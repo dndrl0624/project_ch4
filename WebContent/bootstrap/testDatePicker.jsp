@@ -18,7 +18,10 @@
 //부트스트랩 datetimepicker 셋팅과 두개씩 링크
 // minDate : 오늘 이후의 날짜값만 셋팅될 수 있도록
 $(document).ready(function(){
-	$('.dateTimePicker').datetimepicker({format:"YYYY-MM-DD",minDate : moment()});
+	$('.dateTimePicker').datetimepicker({
+		format:"YYYY-MM-DD",
+		minDate : moment()
+	});
     $('#datepicker1').datetimepicker({
         useCurrent: false
     });
