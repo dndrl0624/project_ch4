@@ -11,7 +11,7 @@
 ​<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="../js/bootstrap-datetimepicker.js"></script>
 <link rel="stylesheet" type="text/css" href="../css/datetimepickerstyle.css" /> -->
-<%@ include file="/common/BootstrapCommon.jsp" %>
+<%@ include file="../../Style/common/BootstrapCommon.jsp" %>
 </head>
 <body>
 <script type="text/javascript">

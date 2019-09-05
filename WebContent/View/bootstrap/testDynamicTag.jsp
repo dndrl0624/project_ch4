@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@ include file="/common/BootstrapCommon.jsp" %>
+<%@ include file="../../Style/common/BootstrapCommon.jsp" %>
 <script type="text/javascript">
 	var inputnum = 1;
 </script>
