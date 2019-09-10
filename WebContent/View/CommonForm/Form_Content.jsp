@@ -6,7 +6,7 @@
 <meta charset="utf-8"> 
 <!-- Web icon 설정 --> 
 <%@ include file="../CommonForm/TapLogo.jsp"%>
-<title>메인 폼을 작성해보자</title>
+<title>컨텐츠 폼을 작성해보자</title>
 <!-- Link Import --> 
 <%@ include file="/Style/common/HeadUI.jsp"%> 
 <!-- CSS Style Import --> 
@@ -51,9 +51,9 @@
 </header>
 
 <!-- Banner -->
-	<section class="banner_Main">
-		<div class="jumbotron_Main">
-			<div> <div class="container_Banner_Main" style="color: white;">
+	<section class="banner_Content">
+		<div class="jumbotron_Content">
+			<div> <div class="container_Banner_Content" style="color: white;">
 					<h1 style="font-size:50px; text-shadow: 4px 2px 2px gray;">점보트론 - 배너</h1><br>
 					<p style="font-size:20px; text-shadow: 2px 2px 2px gray; ">이부분에 사진을 넣어보자구</p>
 					<div class="page_link">

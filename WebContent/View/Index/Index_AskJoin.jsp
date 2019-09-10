@@ -15,7 +15,6 @@
 </style>
 </head>
 <body>
-	<!-- 미결과제 :  -->
 <!-- Top -->	<!-- 선택된 페이지 class : nav-item active // 나머지 페이지: nav-item -->
 <header class="header">
 	<div class="main_menu">
@@ -53,14 +52,14 @@
 <!-- Banner -->
 	<section class="banner_Main">
 		<div class="jumbotron_Main">
-			<div> <div class="container_Banner_Main" style="color: white;">
+			<div> <div class="container_Banner_Main" style="color: white">
 					<h1 style="font-size:50px; text-shadow: 4px 2px 2px gray;">점보트론 - 배너</h1><br>
 					<p style="font-size:20px; text-shadow: 2px 2px 2px gray; ">이부분에 사진을 넣어보자구</p>
 					<div class="page_link">
 						<a href="Index_Main.jsp">Home</a> → <a href="Index_Notice.jsp">Notice</a>
 		</div></div></div></div> 
 	</section>
-<!-- Category Area -->
+<!-- 회원가입 문의 -->
 	<section class="content">
 		<div>본문 내용</div>
 	</section>

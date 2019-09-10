@@ -4,32 +4,19 @@
 <!-- Top -->
 			<!-- URL 처리하기 -->
 <!-- 여기서 열린 Header태그 : 메뉴 부분 끝 난 후, 닫기 -->
-<header class="header">
-	<div class="top_menu row 0" style="background-color: white">>
-		<div class="container">
-			<div class="float-left">
-				<ul>
-					<li><a href="Login.jsp"> <i class="fa fa-facebook-f"></i> 	</a></li>
-					<li><a href="Login.jsp"> <i class="fa fa-twitter"></i> 		</a></li>
-					<li><a href="Login.jsp"> <i class="fa fa-dribbble"></i> 	</a></li>
-					<li><a href="Login.jsp"> <i class="fa fa-behance"></i> 		</a></li>
-				</ul>
-			</div>
+	<div class="container">
+ 			<div style="float:left">
+				<a href="Login.jsp"> <i class="fab fa-facebook-square"  style="color:#3b5998"></i> 	</a>
+				<a href="Login.jsp"> <i class="fab fa-instagram" style="color:#770055"></i> 		</a>
+				<a href="Login.jsp"> <i class="fab fa-twitter-square" style="color:#55acee"></i> 	</a>
+				<a href="Login.jsp"> <i class="fab fa-youtube" style="color:#ff3333"></i> 			</a>
+			</div> 
 			<div style="float:right">
-				<ul>
-					<li>
-						<a href="Login.jsp"> 
-							<i class="fas fa-phone-square-alt"></i>
-							012-3456-7890-123
-						</a>
-					</li>
-					<li>
-						<a href="#"> 
-							<i class="fas fa-envelope-square"></i>
-							CH4@CH4.CH4
-						</a>
-					</li>
-				</ul>
+				<a href="Login.jsp"> 
+					<i class="fas fa-phone" style="color:gray">  012-3456-7890-123</i>
+				</a>
+				<a href="Login.jsp"> 
+					<i class="far fa-envelope" style="color:gray">  CH4@CH4.CH4</i> 
+				</a>
 			</div>
-		</div>
 	</div>
