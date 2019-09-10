@@ -6,7 +6,7 @@
 <meta charset="utf-8"> 
 <!-- Web icon 설정 --> 
 <%@ include file="../CommonForm/TapLogo.jsp"%>
-<title>메인 폼을 작성해보자</title>
+<title>메인 - CH4 방문자 관리 시스템</title>
 <!-- Link Import --> 
 <%@ include file="/Style/common/HeadUI.jsp"%> 
 <!-- CSS Style Import --> 
@@ -18,7 +18,6 @@
 <%@ include file="/View/CommonForm/Top.jsp"%>
 	<!-- 미결과제 : 이동할 페이지 URL 설정 해야함 ( 먼저 각 페이지를 만들어야함 ) // 사진 크기 설정-->
 <!-- 방문 유형 선택 옵션 -->	
-	<section class="guestType">
 		<div class="container" style="text-align: center;">
 <!-- 글머리 --><div style="display: inline-block;">
 				<div class="col-lg-12">
@@ -29,47 +28,22 @@
 			
 <!-- 페이지 --><div class="row">
 				<div class="col-lg-4">
-					<div class="categories">
-						<div class="categories_details">
-							<div class="categories_text">
-								<div class="border_line"></div>
-								<a href="#"><!-- 이동할 페이지 URL 설정 해야함 -->
-									<img src="../../Style/images/crud/visit_logo.png" class="img-thumbnail">
-								</a>
-								<div class="border_line"></div>
-							</div>
-						</div>
-					</div>
+					<a href="/View/Visitor/Visit_Main.jsp"><!-- 이동할 페이지 URL 설정 해야함 -->
+						<img src="../../Style/images/crud/visit_logo.png" class="img-thumbnail">
+					</a>
 				</div>
 				<div class="col-lg-4">
-					<div class="categories">
-						<div class="categories_details">
-							<div class="categories_text">
-								<div class="border_line"></div>
-								<a href="#"><!-- 이동할 페이지 URL 설정 해야함 -->
-									<img src="../../Style/images/crud/company_logo.png"  class="img-thumbnail">
-								</a>
-								<div class="border_line"></div>
-							</div>
-						</div>
-					</div>
+					<a href="/View/Company/Company_Login.jsp"><!-- 이동할 페이지 URL 설정 해야함 -->
+						<img src="../../Style/images/crud/company_logo.png"  class="img-thumbnail">
+					</a>
 				</div>
 				<div class="col-lg-4">
-					<div class="categories">
-						<div class="categories_details">
-							<div class="categories_text">
-								<div class="border_block"></div>
-								<a href="#"><!-- 이동할 페이지 URL 설정 해야함 -->
-									<img src="../../Style/images/crud/admin_logo.png"  class="img-thumbnail">
-								</a>
-								<div class="border_line"></div>
-							</div>
-						</div>
-					</div>
+					<a href="/View/Admin/Admin_Login.jsp"><!-- 이동할 페이지 URL 설정 해야함 -->
+						<img src="../../Style/images/crud/admin_logo.png"  class="img-thumbnail">
+					</a>
 				</div>
 			</div>
 		</div>
-	</section>
-	
+<%@ include file="/View/CommonForm/Footer.jsp"%>
 </body>
 </html>

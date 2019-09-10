@@ -6,7 +6,7 @@
 <!-- 여기서 열린 Header태그 : 메뉴 부분 끝 난 후, 닫기 -->
 <header class="header">
 	<div class="main_menu">
-		<nav class="navbar navbar-default navbar-fixed-top" style="padding-top:10px;padding-bottom:10px;">
+		<nav class="navbar navbar-default" style="padding-top:10px;padding-bottom:10px;">
 			<div class="container">
 				<!-- 대표 회사 아이콘 및 링크 -->	
 				<a id="Main_log" href="Index_Main.jsp">
