@@ -15,6 +15,7 @@
 </style>
 </head>
 <body>
+<%@ include file="/View/CommonForm/Top.jsp"%>
 	<!-- 미결과제 : 이동할 페이지 URL 설정 해야함 ( 먼저 각 페이지를 만들어야함 ) // 사진 크기 설정-->
 <!-- 방문 유형 선택 옵션 -->	
 	<section class="guestType">
@@ -27,58 +28,39 @@
 			</div>
 			
 <!-- 페이지 --><div class="row">
-				<div class="col-lg-6">
+				<div class="col-lg-4">
 					<div class="categories">
-						<img src="../../Style/images/crud/visitor.jpg">
 						<div class="categories_details">
 							<div class="categories_text">
 								<div class="border_line"></div>
 								<a href="#"><!-- 이동할 페이지 URL 설정 해야함 -->
-									<h5>방문 신청</h5>
+									<img src="../../Style/images/crud/visit_logo.png" class="img-thumbnail">
 								</a>
 								<div class="border_line"></div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-6">
+				<div class="col-lg-4">
 					<div class="categories">
-						<img src="../../Style/images/crud/manager.jpg" alt="">
 						<div class="categories_details">
 							<div class="categories_text">
 								<div class="border_line"></div>
 								<a href="#"><!-- 이동할 페이지 URL 설정 해야함 -->
-									<h5>방문자 승인</h5>
+									<img src="../../Style/images/crud/company_logo.png"  class="img-thumbnail">
 								</a>
 								<div class="border_line"></div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="row" style="margin-top:10px">
-				<div class="col-lg-6">
+				<div class="col-lg-4">
 					<div class="categories">
-						<img src="../../Style/images/crud/info.jpg" alt="">
 						<div class="categories_details">
 							<div class="categories_text">
 								<div class="border_block"></div>
 								<a href="#"><!-- 이동할 페이지 URL 설정 해야함 -->
-									<h5>방문자 신원 인증</h5>
-								</a>
-								<div class="border_line"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-6">
-					<div class="categories">
-						<img src="../../Style/images/crud/admin.png" alt="">
-						<div class="categories_details">
-							<div class="categories_text">
-								<div class="border_block"></div>
-								<a href="#"><!-- 이동할 페이지 URL 설정 해야함 -->
-									<h5>시스템 관리</h5>
+									<img src="../../Style/images/crud/admin_logo.png"  class="img-thumbnail">
 								</a>
 								<div class="border_line"></div>
 							</div>
