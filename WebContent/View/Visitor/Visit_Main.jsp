@@ -66,8 +66,7 @@
 <%@ include file="/View/CommonForm/Top.jsp"%>
 <div class="container-fluid" style="text-align:center;">
 	<div id="jumbo_visit" class="jumbotron">
-		<div class="col-lg-1"></div>
-		<div class="col-lg-10">
+		<div class="col-lg-offset-1 col-lg-10 col-lg-offset-1">
 			<div class="row">
 				<div style="text-align:left;">
 					<h2>방문/반입 신청</h2>
@@ -148,7 +147,6 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-1"></div>
 	</div>
 </div>
 
