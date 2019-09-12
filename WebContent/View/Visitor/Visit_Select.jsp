@@ -17,16 +17,17 @@
 <body>
 <%@ include file="/View/CommonForm/Top.jsp"%>
 <div class="container-fluid">
-	<div class="col-lg-offset-2 col-lg-8 col-lg-offset-2">
-		<div class="row" style="padding-top:100px;">
-			<div class="col-lg-offset-1 col-lg-4">
-				<a href="/View/Visitor/Visit_Main.jsp"><!-- 이동할 페이지 URL 설정 해야함 -->
-					<img src="../../Style/images/crud/visit_logo.png" class="img-thumbnail">
+	<div class="col-lg-offset-2 col-lg-8 col-lg-offset-2" style="text-align:center;">
+		<h1><b>방문/반입 선택</b></h1>
+		<div class="row" style="padding-top:40px;">
+			<div class="col-lg-offset-1 col-lg-5">
+				<a href="/View/Visitor/Visit_Apply.jsp"><!-- 이동할 페이지 URL 설정 해야함 -->
+					<img src="../../Style/images/crud/visitor_logo.png" class="img-thumbnail" style="background-color:#E8E8E8;">
 				</a>
 			</div>
-			<div class="col-lg-4 col-lg-offset-2">
-				<a href="/View/Visitor/Visit_Main.jsp"><!-- 이동할 페이지 URL 설정 해야함 -->
-					<img src="../../Style/images/crud/visit_logo.png" class="img-thumbnail">
+			<div class="col-lg-5">
+				<a href="/View/Visitor/Port_Apply.jsp"><!-- 이동할 페이지 URL 설정 해야함 -->
+					<img src="../../Style/images/crud/transport_logo.png" class="img-thumbnail" style="background-color:#E8E8E8;">
 				</a>		
 			</div>
 		</div>
