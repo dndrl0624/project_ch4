@@ -6,152 +6,171 @@
 <meta charset="utf-8"> 
 <!-- Web icon 설정 --> 
 <%@ include file="../CommonForm/TapLogo.jsp"%>
-<title>좌측 네비게이션바 넣은 페이지</title>
+<title>11 좌측 네비게이션바 넣은 페이지 11</title>
 <!-- Link Import --> 
 <%@ include file="/Style/common/HeadUI.jsp"%> 
 <!-- CSS Style Import --> 
 <style type="text/css"> 
 <%@ include file="/Style/css/CssStyle.css"%>
-<%@ include file="/Style/css/SideNav.css"%>
+/*sidebar navigation*/
+/* 사이드바 크기 지정 */ 
+#sidebar {
+    width: 10%;
+    height: 100%;
+    position: fixed;
+    background: #2f323a;
+}
+/* 반응형 크기 지정 */
+#sidebar ul li {
+    position: relative;
+}
+/* 인라인 속성 설정 */
+.nav-collapse.collapse {
+    display: inline;
+}
+/* 마진 설정 */
+ul.sidebar-menu , ul.sidebar-menu li ul.sub{
+    margin: -2px 0 0;
+    padding: 0;
+}
+ul.sidebar-menu {
+    margin-top: 75px;
+}
+/* 메뉴 스타일 */
+ul.sidebar-menu li a{
+    color: #aeb2b7;
+    text-decoration: none;
+    display: block;
+    padding: 15px 0 15px 10px;
+    font-size: 15px;
+    outline: none;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+/* active 스타일 지정 */
+ul.sidebar-menu li a.active, ul.sidebar-menu li a:hover, ul.sidebar-menu li a:focus {
+    background: #4ECDC4;
+    color: #fff;
+    display: block;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+ul.sidebar-sub li a.active, ul.sidebar-sub li a:hover, ul.sidebar-sub li a:focus {
+    background: #4ECDC4;
+    color: #fff;
+    display: block;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+/* 메인메뉴 글씨 크기 조절 및 패딩 위치*/
+ul.sidebar-menu li a i {
+    font-size: 19px;
+    padding-right: 6px;
+}
+
+/* 각 메뉴 크기 설정 + 블럭 크기 설정 */
+#sidebar-menu{
+	width: 105%;
+	color: #aeb2b7;
+}
+#sidebar-menu ul li{
+	width: 107%;
+	color: #aeb2b7;
+}
+/* 하위메뉴 숨겨주는 부분 */
+#sidebar ul ul {
+	display: none;
+	background-color: #5c5c5c;
+}
+/* 하위메뉴 > 블럭지정: 내부에 연장되도록 변경 */
+#sidebar ul li:hover ul {
+	display: block;
+}
+/* ///////////////////////////////////// */
+#z-choose{
+	width: 105%;
+	color: #aeb2b7;
+}
+#z-choose ul li{
+	width: 107%;
+	color: #aeb2b7;
+}
+
 </style>
 </head>
 <body>
-<header>
-	<div> 
-		<nav class="navbar navbar-default navbar-fixed-top">
-	<a class="Main_Log" href="Index_Main.jsp"> 
-		<img src="../../Style/images/logo/logo_navi.png" alt=""> 
-	</a>
-		</nav>
-	</div>
-</header>
+<%@ include file="../CommonForm/Top.jsp"%>
 
-    <!--sidebar start-->
-    <aside>
-      <div id="sidebar" class="nav-collapse ">
-        <!-- sidebar menu start-->
-        <ul class="sidebar-menu" id="nav-accordion">
-          <p class="centered">
-          	<a href="profile.html"><img src="img/ui-sam.jpg" class="img-circle" width="80"></a>
-          </p>
-          <h5 class="centered">Sam Soffes</h5>
-          <li class="mt">
-            <a class="active" href="index.html">
-              <i class="fa fa-dashboard"></i>
-              <span>Dashboard</span>
-              </a>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;">
-              <i class="fa fa-desktop"></i>
-              <span>UI Elements</span>
-              </a>
-            <ul class="sub">
-              <li><a href="general.html">General</a></li>
-              <li><a href="buttons.html">Buttons</a></li>
-              <li><a href="panels.html">Panels</a></li>
-              <li><a href="font_awesome.html">Font Awesome</a></li>
-            </ul>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;">
-              <i class="fa fa-cogs"></i>
-              <span>Components</span>
-              </a>
-            <ul class="sub">
-              <li><a href="grids.html">Grids</a></li>
-              <li><a href="calendar.html">Calendar</a></li>
-              <li><a href="gallery.html">Gallery</a></li>
-              <li><a href="todo_list.html">Todo List</a></li>
-              <li><a href="dropzone.html">Dropzone File Upload</a></li>
-              <li><a href="inline_editor.html">Inline Editor</a></li>
-              <li><a href="file_upload.html">Multiple File Upload</a></li>
-            </ul>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;">
-              <i class="fa fa-book"></i>
-              <span>Extra Pages</span>
-              </a>
-            <ul class="sub">
-              <li><a href="blank.html">Blank Page</a></li>
-              <li><a href="login.html">Login</a></li>
-              <li><a href="lock_screen.html">Lock Screen</a></li>
-              <li><a href="profile.html">Profile</a></li>
-              <li><a href="invoice.html">Invoice</a></li>
-              <li><a href="pricing_table.html">Pricing Table</a></li>
-              <li><a href="faq.html">FAQ</a></li>
-              <li><a href="404.html">404 Error</a></li>
-              <li><a href="500.html">500 Error</a></li>
-            </ul>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;">
-              <i class="fa fa-tasks"></i>
-              <span>Forms</span>
-              </a>
-            <ul class="sub">
-              <li><a href="form_component.html">Form Components</a></li>
-              <li><a href="advanced_form_components.html">Advanced Components</a></li>
-              <li><a href="form_validation.html">Form Validation</a></li>
-              <li><a href="contactform.html">Contact Form</a></li>
-            </ul>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;">
-              <i class="fa fa-th"></i>
-              <span>Data Tables</span>
-              </a>
-            <ul class="sub">
-              <li><a href="basic_table.html">Basic Table</a></li>
-              <li><a href="responsive_table.html">Responsive Table</a></li>
-              <li><a href="advanced_table.html">Advanced Table</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="inbox.html">
-              <i class="fa fa-envelope"></i>
-              <span>Mail </span>
-              <span class="label label-theme pull-right mail-info">2</span>
-              </a>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;">
-              <i class=" fa fa-bar-chart-o"></i>
-              <span>Charts</span>
-              </a>
-            <ul class="sub">
-              <li><a href="morris.html">Morris</a></li>
-              <li><a href="chartjs.html">Chartjs</a></li>
-              <li><a href="flot_chart.html">Flot Charts</a></li>
-              <li><a href="xchart.html">xChart</a></li>
-            </ul>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;">
-              <i class="fa fa-comments-o"></i>
-              <span>Chat Room</span>
-              </a>
-            <ul class="sub">
-              <li><a href="lobby.html">Lobby</a></li>
-              <li><a href="chat_room.html"> Chat Room</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="google_maps.html">
-              <i class="fa fa-map-marker"></i>
-              <span>Google Maps </span>
-              </a>
-          </li>
-        </ul>
-        <!-- sidebar menu end-->
-      </div>
-    </aside>
-    
-    
+<!-- Side Bar -->
+	<aside>
 
-<section>
-          </section>
+		<div id="sidebar" class="nav-collapse ">
+			<div style="padding:20px;"></div>
+			
+			<!-- side bar menu start-->
+			<ul class="sidebar-menu">
+				
+				<li id="z-choose">
+					<a class="active" href="#"> 
+						<i class="fa fa-dashboard">Main Menu 0</i>
+					</a>
+					<ul>
+						<li class="sidebar-sub"><a class="active" href="#">Sub Menu 1</a></li>
+						<li class="sidebar-sub"><a href="#">Sub Menu 2</a></li>
+						<li class="sidebar-sub"><a href="#">Sub Menu 3</a></li>
+					</ul>
+				</li>
+				
+				<li id="sidebar-menu">
+					<a href="#"> 
+						<i class="fa fa-dashboard">Main Menu 1</i>
+					</a>
+					<ul>
+						<li class="sidebar-sub"><a href="#">Sub Menu 1</a></li>
+						<li class="sidebar-sub"><a href="#">Sub Menu 2</a></li>
+						<li class="sidebar-sub"><a href="#">Sub Menu 3</a></li>
+					</ul>
+				</li>
+				
+				<li id="sidebar-menu">
+					<a href="#"> 
+						<i class="fa fa-dashboard">Main Menu 2</i>
+					</a>
+					<ul>
+						<li class="sidebar-sub"><a href="#">Sub Menu 1</a></li>
+						<li class="sidebar-sub"><a href="#">Sub Menu 2</a></li>
+						<li class="sidebar-sub"><a href="#">Sub Menu 3</a></li>
+					</ul>
+				</li>
+				
+				<li id="sidebar-menu">
+					<a href="#"> 
+						<i class="fa fa-dashboard">Main Menu 3</i>
+					</a>
+					<ul>
+						<li class="sidebar-sub"><a href="#">Sub Menu 1</a></li>
+						<li class="sidebar-sub"><a href="#">Sub Menu 2</a></li>
+						<li class="sidebar-sub"><a href="#">Sub Menu 3</a></li>
+					</ul>
+				</li>
+				
+			</ul>
+		</div>
+
+	</aside>
+
+
+
+
 
 	<!-- 공통 Footer -->
 <%@ include file="/View/CommonForm/Footer.jsp"%></div>

@@ -40,3 +40,12 @@ ul li {
 i {
 	margin-right: 5px;
 }
+
+#Main_title {
+   display: inline-block;
+}
+
+body{
+	padding-top : 70px;
+	padding-bpttom : 150px;	
+}
