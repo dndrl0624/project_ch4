@@ -96,11 +96,11 @@ ul.sidebar-menu li a i {
 	display: block;
 }
 /* ///////////////////////////////////// */
-#z-choose{
+#choose{
 	width: 105%;
 	color: #aeb2b7;
 }
-#z-choose ul li{
+#choose ul li{
 	width: 107%;
 	color: #aeb2b7;
 }
@@ -116,10 +116,10 @@ ul.sidebar-menu li a i {
 		<div id="sidebar" class="nav-collapse ">
 			<div style="padding:20px;"></div>
 			
-			<!-- side bar menu start-->
+			<!-- side bar menu start-->s
 			<ul class="sidebar-menu">
 				
-				<li id="z-choose">
+				<li id="choose">
 					<a class="active" href="#"> 
 						<i class="fa fa-dashboard">Main Menu 0</i>
 					</a>

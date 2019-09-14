@@ -37,7 +37,24 @@ aside::-webkit-scrollbar {
 <%@ include file="../CommonForm/Top.jsp"%>
 
 <!-- Side Bar -->
+
+
+
 <aside>
+	<div class="sidebar" role="tablist">
+     <div class="panel panel-info" role="tab" id="headingz" style="margin-top:100px;" data-toggle="collapse" href="#mainz" aria-controls="mainz">
+     	<h4>메인메뉴0</h4></a>
+      <div id="mainz" class="panel-collapse collapse show">
+       	<div class="side-sub"><!-- 스타일 설정 -->
+		      	<a>sub0</a><br>
+		      	<a>sub1</a><br>
+		      	<a>sub2</a><br>
+		      	<a>sub3</a><br>
+		</div>
+      </div>
+      </div>
+</div>
+
 	<div class="sidebar" role="tablist">
 		<div class="panel panel-info" style="margin-top:100px;"><!-- 스타일설정 -->
 	    	<div class="panel-heading" role="tab" id="headingOne">
