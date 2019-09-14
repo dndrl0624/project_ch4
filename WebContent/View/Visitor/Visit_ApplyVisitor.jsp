@@ -62,15 +62,53 @@
 		border-top: 2px solid #333333;
 		margin-bottom:50px;
 	}
-	th,td {
+	.table th,
+	.table td {
 		text-align:center;
 		border: 1px solid #EDEDED;
 	}
-	th {
+	.table th {
 		background-color: #DDDDDD;
+	}
+	.modal-table {
+		width: 100%;
+		max-width: 100%;
+		margin-bottom: 1rem;
+		background-color: transparent;
+	}
+	.modal-table th,
+	.modal-table td {
+		text-align: center;
+		padding: 0.75rem;
+		vertical-align: middle;
 	}
 	.modal-header.visitor {
 		background-color: #dff0d8;
+	}
+	.modal-header.device {
+		background-color: #fcf8e3;
+	}
+	.modal-header.parking {
+		background-color: #f5f5f5;
+	}
+	.modal-body {
+		padding-left: 100px;
+		padding-right: 100px;
+	}
+	.modal-body p {
+		margin: 0 0 0 0px;
+	}
+	.calendar-saturday {
+		color: #CC2222;
+	}
+	.calendar-today {
+		font-weight: bold;
+		color: #0000ff;
+	}
+	.calendar-disabled {
+		opacity: 0.3;
+		filter: alpha(opacity=60);
+		cursor: default;
 	}
 </style>
 <title>방문 신청 - CH4 방문자 관리 시스템</title>
@@ -78,12 +116,84 @@
 	var vIndex = 1;
 	var dIndex = 1;
 	var pIndex = 1;
+	var dKind;
+	var dBrand;
+	var pKind;
+	var pModel;
+	var firstDate;
 </script>
 </head>
 <body data-spy="scroll" data-target="#myScrollspy" data-offset="300">
 <%@ include file="/View/CommonForm/Top.jsp"%>
 <script type="text/javascript">
+	$.fn.combobox.defaults.editable = false
+	$.fn.datebox.defaults.formatter = function(date){
+	    var y = date.getFullYear();
+	    var m = date.getMonth()+1;
+	    var d = date.getDate();
+	    return y+'-'+(m<10 ? "0"+m:m)+'-'+(d<10 ? "0"+d:d);
+	}   
+	$.fn.datebox.defaults.parser = function(s){
+	    var t = Date.parse(s);
+	    if (!isNaN(t)){
+	    	return new Date(t);
+	    } else {
+	    	return new Date();
+	    }
+	}
+	$.fn.datebox.defaults.currentText = '오늘'
+	$.fn.datebox.defaults.closeText = '닫기'
+	$.fn.calendar.defaults.weeks = ['일','월','화','수','목','금','토']
+	$.fn.calendar.defaults.months = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
 	$(document).ready(function(){
+		///////////////////////// 방문날짜 이벤트  //////////////////////////
+		$("#visit_term").combobox("disable");
+		$("#visit_day").combobox("disable");
+		$("#visit_date2").datebox("disable");
+		$("#visit_type").combobox({
+			onChange: function(newValue){
+				if("일일방문"==newValue){
+					$("#visit_term").combobox("disable");
+					$("#visit_day").combobox("disable");
+					$("#visit_date2").datebox("disable");
+				}
+				else if("기간방문"==newValue){
+					$("#visit_term").combobox("disable");
+					$("#visit_day").combobox("disable");
+					$("#visit_date2").datebox("enable");
+				}
+				else {
+					$("#visit_term").combobox("enable");
+					$("#visit_day").combobox("enable");
+					$("#visit_date2").datebox("enable");
+				}
+			}
+		});
+		$('#visit_date1').datebox({
+			onSelect: function(date){
+				firstDate = date;
+				$('#visit_date2').datebox().datebox('calendar').calendar({
+		            validator: function(date){
+		                var now = new Date();
+		                var d1 = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate()+1);
+		                var d2 = new Date(now.getFullYear()+1, now.getMonth(), now.getDate());
+		                return d1<=date && date<=d2;
+		            }
+		        });
+				//최소기간을 정해버리면 disable이 풀림.....
+				if("일일방문"==$("#visit_type").val()){
+					$("#visit_date2").datebox("disable");
+				}
+			}
+		});
+		$('#visit_date1').datebox().datebox('calendar').calendar({
+            validator: function(date){
+                var now = new Date();
+                var d1 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                var d2 = new Date(now.getFullYear()+1, now.getMonth(), now.getDate());
+                return d1<=date && date<=d2;
+            }
+        });
 		///////////////////////// 방문자 추가 이벤트 /////////////////////////
 		//방문자 추가 modal 띄우기
 		$("#btn_addRowVisitor").on('click',function(){
@@ -97,7 +207,7 @@
 		$("#addVisitor").on('click',function(){
 			var name = $("#v_name").val();
 			var hp = $("#v_hp").val();
-			var row = "<tr id='row'"+vIndex+"><td><input id='chkVisitor' type='checkbox' value='"+vIndex+"'></td>"
+			var row = "<tr id='vRow"+vIndex+"'><td><input id='chkVisitor' type='checkbox'></td>"
 					+"<td>"+name+"</td>"
 					+"<td>"+hp+"</td></tr>";
 			$("#tb_visitor tbody").append(row);
@@ -116,22 +226,67 @@
 		    	$("#tb_visitor input:checkbox").prop("checked", false);
 		    }
 		});
-		//선택된 row 제거하기 (미완성)
+		//선택된 row 제거하기
 		$("#btn_delRowVisitor").on('click',function(){
+			var doRemove = false; //체크박스가 선택이되어 삭제가 된경우만 true
 			$("#tb_visitor #chkVisitor:checked").each(function(){
-				alert($(this).val());
+				$(this).parent().parent().remove();
+				doRemove = true;
 			});
+			//삭제된 건이 있으면...
+			if(doRemove){
+				//삭제되지 않은 row의 index초기화를 위한 변수
+				var reset = 1;
+				//row 전체조회
+				for(var i=1;i<vIndex;i++){
+					var vRow = $("#vRow"+i);
+					//해당row가 존재하니?
+					//스크립트의 if문에서 undefined는 false로 인식
+					//.html()을 본래 해당 태그의 자식노드 전체의 html구문을 반환함
+					//만약 자식노드가 없다면 undefined
+					//지워진 row는 자식노드가 없으므로 조건에서 제외
+					//그런데 해당row가 지워졌다면 값이 null이거나 undefined일텐데 굳이 .html()을 쓴이유는?
+					//dom에 해당하는 노드가 없다면 해당 노드를 '생성'해버림 => 즉 선언한 순간 존재하는 노드
+					//그렇기 때문에 .html()없이 vRow를 쓰면 정의가 되어있으므로 true로 인식
+					if(vRow.html()){
+						if(i!=reset){
+							$("#vRow"+i).attr('id',"vRow"+reset);
+						}
+						reset++;
+					}
+				}
+				vIndex = reset;
+				$("#tb_visitor input:checkbox").prop("checked", false);
+			}
+			//없으면 == checked가 없음
+			else {
+				alert("삭제할 정보를 선택하시기 바랍니다.");
+			}
 		});
 		////////////////////////////////////////////////////////////////
 		///////////////////////// 반입기기 추가 이벤트 /////////////////////////
 		$("#btn_addRowDevice").on('click',function(){
 			$("#md_device").modal("show");
 		});
+		$("#d_kind").combobox({
+			onChange:function(newValue){
+				dKind = newValue;
+				alert(dKind);
+			}
+		});
+		$("#d_brand").combobox({
+			onChange:function(newValue){
+				dBrand = newValue;
+				alert(dBrand);
+			}
+		});
 		$("#addDevice").on('click',function(){
-			var name = $("#d_name").val();
+			var kind = dKind;
+			var brand = dBrand;
 			var model = $("#d_model").val();
-			var row = "<tr id='row'"+dIndex+"><td><input id='chkDevice' type='checkbox' value='"+dIndex+"'></td>"
-					+"<td>"+name+"</td>"
+			var row = "<tr id='dRow"+dIndex+"'><td><input id='chkDevice' type='checkbox'></td>"
+					+"<td>"+kind+"</td>"
+					+"<td>"+brand+"</td>"
 					+"<td>"+model+"</td></tr>";
 			$("#tb_device tbody").append(row);
 			$("#d_name").textbox('setValue',null);
@@ -149,9 +304,28 @@
 		    }
 		});
 		$("#btn_delRowDevice").on('click',function(){
+			var doRemove = false;
 			$("#tb_device #chkDevice:checked").each(function(){
-				alert($(this).val());
+				$(this).parent().parent().remove();
+				doRemove = true;
 			});
+			if(doRemove){
+				var reset = 1;
+				for(var i=1;i<dIndex;i++){
+					var dRow = $("#dRow"+i);
+					if(dRow.html()){
+						if(i!=reset){
+							$("#dRow"+i).attr('id',"dRow"+reset);
+						}
+						reset++;
+					}
+				}
+				dIndex = reset;
+				$("#tb_device input:checkbox").prop("checked", false);
+			}
+			else {
+				alert("삭제할 정보를 선택하시기 바랍니다.");
+			}
 		});
 		////////////////////////////////////////////////////////////////
 		///////////////////////// 차량 추가 이벤트 ///////////////////////////
@@ -160,14 +334,21 @@
 		});
 		$("#p_kind").combobox({
 			onChange:function(newValue){
-				
+				pKind = newValue;
+				alert(pKind);
+			}
+		});
+		$("#p_model").combobox({
+			onChange:function(newValue){
+				pModel = newValue;
+				alert(pModel);
 			}
 		});
 		$("#addParking").on('click',function(){
 			var num = $("#p_num").val();
-			var kind = $("#p_kind").val();
-			var model = $("#p_model").val();
-			var row = "<tr id='row'"+pIndex+"><td><input id='chkParking' type='checkbox' value='"+pIndex+"'></td>"
+			var kind = pKind;
+			var model = pModel;
+			var row = "<tr id='pRow"+pIndex+"'><td><input id='chkParking' type='checkbox'></td>"
 					+"<td>"+num+"</td>"
 					+"<td>"+kind+"</td>"
 					+"<td>"+model+"</td></tr>";
@@ -188,9 +369,28 @@
 		    }
 		});
 		$("#btn_delRowParking").on('click',function(){
+			var doRemove = false;
 			$("#tb_parking #chkParking:checked").each(function(){
-				alert($(this).val());
+				$(this).parent().parent().remove();
+				doRemove = true;
 			});
+			if(doRemove){
+				var reset = 1;
+				for(var i=1;i<pIndex;i++){
+					var pRow = $("#pRow"+i);
+					if(pRow.html()){
+						if(i!=reset){
+							$("#pRow"+i).attr('id',"pRow"+reset);
+						}
+						reset++;
+					}
+				}
+				pIndex = reset;
+				$("#tb_parking input:checkbox").prop("checked", false);
+			}
+			else {
+				alert("삭제할 정보를 선택하시기 바랍니다.");
+			}
 		});
 		////////////////////////////////////////////////////////////////
 	});
@@ -242,14 +442,14 @@
 			    			<tbody>
 			    				<tr>
 			    					<td>
-			    						<select class="easyui-combobox" style="width:80%;">
+			    						<select id="visit_type" class="easyui-combobox" style="width:80%;" data-options="panelHeight:'auto'">
 			    							<option value="일일방문">일일방문</option>
 			    							<option value="기간방문">기간방문</option>
 			    							<option value="정기방문">정기방문</option>
 			    						</select>
 			    					</td>
 			    					<td>
-			    						<select class="easyui-combobox" style="width:80%;">
+			    						<select id="visit_term" class="easyui-combobox" style="width:80%;" data-options="panelHeight:'auto'">
 			    							<option value="매주">매주</option>
 			    							<option value="격주">격주</option>
 			    							<option value="첫째주">첫째주</option>
@@ -260,7 +460,7 @@
 			    						</select>
 			    					</td>
 			    					<td>
-			    						<select class="easyui-combobox" style="width:80%;">
+			    						<select id="visit_day" class="easyui-combobox" style="width:80%;" data-options="panelHeight:'auto'">
 			    							<option value="월요일">월요일</option>
 			    							<option value="화요일">화요일</option>
 			    							<option value="수요일">수요일</option>
@@ -277,9 +477,9 @@
 			    			<tr>
 			    				<th>방문날짜</th>
 			    				<td>
-			    					<input class="easyui-datebox" style="width:30%;height:100%">
+			    					<input id="visit_date1" class="easyui-datebox" style="width:30%;height:100%">
 			    					&emsp;&emsp;<span>~</span>&emsp;&emsp;
-			    					<input class="easyui-datebox" style="width:30%;height:100%">
+			    					<input id="visit_date2" class="easyui-datebox" style="width:30%;height:100%">
 			    				</td> 
 			    			</tr>
 			    		</table>
@@ -296,7 +496,7 @@
 			    			</thead>
 			    			<tbody>
 			    				<tr>
-			    					<td><input class="easyui-combobox" style="width:80%;"></td>
+			    					<td><input class="easyui-combobox" style="width:80%;" data-options="panelHeight:'auto'"></td>
 			    					<td><input class="easyui-textbox" style="width:80%;"></td>
 			    					<td><input class="easyui-textbox" style="width:80%;"></td>
 			    				</tr>
@@ -351,8 +551,9 @@
 			    			<thead>
 			    				<tr>
 			    					<th><input id="chkAllDevice" type="checkbox"></th>
-				    				<th style="width:40%;">기기명</th>
-				    				<th style="width:50%;">기종</th>
+				    				<th style="width:30%;">기종</th>
+				    				<th style="width:30%;">제조사</th>
+				    				<th style="width:30%;">모델명</th>
 			    				</tr>
 			    			</thead>
 			    			<tbody>
@@ -401,8 +602,16 @@
 				<h4 class="modal-title">방문자 정보 입력</h4>
 			</div>
 			<div class="modal-body" style="text-align:center;">
-				<input id="v_name" class="easyui-textbox" label="성명" labelPosition="left" ><br><br>
-				<input id="v_hp" class="easyui-textbox" label="전화번호" labelPosition="left" >
+				<table class="modal-table">
+					<tr>
+						<th><p>성명</p></th>
+						<td><input id="v_name" class="easyui-textbox"></td>
+					</tr>
+					<tr>
+						<th><p>전화번호</p></th>
+						<td><input id="v_hp" class="easyui-textbox"></td>
+					</tr>
+				</table>
 			</div>
 			<div class="modal-footer">
         		<button type="button" class="btn btn-primary" id="addVisitor">추가</button>
@@ -420,8 +629,38 @@
 				<h4 class="modal-title">반입기기 정보 입력</h4>
 			</div>
 			<div class="modal-body" style="text-align:center;">
-				<input id="d_name" class="easyui-textbox" label="기기명" labelPosition="left" ><br><br>
-				<input id="d_model" class="easyui-textbox" label="기종" labelPosition="left" >
+				<table class="modal-table">
+					<tr>
+						<th><p>기종</p></th>
+						<td>
+							<select id="d_kind" class="easyui-combobox" data-options="panelHeight:'auto'">
+								<option value="">기종</option>
+								<option value="노트북">노트북</option>
+								<option value="휴대전화">휴대전화</option>
+								<option value="태블릿">태블릿</option>
+								<option value="MP3">MP3</option>
+								<option value="PMP">PMP</option>
+								<option value="디지털카메라">디지털카메라</option>
+								<option value="디지털캠코더">디지털캠코더</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<th><p>제조사</p></th>
+						<td>
+							<select id="d_brand" class="easyui-combobox" data-options="panelHeight:'auto'">
+								<option value="test">제조사</option>
+							</select>
+							
+						</td>
+					</tr>
+					<tr>
+						<th><p>모델명</p></th>
+						<td>
+							<input id="d_model" class="easyui-textbox">
+						</td>
+					</tr>
+				</table>
 			</div>
 			<div class="modal-footer">
         		<button type="button" class="btn btn-primary" id="addDevice">추가</button>
@@ -439,21 +678,38 @@
 				<h4 class="modal-title">차량 정보 입력</h4>
 			</div>
 			<div class="modal-body" style="text-align:center;">
-				<input id="p_num" class="easyui-textbox" label="차량번호" labelPosition="left" data-options="promt:'예시)OOO가1234'"><br><br>
-				<select id="p_kind" class="easyui-combobox" label="차종" labelPosition="left" >
-					<option value=''>차종</option> 
-					<option value='승용차'>승용차</option> 
-					<option value='승합차'>승합차</option> 
-					<option value='작업차'>작업차</option> 
-					<option value='특수차'>특수차</option> 
-					<option value='오토바이'>오토바이</option> 
-				</select><br><br>
-				<select id="p_model" class="easyui-combobox" label="차량모델명" labelPosition="left" >
-					<option value="">차량모델명</option>
-				</select>
+				<table class="modal-table">
+					<tr>
+						<th><p>차량번호</p></th>
+						<td>
+							<input id="p_num" class="easyui-textbox" style="width:250px;" data-options="prompt:'예시)OOO가1234'">
+						</td>
+					</tr>
+					<tr>
+						<th><p>차종</p></th>
+						<td>
+							<select id="p_kind" class="easyui-combobox" data-options="panelHeight:'auto'">
+								<option value=''>차종</option> 
+								<option value='승용차'>승용차</option> 
+								<option value='승합차'>승합차</option> 
+								<option value='작업차'>작업차</option> 
+								<option value='특수차'>특수차</option> 
+								<option value='오토바이'>오토바이</option> 
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<th><p>모델명</p></th>
+						<td>
+							<select id="p_model" class="easyui-combobox" data-options="panelHeight:'auto'">
+								<option value="test">차량모델명</option>
+							</select>
+						</td>
+					</tr>
+				</table>
 			</div>
 			<div class="modal-footer">
-        		<button type="button" class="btn btn-primary" id="addDevice">추가</button>
+        		<button type="button" class="btn btn-primary" id="addParking">추가</button>
         		<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
         	</div>
 		</div>
