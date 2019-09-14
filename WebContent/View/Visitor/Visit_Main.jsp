@@ -102,7 +102,7 @@
 									<input class="easyui-textbox" data-options="prompt:'전화번호'">
 								</div>
 								<div class="col-lg-3" style="padding-left:0px;padding-right:20px;margin : 10px 0px 10px 0px;">
-									<button id="btn_apply" class="btn btn-primary" type="button">신청</button>
+									<button id="btn_apply" class="btn btn-primary" type="button" onclick="location.href='/View/Visitor/Visit_Agreement.jsp'">신청</button>
 								</div>
 							</div>
 						</div>
