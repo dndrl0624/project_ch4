@@ -126,16 +126,16 @@ th {
 	<div class='col-sm-2'>
 <!-- 검색 타입 설정 -->
 	<div style="margin-bottom:3px">
-		<input type="radio" name="SearchType" value="CompanyName" checked="checked">회사명
-		<input type="radio" name="SearchType" value="NameTel">방문자명+연락처
+		<input class="easyui-radiobutton" name="SearchType" value="CompanyName" label="회사명" checked="checked">
+		<input class="easyui-radiobutton" name="SearchType" value="NameTel" label="방문자명+연락처">
 	</div>
 <!-- 검색창 : 라디오버튼에 의한 분기 -->
 	<span id="CompanyNameSearchBox">
-	<textarea name="CompanyNameSearchBox" style="width:100%;height:25px;overflow:hidden;" placeholder="회사명을 입력하세요"></textarea>
+	<input class="easyui-textbox" name="CompanyNameSearchBox" style="width:100%;height:25px;overflow:hidden;" placeholder="회사명을 입력하세요">
 	</span>
 	<span id="NameTelSearchBox" style="display:none">
-	<textarea name="NameSearchBox" style="width:100%;height:25px;overflow:hidden;" placeholder="방문자명을 입력하세요"></textarea>
-	<textarea name="TelSearchBox" style="width:100%;height:25px;overflow:hidden;" placeholder="Tel (    )      -"></textarea>
+	<input class="easyui-textbox" name="NameSearchBox" style="width:100%;height:25px;overflow:hidden;" placeholder="방문자명을 입력하세요">
+	<input class="easyui-textbox" name="TelSearchBox" style="width:100%;height:25px;overflow:hidden;" placeholder="Tel (    )      -">
 	</span>
 	</div>
 	<div  class='col-sm-4'>
