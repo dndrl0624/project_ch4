@@ -21,12 +21,12 @@
 		<h1><b>방문/반입 선택</b></h1>
 		<div class="row" style="padding-top:40px;">
 			<div class="col-lg-offset-1 col-lg-5">
-				<a href="/View/Visitor/Visit_Apply.jsp"><!-- 이동할 페이지 URL 설정 해야함 -->
+				<a href="/View/Visitor/Visit_ApplyVisitor.jsp"><!-- 이동할 페이지 URL 설정 해야함 -->
 					<img src="../../Style/images/crud/visitor_logo.png" class="img-thumbnail" style="background-color:#E8E8E8;">
 				</a>
 			</div>
 			<div class="col-lg-5">
-				<a href="/View/Visitor/Port_Apply.jsp"><!-- 이동할 페이지 URL 설정 해야함 -->
+				<a href="/View/Visitor/Visit_ApplyGoods.jsp"><!-- 이동할 페이지 URL 설정 해야함 -->
 					<img src="../../Style/images/crud/transport_logo.png" class="img-thumbnail" style="background-color:#E8E8E8;">
 				</a>		
 			</div>
