@@ -116,10 +116,6 @@
 	var vIndex = 1;
 	var dIndex = 1;
 	var pIndex = 1;
-	var dKind;
-	var dBrand;
-	var pKind;
-	var pModel;
 	var firstDate;
 </script>
 </head>
@@ -266,23 +262,30 @@
 		////////////////////////////////////////////////////////////////
 		///////////////////////// 반입기기 추가 이벤트 /////////////////////////
 		$("#btn_addRowDevice").on('click',function(){
+			$("#d_kind").combobox('clear');
+			$("#d_brand").combobox('clear');
+			$("#d_brand").combobox({
+				editable: false
+			});
 			$("#md_device").modal("show");
 		});
 		$("#d_kind").combobox({
 			onChange:function(newValue){
-				dKind = newValue;
-				alert(dKind);
-			}
-		});
-		$("#d_brand").combobox({
-			onChange:function(newValue){
-				dBrand = newValue;
-				alert(dBrand);
+				$("#d_brand").combobox({
+					valueField: 'value',
+					textField: 'brand',
+					url: "../../json/"+newValue+".json"
+				});
+				if("etc"==newValue){
+					$("#d_brand").combobox({
+						editable: true
+					});
+				}
 			}
 		});
 		$("#addDevice").on('click',function(){
-			var kind = dKind;
-			var brand = dBrand;
+			var kind = $("#d_kind").combobox('getText');
+			var brand = $("#d_brand").combobox('getText');
 			var model = $("#d_model").val();
 			var row = "<tr id='dRow"+dIndex+"'><td><input id='chkDevice' type='checkbox'></td>"
 					+"<td>"+kind+"</td>"
@@ -330,24 +333,23 @@
 		////////////////////////////////////////////////////////////////
 		///////////////////////// 차량 추가 이벤트 ///////////////////////////
 		$("#btn_addRowParking").on('click',function(){
+			$("#p_kind").combobox('clear');
+			$("#p_model").combobox('clear');
 			$("#md_parking").modal("show");
 		});
 		$("#p_kind").combobox({
 			onChange:function(newValue){
-				pKind = newValue;
-				alert(pKind);
-			}
-		});
-		$("#p_model").combobox({
-			onChange:function(newValue){
-				pModel = newValue;
-				alert(pModel);
+				$("#p_model").combobox({
+					valueField: 'value',
+					textField: 'model',
+					url: "../../json/"+newValue+".json"
+				});
 			}
 		});
 		$("#addParking").on('click',function(){
 			var num = $("#p_num").val();
-			var kind = pKind;
-			var model = pModel;
+			var kind = $("#p_kind").combobox('getText');
+			var model = $("#p_model").combobox('getText');
 			var row = "<tr id='pRow"+pIndex+"'><td><input id='chkParking' type='checkbox'></td>"
 					+"<td>"+num+"</td>"
 					+"<td>"+kind+"</td>"
@@ -635,13 +637,11 @@
 						<td>
 							<select id="d_kind" class="easyui-combobox" data-options="panelHeight:'auto'">
 								<option value="">기종</option>
-								<option value="노트북">노트북</option>
-								<option value="휴대전화">휴대전화</option>
-								<option value="태블릿">태블릿</option>
-								<option value="MP3">MP3</option>
-								<option value="PMP">PMP</option>
-								<option value="디지털카메라">디지털카메라</option>
-								<option value="디지털캠코더">디지털캠코더</option>
+								<option value="laptop">노트북</option>
+								<option value="phone">휴대전화</option>
+								<option value="tablet">태블릿</option>
+								<option value="mp3">MP3</option>
+								<option value="device_etc">기타(PMP,디지털카메라)</option>
 							</select>
 						</td>
 					</tr>
@@ -649,7 +649,7 @@
 						<th><p>제조사</p></th>
 						<td>
 							<select id="d_brand" class="easyui-combobox" data-options="panelHeight:'auto'">
-								<option value="test">제조사</option>
+								<option value="">제조사</option>
 							</select>
 							
 						</td>
@@ -690,19 +690,19 @@
 						<td>
 							<select id="p_kind" class="easyui-combobox" data-options="panelHeight:'auto'">
 								<option value=''>차종</option> 
-								<option value='승용차'>승용차</option> 
-								<option value='승합차'>승합차</option> 
-								<option value='작업차'>작업차</option> 
-								<option value='특수차'>특수차</option> 
-								<option value='오토바이'>오토바이</option> 
+								<option value='car'>승용차</option> 
+								<option value='van'>승합차</option> 
+								<option value='working_vehicle'>작업차</option> 
+								<option value='specialty_vehicle'>특수차</option> 
+								<option value='motorcycle'>오토바이</option> 
 							</select>
 						</td>
 					</tr>
 					<tr>
 						<th><p>모델명</p></th>
 						<td>
-							<select id="p_model" class="easyui-combobox" data-options="panelHeight:'auto'">
-								<option value="test">차량모델명</option>
+							<select id="p_model" class="easyui-combobox" data-options="panelHeight:'200px'">
+								<option value="">차량모델명</option>
 							</select>
 						</td>
 					</tr>
