@@ -82,18 +82,36 @@
 		padding: 0.75rem;
 		vertical-align: middle;
 	}
+	.modal-content {
+		border: 0px;
+	}
 	.modal-header.visitor {
+		border-top-left-radius: 6px;
+		border-top-right-radius: 6px;
 		background-color: #dff0d8;
 	}
 	.modal-header.device {
+		border-top-left-radius: 6px;
+		border-top-right-radius: 6px;
 		background-color: #fcf8e3;
 	}
 	.modal-header.parking {
+		border-top-left-radius: 6px;
+		border-top-right-radius: 6px;
 		background-color: #f5f5f5;
+	}
+	.modal-header.log {
+		border-top-left-radius: 6px;
+		border-top-right-radius: 6px;
+		background-color: #337ab7;
 	}
 	.modal-body {
 		padding-left: 100px;
 		padding-right: 100px;
+	}
+	.modal-body.log {
+		padding-left: 50px;
+		padding-right: 50px;
 	}
 	.modal-body p {
 		margin: 0 0 0 0px;
@@ -110,25 +128,37 @@
 		filter: alpha(opacity=60);
 		cursor: default;
 	}
+	input[type=number]::-webkit-inner-spin-button,
+	input[type=number]::-webkit-outer-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
 </style>
 <title>방문 신청 - CH4 방문자 관리 시스템</title>
 <script type="text/javascript">
+	//등록한 방문자 수,반입기기 수,차량 수
 	var vIndex = 1;
 	var dIndex = 1;
 	var pIndex = 1;
+	//datebox 선택날짜값 변수
 	var firstDate;
+	//오늘날짜 변수
+	var now = new Date();
 </script>
 </head>
 <body data-spy="scroll" data-target="#myScrollspy" data-offset="300">
 <%@ include file="/View/CommonForm/Top.jsp"%>
 <script type="text/javascript">
+	//combobox 직접입력 방지
 	$.fn.combobox.defaults.editable = false
+	//datebox 날짜형식 YYYY-MM-DD로 설정
 	$.fn.datebox.defaults.formatter = function(date){
 	    var y = date.getFullYear();
 	    var m = date.getMonth()+1;
 	    var d = date.getDate();
 	    return y+'-'+(m<10 ? "0"+m:m)+'-'+(d<10 ? "0"+d:d);
-	}   
+	}  
+	//datebox parser설정
 	$.fn.datebox.defaults.parser = function(s){
 	    var t = Date.parse(s);
 	    if (!isNaN(t)){
@@ -137,34 +167,68 @@
 	    	return new Date();
 	    }
 	}
+	//datebox 한글화
 	$.fn.datebox.defaults.currentText = '오늘'
 	$.fn.datebox.defaults.closeText = '닫기'
 	$.fn.calendar.defaults.weeks = ['일','월','화','수','목','금','토']
 	$.fn.calendar.defaults.months = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
 	$(document).ready(function(){
+		///////////////////////// 방문이력 이벤트  //////////////////////////
+		//방문이력 조회 Modal 띄우기
+		$("#btn_log").on('click',function(){
+			$("#md_log").modal('show');
+		});
+		//신청일자 조회 시작일 선택시 마지막일 선택범위 제한
+		$('#log_date1').datebox({
+			onSelect: function(date){
+				firstDate = date;
+				$('#log_date2').datebox().datebox('calendar').calendar({
+		            validator: function(date){
+		                var now = new Date();
+		                var d1 = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate());
+		                var d2 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+		                return d1<=date && date<=d2;
+		            }
+		        });
+			}
+		});
+		//신청일자 시작일 범위 (작년 당일~올해 당일) 제한
+		$('#log_date1').datebox().datebox('calendar').calendar({
+            validator: function(date){
+                var now = new Date();
+                var d1 = new Date(now.getFullYear()-1, now.getMonth(), now.getDate());
+                var d2 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                return d1<=date && date<=d2;
+            }
+        });
+		//신청일자 시작일 마지막일 (한달전~당일) 기본세팅
+		$('#log_date1').datebox('setValue',now.getFullYear()+'-'+now.getMonth()+'-'+now.getDate());
+		$('#log_date2').datebox('setValue',now.getFullYear()+'-'+(now.getMonth()+1)+'-'+now.getDate());
 		///////////////////////// 방문날짜 이벤트  //////////////////////////
 		$("#visit_term").combobox("disable");
 		$("#visit_day").combobox("disable");
 		$("#visit_date2").datebox("disable");
+		//방문유형 선택시 입력폼 Enable,Disable
 		$("#visit_type").combobox({
 			onChange: function(newValue){
-				if("일일방문"==newValue){
+				if("일일방문"==newValue){	//datebox 1개만 Enable
 					$("#visit_term").combobox("disable");
 					$("#visit_day").combobox("disable");
 					$("#visit_date2").datebox("disable");
 				}
-				else if("기간방문"==newValue){
+				else if("기간방문"==newValue){	//datebox 2개만 Enable
 					$("#visit_term").combobox("disable");
 					$("#visit_day").combobox("disable");
 					$("#visit_date2").datebox("enable");
 				}
-				else {
+				else {	//정기방문 : 전부 Enable
 					$("#visit_term").combobox("enable");
 					$("#visit_day").combobox("enable");
 					$("#visit_date2").datebox("enable");
 				}
 			}
 		});
+		//방문시작일 선택시 마지막일 선택범위 (시작일+1~내년 당일) 제한
 		$('#visit_date1').datebox({
 			onSelect: function(date){
 				firstDate = date;
@@ -177,11 +241,13 @@
 		            }
 		        });
 				//최소기간을 정해버리면 disable이 풀림.....
+				//그래서 '일일방문'에선 다시 사용못하게 막아야함
 				if("일일방문"==$("#visit_type").val()){
 					$("#visit_date2").datebox("disable");
 				}
 			}
 		});
+		//방문일자 선택범위 (당일~내년 당일) 제한
 		$('#visit_date1').datebox().datebox('calendar').calendar({
             validator: function(date){
                 var now = new Date();
@@ -190,10 +256,12 @@
                 return d1<=date && date<=d2;
             }
         });
+		//방문일자 
+		$('#visit_date1').datebox('setValue',now.getFullYear()+'-'+now.getMonth()+'-'+(now.getDate()+1));
 		///////////////////////// 방문자 추가 이벤트 /////////////////////////
 		//방문자 추가 modal 띄우기
 		$("#btn_addRowVisitor").on('click',function(){
-			if(vIndex>=10){
+			if(vIndex>10){
 				alert("방문인원은 최대 10명입니다.");
 				return;
 			}
@@ -201,8 +269,28 @@
 		});
 		//입력값 테이블에 row 추가하기
 		$("#addVisitor").on('click',function(){
+			if(!($("#v_name").val())){
+				alert("방문자 성명을 입력해 주세요.");
+				$("#v_name").textbox('textbox').focus();
+				return;
+			}
+			if(!($("#v_hp1").val())){
+				alert("연락처를 입력해 주세요.");
+				$("#v_hp1").textbox('textbox').focus();
+				return;
+			}
+			if(!($("#v_hp2").val())){
+				alert("연락처를 입력해 주세요.");
+				$("#v_hp2").textbox('textbox').focus();
+				return;
+			}
+			if(!($("#v_hp3").val())){
+				alert("연락처를 입력해 주세요.");
+				$("#v_hp3").textbox('textbox').focus();
+				return;
+			}
 			var name = $("#v_name").val();
-			var hp = $("#v_hp").val();
+			var hp = $("#v_hp1").val()+'-'+$("#v_hp2").val()+'-'+$("#v_hp3").val();
 			var row = "<tr id='vRow"+vIndex+"'><td><input id='chkVisitor' type='checkbox'></td>"
 					+"<td>"+name+"</td>"
 					+"<td>"+hp+"</td></tr>";
@@ -332,6 +420,7 @@
 		});
 		////////////////////////////////////////////////////////////////
 		///////////////////////// 차량 추가 이벤트 ///////////////////////////
+		$("#p_num").textbox('textbox').attr('maxlength', '8');
 		$("#btn_addRowParking").on('click',function(){
 			$("#p_kind").combobox('clear');
 			$("#p_model").combobox('clear');
@@ -413,7 +502,7 @@
 					<h2 style="margin-bottom:20px; border-left: 4px solid #17405D; padding-left:8px;"><b>방문 신청</b> (방문지)</h2>
 		    	</div>
 		    	<div class="col-lg-2" style="text-align:right; padding-top:30px;">
-					<button class="btn btn-primary">방문이력</button>
+					<button id="btn_log" class="btn btn-primary">방문이력</button>
 		    	</div>
 			</div>
 		    <div id="section1" class="panel panel-info">    
@@ -591,7 +680,11 @@
 				    	</table>
 				    </div>
 			    </div>
-		    </div>
+		    </div><br>
+			<div style="text-align:center;"> 
+				<button id="btn_apply" class="btn btn-primary" onclick="" style="width:150px;margin-right:20px;">신청</button>
+				<button id="btn_cancel" class="btn" onclick="location.href='Visit_Main.jsp'" style="width:150px;">취소</button>
+			</div>
 	    </div>
   	</div>
 </div>
@@ -611,7 +704,11 @@
 					</tr>
 					<tr>
 						<th><p>전화번호</p></th>
-						<td><input id="v_hp" class="easyui-textbox"></td>
+						<td>
+							<input id="v_hp1" class="easyui-textbox" type="number" style="width:60px;"> -
+							<input id="v_hp2" class="easyui-textbox" type="number" style="width:60px;"> -
+							<input id="v_hp3" class="easyui-textbox" type="number" style="width:60px;">
+						</td>
 					</tr>
 				</table>
 			</div>
@@ -710,6 +807,50 @@
 			</div>
 			<div class="modal-footer">
         		<button type="button" class="btn btn-primary" id="addParking">추가</button>
+        		<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+        	</div>
+		</div>
+	</div>
+</div>
+<!-- 방문이력 조회 Modal -->
+<div id="md_log" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header log">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" style="color:white;">방문이력 (방문지)</h4>
+			</div>
+			<div class="modal-body log" >
+				<div class="container-fluid">
+					<div class="row table basic">
+						<table class="table">
+				    		<tr>
+				    			<th>
+									<input id="log_date1" class="easyui-datebox" label="신청일자" style="width:230px;height:30px">
+							    	&emsp;<span>~</span>&emsp;
+							    	<input id="log_date2" class="easyui-datebox" style="width:150px;height:30px">
+							    	&emsp;&emsp;
+							    	<button type="button" class="btn btn-primary" id="btn_reflect">조회</button>
+				    			</th>
+				    		</tr>
+				    	</table>
+					</div>
+					<h6 style="margin-bottom:10px;">※이전 신청/방문이력을 재사용 신청할 수 있습니다.</h6>
+				    <div class="row table basic">
+				    	<table class="table">
+				    		<tr>
+				    			<th>신청일자</th>
+				    			<th>방문자</th>
+				    			<th>목적지</th>
+				    			<th>방문일자</th>
+				    			<th>방문목적</th>
+				    		</tr>
+				    	</table>
+				    </div>
+				</div>
+			</div>
+			<div class="modal-footer">
+        		<button type="button" class="btn btn-primary" id="btn_reflect">재사용</button>
         		<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
         	</div>
 		</div>
