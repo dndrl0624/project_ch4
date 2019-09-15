@@ -126,16 +126,19 @@ th {
 	<div class='col-sm-2'>
 <!-- 검색 타입 설정 -->
 	<div style="margin-bottom:3px">
-		<input class="easyui-radiobutton" name="SearchType" value="CompanyName" label="회사명" checked="checked">
-		<input class="easyui-radiobutton" name="SearchType" value="NameTel" label="방문자명+연락처">
+		<input type="radio" name="SearchType" value="CompanyName" checked="checked"><span>회사명</span>
+		<input type="radio" name="SearchType" value="NameTel"><span>방문자명+연락처</span>
 	</div>
 <!-- 검색창 : 라디오버튼에 의한 분기 -->
 	<span id="CompanyNameSearchBox">
-	<input class="easyui-textbox" name="CompanyNameSearchBox" style="width:100%;height:25px;overflow:hidden;" placeholder="회사명을 입력하세요">
+		<textarea name="CompanyNameSearchBox" style="width:100%;height:25px;overflow:hidden;" placeholder="회사명을 입력하세요"></textarea>
+		<input class="easyui-textbox" name="CompanyNameSearchBox" style="width:30px;height:25px;" data-options="prompt:'회사명을 입력하세요'">
 	</span>
 	<span id="NameTelSearchBox" style="display:none">
-	<input class="easyui-textbox" name="NameSearchBox" style="width:100%;height:25px;overflow:hidden;" placeholder="방문자명을 입력하세요">
-	<input class="easyui-textbox" name="TelSearchBox" style="width:100%;height:25px;overflow:hidden;" placeholder="Tel (    )      -">
+		<input class="easyui-textbox" name="NameSearchBox" style="width:100%;height:25px;overflow:hidden;" data-options="prompt:'방문자명을 입력하세요'">
+		<input class="easyui-textbox" name="TelSearchBox" style="width:100%;height:25px;overflow:hidden;" data-options="prompt:'Tel (    )      -'">
+		<textarea name="NameSearchBox" style="width:100%;height:25px;overflow:hidden;" placeholder="방문자명을 입력하세요"></textarea>
+		<textarea name="TelSearchBox" style="width:100%;height:25px;overflow:hidden;" placeholder="Tel (    )      -"></textarea>
 	</span>
 	</div>
 	<div  class='col-sm-4'>
@@ -289,6 +292,6 @@ window.onclick = function(event) {
    }
 </script>
 <!-- Bottom Link Import --> 
-<%@ include file="/Style/common/BottomUI.jsp"%>
+<%-- <%@ include file="/Style/common/BottomUI.jsp"%> --%>
 </body>
 </html>
