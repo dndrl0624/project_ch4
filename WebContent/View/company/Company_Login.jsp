@@ -21,15 +21,22 @@
 		background-image: url('../../Style/images/banner/speedGate (2).jpg');
 	}
 	#login_background{
-		background-color: gray;
-		opacity:inherit;
-		margin-left: 20px;
-		margin-right: 20px;
-		margin-bottom: 20px;
+		background-color:rgba(223,223,223,0.7);
 		height: 100%;
+		padding-bottom: 30px;
 	}
 	#blank{
 		height: 100px;
+	}
+	div.row{
+		padding-top: 20px;
+	}
+	#btn_login {
+		width: 50%;
+		height: 80px;
+	}
+	.checkbox{
+		border: 0px;
 	}
 </style>
 </head>
@@ -37,32 +44,48 @@
 <%@ include file="/View/CommonForm/Top.jsp"%>
 <div class="container-fluid" style="text-align: center;">
 	<div id="jumbo_companylogin" class="jumbotron">
-		<div >
+		<div>
 			<div class="row">
 			<!-- 로그인//kiosk 버튼 -->
 				<div class="col-lg-offset-10 col-lg-2">
-					<button class="btn btn-light">JOIN</button>
-					<button class="btn btn-primary">KIOSK</button>
+					<button class="btn btn-light" style="width: 80px;">JOIN</button>
+					<button class="btn btn-danger" style="width: 80px;">KIOSK</button>
 				</div>
 			</div>
 			<div class="row" id="blank">
 			</div>
 			<div class="col-lg-offset-1 col-lg-10 col-lg-offset-1">
-				<div id="login_background" class="row">
+				<div id="login_background" class="row" align="center">
 				<!-- 로그인화면 -->
 					<form class="fsignin">
-						<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-						<div class="col-lg-8">
-							<div class="col-lg-offset-4 col-lg-8 ">
-								<label for="inputEmail" class="sr-only">Email address</label>
-								<input id="id" class="form-control"	placeholder="id" style="width: 70%" required autofocus> 
-								<label for="inputPassword" class="sr-only">Password</label>
-								<input type="password" id="password" class="form-control" placeholder="Password" required>
+						&nbsp;
+						<h1     style="font-size: 50px;">Please sign in</h1>
+						&nbsp;
+						<div class="row">
+							<div class="row">
+								<div class="col-lg-7" align="right">
+									<div class="col-lg-offset-4 col-lg-8 ">
+										<input id="id" class="easyui-textbox"  prompt="id" data-options="iconCls:'icon-man'" style="width:80%; height: 40px; margin-bottom: 10px">
+										<input id="pw" class="easyui-passwordbox" prompt="Password" iconWidth="28" style="width:80%; height: 40px">
+									</div>
+								</div> 
+								<div class="col-lg-3" align="left">
+									<button id="btn_login"  class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+								</div>
+								<div class="col-lg-2">
+								
+								</div>
 							</div>
+							<div class="row">
+								<div class="checkbox">
+    								<label>
+										<input type="checkbox" value="remember-me"> Remember me
+							    	</label>
+							    </div>
+  							</div>
 						</div>
-						<div class="col-lg-4">
-							<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 						</div>
+						
 					</form>
 				</div>
 			</div>
