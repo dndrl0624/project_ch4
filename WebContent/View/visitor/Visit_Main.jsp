@@ -77,7 +77,7 @@
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-lg-4">
-									<img class="img-circle" src="/Style/images/crud/buildings.png">
+									<img class="img-circle" src="../../Style/images/crud/buildings.png">
 								</div>
 								<div class="col-lg-8">
 									<br>
@@ -94,7 +94,7 @@
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-lg-4">
-									<img class="img-circle" src="/Style/images/crud/clipboard.png">
+									<img class="img-circle" src="../../Style/images/crud/clipboard.png">
 								</div>
 								<div class="col-lg-5" style="padding-left:0px;padding-right:0px;">
 									<br>
@@ -102,7 +102,7 @@
 									<input class="easyui-textbox" data-options="prompt:'전화번호'">
 								</div>
 								<div class="col-lg-3" style="padding-left:0px;padding-right:20px;margin : 10px 0px 10px 0px;">
-									<button id="btn_apply" class="btn btn-primary" type="button" onclick="location.href='/View/visitor/Visit_Agreement.jsp'">신청</button>
+									<button id="btn_apply" class="btn btn-primary" type="button" onclick="location.href='Visit_Agreement.jsp'">신청</button>
 								</div>
 							</div>
 						</div>
@@ -116,7 +116,7 @@
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-lg-2">
-									<img class="img-circle" src="/Style/images/crud/searchbox.png" style="background-color:#6EAFA8">
+									<img class="img-circle" src="../../Style/images/crud/searchbox.png" style="background-color:#6EAFA8">
 								</div>
 								<div class="col-lg-4" style="padding-left:0px;padding-right:10px;">
 									<ul class="nav nav-tabs">
@@ -139,7 +139,7 @@
 								</div>
 								<div class="col-lg-4" style="padding-left:0px;padding-right:0px;">
 									<label for="img_process">신청 절차안내</label>
-									<img id="img_process" src="/Style/images/crud/img_process.png">
+									<img id="img_process" src="../../Style/images/crud/img_process.png">
 								</div>
 							</div>
 						</div>

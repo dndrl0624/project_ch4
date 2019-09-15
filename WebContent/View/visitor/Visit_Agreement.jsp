@@ -53,8 +53,8 @@
 			</label>
 		</div><br>
 		<div style="text-align:center;">
-			<button class="btn btn-primary" onclick="location.href='/View/visitor/Visit_Select.jsp'">동의합니다.</button>
-			<button class="btn" onclick="location.href='/View/visitor/Visit_Main.jsp'">동의하지 않습니다.</button>
+			<button class="btn btn-primary" onclick="location.href='Visit_Select.jsp'">동의합니다.</button>
+			<button class="btn" onclick="location.href='Visit_Main.jsp'">동의하지 않습니다.</button>
 		</div>
 	</div>
 </div>
