@@ -218,7 +218,7 @@
 					<h2>방문/반입 신청</h2>
 				</div>
 				<!------------------ 이 구간은 신청시 값이 전송되는 구간 -------------------->
-				<form name="form_apply" action="" method="POST">
+				<form id="form_apply" action="" method="POST">
 					<div id="form1" class="col-lg-6">
 						<div class="panel panel-primary">
 							<div class="panel-heading">1. 방문지/목적지 선택</div>
@@ -284,7 +284,7 @@
 										</ul>
 										<div class="tab-content">
 											<!------------------ 이 구간은 신청번호로 조회시 값이 전송되는 구간 -------------------->
-											<form name="form_search_num" action="" method="POST">
+											<form id="form_search_num" action="" method="POST">
 											<div id="nav_search1" class="tab-pane fade in active">
 												<br>
 												<input id="input_num" class="easyui-textbox" name="visit_no" data-options="prompt:'신청번호를 입력하세요.'">
@@ -292,7 +292,7 @@
 											</form>
 											<!------------------ 이 구간은 조회시 값이 전송되는 구간 끝 ------------------>
 											<!------------------ 이 구간은 이름 & 연락처로 조회시 값이 전송되는 구간 -------------------->
-											<form name="form_search_name" action="" method="POST">
+											<form id="form_search_name" action="" method="POST">
 											<div id="nav_search2" class="tab-pane fade" style="padding-top:10px;">
 												<input id="input_search_name" class="easyui-textbox" name="visit_apply_name" data-options="prompt:'성명'" style="width:300px;"><br><br>
 												<input id="input_search_hp" type="hidden" name="visit_apply_hp">
