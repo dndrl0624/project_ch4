@@ -63,6 +63,10 @@ th {
     text-decoration: none;
     cursor: pointer;
 }
+/* 메인 페이지 프레임 구간 설정 */
+.mainContent {
+	margin:30px 20px 10px 17%;
+}
 </style>
 </head>
 <body>
@@ -116,11 +120,11 @@ th {
 </aside>
 
 <!-- Content -->
-<div class="mainContent" style="margin:30px 20px 10px 17%;">
-	<!-- <div style="margin:30px 20px 10px 0px;font-size:35px;">
+<div class="mainContent">
+	<div style="margin:30px 20px 10px 0px;font-size:35px;">
 	방문 신청 조회 페이지
-	<button type="button" id="lastDetail" class="btn btn-info" style="margin-left:456px;">이전 방문 이력</button><br>
-	</div> -->
+	<!-- <button type="button" id="lastDetail" class="btn btn-info" style="margin-left:456px;">이전 방문 이력</button><br> -->
+	</div>
 <!-- margin : top right bottom left 순서 -->
 	<div class='col-sm-1'></div>
 	<div class='col-sm-2'>

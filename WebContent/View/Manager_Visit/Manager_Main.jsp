@@ -28,6 +28,10 @@ th {
 	text-align: center;
 }
 
+/* 메인 페이지 프레임 구간 설정 */
+.mainContent {
+	margin:30px 20px 10px 17%;
+}
 
 </style>
 </head>
@@ -82,7 +86,9 @@ th {
 </aside>
 
 <!-- Content -->
-
+<div class="mainContent">
+	각 페이지 소개?
+</div>
 
  
 <!-- 공통 Footer -->
