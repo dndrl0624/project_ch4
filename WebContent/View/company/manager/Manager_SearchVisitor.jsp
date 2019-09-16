@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <!-- Web icon 설정 --> 
-<%@ include file="../CommonForm/TapLogo.jsp"%>
+<%@ include file="../../CommonForm/TapLogo.jsp"%>
 <title>방문 신청 조회 페이지</title>
 <%@ include file="/Style/common/HeadUI.jsp"%>
 <!-- CSS Style Import --> 
@@ -70,7 +70,7 @@ th {
 </style>
 </head>
 <body>
-<%@ include file="../CommonForm/Top.jsp"%>
+<%@ include file="../../CommonForm/Top.jsp"%>
 
 <!-- Side Bar -->
 <aside>
