@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <!-- Web icon 설정 --> 
 <%@ include file="../../CommonForm/TapLogo.jsp"%>
-<title>방문 현황 조회 페이지</title>
+<title>물품반입 현황 조회 페이지</title>
 <!-- 공통코드 -->
 <%@ include file="../../../Style/common/HeadUI.jsp"%>
 <style type="text/css"> 
@@ -87,7 +87,7 @@ th {
 					<a data-toggle="collapse" href="#collapse1">방문 신청 조회</a>
 				</h4>
 			</div>
-			<div id="collapse1" class="panel-collapse collapse in">
+			<div id="collapse1" class="panel-collapse collapse">
 				<div class="panel-body">
 					<a  href="/project_ch4_pojo/View/company/manager/Manager_SearchVisitor.jsp">방문 신청 조회</a><br> 
 					<a  href="/project_ch4_pojo/View/company/manager/Manager_LogVisitor.jsp">방문현황 조회</a><br> 
@@ -100,7 +100,7 @@ th {
 					<a data-toggle="collapse" href="#collapse2">물품 반입 신청 조회</a>
 				</h4>
 			</div>
-			<div id="collapse2" class="panel-collapse collapse">
+			<div id="collapse2" class="panel-collapse collapse in">
 				<div class="panel-body">
 					<a  href="/project_ch4_pojo/View/company/manager/Manager_SearchGoods.jsp">반입 신청 조회</a><br> 
 					<a  href="/project_ch4_pojo/View/company/manager/Manager_LogGoods.jsp">반입 현황 조회</a><br> 
@@ -127,7 +127,7 @@ th {
 <!-- Content -->
 <div class="mainContent">
 	<div style="margin:30px 20px 10px 0px;font-size:35px;">
-	방문 현황 조회 페이지
+	물품 반입 현황 조회
 	<!-- <button type="button" id="lastDetail" class="btn btn-info" style="margin-left:456px;">이전 방문 이력</button><br> -->
 	</div>
 <!-- margin : top right bottom left 순서 -->
@@ -154,17 +154,10 @@ th {
 	<span id="CompanyNameSearchBox">
 		<!-- 아래 텍스트 박스가 크기를 %로 지정 할 수 없는 문제!!! 모든 페이지에서 동일함 -->
 		<input class="easyui-textbox" name="CompanyNameSearchBox" style="width:230px;height:25px;" data-options="prompt:'회사명을 입력하세요'">
-		<!-- 		
-		<textarea name="CompanyNameSearchBox" style="width:100%;height:25px;overflow:hidden;" placeholder="회사명을 입력하세요"></textarea> 
-		-->
 	</span>
 	<span id="NameTelSearchBox" style="display:none">
 		<input class="easyui-textbox" name="NameSearchBox" style="width:100%;height:25px;overflow:hidden; data-options="prompt:'방문자명을 입력하세요'">
 		<input class="easyui-textbox" name="TelSearchBox" style="width:100%;height:25px;overflow:hidden;" data-options="prompt:'Tel (    )      -'">
-		<!-- 
-		<textarea name="NameSearchBox" style="width:100%;height:25px;overflow:hidden;" placeholder="방문자명을 입력하세요"></textarea>
-		<textarea name="TelSearchBox" style="width:100%;height:25px;overflow:hidden;" placeholder="Tel (    )      -"></textarea> 
-		-->
 	</span>
 	</div>
 	<div  class='col-sm-4'>
@@ -209,13 +202,18 @@ th {
 	<thead style="font-size:20px;">
 	<tr>
 		<th>신청번호</th>
-		<th>현재 위치</th>
-		<th>방문자명</th>
+		<th>신청자</th>
 		<th>방문지</th>
 		<th>목적지</th>
-		<th>방문자 연락처</th>
+		<th>방문목적</th>
+		<th>신청자연락처</th>
 		<th>방문유형</th>
 		<th>방문일자</th>
+		<th>방문주기</th>
+		<th>방문요일</th>
+		<th>반입물품명</th>
+		<th>물품종류</th>
+		<th>물품수량</th>
 	</tr>
 	</thead>
 <!-- ========================================================================================================== -->
@@ -224,7 +222,7 @@ th {
 	<tbody>
 	
 	<tr>
-		<td colspan= "10" style="text-align: center;font-size:20px;font-weight: bold;text-decoration: underline;height:100px;">검색결과가 없습니다</td>
+		<td colspan= "13" style="text-align: center;font-size:20px;font-weight: bold;text-decoration: underline;height:100px;">검색결과가 없습니다</td>
 	</tr>
 	
 	<tr style="height:30px;">
@@ -236,10 +234,15 @@ th {
 		<td>Example</td>
 		<td>Example</td>
 		<td>Example</td>
+		<td>Example</td>
+		<td>Example</td>
+		<td>Example</td>
+		<td>Example</td>
+		<td>Example</td>
 	</tr>
 	
 	<tr>
-		<td colspan= "10" id="modalopen" data-toggle="modal" data-target="#detailModal"
+		<td colspan= "13" id="modalopen" data-toggle="modal" data-target="#detailModal"
 		style="text-align: center;font-size:20px; font-weight: bold;text-decoration: underline;height:100px;" >
 		상세정보 예시</td>
 	</tr>

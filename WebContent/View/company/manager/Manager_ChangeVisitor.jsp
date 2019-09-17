@@ -5,26 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <!-- Web icon 설정 --> 
-<%-- <%@ include file="../../CommonForm/TapLogo.jsp"%> --%>
-<!-- 경로 바꿈으로 인한 경로 재설정 -->
-<!-- 반응형 웹 -->
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<!-- 인터넷 상단 창 아이콘 -->
-<link rel="icon" href="../../../Style/images/logo/logo_tap.png" type="image/png"> 
+<%@ include file="../../CommonForm/TapLogo.jsp"%>
 <title>방문 신청 변경 페이지</title>
-<!-- 경로 바꿈으로 인한 경로 재설정 -->
-<!-- easyui -->
-<link rel="stylesheet" type="text/css" href="../../../Style/themes/default/easyui.css">
-<link rel="stylesheet" type="text/css" href="../../../Style/themes/icon.css">
-<link rel="stylesheet" type="text/css" href="../../../Style/demo/demo.css">
-<!-- Bootstrap core CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-<script src="../../../Style/js/jquery.easyui.min.js"></script>
-<!-- Custom styles for this template -->
-<!-- i Tag Font Image -->
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<!-- 공통코드 -->
+<%@ include file="../../../Style/common/HeadUI.jsp"%>
 <!-- CSS Style Import --> 
 <style type="text/css"> 
 <%@ include file="/Style/css/CssStyle.css"%>
@@ -44,24 +28,19 @@ aside::-webkit-scrollbar {
 </head>
 
 <!-- 페이지 불러올 때, 정보 넣기 // 사이드바 메뉴 고정 및 현재 위치 표시 // 저장 취소 기능 구현 -->
-<body>		<!-- 경로 바꿈으로 인한 재설정 -->
-<%-- <%@ include file="../../CommonForm/Top.jsp"%> --%>
-<header class="header">
-	<div class="main_menu">
-		<nav class="navbar navbar-default navbar-fixed-top" style="padding-top:10px;padding-bottom:10px;">
-			<div class="container">
-				<!-- 대표 회사 아이콘 및 링크 -->	
-				<a id="Main_log" href="/View/Index/Index_Choose.jsp">
-					<img src="../../../Style/images/logo/logo_navi2.png" alt="">
-				</a>
-			</div>
-		</nav>
-	</div>
-</header>
+<body>
+<%@ include file="../../CommonForm/Top.jsp"%>
 
 <!-- Side Bar -->
 <aside>
 	<div class="panel-group" style="margin-top:90px">
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a href="/project_ch4_pojo/View/company/manager/Manager_Main.jsp">메인페이지</a>
+				</h4>
+			</div>
+		</div>
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h4 class="panel-title">
@@ -70,8 +49,8 @@ aside::-webkit-scrollbar {
 			</div>
 			<div id="collapse1" class="panel-collapse collapse in">
 				<div class="panel-body">
-					<a  href="#">방문 신청 조회</a><br> 
-					<a  href="#">방문현황 조회</a><br> 
+					<a  href="/project_ch4_pojo/View/company/manager/Manager_SearchVisitor.jsp">방문 신청 조회</a><br> 
+					<a  href="/project_ch4_pojo/View/company/manager/Manager_LogVisitor.jsp">방문현황 조회</a><br> 
 				</div>
 			</div>
 		</div>
@@ -83,23 +62,22 @@ aside::-webkit-scrollbar {
 			</div>
 			<div id="collapse2" class="panel-collapse collapse">
 				<div class="panel-body">
-					<a  href="#">반입 신청 조회</a><br> 
-					<a  href="#">반입 현황 조회</a><br> 
+					<a  href="/project_ch4_pojo/View/company/manager/Manager_SearchGoods.jsp">반입 신청 조회</a><br> 
+					<a  href="/project_ch4_pojo/View/company/manager/Manager_LogGoods.jsp">반입 현황 조회</a><br> 
 				</div>
 			</div>
 		</div>
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<a data-toggle="collapse" href="#collapse3">여분 목록</a>
+					<a data-toggle="collapse" href="#collapse3">안내데스크</a>
 				</h4>
 			</div>
 			<div id="collapse3" class="panel-collapse collapse">
 				<div class="panel-body">
-					<a  href="#">sub0</a><br> 
-					<a  href="#">sub1</a><br> 
-					<a  href="#">sub2</a><br> 
-					<a  href="#">sub3</a><br>
+					<a  href="/project_ch4_pojo/View/company/info/Info_Main.jsp">안내데스크 메인</a><br> 
+					<a  href="/project_ch4_pojo/View/company/info/Info_Notice.jsp">안내데스크 공지</a><br> 
+					<a  href="/project_ch4_pojo/View/company/info/Info_ManageLog.jsp">방문자 현황 관리</a><br> 
 				</div>
 			</div>
 		</div>
