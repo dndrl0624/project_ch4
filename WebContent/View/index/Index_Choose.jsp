@@ -28,17 +28,17 @@
 			
 <!-- 페이지 --><div class="row">
 				<div class="col-lg-4">
-					<a href="../visitor/Visit_Main.jsp"><!-- 이동할 페이지 URL 설정 해야함 -->
+					<a href="/service/visitor.ch4"><!-- 이동할 페이지 URL 설정 해야함 -->
 						<img src="../../Style/images/crud/visit_logo.png" class="img-thumbnail">
 					</a>
 				</div>
 				<div class="col-lg-4">
-					<a href="../company/Company_Login.jsp"><!-- 이동할 페이지 URL 설정 해야함 -->
+					<a href="/service/company.ch4"><!-- 이동할 페이지 URL 설정 해야함 -->
 						<img src="../../Style/images/crud/company_logo.png"  class="img-thumbnail">
 					</a>
 				</div>
 				<div class="col-lg-4">
-					<a href="../admin/Admin_Login.jsp"><!-- 이동할 페이지 URL 설정 해야함 -->
+					<a href="/service/admin/ch4"><!-- 이동할 페이지 URL 설정 해야함 -->
 						<img src="../../Style/images/crud/admin_logo.png"  class="img-thumbnail">
 					</a>
 				</div>
