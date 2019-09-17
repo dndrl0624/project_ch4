@@ -71,7 +71,7 @@
 		<div class="col-lg-offset-1 col-lg-10 col-lg-offset-1">
 			<div class="row" align="left" style="margin-top:80px;">
 				<h2>ADMIN </h2>
-			<div>
+			</div>
 			<div class="col-lg-offset-1 col-lg-10 col-lg-offset-1">
 				<div id="login_background" class="row" align="center" >
 					<h1 style="font-size: 50px;">Please sign in</h1>
