@@ -5,9 +5,26 @@
 <head>
 <meta charset="UTF-8">
 <!-- Web icon 설정 --> 
-<%@ include file="../../CommonForm/TapLogo.jsp"%>
-<title>승인 관리자 메인 페이지</title>
-<%@ include file="/Style/common/HeadUI.jsp"%>
+<%-- <%@ include file="../../CommonForm/TapLogo.jsp"%> --%>
+<!-- 경로 바꿈으로 인한 경로 재설정 -->
+<!-- 반응형 웹 -->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- 인터넷 상단 창 아이콘 -->
+<link rel="icon" href="../../../Style/images/logo/logo_tap.png" type="image/png"> 
+<!-- 경로 바꿈으로 인한 경로 재설정 -->
+<!-- easyui -->
+<link rel="stylesheet" type="text/css" href="../../../Style/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="../../../Style/themes/icon.css">
+<link rel="stylesheet" type="text/css" href="../../../Style/demo/demo.css">
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="../../../Style/js/jquery.easyui.min.js"></script>
+<!-- Custom styles for this template -->
+<!-- i Tag Font Image -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<!-- CSS Style Import --> 
 <!-- CSS Style Import --> 
 <style type="text/css"> 
 <%@ include file="/Style/css/CssStyle.css"%>
@@ -35,8 +52,20 @@ th {
 
 </style>
 </head>
-<body>
-<%@ include file="../../CommonForm/Top.jsp"%>
+<body>		<!-- 경로 바꿈으로 인한 재설정 -->
+<%-- <%@ include file="../../CommonForm/Top.jsp"%> --%>
+<header class="header">
+	<div class="main_menu">
+		<nav class="navbar navbar-default navbar-fixed-top" style="padding-top:10px;padding-bottom:10px;">
+			<div class="container">
+				<!-- 대표 회사 아이콘 및 링크 -->	
+				<a id="Main_log" href="/View/Index/Index_Choose.jsp">
+					<img src="../../../Style/images/logo/logo_navi2.png" alt="">
+				</a>
+			</div>
+		</nav>
+	</div>
+</header>
 
 <!-- Side Bar -->
 <aside>
@@ -87,7 +116,56 @@ th {
 
 <!-- Content -->
 <div class="mainContent">
-	각 페이지 소개?
+	<div class="container">
+		<h2>CH4 방문자 관리 시스템</h2>
+		<h5>방문자 관리 시스템은 다양한 기관에서 사용하는 방문시스템을 자동화 하는 시스템입니다</h5>
+		<div id="myCarousel" class="carousel slide" data-ride="carousel">
+		<!-- Indicators -->
+			<ol class="carousel-indicators">
+				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#myCarousel" data-slide-to="1"></li>
+				<li data-target="#myCarousel" data-slide-to="2"></li>
+			</ol>
+
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner">
+				<div class="item active">
+					<!-- 사진 바꾸기 =============================== -->
+					<img src="../../../Style/images/banner/gate.gif" alt="방문자" style="width: 100%;">
+					<div class="carousel-caption">
+          				<h3>방문자</h3>
+         	 			<p>귀하가 방문할 곳에 미리 방문을 알리세요</p>
+        			</div>
+				</div>
+
+				<div class="item">
+					<img src="../../../Style/images/banner/gate.gif" alt="승인자" style="width: 100%;">
+					<div class="carousel-caption">
+          				<h3>승인자</h3>
+         	 			<p>방문 신청한 이들에게 방문 가능여부를 알리세요</p>
+        			</div>
+				</div>
+
+				<div class="item">
+					<img src="../../../Style/images/banner/gate.gif" alt="인포" style="width: 100%;">
+					<div class="carousel-caption">
+          				<h3>인포데스크</h3>
+         	 			<p>방문한 이들의 출입을 관리하세요</p>
+        			</div>
+				</div>
+			</div>
+
+			<!-- Left and right controls -->
+			<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left"></span> 
+				<span class="sr-only">Previous</span>
+			</a> 
+			<a class="right carousel-control" href="#myCarousel" data-slide="next"> 
+			<span class="glyphicon glyphicon-chevron-right"></span> 
+			<span class="sr-only">Next</span>
+			</a>
+		</div>
+	</div>
 </div>
 
  

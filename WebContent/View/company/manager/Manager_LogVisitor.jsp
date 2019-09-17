@@ -5,9 +5,28 @@
 <head>
 <meta charset="UTF-8">
 <!-- Web icon 설정 --> 
-<%@ include file="../../CommonForm/TapLogo.jsp"%>
+<!-- Web icon 설정 --> 
+<%-- <%@ include file="../../CommonForm/TapLogo.jsp"%> --%>
+<!-- 경로 바꿈으로 인한 경로 재설정 -->
+<!-- 반응형 웹 -->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- 인터넷 상단 창 아이콘 -->
+<link rel="icon" href="../../../Style/images/logo/logo_tap.png" type="image/png"> 
 <title>방문 현황 조회 페이지</title>
-<%@ include file="/Style/common/HeadUI.jsp"%>
+<!-- 경로 바꿈으로 인한 경로 재설정 -->
+<!-- easyui -->
+<link rel="stylesheet" type="text/css" href="../../../Style/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="../../../Style/themes/icon.css">
+<link rel="stylesheet" type="text/css" href="../../../Style/demo/demo.css">
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="../../../Style/js/jquery.easyui.min.js"></script>
+<!-- Custom styles for this template -->
+<!-- i Tag Font Image -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<!-- CSS Style Import --> 
 <!-- CSS Style Import --> 
 <style type="text/css"> 
 <%@ include file="/Style/css/CssStyle.css"%>
@@ -32,7 +51,6 @@ th {
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -69,8 +87,20 @@ th {
 }
 </style>
 </head>
-<body>
-<%@ include file="../../CommonForm/Top.jsp"%>
+<body>  	<!-- 경로 바꿈으로 인한 재설정 -->
+<%-- <%@ include file="../../CommonForm/Top.jsp"%> --%>
+<header class="header">
+	<div class="main_menu">
+		<nav class="navbar navbar-default navbar-fixed-top" style="padding-top:10px;padding-bottom:10px;">
+			<div class="container">
+				<!-- 대표 회사 아이콘 및 링크 -->	
+				<a id="Main_log" href="/View/Index/Index_Choose.jsp">
+					<img src="../../../Style/images/logo/logo_navi2.png" alt="">
+				</a>
+			</div>
+		</nav>
+	</div>
+</header>
 
 <!-- Side Bar -->
 <aside>
@@ -147,14 +177,19 @@ th {
 	</div>
 <!-- 검색창 : 라디오버튼에 의한 분기 -->
 	<span id="CompanyNameSearchBox">
-		<textarea name="CompanyNameSearchBox" style="width:100%;height:25px;overflow:hidden;" placeholder="회사명을 입력하세요"></textarea>
-		<input class="easyui-textbox" name="CompanyNameSearchBox" style="width:30px;height:25px;" data-options="prompt:'회사명을 입력하세요'">
+		<!-- 아래 텍스트 박스가 크기를 %로 지정 할 수 없는 문제!!! 모든 페이지에서 동일함 -->
+		<input class="easyui-textbox" name="CompanyNameSearchBox" style="width:230px;height:25px;" data-options="prompt:'회사명을 입력하세요'">
+		<!-- 		
+		<textarea name="CompanyNameSearchBox" style="width:100%;height:25px;overflow:hidden;" placeholder="회사명을 입력하세요"></textarea> 
+		-->
 	</span>
 	<span id="NameTelSearchBox" style="display:none">
-		<input class="easyui-textbox" name="NameSearchBox" style="width:100%;height:25px;overflow:hidden;" data-options="prompt:'방문자명을 입력하세요'">
+		<input class="easyui-textbox" name="NameSearchBox" style="width:100%;height:25px;overflow:hidden; data-options="prompt:'방문자명을 입력하세요'">
 		<input class="easyui-textbox" name="TelSearchBox" style="width:100%;height:25px;overflow:hidden;" data-options="prompt:'Tel (    )      -'">
+		<!-- 
 		<textarea name="NameSearchBox" style="width:100%;height:25px;overflow:hidden;" placeholder="방문자명을 입력하세요"></textarea>
-		<textarea name="TelSearchBox" style="width:100%;height:25px;overflow:hidden;" placeholder="Tel (    )      -"></textarea>
+		<textarea name="TelSearchBox" style="width:100%;height:25px;overflow:hidden;" placeholder="Tel (    )      -"></textarea> 
+		-->
 	</span>
 	</div>
 	<div  class='col-sm-4'>
@@ -195,19 +230,17 @@ th {
 	
 
 <!-- 검색 결과 테이블 -->
-<table style="width: 100%;" border="1">
+<table style="width: 100%;margin-top:20px;" border="1">
 	<thead style="font-size:20px;">
 	<tr>
 		<th>신청번호</th>
-		<th>신청자</th>
+		<th>현재 위치</th>
+		<th>방문자명</th>
 		<th>방문지</th>
 		<th>목적지</th>
-		<th>방문목적</th>
-		<th>신청자연락처</th>
+		<th>방문자 연락처</th>
 		<th>방문유형</th>
 		<th>방문일자</th>
-		<th>방문주기</th>
-		<th>방문요일</th>
 	</tr>
 	</thead>
 <!-- ========================================================================================================== -->
@@ -228,9 +261,14 @@ th {
 		<td>Example</td>
 		<td>Example</td>
 		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
 	</tr>
+	
+	<tr>
+		<td colspan= "10" id="modalopen" data-toggle="modal" data-target="#detailModal"
+		style="text-align: center;font-size:20px; font-weight: bold;text-decoration: underline;height:100px;" >
+		상세정보 예시</td>
+	</tr>
+	
 	</tbody>
 </table>
 
@@ -241,7 +279,7 @@ th {
       <!-- Modal content -->
       <div class="modal-content">
         <span class="close">&times;</span>                                                               
-        <p>디테일 페이지 만든 후, 적용하기</p>
+        <p>디테일 페이지 만든 후, 적용??</p>
       </div>
  
     </div>
@@ -271,31 +309,6 @@ else if(SearchType == "NameTel"){//공연/전시인 경우
 	}                     
 });
 
-//Modal
-var modal = document.getElementById('detailModal');
-
-// Get the button that opens the modal
-var btn = document.getElementById("lastDetail");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];                                          
-
-// 버튼 눌렀을 시, Modal 열기
-btn.onclick = function() {
-    modal.style.display = "block";
-}
-
-// x버튼 눌렀을 때
-span.onclick = function() {
-    modal.style.display = "none";
-}
-
-// Modal 밖 부븐 클릭 시
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
 /*<!-- ========================================================================================================== --> */
 /* 달력 기능 */
 
