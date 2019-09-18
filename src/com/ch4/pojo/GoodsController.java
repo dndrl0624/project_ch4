@@ -30,11 +30,12 @@ public class GoodsController implements Controller{
 			int result = 0;
 			hmb.multiBind(pMap);
 			logger.info("pMap : " + pMap);
-			result = gLogic.goodsAdd(pMap);
-			if(result == 0) {
+			result = gLogic.goodsApplyAdd(pMap);
+			
+			if(result == 1) {
 				mav.setViewName("Visit_ResultGoods.jsp");
 			}
-			else if(result == 1) {
+			else if(result == 0) {
 				mav.setViewName("Visit_ApplyFail.jsp");
 			}
 			
@@ -44,10 +45,10 @@ public class GoodsController implements Controller{
 			hmb.multiBind(pMap);
 			logger.info("pMap : " + pMap);
 			result = gLogic.goodsUpdate(pMap);
-			if(result == 0) {
+			if(result == 1) {
 				mav.setViewName("Visit_ResultGoods.jsp");
 			}
-			else if(result == 1) {
+			else if(result == 0) {
 				mav.setViewName("Visit_ApplyFail.jsp");
 			}
 		}
@@ -56,10 +57,10 @@ public class GoodsController implements Controller{
 			hmb.multiBind(pMap);
 			logger.info("pMap : " + pMap);
 			result = gLogic.goodsCancle(pMap);
-			if(result == 0) {
+			if(result == 1) {
 				mav.setViewName("Visit_Main.jsp");
 			}
-			else if(result == 1) {
+			else if(result == 0) {
 				mav.setViewName("Visit_ApplyFail.jsp");
 			}
 		}

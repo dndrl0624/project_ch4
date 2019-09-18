@@ -7,10 +7,9 @@ import java.util.Map;
 
 public class SortAndBind {
 	
-	static public Map<String,Object> visitApplySort(Map<String,Object> pMap){
+	public static Map<String,Object> visitApplySort(Map<String,Object> pMap){
 		Map<String,Object> rMap = new HashMap<String, Object>();
 		
-		int visit_no = (int) pMap.get("visit_no");
 		
 		List<Map<String,Object>> vtAddList = new ArrayList<Map<String,Object>>();
 		List<Map<String,Object>> tnAddList = new ArrayList<Map<String,Object>>();
@@ -22,7 +21,6 @@ public class SortAndBind {
 		String[] vt_hps = (String[])pMap.get("visitor_hp");
 		for(int i=0;i<vt_names.length;i++) {
 			Map<String,Object> addMap = new HashMap<String, Object>();
-			addMap.put("visitor_no",visit_no);
 			addMap.put("visitor_name",vt_names[i]);
 			addMap.put("visitor_hp",vt_hps[i]);
 			vtAddList.add(addMap);
@@ -35,7 +33,6 @@ public class SortAndBind {
 		String[] tn_kinds = (String[])pMap.get("tkin_kind");
 		for(int i=0;i<tn_models.length;i++) {
 			Map<String,Object> addMap = new HashMap<String, Object>();
-			addMap.put("visitor_no",visit_no);
 			addMap.put("tkin_model",tn_models[i]);
 			addMap.put("tkin_brand",tn_brand[i]);
 			addMap.put("tkin_kind",tn_kinds[i]);
@@ -50,7 +47,6 @@ public class SortAndBind {
 		String[] pk_nums = (String[])pMap.get("parking_num");
 		for(int i=0;i<pk_kinds.length;i++) {
 			Map<String,Object> addMap = new HashMap<String, Object>();
-			addMap.put("visitor_no",visit_no);
 			addMap.put("parking_kind",pk_kinds[i]);
 			addMap.put("parking_model",pk_models[i]);
 			addMap.put("parking_num",pk_nums[i]);
@@ -69,6 +65,38 @@ public class SortAndBind {
 		rMap.put("vtAddList", vtAddList);
 		rMap.put("tnAddList", tnAddList);
 		rMap.put("pkAddList", pkAddList);
+		rMap.put("applyAdd", applyAdd);
+		
+		return rMap;
+	}
+
+	public static Map<String, Object> goodsApplySort(Map<String, Object> pMap) {
+		Map<String,Object> rMap = new HashMap<String, Object>();
+		
+		List<Map<String,Object>> gmAddList = new ArrayList<Map<String,Object>>();
+		Map<String,Object> applyAdd = null;
+		
+		///////////////// [반입물품 list에 담기] ///////////////
+		String[] gm_names = (String[])pMap.get("gmng_name");
+		String[] gm_types = (String[])pMap.get("gmng_type");
+		String[] gm_quans = (String[])pMap.get("gmng_quan");
+		
+		for(int i=0;i<gm_names.length;i++) {
+			Map<String,Object> addMap = new HashMap<String, Object>();
+			addMap.put("gmng_name",gm_names[i]);
+			addMap.put("gmng_type",gm_types[i]);
+			addMap.put("gmng_quan",gm_quans[i]);
+			gmAddList.add(addMap);			
+		}		
+		pMap.remove("gmng_name");
+		pMap.remove("gmng_type");
+		pMap.remove("gmng_quan");
+		
+		
+		///////////////// [배열 제외한 신청정보] ///////////////
+		applyAdd = pMap;
+		
+		rMap.put("gmAddList", gmAddList);
 		rMap.put("applyAdd", applyAdd);
 		
 		return rMap;

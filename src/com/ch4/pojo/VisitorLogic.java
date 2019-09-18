@@ -11,7 +11,7 @@ public class VisitorLogic {
 		vDao = new VisitorDao();
 	}
 
-	public int applyAdd(Map<String, Object> pMap) {
+	public int visitApplyAdd(Map<String, Object> pMap) {
 		int result = 0;
 		Map<String, Object> addInfo = SortAndBind.visitApplySort(pMap);
 		
@@ -19,7 +19,14 @@ public class VisitorLogic {
 		List<Map<String,Object>> tnAddList = (List<Map<String,Object>>) addInfo.get("tnAddList");
 		List<Map<String,Object>> pkAddList = (List<Map<String,Object>>) addInfo.get("pkAddList");
 		Map<String,Object> applyAdd = (Map<String,Object>) addInfo.get("applyAdd");
-		result = vDao.applyAdd(vtAddList,tnAddList,pkAddList,applyAdd);
+		
+		String visit_no = vDao.visitApplyAdd(applyAdd);
+		if(visit_no==null) {
+			return result;
+		}
+		else {
+			result = vDao.visitSubAdd(vtAddList,tnAddList,pkAddList,visit_no);
+		}
 		return result;
 	}
 

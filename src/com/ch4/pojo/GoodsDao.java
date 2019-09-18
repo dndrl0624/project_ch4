@@ -1,5 +1,6 @@
 package com.ch4.pojo;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -18,9 +19,32 @@ public class GoodsDao {
 		sqlSession = sqlSessionFactory.openSession();
 	}
 
-	public int goodsAdd(Map<String, Object> pMap) {
+	public String goodsApplyAdd(Map<String, Object> applyAdd) {
+		String aplg_no = null;
 		int result = 0;
-		result = sqlSession.insert("goodsAdd", pMap);
+		applyAdd.put("aplg_no", aplg_no);
+		result = sqlSession.insert("goodsApplyAdd", applyAdd);
+		
+		if(result==0) {
+			return null;
+		}
+		else if(result==1) {			
+			sqlSession.commit();
+		}
+		return aplg_no;
+	}
+	
+	public int goodsSubAdd(List<Map<String,Object>> gmAddList, String aplg_no) {
+		int result = 0;
+		for(int i=0;i<gmAddList.size();i++) {
+			Map<String, Object> addMap = gmAddList.get(i);
+			addMap.put("aplg_no", aplg_no);
+			result = sqlSession.insert("goodsSubAdd", addMap);
+			if(result==0) {
+				return result;
+			}
+		}
+		sqlSession.commit();
 		return result;
 	}
 

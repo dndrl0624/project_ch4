@@ -24,13 +24,32 @@ public class VisitorDao {
 	 * 
 	 * 
 	 *******************/
-	public int applyAdd(List<Map<String,Object>> vtAddList
-			          , List<Map<String,Object>> tnAddList
-			          , List<Map<String,Object>> pkAddList
-			          , Map<String,Object> applyAdd) {
+	public String visitApplyAdd(Map<String,Object> applyAdd) {
+		String visit_no = null;
+		/*
+		 * 여기에 visit_no 발급 규칙 작성
+		 */
+		int result = 0;
+		applyAdd.put("visit_no", visit_no);
+		result = sqlSession.insert("visitApplyAdd", applyAdd);
+		
+		if(result==0) {
+			return null;
+		}
+		else if(result==1) {			
+			sqlSession.commit();
+		}
+		return visit_no;
+	}
+	
+	public int visitSubAdd(List<Map<String,Object>> vtAddList
+			               , List<Map<String,Object>> tnAddList
+			               , List<Map<String,Object>> pkAddList
+			               , String visit_no) {
 		int result = 0;
 		for(int i=0;i<vtAddList.size();i++) {
 			Map<String, Object> addMap = vtAddList.get(i);
+			addMap.put("visit_no", visit_no);
 			result = sqlSession.insert("visitorAdd", addMap);
 			if(result==0) {
 				return result;
@@ -38,6 +57,7 @@ public class VisitorDao {
 		}
 		for(int i=0;i<tnAddList.size();i++) {
 			Map<String, Object> addMap = tnAddList.get(i);
+			addMap.put("visit_no", visit_no);
 			result = sqlSession.insert("equipAdd", addMap);
 			if(result==0) {
 				return result;
@@ -45,16 +65,13 @@ public class VisitorDao {
 		}
 		for(int i=0;i<vtAddList.size();i++) {
 			Map<String, Object> addMap = pkAddList.get(i);
+			addMap.put("visit_no", visit_no);
 			result = sqlSession.insert("carAdd", addMap);
 			if(result==0) {
 				return result;
 			}
 		}
-		
-		result = sqlSession.insert("applyAdd", applyAdd);
-		if(result==0) {
-			return result;
-		}
+		sqlSession.commit();
 		return result;
 	}
 
@@ -67,6 +84,7 @@ public class VisitorDao {
 	public int visitorCancle(Map<String, Object> pMap) {
 		int result = 0;
 		result = sqlSession.update("visitorCancle", pMap);
+		sqlSession.commit();
 		return result;
 	}
 

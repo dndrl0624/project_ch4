@@ -79,6 +79,7 @@ public class HashMapBinder {
 		while(er.hasMoreElements()) {
 			String name = (String)er.nextElement();//name,address,pet
 			if(
+					////// visit ////////
 					("visitor_name".equals(name))
 					||("visitor_hp".equals(name))
 					||("tkin_model".equals(name))
@@ -87,6 +88,10 @@ public class HashMapBinder {
 					||("parking_kind".equals(name))
 					||("parking_model".equals(name))
 					||("parking_num".equals(name))
+				    ////// goods ////////
+					||("gmng_name".equals(name))
+					||("gmng_type".equals(name))
+					||("gmng_quan".equals(name))
 				) 
 			{
 				String values[] = req.getParameterValues(name);

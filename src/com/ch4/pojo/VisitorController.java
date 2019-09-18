@@ -56,12 +56,11 @@ public class VisitorController implements Controller{
 			hmb.bind(pMap);			
 			int result = 0;
 			logger.info("pMap : " + pMap);
-			result = vLogic.applyAdd(pMap);
+			result = vLogic.visitApplyAdd(pMap);
 			
 			if(result == 1) {
 				mav.isRedirect(false);
 				mav.setViewName("Visit_ResultVisitor.jsp");
-				mav.addObject("visit_no", pMap.get("visit_no"));
 			}
 			else if(result == 0) {
 				mav.setViewName("Visit_ApplyFail.jsp");
