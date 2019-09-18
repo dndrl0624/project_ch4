@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <!-- Web icon 설정 --> 
 <%@ include file="../../CommonForm/TapLogo.jsp"%>
-<title>물품 반입 변경 페이지</title>
+<title>방문 신청 변경 페이지</title>
 <!-- 공통코드 -->
 <%@ include file="../../../Style/common/HeadUI.jsp"%>
 <!-- CSS Style Import --> 
@@ -24,6 +24,12 @@ aside {
 aside::-webkit-scrollbar { 
     display: none; 
 }
+
+/* 메인 페이지 프레임 구간 설정 */
+.mainContent {
+	margin: 0px 0px 5% 17%;
+}
+
 </style>
 </head>
 
@@ -47,7 +53,7 @@ aside::-webkit-scrollbar {
 					<a data-toggle="collapse" href="#collapse1">방문 신청 조회</a>
 				</h4>
 			</div>
-			<div id="collapse1" class="panel-collapse collapse">
+			<div id="collapse1" class="panel-collapse collapse in">
 				<div class="panel-body">
 					<a  href="/project_ch4_pojo/View/company/manager/Manager_SearchVisitor.jsp">방문 신청 조회</a><br> 
 					<a  href="/project_ch4_pojo/View/company/manager/Manager_LogVisitor.jsp">방문현황 조회</a><br> 
@@ -60,7 +66,7 @@ aside::-webkit-scrollbar {
 					<a data-toggle="collapse" href="#collapse2">물품 반입 신청 조회</a>
 				</h4>
 			</div>
-			<div id="collapse2" class="panel-collapse collapse in">
+			<div id="collapse2" class="panel-collapse collapse">
 				<div class="panel-body">
 					<a  href="/project_ch4_pojo/View/company/manager/Manager_SearchGoods.jsp">반입 신청 조회</a><br> 
 					<a  href="/project_ch4_pojo/View/company/manager/Manager_LogGoods.jsp">반입 현황 조회</a><br> 
@@ -85,18 +91,9 @@ aside::-webkit-scrollbar {
 </aside>
 
 <!-- content -->
-<div class="mainContent" style="margin-left:17%;">
+<div class="mainContent" style="padding-left:16%">
 	<div class="row"><!-- <!-- -----------------창 고정 및 스타일---------------------------------------- -->
-	    <div class="col-sm-2" id="myScrollspy" style="text-align:center;">
-		    <ul class="nav nav-pills nav-stacked">
-		      <li class="active"><a href="#section1">기본 방문정보</a></li>
-		      <li><a href="#section2">방문자 등록</a></li>
-		      <li><a href="#section5">반입물품</a></li>
-		      <li><a href="#section3">반입기기</a></li>
-		      <li><a href="#section4">주차등록</a></li>
-		    </ul>
-	    </div>
-	    <div class="col-sm-7"> 
+	    <div class="col-lg-8"> 
 			<div class="row">
 		    	<div class="col-lg-9">
 					<h2 style="margin-bottom:20px; border-left: 4px solid #17405D;"><b>방문 신청 변경</b> (승인자용)</h2>
@@ -215,30 +212,6 @@ aside::-webkit-scrollbar {
 			    	</div>
 			    </div>
 		    </div>
-		    <div id="section5" class="panel panel-danger">    
-			    <div class="panel-heading">반입기기</div>
-			    <div class="panel-body">
-			    	<div class="row">
-			    		<div class="col-lg-8">
-					    	<h4 style="border-left: 3px solid #8a6d3b; padding-left:4px;"><b>반입물품 정보</b></h4>
-				    	</div>
-				    </div>
-				    <div class="row table device">
-			    		<table id="tb_device" class="table">
-			    			<thead>
-			    				<tr>
-			    					<th><input id="chkAllDevice" type="checkbox"></th>
-				    				<th style="width:30%;">물품명</th>
-				    				<th style="width:30%;">물품종류</th>
-				    				<th style="width:30%;">물품수량</th>
-			    				</tr>
-			    			</thead>
-			    			<tbody>
-			    			</tbody>
-			    		</table>
-			    	</div>
-			    </div>
-		    </div>
 		    <div id="section3" class="panel panel-warning">    
 			    <div class="panel-heading">반입기기</div>
 			    <div class="panel-body">
@@ -285,7 +258,7 @@ aside::-webkit-scrollbar {
 				    </div>
 			    </div>
 		    </div>
-		  	<div class="col-lg-3" style="float: right;margin-bottom: 3%;">
+		  	<div style="float: right;">
 				<button type="button" id="done" class="btn btn-primary">변경 완료</button>
 				<button type="button" id="cancle" class="btn btn-danger">변경 취소</button><!-- 취소시 1)신청조회페이지로 2)변경전내용으로 -->
 			</div>

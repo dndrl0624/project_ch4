@@ -112,7 +112,10 @@ th {
 					<img src="../../../Style/images/banner/gate.gif" alt="visitor" style="width: 100%;">
 					<div class="carousel-caption">
           				<h3>방문자</h3>
-         	 			<p>귀하가 방문할 곳에 미리 방문을 알리세요</p>
+         	 			<p>	방문 전에 미리 인터넷으로 방문신청이 가능한 방문자 관리시스템을 이용하세요.<br>
+         	 				담당자가 PC 또는 모바일로 승인했다면 시간약속 역시 되어 있는 거지요. <br>
+         	 				방문 장소 입구에서 키오스크를 통해 빠르게 방문하세요.
+						</p>
         			</div>
 				</div>
 
@@ -120,7 +123,9 @@ th {
 					<img src="../../../Style/images/banner/gate.gif" alt="manager" style="width: 100%;">
 					<div class="carousel-caption">
           				<h3>승인자</h3>
-         	 			<p>방문 신청한 이들에게 방문 가능여부를 알리세요</p>
+         	 			<p>	방문을 원하는 인원을 체계적으로 관리해 보세요.<br>
+         	 				방문자 관리시스템을 통하여 귀사의 보안관리와<br>
+         	 				응급상황에 대비할 수 있습니다</p>
         			</div>
 				</div>
 
@@ -128,7 +133,9 @@ th {
 					<img src="../../../Style/images/banner/gate.gif" alt="info" style="width: 100%;">
 					<div class="carousel-caption">
           				<h3>인포데스크</h3>
-         	 			<p>방문한 이들의 출입을 관리하세요</p>
+         	 			<p>	방문한 이들의 출입을 관리하세요
+         	 				방문자 관리시스템에서 제공하는 키오스크를<br>
+         	 				이용하여 귀사의 업무효율성을 늘려보세요.</p>
         			</div>
 				</div>
 			</div>

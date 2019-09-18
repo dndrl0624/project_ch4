@@ -28,40 +28,6 @@ th {
 	text-align: center;
 }
 
-/* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content/Box */
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 50%; /* Could be more or less, depending on screen size */                          
-}
-/* The Close Button */
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
 /* 메인 페이지 프레임 구간 설정 */
 .mainContent {
 	margin:30px 20px 10px 17%;
@@ -69,6 +35,18 @@ th {
 </style>
 </head>
 <body>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#SearchType').combobox({
+		onChange: function(newVal,oldVal){
+			$("#search").textbox('textbox').attr('name',newVal);
+			$("#search").attr('textboxname',newVal);
+			$("span.textbox > .textbox-value").attr('name',newVal);
+			//alert($("span.textbox > .textbox-value").attr('name'));
+		}
+	});
+});
+</script>
 <%@ include file="../../CommonForm/Top.jsp"%>
 
 <!-- Side Bar -->
@@ -128,15 +106,23 @@ th {
 <div class="mainContent">
 	<div style="margin:30px 20px 10px 0px;font-size:35px;">
 	물품 반입 현황 조회
-	<!-- <button type="button" id="lastDetail" class="btn btn-info" style="margin-left:456px;">이전 방문 이력</button><br> -->
 	</div>
-<!-- margin : top right bottom left 순서 -->
+	
 	<div class='col-sm-2'>
-	<!-- 콤보 박스 : 전체조회/기간별 조회/모든 신청건 -->
-		<select class="easyui-combobox" name="dateSearch" label="일자조회" labelPosition="left" style="width:100%;padding-bottom:5px;">
-			<option value="all" selected>전체 조회</option>
-			<option value="term">기간별 조회</option>
+	<!-- 검색 타입 설정 --><br>
+		<select class="easyui-combobox" id="SearchType" name='SearchType' label="검색방법" labelPosition="left" style="width:100%;">
+			<option value="visitorName" selected>방문자명</option>
+			<option value="visitorTel">연락처</option>
+			<option value="visitorCompany">회사</option>
 		</select>
+	</div>
+	<div class='col-sm-2'>
+		<!-- 검색창 : 콤보박스에 의한 분기 --><br>
+		<!-- 텍스트 박스에 대해 name값 변경 : 처음 값은 방문자명 // onChange 이벤트로 Name속성을 바꾸어 주기 -->
+		<input class="easyui-textbox" id="search" name="visitorName" style="width:230px;height:25px;">
+	
+	</div>
+	<div class='col-sm-2'><br>
 		<select class="easyui-combobox" name="permissionSearch" label="처리결과" labelPosition="left" style="width:100%;">
 			<option value="all" selected>전체</option>
 			<option value="permission">승인</option>
@@ -144,27 +130,11 @@ th {
 			<option value="cancle">취소</option>
 		</select>
 	</div>
-	<div class='col-sm-2'>
-<!-- 검색 타입 설정 -->
-	<div style="margin-bottom:3px">
-		<input type="radio" name="SearchType" value="CompanyName" checked="checked"><span>회사명</span>
-		<input type="radio" name="SearchType" value="NameTel"><span>방문자명+연락처</span>
-	</div>
-<!-- 검색창 : 라디오버튼에 의한 분기 -->
-	<span id="CompanyNameSearchBox">
-		<!-- 아래 텍스트 박스가 크기를 %로 지정 할 수 없는 문제!!! 모든 페이지에서 동일함 -->
-		<input class="easyui-textbox" name="CompanyNameSearchBox" style="width:230px;height:25px;" data-options="prompt:'회사명을 입력하세요'">
-	</span>
-	<span id="NameTelSearchBox" style="display:none">
-		<input class="easyui-textbox" name="NameSearchBox" style="width:100%;height:25px;overflow:hidden; data-options="prompt:'방문자명을 입력하세요'">
-		<input class="easyui-textbox" name="TelSearchBox" style="width:100%;height:25px;overflow:hidden;" data-options="prompt:'Tel (    )      -'">
-	</span>
-	</div>
 	<div  class='col-sm-4'>
 <!-- 날짜 검색 -->
 	<div class="form-group">
 		<div class='col-sm-5'>
-			신청 시작일
+			<span style="font-weight: bold;">시작일</span>
 			<div class="form-group">
 				<div class='easyui-datebox' id="datepicker1" >
 					<input type='text' class="form-control" name="openDate" required="required" /> 
@@ -180,7 +150,7 @@ th {
 			</h4>
 		</div>
 		<div class='col-sm-5'>
-			신청종료일
+			<span style="font-weight: bold;">종료일</span>
 			<div class="form-group">
 				<div class='easyui-datebox' id="datepicker2">
 					<input type='text' class="form-control" name="closeDate" required="required" /> 
@@ -198,7 +168,7 @@ th {
 	
 
 <!-- 검색 결과 테이블 -->
-<table style="width: 100%;margin-top:20px;" border="1">
+<table class="table table-bordered" style="width: 100%;margin-top:20px;" border="1">
 	<thead style="font-size:20px;">
 	<tr>
 		<th>신청번호</th>

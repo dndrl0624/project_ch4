@@ -34,34 +34,21 @@ th {
 	margin:30px 20px 10px 17%;
 }
 
-/* Modal (background) */
- .modal {
-     display: none; /* Hidden by default */
-     overflow: auto; /* Enable scroll if needed */
- }
- 
- /* Modal Content/Box */
- .modal-content {
-     background-color: #fefefe;
-     border: 1px solid #888;
-     width: 100%; /* Could be more or less, depending on screen size */                          
- }
- /* The Close Button */
- .close {
-     color: #aaa;
-     float: right;
-     font-size: 28px;
-     font-weight: bold;
- }
- .close:hover,
- .close:focus {
-     color: black;
-     text-decoration: none;
-     cursor: pointer;
- }
 </style>
 </head>
 <body>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#SearchType').combobox({
+		onChange: function(newVal,oldVal){
+			$("#search").textbox('textbox').attr('name',newVal);
+			$("#search").attr('textboxname',newVal);
+			$("span.textbox > .textbox-value").attr('name',newVal);
+			//alert($("span.textbox > .textbox-value").attr('name'));
+		}
+	});
+});
+</script>
 <%@ include file="../../CommonForm/Top.jsp"%> 
 
 <!-- Side Bar -->
@@ -122,27 +109,25 @@ th {
 	<div style="margin:30px 20px 10px 0px;font-size:35px;">
 	방문 신청 조회
 	</div>
-<!-- margin : top right bottom left 순서 -->
+	
 	<div class='col-sm-2'>
-<!-- 검색 타입 설정 -->
-	<div style="margin-bottom:3px">
-		<input type="radio" name="SearchType" value="CompanyName" checked="checked"><span>회사명</span>
-		<input type="radio" name="SearchType" value="NameTel"><span>방문자명+연락처</span>
+	<!-- 검색 타입 설정 --><br>
+		<select class="easyui-combobox" id="SearchType" name='SearchType' label="검색방법" labelPosition="left" style="width:100%;">
+			<option value="visitorName" selected>방문자명</option>
+			<option value="visitorTel">연락처</option>
+			<option value="visitorCompany">회사</option>
+		</select>
 	</div>
-<!-- 검색창 : 라디오버튼에 의한 분기 -->
-	<span id="CompanyNameSearchBox">
-		<input class="easyui-textbox" name="CompanyNameSearchBox" style="width:230px;height:25px;" data-options="prompt:'회사명을 입력하세요'">
-	</span>
-	<span id="NameTelSearchBox" style="display:none">
-		<input class="easyui-textbox" name="NameSearchBox" style="width:100%;height:25px;overflow:hidden;" data-options="prompt:'방문자명을 입력하세요'">
-		<input class="easyui-textbox" name="TelSearchBox" style="width:100%;height:25px;overflow:hidden;" data-options="prompt:'Tel (    )      -'">
-	</span>
+	<div class='col-sm-2'>
+		<!-- 검색창 : 콤보박스에 의한 분기 --><br>
+		<!-- 텍스트 박스에 대해 name값 변경 : 처음 값은 방문자명 // onChange 이벤트로 Name속성을 바꾸어 주기 -->
+		<input class="easyui-textbox" id="search" name="visitorName" style="width:230px;height:25px;">
 	</div>
 	<div  class='col-sm-4'>
 <!-- 날짜 검색 -->
 	<div class="form-group">
 		<div class='col-sm-5'>
-			신청 시작일
+			<span style="font-weight: bold;">시작일</span>
 			<div class="form-group">
 				<div class='easyui-datebox' id="datepicker1" >
 					<input type='text' class="form-control" name="openDate" required="required" /> 
@@ -158,7 +143,7 @@ th {
 			</h4>
 		</div>
 		<div class='col-sm-5'>
-			신청종료일
+			<span style="font-weight: bold;">종료일</span>
 			<div class="form-group">
 				<div class='easyui-datebox' id="datepicker2">
 					<input type='text' class="form-control" name="closeDate" required="required" /> 
@@ -176,7 +161,7 @@ th {
 	
 
 <!-- 검색 결과 테이블 -->
-<table style="width: 100%;" border="1">
+<table class="table table-bordered" style="width: 100%;">
 	<thead style="font-size:20px;">
 	<tr>
 		<th>신청번호</th>
@@ -232,7 +217,7 @@ th {
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Modal Header</h4>
+					<h1 class="modal-title" style="text-align: center;font-weight: bold;">방문 신청 상세 조회</h1>
 				</div>
 				<div class="modal-body">
 					<div class="row">
@@ -246,19 +231,10 @@ th {
 							</ul>
 						</div>
 						<div class="col-sm-9">
-							<div class="row">
-								<div class="col-lg-9">
-									<h2
-										style="margin-bottom: 20px; border-left: 4px solid #17405D;">
-										<b>방문 신청 상세 조회</b> (승인자용)
-									</h2>
-								</div>
-							</div>
 							<div id="section1" class="panel panel-info">
-								<div class="panel-heading">기본 방문정보</div>
+								<div class="panel-heading"><h4>기본 방문 정보</h4></div>
 								<div class="panel-body">
-									<h4
-										style="margin-bottom: 10px; border-left: 3px solid #31708f; padding-left: 4px;">
+									<h4 style="margin-bottom: 10px; border-left: 3px solid #31708f; padding-left: 4px;">
 										<b>신청자 정보</b>
 									</h4>
 									<div class="row table basic">
@@ -286,14 +262,15 @@ th {
 											</thead>
 											<tbody>
 												<tr>
-													<td><select id="visit_type" class="easyui-combobox"
-														style="width: 80%;" data-options="panelHeight:'auto'">
+													<td>
+														<select id="visit_type" class="easyui-combobox" style="width: 80%;" data-options="panelHeight:'auto'">
 															<option value="일일방문">일일방문</option>
 															<option value="기간방문">기간방문</option>
 															<option value="정기방문">정기방문</option>
-													</select></td>
-													<td><select id="visit_term" class="easyui-combobox"
-														style="width: 80%;" data-options="panelHeight:'auto'">
+														</select>
+													</td>
+													<td>
+														<select id="visit_term" class="easyui-combobox" style="width: 80%;" data-options="panelHeight:'auto'">
 															<option value="매주">매주</option>
 															<option value="격주">격주</option>
 															<option value="첫째주">첫째주</option>
@@ -301,9 +278,10 @@ th {
 															<option value="셋째주">셋째주</option>
 															<option value="넷째주">넷째주</option>
 															<option value="마지막주">마지막주(넷째주포함)</option>
-													</select></td>
-													<td><select id="visit_day" class="easyui-combobox"
-														style="width: 80%;" data-options="panelHeight:'auto'">
+														</select>
+													</td>
+													<td>
+														<select id="visit_day" class="easyui-combobox" style="width: 80%;" data-options="panelHeight:'auto'">
 															<option value="월요일">월요일</option>
 															<option value="화요일">화요일</option>
 															<option value="수요일">수요일</option>
@@ -311,22 +289,22 @@ th {
 															<option value="금요일">금요일</option>
 															<option value="토요일">토요일</option>
 															<option value="일요일">일요일</option>
-													</select></td>
+														</select>
+													</td>
 												</tr>
 											</tbody>
 										</table>
 										<table class="table">
 											<tr>
 												<th>방문날짜</th>
-												<td><input id="visit_date1" class="easyui-datebox"
-													style="width: 30%; height: 100%"> &emsp;&emsp;<span>~</span>&emsp;&emsp;
-													<input id="visit_date2" class="easyui-datebox"
-													style="width: 30%; height: 100%"></td>
+												<td>
+													<input id="visit_date1" class="easyui-datebox" style="width: 30px; height: 100%"> 
+													&emsp;&emsp;<span>~</span>&emsp;&emsp;
+													<input id="visit_date2" class="easyui-datebox" style="width: 30%; height: 100%"></td>
 											</tr>
 										</table>
 									</div>
-									<h4
-										style="margin-bottom: 10px; border-left: 3px solid #31708f; padding-left: 4px;">
+									<h4 style="margin-bottom: 10px; border-left: 3px solid #31708f; padding-left: 4px;">
 										<b>상세정보</b>
 									</h4>
 									<div class="row table basic">
@@ -340,8 +318,7 @@ th {
 											</thead>
 											<tbody>
 												<tr>
-													<td><input class="easyui-combobox" style="width: 80%;"
-														data-options="panelHeight:'auto'"></td>
+													<td><input class="easyui-combobox" style="width: 80%;" data-options="panelHeight:'auto'"></td>
 													<td><input class="easyui-textbox" style="width: 80%;"></td>
 													<td><input class="easyui-textbox" style="width: 80%;"></td>
 												</tr>
@@ -351,23 +328,16 @@ th {
 								</div>
 							</div>
 							<div id="section2" class="panel panel-success">
-								<div class="panel-heading">방문자 등록</div>
+								<div class="panel-heading"><h4>방문자 정보</h4></div>
 								<div class="panel-body">
-									<div class="row">
-										<div class="col-lg-8">
-											<h4
-												style="border-left: 3px solid #3c763d; padding-left: 4px;">
-												<b>방문자 정보</b>
-											</h4>
-										</div>
-									</div>
 									<div class="row table visitor">
 										<table id="tb_visitor" class="table">
 											<thead>
 												<tr>
 													<th><input id="chkAllVisitor" type="checkbox"></th>
-													<th style="width: 40%;">성명</th>
-													<th style="width: 50%;">연락처</th>
+													<th style="width: 30%;">위치정보</th>
+													<th style="width: 30%;">성명</th>
+													<th style="width: 30%;">연락처</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -377,16 +347,8 @@ th {
 								</div>
 							</div>
 							<div id="section3" class="panel panel-warning">
-								<div class="panel-heading">반입기기</div>
+								<div class="panel-heading"><h4>반입기기 정보</h4></div>
 								<div class="panel-body">
-									<div class="row">
-										<div class="col-lg-8">
-											<h4
-												style="border-left: 3px solid #8a6d3b; padding-left: 4px;">
-												<b>반입기기 정보</b>
-											</h4>
-										</div>
-									</div>
 									<div class="row table device">
 										<table id="tb_device" class="table">
 											<thead>
@@ -404,16 +366,8 @@ th {
 								</div>
 							</div>
 							<div id="section4" class="panel panel-default">
-								<div class="panel-heading">주차등록</div>
+								<div class="panel-heading"><h4>차량 정보</h4></div>
 								<div class="panel-body">
-									<div class="row">
-										<div class="col-lg-8">
-											<h4
-												style="border-left: 3px solid #333333; padding-left: 4px;">
-												<b>차량 정보</b>
-											</h4>
-										</div>
-									</div>
 									<div class="row table parking">
 										<table id="tb_parking" class="table">
 											<thead>
@@ -453,24 +407,18 @@ $("input[name='SearchType']:radio").change(function () {
  //라디오 버튼 값을 가져온다.
 var SearchType = this.value;
                          
-if(SearchType == "CompanyName"){//스포츠인 경우
+if(SearchType == "CompanyName"){
 	//방문자명 연락처 검색 hide
 	$( "#NameTelSearchBox" ).hide();
 	//회사명 검색 show
 	$( "#CompanyNameSearchBox" ).show();
 	}
-else if(SearchType == "NameTel"){//공연/전시인 경우
+else if(SearchType == "NameTel"){
 	//회사명 검색 hide
 	$( "#CompanyNameSearchBox" ).hide();
 	//방문자명 연락처 검색 show
 	$( "#NameTelSearchBox" ).show();
 	}                     
-});
-
-$(document).ready(function(){
-    $("#modalEx").click(function(){
-        $("##detailModal").modal();
-    });
 });
 
 /*<!-- ========================================================================================================== --> */
@@ -484,7 +432,5 @@ $(document).ready(function(){
       }
    }
 </script>
-<!-- Bottom Link Import --> 
-<%-- <%@ include file="/Style/common/BottomUI.jsp"%> --%>
 </body>
 </html>

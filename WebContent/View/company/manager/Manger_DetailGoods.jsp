@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <!-- Web icon 설정 --> 
 <%@ include file="../../CommonForm/TapLogo.jsp"%>
-<title>방문 신청 디테일</title>
+<title>물품 반입 신청 디테일</title>
 <!-- 공통코드 -->
 <%@ include file="../../../Style/common/HeadUI.jsp"%>
 <!-- CSS Style Import --> 
@@ -240,7 +240,7 @@ $(document).ready(function(){
 					<a data-toggle="collapse" href="#collapse1">방문 신청 조회</a>
 				</h4>
 			</div>
-			<div id="collapse1" class="panel-collapse collapse in">
+			<div id="collapse1" class="panel-collapse collapse">
 				<div class="panel-body">
 					<a  href="/project_ch4_pojo/View/company/manager/Manager_SearchVisitor.jsp">방문 신청 조회</a><br> 
 					<a  href="/project_ch4_pojo/View/company/manager/Manager_LogVisitor.jsp">방문현황 조회</a><br> 
@@ -253,7 +253,7 @@ $(document).ready(function(){
 					<a data-toggle="collapse" href="#collapse2">물품 반입 신청 조회</a>
 				</h4>
 			</div>
-			<div id="collapse2" class="panel-collapse collapse">
+			<div id="collapse2" class="panel-collapse collapse in">
 				<div class="panel-body">
 					<a  href="/project_ch4_pojo/View/company/manager/Manager_SearchGoods.jsp">반입 신청 조회</a><br> 
 					<a  href="/project_ch4_pojo/View/company/manager/Manager_LogGoods.jsp">반입 현황 조회</a><br> 
@@ -282,7 +282,7 @@ $(document).ready(function(){
 			<div class="row">
 				<div class="col-lg-9">
 					<h2 style="margin-bottom: 20px; border-left: 4px solid #17405D;">
-						<b>방문 신청 상세 조회</b> (승인자용)
+						<b>물품 반입 상세 조회</b> (승인자용)
 					</h2>
 				</div>
 			</div>
@@ -458,9 +458,9 @@ $(document).ready(function(){
 				</div>
 			</div>
 			<div style="float: right; margin-bottom:20%;">
-				<button type="button" id="permission" class="btn btn-primary">방문 신청 승인</button>
-				<button type="button" id="return" class="btn btn-danger">방문 신청 반려</button>
-				<button type="button" class="btn btn-default" onclick="location.href='/project_ch4_pojo/View/company/manager/Manager_SearchVisitor.jsp'">조회페이지 이동</button>
+				<button type="button" id="permission" class="btn btn-primary">반입 신청 승인</button>
+				<button type="button" id="return" class="btn btn-danger">반입 신청 반려</button>
+				<button type="button" class="btn btn-default" onclick="location.href='/project_ch4_pojo/View/company/manager/Manager_SearchGoods.jsp'">조회페이지 이동</button>
 			</div>
 		</div>
 </div>

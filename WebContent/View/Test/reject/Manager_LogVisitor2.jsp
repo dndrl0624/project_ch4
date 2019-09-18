@@ -63,17 +63,20 @@ th {
 
 </head>
 <body>
+<form id="f_test" action="a.jsp">
+	<input class="easyui-textbox" id="search2" name="s2" style="width:230px;height:25px;">
+</form>
 <script type="text/javascript">
-$(document).ready(function(){
-	$('#SearchType').combobox({
-		onChange: function(newVal,oldVal){
-			$("#search").textbox('textbox').attr('name',newVal);
-			$("#search").attr('textboxname',newVal);
-			$("span.textbox > .textbox-value").attr('name',newVal);
-			//alert($("span.textbox > .textbox-value").attr('name'));
-		}
+	$(document).ready(function(){
+		$('#SearchType').combobox({
+			onChange: function(newVal,oldVal){
+				$("#search").textbox('textbox').attr('name',newVal);
+				$("#search").attr('textboxname',newVal);
+				$("span.textbox > .textbox-value").attr('name',newVal);
+				//alert($("span.textbox > .textbox-value").attr('name'));
+			}
+		});
 	});
-});
 </script>
 <%@ include file="../../CommonForm/Top.jsp"%>
 
@@ -135,23 +138,8 @@ $(document).ready(function(){
 	<div style="margin:30px 20px 10px 0px;font-size:35px;">
 	방문 현황 조회 페이지
 	</div>
-	
 	<div class='col-sm-2'>
-	<!-- 검색 타입 설정 --><br>
-		<select class="easyui-combobox" id="SearchType" name='SearchType' label="검색방법" labelPosition="left" style="width:100%;">
-			<option value="visitorName" selected>방문자명</option>
-			<option value="visitorTel">연락처</option>
-			<option value="visitorCompany">회사</option>
-		</select>
-	</div>
-	<div class='col-sm-2'>
-	<!-- 검색창 : 콤보박스에 의한 분기 --><br>
-		<!-- 텍스트 박스에 대해 name값 변경 : 처음 값은 방문자명 // onChange 이벤트로 Name속성을 바꾸어 주기 -->
-		<input class="easyui-textbox" id="search" name="visitorName" style="width:230px;height:25px;">
-	
-	</div>
-	<div class='col-sm-2'>
-	<!-- 콤보 박스 : 처리결과 대해 --><br>
+	<!-- 콤보 박스 : 처리결과 대해 -->
 		<select class="easyui-combobox" name="permissionSearch" label="처리결과" labelPosition="left" style="width:100%;">
 			<option value="all" selected>전체</option>
 			<option value="permission">승인</option>
@@ -159,15 +147,34 @@ $(document).ready(function(){
 			<option value="cancle">취소</option>
 		</select>
 	</div>
+	<div class='col-sm-2'>
+	<!-- 검색 타입 설정 -->
+		<select class="easyui-combobox" id="SearchType" name='SearchType' label="검색방법" labelPosition="left" style="width:100%;">
+			<option value="visitorName" selected>방문자명</option>
+			<option value="visitorTel">연락처</option>
+			<option value="visitorCompany">회사</option>
+		</select>
+		<a href="javascript:void(0)" class="easyui-linkbutton" onclick="alert($('#SearchType').combobox('getValue'))">콤보박스Value확인용</a>
+<!-- 검색창 : 콤보박스에 의한 분기 -->
+		<!-- 텍스트 박스에 대해 name값 변경 -->
+		<input class="easyui-textbox" id="search" name="visitorName" style="width:230px;height:25px;">
+		<script>
+		$('#visitorName').textbox({
+		    buttonText:'Search',
+		    iconCls:'icon-man',
+		    iconAlign:'left'
+		})
+		</script>
+	</div>
 	<div  class='col-sm-4'>
 <!-- 날짜 검색 -->
 			<div class="form-group">
 				<div class='col-sm-5'>
-					<span style="font-weight: bold;">시작일</span>
+					신청 시작일
 					<div class="form-group">
 						<div class='easyui-datebox' id="datepicker1">
-							<input type='text' class="form-control" name="openDate" required="required" /> 
-							<span class="input-group-addon">
+							<input type='text' class="form-control" name="openDate"
+								required="required" /> <span class="input-group-addon">
 								<span class="glyphicon glyphicon-calendar"></span>
 							</span>
 						</div>
@@ -179,11 +186,11 @@ $(document).ready(function(){
 					</h4>
 				</div>
 				<div class='col-sm-5'>
-					<span style="font-weight: bold;">종료일</span>
+					신청종료일
 					<div class="form-group">
 						<div class='easyui-datebox' id="datepicker2">
-							<input type='text' class="form-control" name="closeDate" required="required" /> 
-							<span class="input-group-addon">
+							<input type='text' class="form-control" name="closeDate"
+								required="required" /> <span class="input-group-addon">
 								<span class="glyphicon glyphicon-calendar"></span>
 							</span>
 						</div>
@@ -198,7 +205,7 @@ $(document).ready(function(){
 	
 
 <!-- 검색 결과 테이블 -->
-<table class="table table-bordered" style="width: 100%;margin-top:20px;" border="1">
+<table style="width: 100%;margin-top:20px;" border="1">
 	<thead style="font-size:20px;">
 	<tr>
 		<th>신청번호</th>
@@ -454,6 +461,7 @@ $(document).ready(function(){
 	</div>
 <!-- 공통 Footer -->
 <%@ include file="/View/CommonForm/Footer.jsp"%>
+<!-- java script -->
 
 </body>
 </html>
