@@ -1,5 +1,6 @@
 package com.ch4.pojo;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -10,9 +11,15 @@ public class VisitorLogic {
 		vDao = new VisitorDao();
 	}
 
-	public int visitrorAdd(Map<String, Object> pMap) {
+	public int applyAdd(Map<String, Object> pMap) {
 		int result = 0;
-		result = vDao.visitrorAdd(pMap);
+		Map<String, Object> addInfo = SortAndBind.visitApplySort(pMap);
+		
+		List<Map<String,Object>> vtAddList = (List<Map<String,Object>>) addInfo.get("vtAddList");
+		List<Map<String,Object>> tnAddList = (List<Map<String,Object>>) addInfo.get("tnAddList");
+		List<Map<String,Object>> pkAddList = (List<Map<String,Object>>) addInfo.get("pkAddList");
+		Map<String,Object> applyAdd = (Map<String,Object>) addInfo.get("applyAdd");
+		result = vDao.applyAdd(vtAddList,tnAddList,pkAddList,applyAdd);
 		return result;
 	}
 

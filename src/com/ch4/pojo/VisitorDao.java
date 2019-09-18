@@ -24,9 +24,37 @@ public class VisitorDao {
 	 * 
 	 * 
 	 *******************/
-	public int visitrorAdd(Map<String, Object> pMap) {
+	public int applyAdd(List<Map<String,Object>> vtAddList
+			          , List<Map<String,Object>> tnAddList
+			          , List<Map<String,Object>> pkAddList
+			          , Map<String,Object> applyAdd) {
 		int result = 0;
-		result = sqlSession.insert("visitorAdd", pMap);
+		for(int i=0;i<vtAddList.size();i++) {
+			Map<String, Object> addMap = vtAddList.get(i);
+			result = sqlSession.insert("visitorAdd", addMap);
+			if(result==0) {
+				return result;
+			}
+		}
+		for(int i=0;i<tnAddList.size();i++) {
+			Map<String, Object> addMap = tnAddList.get(i);
+			result = sqlSession.insert("equipAdd", addMap);
+			if(result==0) {
+				return result;
+			}
+		}
+		for(int i=0;i<vtAddList.size();i++) {
+			Map<String, Object> addMap = pkAddList.get(i);
+			result = sqlSession.insert("carAdd", addMap);
+			if(result==0) {
+				return result;
+			}
+		}
+		
+		result = sqlSession.insert("applyAdd", applyAdd);
+		if(result==0) {
+			return result;
+		}
 		return result;
 	}
 
