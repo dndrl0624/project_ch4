@@ -8,10 +8,6 @@
 <%@ include file="../CommonForm/TapLogo.jsp"%>
 <!-- Link Import --> 
 <%@ include file="/Style/common/HeadUI.jsp"%> 
-<!-- CSS Style Import --> 
-<style type="text/css"> 
-<%@ include file="/Style/css/CssStyle.css"%>
-</style>
 <style>
 	body {
 		position: relative;
@@ -116,23 +112,6 @@
 	.modal-body p {
 		margin: 0 0 0 0px;
 	}
-	.calendar-saturday {
-		color: #CC2222;
-	}
-	.calendar-today {
-		font-weight: bold;
-		color: #0000ff;
-	}
-	.calendar-disabled {
-		opacity: 0.3;
-		filter: alpha(opacity=60);
-		cursor: default;
-	}
-	input[type=number]::-webkit-inner-spin-button,
-	input[type=number]::-webkit-outer-spin-button {
-		-webkit-appearance: none;
-		margin: 0;
-	}
 </style>
 <title>방문 신청 - CH4 방문자 관리 시스템</title>
 <script type="text/javascript">
@@ -148,30 +127,8 @@
 </head>
 <body data-spy="scroll" data-target="#myScrollspy" data-offset="300">
 <%@ include file="/View/CommonForm/Top.jsp"%>
+<script src="/project_ch4_pojo/Style/js/ch4commons.js"></script>
 <script type="text/javascript">
-	//combobox 직접입력 방지
-	$.fn.combobox.defaults.editable = false
-	//datebox 날짜형식 YYYY-MM-DD로 설정
-	$.fn.datebox.defaults.formatter = function(date){
-	    var y = date.getFullYear();
-	    var m = date.getMonth()+1;
-	    var d = date.getDate();
-	    return y+'-'+(m<10 ? "0"+m:m)+'-'+(d<10 ? "0"+d:d);
-	}  
-	//datebox parser설정
-	$.fn.datebox.defaults.parser = function(s){
-	    var t = Date.parse(s);
-	    if (!isNaN(t)){
-	    	return new Date(t);
-	    } else {
-	    	return new Date();
-	    }
-	}
-	//datebox 한글화
-	$.fn.datebox.defaults.currentText = '오늘'
-	$.fn.datebox.defaults.closeText = '닫기'
-	$.fn.calendar.defaults.weeks = ['일','월','화','수','목','금','토']
-	$.fn.calendar.defaults.months = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
 	$(document).ready(function(){
 		///////////////////////// 방문이력 이벤트  //////////////////////////
 		//방문이력 조회 Modal 띄우기
@@ -702,7 +659,6 @@
 			    			<thead>
 			    				<tr>
 				    				<th>목적지</th>
-				    				<th>담당자</th>
 				    				<th>방문목적</th>
 			    				</tr>
 			    			</thead>
@@ -714,7 +670,6 @@
 			    							<option value="test">테스트</option>
 			    						</select>
 			    					</td>
-			    					<td><input id="visit_charge" class="easyui-textbox" name="visit_charge" data-options="prompt:'(선택사항)'" style="width:80%;"></td>
 			    					<td><input id="visit_purps" class="easyui-textbox" name="visit_purps" data-options="prompt:'예시)업무협의'" style="width:80%;"></td>
 			    				</tr>
 			    			</tbody>
