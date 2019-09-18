@@ -1,5 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String com_no = "null";
+	if(null!=request.getParameter("com_no")){
+		com_no = (String)request.getParameter("com_no");
+	}
+	String com_name = "null";
+	if(null!=request.getParameter("com_name")){
+		com_name = (String)request.getParameter("com_name");
+	}
+	String visit_desti = "null";
+	if(null!=request.getParameter("visit_desti")){
+		visit_desti = (String)request.getParameter("visit_desti");
+	}
+	String visit_apply_name = "null";
+	if(null!=request.getParameter("visit_apply_name")){
+		visit_apply_name = (String)request.getParameter("visit_apply_name");
+	}
+	String visit_apply_hp = "null";
+	if(null!=request.getParameter("visit_apply_hp")){
+		visit_apply_hp = (String)request.getParameter("visit_apply_hp");
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -130,16 +152,23 @@
 <script src="/project_ch4_pojo/Style/js/ch4commons.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+		//목적지 combobox 초기화 + 이전페이지 정보 반영
+		$("#visit_desti").combobox({
+			valueField: 'dept_name',
+			textField: 'dept_name',
+			url: "/visitor/deptList.ch4?cmpCode="+<%=com_no %>
+		});
+		$("#visit_desti").combobox('select','<%=visit_desti%>');
 		///////////////////////// 방문이력 이벤트  //////////////////////////
 		//방문이력 조회 Modal 띄우기
 		$("#btn_log").on('click',function(){
 			$("#md_log").modal('show');
 		});
 		//신청일자 조회 시작일 선택시 마지막일 선택범위 제한
-		$('#log_date1').datebox({
+		$('#visit_apply_date1').datebox({
 			onSelect: function(date){
 				firstDate = date;
-				$('#log_date2').datebox().datebox('calendar').calendar({
+				$('#visit_apply_date2').datebox().datebox('calendar').calendar({
 		            validator: function(date){
 		                var now = new Date();
 		                var d1 = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate());
@@ -150,7 +179,7 @@
 			}
 		});
 		//신청일자 조회 시작일 범위 (작년 당일~올해 당일) 제한
-		$('#log_date1').datebox().datebox('calendar').calendar({
+		$('#visit_apply_date1').datebox().datebox('calendar').calendar({
             validator: function(date){
                 var now = new Date();
                 var d1 = new Date(now.getFullYear()-1, now.getMonth(), now.getDate());
@@ -159,7 +188,7 @@
             }
         });
 		//신청일자 조회 마지막일 범위 (시작일~당일) 제한
-		$('#log_date2').datebox().datebox('calendar').calendar({
+		$('#visit_apply_date2').datebox().datebox('calendar').calendar({
             validator: function(date){
                 var now = new Date();
                 var d1 = new Date(now.getFullYear(), now.getMonth()-1, now.getDate());
@@ -168,8 +197,8 @@
             }
         });
 		//신청일자 시작일 마지막일 (한달전~당일) 기본세팅
-		$('#log_date1').datebox('setValue',now.getFullYear()+'-'+now.getMonth()+'-'+now.getDate());
-		$('#log_date2').datebox('setValue',now.getFullYear()+'-'+(now.getMonth()+1)+'-'+now.getDate());
+		$('#visit_apply_date1').datebox('setValue',now.getFullYear()+'-'+now.getMonth()+'-'+now.getDate());
+		$('#visit_apply_date2').datebox('setValue',now.getFullYear()+'-'+(now.getMonth()+1)+'-'+now.getDate());
 		///////////////////////// 방문날짜 이벤트  //////////////////////////
 		$("#visit_term").combobox("disable");
 		$("#visit_day").combobox("disable");
@@ -267,8 +296,8 @@
 			var name = $("#v_name").val();
 			var hp = $("#v_hp1").val()+'-'+$("#v_hp2").val()+'-'+$("#v_hp3").val();
 			var row = "<tr id='vRow"+vIndex+"'><td><input id='chkVisitor' type='checkbox'></td>"
-					+"<td><input type='hidden' name='visitor_name' value='"+name+"'>"+name+"</td>"
-					+"<td><input type='hidden' name='visitor_hp' value='"+hp+"'>"+hp+"</td></tr>";
+					+"<td><input id='visitor_name' type='hidden' name='visitor_name' value='"+name+"'>"+name+"</td>"
+					+"<td><input id='visitor_hp' type='hidden' name='visitor_hp' value='"+hp+"'>"+hp+"</td></tr>";
 			$("#tb_visitor tbody").append(row);
 			$("#v_name").textbox('setValue',null);
 			$("#v_hp").textbox('setValue',null);
@@ -366,9 +395,9 @@
 			var brand = $("#d_brand").combobox('getText');
 			var model = $("#d_model").val();
 			var row = "<tr id='dRow"+dIndex+"'><td><input id='chkDevice' type='checkbox'></td>"
-					+"<td><input type='hidden' name='tkin_kind' value='"+kind+"'>"+kind+"</td>"
-					+"<td><input type='hidden' name='tkin_brand' value='"+brand+"'>"+brand+"</td>"
-					+"<td><input type='hidden' name='tkin_model' value='"+model+"'>"+model+"</td></tr>";
+					+"<td><input id='tkin_kind' type='hidden' name='tkin_kind' value='"+kind+"'>"+kind+"</td>"
+					+"<td><input id='tkin_brand' type='hidden' name='tkin_brand' value='"+brand+"'>"+brand+"</td>"
+					+"<td><input id='tkin_model' type='hidden' name='tkin_model' value='"+model+"'>"+model+"</td></tr>";
 			$("#tb_device tbody").append(row);
 			$("#d_name").textbox('setValue',null);
 			$("#d_model").textbox('setValue',null);
@@ -445,9 +474,9 @@
 			var kind = $("#p_kind").combobox('getText');
 			var model = $("#p_model").combobox('getText');
 			var row = "<tr id='pRow"+pIndex+"'><td><input id='chkParking' type='checkbox'></td>"
-					+"<td><input type='hidden' name='parking_num' value='"+num+"'>"+num+"</td>"
-					+"<td><input type='hidden' name='parking_kind' value='"+kind+"'>"+kind+"</td>"
-					+"<td><input type='hidden' name='parking_model' value='"+model+"'>"+model+"</td></tr>";
+					+"<td><input id='parking_num' type='hidden' name='parking_num' value='"+num+"'>"+num+"</td>"
+					+"<td><input id='parking_kind' type='hidden' name='parking_kind' value='"+kind+"'>"+kind+"</td>"
+					+"<td><input id='parking_model' type='hidden' name='parking_model' value='"+model+"'>"+model+"</td></tr>";
 			$("#tb_parking tbody").append(row);
 			$("#p_num").textbox('setValue',null);
 			$("#p_kind").combobox('select','차종');
@@ -554,7 +583,42 @@
 			$("#visit_vhcle_encc").val('O');
 		}
 		//url주소 결정되면 활성화
-		//$("#form_apply").submit();
+		alert(
+			"신청자 이름: "+$("#visit_apply_name").val()+"\n"
+			+"신청자 연락처: "+$("#visit_apply_hp").val()+"\n"
+			+"방문목적: "+$("#visit_purps").textbox('getValue')+"\n"
+			+"목적지: "+$("#visit_desti").combobox('getValue')+"\n"
+			+"방문유형: "+$("#visit_type").combobox('getValue')+"\n"
+			+"방문주기: "+$("#visit_term").combobox('getValue')+"\n"
+			+"방문요일: "+$("#visit_day").combobox('getValue')+"\n"
+			+"방문날짜: "+$("#visit_date").val()+"\n"
+			+"반입기기유무: "+$("#visit_tkin_encc").val()+"\n"
+			+"차량유무: "+$("#visit_vhcle_encc").val()+"\n"
+			+"방문자이름: "+$("#visitor_name").val()+"\n"
+			+"기종: "+$("#tkin_kind").val()+"\n"
+			+"기기제조사: "+$("#tkin_brand").val()+"\n"
+			+"모델명: "+$("#tkin_model").val()+"\n"
+			+"차종: "+$("#parking_kind").val()+"\n"
+			+"모델명: "+$("#parking_model").val()+"\n"
+			+"차량번호: "+$("#parking_num").val()+"\n"
+		);
+		$("#form_apply").submit();
+	}
+	function searchLog(){
+		alert("이력조회");
+		$.ajax({
+			type: 'POST',
+			data: 'json',
+			url: '/visitor/applyLogList.ch4',
+			success: function(data){
+				var obj = JSON.parse(data);
+				//받을값 형태 미결정
+			}
+		});
+	}
+	function reflect(){
+		alert("재사용");
+		//반영방법 미결정
 	}
 </script>
 <div class="container-fluid">
@@ -570,14 +634,15 @@
 	    <div class="col-lg-7 col-lg-offset-1"> 
 			<div class="row">
 		    	<div class="col-lg-10">
-					<h2 style="margin-bottom:20px; border-left: 4px solid #17405D; padding-left:8px;"><b>방문 신청</b> (방문지)</h2>
+					<h2 style="margin-bottom:20px; border-left: 4px solid #17405D; padding-left:8px;"><b>방문 신청</b> (<%=com_name %>)</h2>
 		    	</div>
 		    	<div class="col-lg-2" style="text-align:right; padding-top:30px;">
 					<button id="btn_log" class="btn btn-primary">방문이력</button>
 		    	</div>
 			</div>
 	    <!------------------------------------- 신청 폼 시작 -------------------------------------->
-	    <form id="form_apply" action="" method="POST">
+	    <form id="form_apply" action="/visitor/add.ch4" method="POST">
+	    	<input id="com_no" type="hidden" name="com_no" value="<%=com_no %>">
 	    	<input id="visit_tkin_encc" type="hidden" name="visit_tkin_encc" value="">
 	    	<input id="visit_vhcle_encc" type="hidden" name="visit_vhcle_encc" value="">
 		    <div id="section1" class="panel panel-info">    
@@ -588,9 +653,9 @@
 			    		<table class="table">
 			    			<tr>
 			    				<th>성명</th>
-			    				<td><input type="hidden" name="visit_apply_name" value="">(성명)</td>
+			    				<td><input id="visit_apply_name" type="hidden" name="visit_apply_name" value="<%=visit_apply_name %>"><%=visit_apply_name %></td>
 			    				<th>전화번호</th>
-			    				<td><input type="hidden" name="visit_apply_hp" value="">010-0000-1234</td>
+			    				<td><input id="visit_apply_hp" type="hidden" name="visit_apply_hp" value="<%=visit_apply_hp %>"><%=visit_apply_hp %></td>
 			    			</tr>
 			    		</table>
 			    	</div>
@@ -901,7 +966,7 @@
 		<div class="modal-content">
 			<div class="modal-header log">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title" style="color:white;">방문이력 (방문지)</h4>
+				<h4 class="modal-title" style="color:white;">방문이력 (<%=com_name %>)</h4>
 			</div>
 			<div class="modal-body log" >
 				<div class="container-fluid">
@@ -909,11 +974,16 @@
 						<table class="table">
 				    		<tr>
 				    			<th>
-									<input id="log_date1" class="easyui-datebox" label="신청일자" style="width:230px;height:30px">
-							    	&emsp;<span>~</span>&emsp;
-							    	<input id="log_date2" class="easyui-datebox" style="width:150px;height:30px">
-							    	&emsp;&emsp;
-							    	<button type="button" class="btn btn-primary" id="btn_reflect">조회</button>
+				    				<form id="form_search_log" action="" method="POST">
+				    					<input type="hidden" name="com_no" value="<%=com_no %>">
+				    					<input type="hidden" name="visit_apply_name" value="<%=visit_apply_name %>">
+				    					<input type="hidden" name="visit_apply_hp" value="<%=visit_apply_hp %>">
+										<input id="visit_apply_date1" class="easyui-datebox" name="visit_apply_date1" label="신청일자" style="width:230px;height:30px">
+								    	&emsp;<span>~</span>&emsp;
+								    	<input id="visit_apply_date2" class="easyui-datebox" name="visit_apply_date2" style="width:150px;height:30px">
+								    	&emsp;&emsp;
+								    	<button id="btn_reflect" type="button" class="btn btn-primary" onClick="searchLog()">조회</button>
+							    	</form>
 				    			</th>
 				    		</tr>
 				    	</table>
@@ -933,7 +1003,7 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-        		<button type="button" class="btn btn-primary" id="btn_reflect">재사용</button>
+        		<button id="btn_reflect" type="button" class="btn btn-primary" onClick="reflect()">재사용</button>
         		<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
         	</div>
 		</div>

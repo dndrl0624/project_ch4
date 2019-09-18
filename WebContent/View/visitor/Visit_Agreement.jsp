@@ -48,7 +48,7 @@
 		var chkAll = $("#agreeAll").is(":checked");
 		//전부 체크했니?
 		if(chkAll){
-			
+			location.href= "/visitor/applyAgreement.ch4";
 		}
 		else{
 			alert("약관을 전부 동의해 주세요.");
