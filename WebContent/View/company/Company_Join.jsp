@@ -39,6 +39,7 @@
 </style>
 <script type="text/javascript">
 	function join(){
+		//모든 칸이 쓰였는지 확인
 		if($("#cmng_id").val()==""){
 			alert("아이디를 입력해주세요.");
 			$("#cmng_id").textbox('textbox').focus();
@@ -87,7 +88,9 @@
 			$("#cmng_permit_hp").setValue(cmng_permit_hp);
 			//$("#f_join").submit();
 		} 
+		//url 보내기
 	}
+	//아이디 중복 체크
 	function checkid(){
 		var id = $("#cmng_id").val();
 		alert(id);
@@ -109,13 +112,9 @@
 <body>
 <%@ include file="/View/CommonForm/Top.jsp"%>
 <script type="text/javascript">
-	var id = $("#cmng_id").val();
-  	var name=$("#cmng_name").val();
-  	var hp=$("#cmng_permit_hp").val();
-  	var grade=$("#cmng_grade").val();
 	$(document).ready(function(){
+		//비밀번호와 비밀번호 확인 칸이 같은지 확인
 		$("#re_cmng_pw").passwordbox('textbox').blur(function(){
-			//alert("여기");
             var pwd=$("#cmng_pw").val();
           	var rePwd=$("#re_cmng_pw").val();
 	        if(rePwd!=pwd){//비밀번호 다르다면
@@ -192,8 +191,6 @@
 			</button>
 		</div>
 	</div>
-
-
 </div>
 <%@ include file="/View/CommonForm/Footer.jsp"%>
 </body>

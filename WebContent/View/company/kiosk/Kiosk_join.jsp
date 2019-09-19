@@ -63,10 +63,16 @@
 <body>
 <script type="text/javascript">
 	$(document).ready(function(){
+		var g_com_no;//전역변수_회사 코드
+		//콤보박스 - 회사 이름을 받을 부분
 		$("#cb_com").combobox({
-			url:'combobox_data.json',//회사 이름을 받을 url
-			valueField:'com_no',
-			textField:'com_name'
+			url:'combobox_data.json'//회사 이름을 받을 url
+			,valueField:'COM_NO'
+			,textField:'COM_NAME'
+			,panelHeight : 'auto'
+			,onSelect : function(recode) {
+				g_com_no = recode.COM_NO;
+			}
 		});
 	});
 </script>

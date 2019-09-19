@@ -43,9 +43,7 @@
 </style>
 <script type="text/javascript">
 	function login(){
-		var admin_id="id";
-		var admin_pw="pw";
-		alert("로그인");
+		//아이디와 비번이 쓰였는지에대한 체크
 		if($('#admin_id').val()==""){
             $('#admin_id').focus();
             alert("아이디를 입력해주세요");
@@ -57,10 +55,10 @@
             return;
         }
         else{
+			//전송할 부분
        	   //$("#f_adminlogin").submit();
-           }
-        } 
-	}
+        }
+	} 
 	
 </script>
 </head>
