@@ -199,6 +199,53 @@
 		//신청일자 시작일 마지막일 (한달전~당일) 기본세팅
 		$('#visit_apply_date1').datebox('setValue',now.getFullYear()+'-'+now.getMonth()+'-'+now.getDate());
 		$('#visit_apply_date2').datebox('setValue',now.getFullYear()+'-'+(now.getMonth()+1)+'-'+now.getDate());
+		//내 방문(신청)이력 조회
+		$("#btn_search_log").on('click',function(){
+			$.ajax({
+				type: 'POST',
+				data: $("#form_search_log").serialize(),
+				dataType: 'json',
+//	 			url: '/visitor/preVisitList.ch4',
+				url: '../../json/testLog.json',
+				success: function(result){
+					//재검색 할 경우 이전 검색기록 제거
+					$("#tb_log #tr_log").remove();
+					$.each(result,function(index,item){
+						var visitor = item.visitor[0].visitor_name +" 외"+ (item.visitor.length-1) + "명";
+						//alert(index + ")\n"+ item.visit_apply_date+"\n"+visitor+"\n"+item.visit_desti+"\n"+item.visit_type+"\n"+item.visit_date+"\n"+item.visit_purps);
+						var row = "<tr id='tr_log'>"
+								+"<td><input id='visit_no' type='radio' name='visit_no' value='"+item.visit_no+"'></td>"
+								+"<td>"+item.visit_apply_date+"</td>"
+								+"<td>"+visitor+"</td>"
+								+"<td>"+item.visit_desti+"</td>"
+								+"<td>"+item.visit_type+"</td>"
+								+"<td>"+item.visit_date+"</td>"
+								+"<td>"+item.visit_purps+"</td></tr>";
+						$("#tb_log tbody").append(row);
+					});
+				}
+			});
+		});
+		//선택한 이력 재사용
+		$("#btn_reflect").on('click',function(){
+			$("#input_reflect").attr('value',$("input[name=visit_no]:checked").val());
+			//alert($("#input_reflect").val());
+			$.ajax({
+				type: 'POST',
+				data: $("#form_reflect").serialize(),
+				dataType: 'json',
+				url: '/visitor/preVisitListDetail.ch4',
+				success: function(result){
+					//정보 걸러내기
+					
+					//받은정보 뿌리기
+					
+					//모달끄기
+					$("#md_log").modal('hide');
+				}
+			});
+		});
+		
 		///////////////////////// 방문날짜 이벤트  //////////////////////////
 		$("#visit_term").combobox("disable");
 		$("#visit_day").combobox("disable");
@@ -604,22 +651,6 @@
 		);
 		$("#form_apply").submit();
 	}
-	function searchLog(){
-		alert("이력조회");
-		$.ajax({
-			type: 'POST',
-			data: 'json',
-			url: '/visitor/applyLogList.ch4',
-			success: function(data){
-				var obj = JSON.parse(data);
-				//받을값 형태 미결정
-			}
-		});
-	}
-	function reflect(){
-		alert("재사용");
-		//반영방법 미결정
-	}
 </script>
 <div class="container-fluid">
 	<div class="row">
@@ -974,7 +1005,7 @@
 						<table class="table">
 				    		<tr>
 				    			<th>
-				    				<form id="form_search_log" action="" method="POST">
+				    				<form id="form_search_log" method="POST">
 				    					<input type="hidden" name="com_no" value="<%=com_no %>">
 				    					<input type="hidden" name="visit_apply_name" value="<%=visit_apply_name %>">
 				    					<input type="hidden" name="visit_apply_hp" value="<%=visit_apply_hp %>">
@@ -982,7 +1013,7 @@
 								    	&emsp;<span>~</span>&emsp;
 								    	<input id="visit_apply_date2" class="easyui-datebox" name="visit_apply_date2" style="width:150px;height:30px">
 								    	&emsp;&emsp;
-								    	<button id="btn_reflect" type="button" class="btn btn-primary" onClick="searchLog()">조회</button>
+								    	<button id="btn_search_log" type="button" class="btn btn-primary">조회</button>
 							    	</form>
 				    			</th>
 				    		</tr>
@@ -990,20 +1021,29 @@
 					</div>
 					<h6 style="margin-bottom:10px;">※이전 신청/방문이력을 재사용 신청할 수 있습니다.</h6>
 				    <div class="row table basic">
-				    	<table class="table">
-				    		<tr>
-				    			<th>신청일자</th>
-				    			<th>방문자</th>
-				    			<th>목적지</th>
-				    			<th>방문일자</th>
-				    			<th>방문목적</th>
-				    		</tr>
+				    	<table id="tb_log" class="table">
+				    		<thead>
+					    		<tr>
+					    			<th style="width:60px;">선택</th>
+					    			<th>신청일자</th>
+					    			<th>방문자</th>
+					    			<th>목적지</th>
+					    			<th>방문유형</th>
+					    			<th>방문일자</th>
+					    			<th>방문목적</th>
+					    		</tr>
+				    		</thead>
+					    	<tbody>
+					    	</tbody>
 				    	</table>
 				    </div>
 				</div>
 			</div>
 			<div class="modal-footer">
-        		<button id="btn_reflect" type="button" class="btn btn-primary" onClick="reflect()">재사용</button>
+				<form id="form_reflect" method="POST">
+					<input id="input_reflect" type="hidden" name="visit_no" value="">
+				</form>
+        		<button id="btn_reflect" type="button" class="btn btn-primary">재사용</button>
         		<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
         	</div>
 		</div>
