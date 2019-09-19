@@ -8,10 +8,6 @@
 <%@ include file="../../CommonForm/TapLogo.jsp"%>
 <!-- Link Import --> 
 <%@ include file="../../../Style/common/HeadUI.jsp"%> 
-<!-- CSS Style Import --> 
-<style type="text/css"> 
-<%@ include file="/Style/css/CssStyle.css"%>
-</style>
 <title>KIOSK_JOIN</title>
 <style>
 	#cb_com{

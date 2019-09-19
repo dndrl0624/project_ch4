@@ -9,10 +9,6 @@
 <title>메인 페이지</title>
 <!-- Head Link Import --> 
 <%@ include file="/Style/common/HeadUI.jsp"%> 
-<!-- CSS Style Import --> 
-<style type="text/css"> 
-<%@ include file="/Style/css/CssStyle.css"%>
-</style>
 </head>
 <body>
 	<!-- 미결과제 :  -->

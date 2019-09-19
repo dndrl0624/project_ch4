@@ -6,11 +6,9 @@
 <meta charset="utf-8"> 
 <!-- Web icon 설정 --> 
 <%@ include file="../CommonForm/TapLogo.jsp"%>
-<title>고객지원 페이지</title>
 <!-- Link Import --> 
 <%@ include file="/Style/common/HeadUI.jsp"%> 
-</style>
-
+<title>고객지원 페이지</title>
 <style type="text/css">
  h2 {
  	text-align: left;

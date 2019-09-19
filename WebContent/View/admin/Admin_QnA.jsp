@@ -12,10 +12,6 @@
 <%@ include file="../CommonForm/TapLogo.jsp"%>
 <!-- Link Import --> 
 <%@ include file="/Style/common/HeadUI.jsp"%> 
-<!-- CSS Style Import --> 
-<style type="text/css"> 
-<%@ include file="/Style/css/CssStyle.css"%>
-</style>
 <title>Insert title here</title>
 <script type="text/javascript">
 	function sendAnswer(q_no){
