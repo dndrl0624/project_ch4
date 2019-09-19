@@ -9,10 +9,6 @@
 <%@ include file="../../CommonForm/TapLogo.jsp"%>
 <!-- Link Import --> 
 <%@ include file="../../../Style/common/HeadUI.jsp"%> 
-<!-- CSS Style Import --> 
-<style type="text/css"> 
-<%@ include file="/Style/css/CssStyle.css"%>
-</style>
 <title>Kiosk_login</title>
 <style type="text/css">
 	#jumbo_Kiosklogin {
