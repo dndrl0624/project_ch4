@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%><!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
 <!-- Required meta tags -->
@@ -21,39 +22,38 @@
 	color: black;
  }
 </style>
+</head>
+<body>
 <script type="text/javascript">
 	//검색하기
 	function NoticeList(){
 		alert("검색");
 		var cb_search = $("#cb_search").val();
 		var tb_search = $("#tb_search").val();
-		$("#tb_notice").bootstrapTable({
-			// url:"검색 유알엘"
-		});
+		 $("#tb_notice").bootstrapTable({
+			//alert("여기");
+			url:"/index/notice.ch4?cb_search="+cb_search+"&tb_search="+tb_search
+		}); 
 	}////////////////////////end of NoticeList
-</script>
-</head>
-<body>
-<script type="text/javascript">
+	$("#tb_notice").bootstrapTable({
+		columns:[[
+	        {field:'n_no',title:'no'}
+	        ,{field:'n_title',title:'title'}
+	        ,{field:'n_date',title:'date'}
+	        ,{field:'n_writer',title:'writer'}
+	        ,{field:'n_hit',title:'hit'}
+	   ]]
+		,url:'/index/notice.ch4'
+		,onClickRow:function(row,$element,field){
+			//$element.attr('data-index',10)
+			$element.toggleClass('single-select');//로우 클릭했을 때 색 변함.
+			//alert(row.N_NO);
+		 }
+		,onDblClickRow:function(row,$element,field){
+			alert("상세조회 모달");
+		 }
+	});////////////////end of bootstrapTable
 	$(document).ready(function(){
-		$("#tb_notice").bootstrapTable({
-			url:''
-			,columns:[[
-		        {field:'n_no',title:'no'}
-		        ,{field:'n_title',title:'title'}
-		        ,{field:'n_date',title:'date'}
-		        ,{field:'n_writer',title:'writer'}
-		        ,{field:'n_hit',title:'hit'}
-		   ]]
-			,onClickRow:function(row,$element,field){
-				//$element.attr('data-index',10)
-				$element.toggleClass('single-select');//로우 클릭했을 때 색 변함.
-				//alert(row.N_NO);
-			 }
-			,onDblClickRow:function(row,$element,field){
-				alert("상세조회 모달");
-			 }
-		});////////////////end of bootstrapTable
 	});
 </script>
 	<!-- 미결과제 : 사진선택 디자인을 다시해야한다 게시판 형식 작성 -->
@@ -103,6 +103,7 @@
 			<div class="row">
 				<table class="table table-bordered table-hover" id="tb_notice" 
 					   data-pagination="true" 
+					   data-toggle="table"
 					   data-page-list="[2, 4, 6, 8, All]"
 					   data-pagination-pre-text="Previous"
 					   data-pagination-next-text="Next">
