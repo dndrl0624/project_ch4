@@ -149,7 +149,6 @@
 </head>
 <body data-spy="scroll" data-target="#myScrollspy" data-offset="300">
 <%@ include file="/View/CommonForm/Top.jsp"%>
-<script src="/project_ch4_pojo/Style/js/ch4commons.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		//목적지 combobox 초기화 + 이전페이지 정보 반영
@@ -385,6 +384,7 @@
 					//그렇기 때문에 .html()없이 vRow를 쓰면 정의가 되어있으므로 true로 인식
 					if(vRow.html()){
 						if(i!=reset){
+							$("#vRow"+i+" #chkVisitor").attr('value',reset);
 							$("#vRow"+i).attr('id',"vRow"+reset);
 						}
 						reset++;
@@ -472,6 +472,7 @@
 					var dRow = $("#dRow"+i);
 					if(dRow.html()){
 						if(i!=reset){
+							$("#dRow"+i+" #chkDevice").attr('value',reset);
 							$("#dRow"+i).attr('id',"dRow"+reset);
 						}
 						reset++;
@@ -552,6 +553,7 @@
 					var pRow = $("#pRow"+i);
 					if(pRow.html()){
 						if(i!=reset){
+							$("#pRow"+i+" #chkParking").attr('value',reset);
 							$("#pRow"+i).attr('id',"pRow"+reset);
 						}
 						reset++;
@@ -685,7 +687,7 @@
 			    			<tr>
 			    				<th>성명</th>
 			    				<td><input id="visit_apply_name" type="hidden" name="visit_apply_name" value="<%=visit_apply_name %>"><%=visit_apply_name %></td>
-			    				<th>전화번호</th>
+			    				<th>연락처</th>
 			    				<td><input id="visit_apply_hp" type="hidden" name="visit_apply_hp" value="<%=visit_apply_hp %>"><%=visit_apply_hp %></td>
 			    			</tr>
 			    		</table>
