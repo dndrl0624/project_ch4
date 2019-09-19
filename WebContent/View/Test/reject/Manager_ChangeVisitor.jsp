@@ -9,9 +9,7 @@
 <title>방문 신청 변경 페이지</title>
 <!-- 공통코드 -->
 <%@ include file="../../../Style/common/HeadUI.jsp"%>
-<!-- CSS Style Import --> 
 <style type="text/css"> 
-<%@ include file="/Style/css/CssStyle.css"%>
 /* 사이드바 설정 */
 aside {
     width: 15%;

@@ -9,8 +9,8 @@
 		<nav class="navbar navbar-default navbar-fixed-top" style="padding-top:10px;padding-bottom:10px;">
 			<div class="container">
 				<!-- 대표 회사 아이콘 및 링크 -->	
-				<a id="Main_log" href="#">
-					<img src="/project_ch4_pojo/Style/images/logo/logo_navi2.png" alt="">
+				<a id="Main_log" href="../index/Index_Choose.jsp">
+					<img src="/project_ch4_pojo/Style/images/logo/logo_navi3.png" alt="">
 				</a>
 			</div>
 		</nav>

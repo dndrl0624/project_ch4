@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -10,7 +11,6 @@
 <!-- 공통코드 -->
 <%@ include file="../../../Style/common/HeadUI.jsp"%>
 <style type="text/css"> 
-<%@ include file="/Style/css/CssStyle.css"%>
 /* 사이드바 설정 */
 aside {
     width: 15%;
@@ -268,4 +268,17 @@ function btn_search(){
 <%@ include file="/View/CommonForm/Footer.jsp"%>
 
 </body>
+=======
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+>>>>>>> refs/heads/uk_view
 </html>

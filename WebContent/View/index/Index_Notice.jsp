@@ -8,10 +8,6 @@
 <title>고객지원 페이지</title>
 <!-- Link Import --> 
 <%@ include file="/Style/common/HeadUI.jsp"%> 
-<!-- CSS Style Import --> 
-<style type="text/css"> 
-<%@ include file="/Style/css/CssStyle.css"%>
-</style>
 </head>
 <body>
 	<!-- 미결과제 : 사진선택 디자인을 다시해야한다 게시판 형식 작성 -->
@@ -107,7 +103,5 @@
 
 <!-- 공통 Footer -->
 <%@ include file="/View/CommonForm/Footer.jsp"%>
-<!-- Bottom Link Import --> 
-<%@ include file="/Style/common/BottomUI.jsp"%>
 </body>
 </html>

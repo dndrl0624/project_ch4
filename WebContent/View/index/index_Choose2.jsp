@@ -9,10 +9,6 @@
 <title>메인 폼을 작성해보자</title>
 <!-- Link Import --> 
 <%@ include file="/Style/common/HeadUI.jsp"%> 
-<!-- CSS Style Import --> 
-<style type="text/css"> 
-<%@ include file="/Style/css/CssStyle.css"%>
-</style>
 </head>
 <body>
 <!-- 방문 유형 선택 옵션 -->	

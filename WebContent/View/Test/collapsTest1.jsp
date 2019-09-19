@@ -11,7 +11,6 @@
 <%@ include file="/Style/common/HeadUI.jsp"%> 
 <!-- CSS Style Import --> 
 <style type="text/css"> 
-<%@ include file="/Style/css/CssStyle.css"%>
 /*sidebar navigation*/
 /* 사이드바 크기 지정 */ 
 #sidebar {
@@ -174,7 +173,5 @@ ul.sidebar-menu li a i {
 
 	<!-- 공통 Footer -->
 <%@ include file="/View/CommonForm/Footer.jsp"%></div>
-<!-- Bottom Link Import --> 
-<%@ include file="/Style/common/BottomUI.jsp"%>
 </body>
 </html>
