@@ -40,5 +40,15 @@ public class GoodsLogic {
 		return result;
 	}
 
+	public List<Map<String, Object>> preGoodsList(Map<String, Object> pMap) {
+		List<Map<String,Object>> preGoodsList = gDao.preGoodsList(pMap);
+		return preGoodsList;
+	}
+
+	public List<Map<String, Object>> preGoodsDetail(Map<String, Object> pMap) {
+		List<Map<String, Object>> preGoodsDetail = gDao.preGoodsDetail(pMap);
+		return preGoodsDetail;
+	}
+
 
 }

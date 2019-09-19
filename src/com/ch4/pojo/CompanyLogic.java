@@ -10,9 +10,14 @@ public class CompanyLogic {
 		cDao = new CompanyDao();
 	}
 
-	public int mngCommit(Map<String, Object> pMap) {
+	public int mngPermit(Map<String, Object> pMap) {
 		int result = 0;
-		result = cDao.mngCommit(pMap);
+		result = cDao.mngPermit(pMap);
+		return result;
+	}
+	public int mngUpdate(Map<String, Object> pMap) {
+		int result = 0;
+		result = cDao.mngUpdate(pMap);
 		return result;
 	}
 	
@@ -25,5 +30,6 @@ public class CompanyLogic {
 		List<Map<String, Object>> inOutList = cDao.inOutList(pMap);
 		return inOutList;
 	}
+
 
 }

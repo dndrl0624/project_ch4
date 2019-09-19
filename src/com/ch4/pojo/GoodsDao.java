@@ -57,7 +57,18 @@ public class GoodsDao {
 	public int goodsCancle(Map<String, Object> pMap) {
 		int result = 0;
 		result = sqlSession.update("goodsCancle", pMap);
+		sqlSession.commit();
 		return result;
+	}
+
+	public List<Map<String, Object>> preGoodsList(Map<String, Object> pMap) {
+		List<Map<String,Object>> preGoodsList = sqlSession.selectList("preGoodsList", pMap);
+		return preGoodsList;
+	}
+
+	public List<Map<String, Object>> preGoodsDetail(Map<String, Object> pMap) {
+		List<Map<String, Object>> preGoodsDetail = sqlSession.selectList("goodsDetail", pMap);
+		return preGoodsDetail;
 	}
 
 }

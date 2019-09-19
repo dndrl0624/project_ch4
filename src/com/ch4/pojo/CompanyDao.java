@@ -20,9 +20,15 @@ public class CompanyDao {
 		sqlSession = sqlSessionFactory.openSession();
 	}
 
-	public int mngCommit(Map<String, Object> pMap) {
+	public int mngPermit(Map<String, Object> pMap) {
 		int result = 0;
-		result = sqlSession.update("mngCommit", pMap);
+		result = sqlSession.update("mngPermit", pMap);
+		
+		return result;
+	}
+	public int mngUpdate(Map<String, Object> pMap) {
+		int result = 0;
+		result = sqlSession.update("mngUpdate",pMap);
 		return result;
 	}
 
@@ -35,5 +41,6 @@ public class CompanyDao {
 		List<Map<String, Object>> inOutList = sqlSession.selectList("inOutList", pMap);
 		return inOutList;
 	}
+
 
 }

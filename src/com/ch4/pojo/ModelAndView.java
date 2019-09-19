@@ -24,7 +24,7 @@ public class ModelAndView {
 	public void setViewName(String viewName) {
 		this.viewName = viewName;
 	}
-	public void addObject(String name, Object obj) {
+	public void addObject(Object obj) {
 		this.obj = obj;
 	}
 	public void isRedirect(boolean isRedirect) {

@@ -1,5 +1,7 @@
 package com.ch4.pojo;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -105,6 +107,25 @@ public class VisitorDao {
 	public List<Map<String, Object>> applyList(Map<String, Object> pMap) {
 		List<Map<String, Object>> applyList = sqlSession.selectList("applyList", pMap);
 		return applyList;
+	}
+
+	public List<Map<String, Object>> preVisitList(Map<String, Object> pMap) {
+		List<Map<String, Object>> preVisitList = sqlSession.selectList("applyList", pMap);
+		return preVisitList;
+	}
+
+	public Map<String, Object> previsitDetail(Map<String, Object> pMap) {
+		Map<String,Object> preDetailList = new HashMap<String, Object>();
+		
+		List<Map<String, Object>> visitorList = sqlSession.selectList("visitorList", pMap);
+		List<Map<String, Object>> equipList = sqlSession.selectList("equipList", pMap);
+		List<Map<String, Object>> carList = sqlSession.selectList("carList", pMap);
+		
+		preDetailList.put("visitorList", visitorList);
+		preDetailList.put("equipList", equipList);
+		preDetailList.put("carList", carList);
+		
+		return preDetailList;
 	}
 
 

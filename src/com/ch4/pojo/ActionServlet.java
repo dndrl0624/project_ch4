@@ -69,6 +69,8 @@ public class ActionServlet extends HttpServlet {
 					res.sendRedirect(viewPath + contextPath + viewName);
 				}
 				else {
+					Object obj = mav.obj;
+					req.setAttribute("pMap", obj);
 					RequestDispatcher view = req.getServletContext().getRequestDispatcher("/View" + contextPath + viewName);
 					view.forward(req, res);
 				}
@@ -96,7 +98,8 @@ public class ActionServlet extends HttpServlet {
 					res.sendRedirect(viewPath + contextPath + viewName);
 				}
 				else {
-					
+					Object obj = mav.obj;
+					req.setAttribute("pMap", obj);
 					RequestDispatcher view = req.getServletContext().getRequestDispatcher("/View" + contextPath + viewName);
 					view.forward(req, res);
 				}
@@ -109,6 +112,8 @@ public class ActionServlet extends HttpServlet {
 					res.sendRedirect(viewPath + "/visitor/" + viewName);
 				}
 				else {
+					Object obj = mav.obj;
+					req.setAttribute("pMap", obj);
 					RequestDispatcher view = req.getServletContext().getRequestDispatcher("/View/visitor/" + viewName);
 					view.forward(req, res);
 				}

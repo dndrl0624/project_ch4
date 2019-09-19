@@ -27,17 +27,23 @@ public class CompanyController implements Controller{
 		ModelAndView mav = new ModelAndView();
 		Map<String,Object> pMap = new HashMap<>();
 		HashMapBinder hmb = new HashMapBinder(req);
-		if(requestName.equals("mngcommit")) {
+		if(requestName.equals("mngPermit")) {
 			int result = 0;
 			hmb.multiBind(pMap);
 			logger.info("pMap : " + pMap);
-			result = cLogic.mngCommit(pMap);
+			result = cLogic.mngPermit(pMap);
 			if(result == 0) {
 				mav.setViewName("Visit_ResultGoods.jsp");
 			}
 			else if(result == 1) {
 				mav.setViewName("Visit_ApplyFail.jsp");
 			}
+		}
+		else if(requestName.equals("mngUpdate")) {
+			int result = 0;
+			hmb.multiBind(pMap);
+			logger.info("pMap : " + pMap);
+			result = cLogic.mngUpdate(pMap);
 		}
 
 		return mav;

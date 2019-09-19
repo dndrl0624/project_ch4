@@ -1,6 +1,7 @@
 package com.ch4.pojo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ public class VisitorLogic {
 
 	public int visitApplyAdd(Map<String, Object> pMap) {
 		int result = 0;
+
 		Map<String, Object> addInfo = SortAndBind.visitApplySort(pMap);
 		
 		List<Map<String,Object>> vtAddList = (List<Map<String,Object>>) addInfo.get("vtAddList");
@@ -27,6 +29,7 @@ public class VisitorLogic {
 		else {
 			result = vDao.visitSubAdd(vtAddList,tnAddList,pkAddList,visit_no);
 		}
+		
 		return result;
 	}
 
@@ -60,6 +63,16 @@ public class VisitorLogic {
 	public List<Map<String, Object>> deptList(Map<String, Object> pMap) {
 		List<Map<String, Object>> deptList = vDao.deptList(pMap);
 		return deptList;
+	}
+
+	public List<Map<String, Object>> preVisitList(Map<String, Object> pMap) {
+		List<Map<String,Object>> preVisitList = vDao.preVisitList(pMap);
+		return preVisitList;
+	}
+
+	public Map<String, Object> previsitDetail(Map<String, Object> pMap) {
+		Map<String,Object> preDetailList = vDao.previsitDetail(pMap);
+		return preDetailList;
 	}
 
 }

@@ -27,6 +27,7 @@ public class VisitorController implements Controller{
 		ModelAndView mav = new ModelAndView();
 		Map<String,Object> pMap = new HashMap<>();
 		HashMapBinder hmb = new HashMapBinder(req);
+		hmb.bind(pMap);
 		if(requestName.equals("visitPurpose")) {
 			String vPP = req.getParameter("pp");
 			if(vPP.equals("visit")) {
@@ -39,7 +40,6 @@ public class VisitorController implements Controller{
 			}
 		}
 		else if(requestName.equals("applyRequest")) {
-			hmb.bind(pMap);
 			logger.info("pMap : " + pMap);
 			HttpSession session = req.getSession();
 			session.setAttribute("pMap", pMap);
@@ -47,13 +47,11 @@ public class VisitorController implements Controller{
 			mav.setViewName("Visit_Agreement.jsp");
 		}
 		else if(requestName.equals("applyAgreement")) {
-			hmb.bind(pMap);
 			logger.info("pMap : " + pMap);
 			mav.isRedirect(false);
 			mav.setViewName("Visit_Select.jsp");
 		}
 		else if(requestName.equals("add")) {
-			hmb.bind(pMap);			
 			int result = 0;
 			logger.info("pMap : " + pMap);
 			result = vLogic.visitApplyAdd(pMap);
@@ -68,7 +66,6 @@ public class VisitorController implements Controller{
 		}
 		else if(requestName.equals("update")) {
 			int result = 0;
-			hmb.bind(pMap);
 			logger.info("pMap : " + pMap);
 			result = vLogic.visitorUpdate(pMap);
 			if(result == 1) {
@@ -80,7 +77,6 @@ public class VisitorController implements Controller{
 		}
 		else if(requestName.equals("cancle")) {
 			int result = 0;
-			hmb.bind(pMap);
 			logger.info("pMap : " + pMap);
 			result = vLogic.visitorCancle(pMap);
 			if(result == 1) {
