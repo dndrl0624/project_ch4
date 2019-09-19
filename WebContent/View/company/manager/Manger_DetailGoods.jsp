@@ -407,6 +407,32 @@ $(document).ready(function(){
 					</div>
 				</div>
 			</div>
+			<div id="section5" class="panel panel-danger">
+				<div class="panel-heading">반입 물품</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-lg-8">
+							<h4 style="border-left: 3px solid #8a6d3b; padding-left: 4px;">
+								<b>반입물품 정보</b>
+							</h4>
+						</div>
+					</div>
+					<div class="row table goods">
+						<table id="tb_goods" class="table">
+							<thead>
+								<tr>
+									<th><input id="chkAllGoods" type="checkbox"></th>
+									<th style="width: 30%;">반입물품명</th>
+									<th style="width: 30%;">물품종류</th>
+									<th style="width: 30%;">물품수량</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
 			<div id="section3" class="panel panel-warning">
 				<div class="panel-heading">반입기기</div>
 				<div class="panel-body">
@@ -460,7 +486,7 @@ $(document).ready(function(){
 			<div style="float: right; margin-bottom:20%;">
 				<button type="button" id="permission" class="btn btn-primary">반입 신청 승인</button>
 				<button type="button" id="return" class="btn btn-danger">반입 신청 반려</button>
-				<button type="button" class="btn btn-default" onclick="location.href='/project_ch4_pojo/View/company/manager/Manager_SearchGoods.jsp'">조회페이지 이동</button>
+				<button type="button" class="btn btn-default" onClick="location.href='javascript:history.back()'">이전 페이지</button>
 			</div>
 		</div>
 </div>

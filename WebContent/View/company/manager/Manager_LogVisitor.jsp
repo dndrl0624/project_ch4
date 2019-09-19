@@ -26,7 +26,7 @@ aside::-webkit-scrollbar {
 
 /* 메인 페이지 프레임 구간 설정 */
 .mainContent {
-	margin:30px 20px 10px 17%;
+	margin:20px 20px 10px 17%;
 }
 
 /* 테이블 제목 구간 가운데 정렬 */
@@ -34,46 +34,49 @@ th {
 	text-align: center;
 }
 
-/* Modal */
- .modal {
-     display: none;
-     overflow: auto;/* 자동 스크롤 */
- }
- /* Modal 본문 */
- .modal-content {
-     background-color: #fefefe;
-     border: 1px solid #888;
-     width: 100%; /* 화면 크기에 반응 */                          
- }
- /* 닫기 버튼 */
- .close {
-     color: #aaa;
-     float: right;
-     font-size: 28px;
-     font-weight: bold;
- }
- .close:hover, .close:focus {
-     color: black;
-     text-decoration: none;
-     cursor: pointer;
- }
-
+/* 로그아웃 버튼 */
+.logout{
+      text-decoration: none;
+      
+      color: white;
+      background-color: teal;
+      padding:10px 20px 10px 20px;
+      margin:20px;
+      display:inline-block;
+      border-radius: 10px;
+      transition:all 0.1s;
+      text-shadow: 0px -2px rgba(0, 0, 0, 0.44);
+}
+.logout:active{
+      transform: translateY(3px);
+}
+    
 </style>
-
 
 </head>
 <body>
 <script type="text/javascript">
+/* 콤보박스 : 검색방법 */
 $(document).ready(function(){
 	$('#SearchType').combobox({
 		onChange: function(newVal,oldVal){
-			$("#search").textbox('textbox').attr('name',newVal);
-			$("#search").attr('textboxname',newVal);
+			$("#searchText").textbox('textbox').attr('name',newVal);
+			$("#searchText").attr('textboxname',newVal);
 			$("span.textbox > .textbox-value").attr('name',newVal);
-			//alert($("span.textbox > .textbox-value").attr('name'));
 		}
 	});
 });
+
+/* 검색버튼 기능 */
+function btn_search(){
+	alert(
+			 "콤보:검색  :"+$('#SearchType').combobox('getValue')
+			 +"// text Name : "+$("span.textbox > .textbox-value").attr('name')
+			 +"// text value :"+document.getElementById("searchText").value
+			 +"// 콤보:처리 :"+$('#GMNG_CONFM').combobox('getValue')
+			 +"// 시작일  :"+$('#datepicker1').datebox('getValue')
+			 +"// 종료일   :"+$('#datepicker2').datebox('getValue')
+	)};
 </script>
 <%@ include file="../../CommonForm/Top.jsp"%>
 
@@ -100,6 +103,7 @@ $(document).ready(function(){
 				</div>
 			</div>
 		</div>
+		
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h4 class="panel-title">
@@ -113,50 +117,43 @@ $(document).ready(function(){
 				</div>
 			</div>
 		</div>
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<h4 class="panel-title">
-					<a data-toggle="collapse" href="#collapse3">안내데스크</a>
-				</h4>
-			</div>
-			<div id="collapse3" class="panel-collapse collapse">
-				<div class="panel-body">
-					<a  href="/project_ch4_pojo/View/company/info/Info_Main.jsp">안내데스크 메인</a><br> 
-					<a  href="/project_ch4_pojo/View/company/info/Info_Notice.jsp">안내데스크 공지</a><br> 
-					<a  href="/project_ch4_pojo/View/company/info/Info_ManageLog.jsp">방문자 현황 관리</a><br> 
-				</div>
-			</div>
-		</div>
+		
 	</div>
 </aside>
 
 <!-- Content -->
 <div class="mainContent">
-	<div style="margin:30px 20px 10px 0px;font-size:35px;">
-	방문 현황 조회 페이지
+<!-- 페이지 이름 / 환영+ 로그아웃 버튼 -->
+	<div class="col-lg-12">
+		<div style="margin:30px 20px 10px 0px;font-size:35px;width: 75%;float: left;"> 방문 현황 조회 페이지 </div>
+		<div style="width:20%; float: right;"> 
+			<!-- 관리자명 -->@@@님 환영합니다.
+<!-- 로그아웃 기능 + 로그인하는 페이지로 이동 --><!-- 로그아웃 기능 + 로그인하는 페이지로 이동 --><!-- 로그아웃 기능 + 로그인하는 페이지로 이동 --><!-- 로그아웃 기능 + 로그인하는 페이지로 이동 -->
+			<a class="logout" href="/project_ch4_pojo/View/로그인하는 페이지.jsp">로그아웃</a> 
+		</div>
 	</div>
 	
 	<div class='col-sm-2'>
 	<!-- 검색 타입 설정 --><br>
 		<select class="easyui-combobox" id="SearchType" name='SearchType' label="검색방법" labelPosition="left" style="width:100%;">
-			<option value="visitorName" selected>방문자명</option>
-			<option value="visitorTel">연락처</option>
-			<option value="visitorCompany">회사</option>
+			<option value="VISITOR_NAME" selected>방문자명</option>
+			<option value="VISITOR_HP">연락처</option>
+			<option value="COM_NAME">회사</option>
 		</select>
 	</div>
 	<div class='col-sm-2'>
 	<!-- 검색창 : 콤보박스에 의한 분기 --><br>
 		<!-- 텍스트 박스에 대해 name값 변경 : 처음 값은 방문자명 // onChange 이벤트로 Name속성을 바꾸어 주기 -->
-		<input class="easyui-textbox" id="search" name="visitorName" style="width:230px;height:25px;">
+		<input class="easyui-textbox" id="searchText" name="VISITOR_NAME" style="width:230px;height:25px;">
 	
 	</div>
 	<div class='col-sm-2'>
 	<!-- 콤보 박스 : 처리결과 대해 --><br>
-		<select class="easyui-combobox" name="permissionSearch" label="처리결과" labelPosition="left" style="width:100%;">
+		<select class="easyui-combobox" id="GMNG_CONFM" name="GMNG_CONFM" label="현재위치" labelPosition="left" style="width:100%;">
 			<option value="all" selected>전체</option>
-			<option value="permission">승인</option>
-				<option value="return">반려</option>
-			<option value="cancle">취소</option>
+			<option value="insideCom">사내</option>
+				<option value="outsideCom">외출</option>
+			<option value="goHome">퇴근</option>
 		</select>
 	</div>
 	<div  class='col-sm-4'>
@@ -190,23 +187,25 @@ $(document).ready(function(){
 					</div>
 				</div>
 			</div>
-			<div class='col-sm-1'>
-				<button type="button" class="btn btn-success"
-					style="margin-top: 5px; margin-bottom: 15px; float: bottom;">Search</button>
-			</div>
+	<!-- 검색 버튼 -->
+		<div  class='col-sm-1'>
+			<button type="button" class="btn btn-success" onclick="javascript:btn_search()"
+				style="margin-top: 5px;margin-bottom: 15px;float: bottom;">Search</button>
 		</div>
+	</div>
 	
-
 <!-- 검색 결과 테이블 -->
 <table class="table table-bordered" style="width: 100%;margin-top:20px;" border="1">
 	<thead style="font-size:20px;">
 	<tr>
-		<th>신청번호</th>
-		<th>현재 위치</th>
+		<th>방문번호</th>
+		<th>처리시간</th>		<!-- 시간 -->
+		<th>처리내용</th>		<!-- 들어옴,나감 // 입장 : 사내  // 퇴장:외출 // 퇴장:퇴근-->
+		<th>현재 위치</th>		<!-- 미방문, 사내, 사외  // 외출, 퇴근 -->
 		<th>방문자명</th>
+		<th>연락처</th>		<!-- 방문자 연락처 -->
 		<th>방문지</th>
 		<th>목적지</th>
-		<th>방문자 연락처</th>
 		<th>방문유형</th>
 		<th>방문일자</th>
 	</tr>
@@ -217,26 +216,20 @@ $(document).ready(function(){
 	<tbody>
 	
 	<tr>
-		<td colspan= "10" style="text-align: center;font-size:20px;font-weight: bold;text-decoration: underline;height:100px;">검색결과가 없습니다</td>
+		<td colspan= "12" style="text-align: center;font-size:20px;font-weight: bold;text-decoration: underline;">검색결과가 없습니다</td>
 	</tr>
-	
-	<tr style="height:30px;">
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
+<!--
+	<tr style="cursor: pointer;" onClick="location.href='/project_ch4_pojo/View/company/manager/Manger_DetailVisitor.jsp'">
+		<td colspan= "12" style="text-align: center;font-size:20px; font-weight: bold;text-decoration: underline;" >
+		상세정보 예시 - 페이지 이동</td>
 	</tr>
 	
 	<tr>
 		<td colspan= "10" id="modalopen" data-toggle="modal" data-target="#detailModal"
-		style="text-align: center;font-size:20px; font-weight: bold;text-decoration: underline;height:100px;" >
-		상세정보 예시</td>
+		style="text-align: center;font-size:20px; font-weight: bold;text-decoration: underline;" >
+		상세정보 예시 - 모달창</td>
 	</tr>
-	
+-->
 	</tbody>
 </table>
 
@@ -250,208 +243,27 @@ $(document).ready(function(){
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h1 class="modal-title" style="text-align: center;font-weight: bold;">방문 현황 상세 조회</h1>
+					<h1 class="modal-title" style="text-align: center;font-weight: bold;">모달제목이다</h1>
 				</div>
 				<div class="modal-body">
 					<div class="row">
-						<!-- <!-- -----------------창 고정 및 스타일---------------------------------------- -->
-						<div class="col-sm-3" id="myScrollspy" style="text-align: center;">
-							<ul class="nav nav-pills nav-stacked">
-								<li class="active"><a href="#section1">기본 방문정보</a></li>
-								<li><a href="#section2">방문자 등록</a></li>
-								<li><a href="#section3">반입기기</a></li>
-								<li><a href="#section4">주차등록</a></li>
-							</ul>
-						</div>
-						<div class="col-sm-9">
-							<div id="section1" class="panel panel-info">
-								<div class="panel-heading">기본 방문정보</div>
-								<div class="panel-body">
-									<h4
-										style="margin-bottom: 10px; border-left: 3px solid #31708f; padding-left: 4px;">
-										<b>신청자 정보</b>
-									</h4>
-									<div class="row table basic">
-										<table class="table">
-											<tr>
-												<th>성명</th>
-												<td>(성명)</td>
-												<th>전화번호</th>
-												<td>010-0000-1234</td>
-											</tr>
-										</table>
-									</div>
-									<h4 style="margin-bottom: 10px; border-left: 3px solid #31708f; padding-left: 4px;">
-										<b>방문기간</b>
-									</h4>
-									<div class="row table basic">
-										<table class="table">
-											<thead>
-												<tr>
-													<th>방문유형</th>
-													<th>방문주기</th>
-													<th>방문요일</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td><select id="visit_type" class="easyui-combobox"
-														style="width: 80%;" data-options="panelHeight:'auto'">
-															<option value="일일방문">일일방문</option>
-															<option value="기간방문">기간방문</option>
-															<option value="정기방문">정기방문</option>
-													</select></td>
-													<td><select id="visit_term" class="easyui-combobox"
-														style="width: 80%;" data-options="panelHeight:'auto'">
-															<option value="매주">매주</option>
-															<option value="격주">격주</option>
-															<option value="첫째주">첫째주</option>
-															<option value="둘째주">둘째주</option>
-															<option value="셋째주">셋째주</option>
-															<option value="넷째주">넷째주</option>
-															<option value="마지막주">마지막주(넷째주포함)</option>
-													</select></td>
-													<td><select id="visit_day" class="easyui-combobox"
-														style="width: 80%;" data-options="panelHeight:'auto'">
-															<option value="월요일">월요일</option>
-															<option value="화요일">화요일</option>
-															<option value="수요일">수요일</option>
-															<option value="목요일">목요일</option>
-															<option value="금요일">금요일</option>
-															<option value="토요일">토요일</option>
-															<option value="일요일">일요일</option>
-													</select></td>
-												</tr>
-											</tbody>
-										</table>
-										<table class="table">
-											<tr>
-												<th>방문날짜</th>
-												<td>
-													<input id="visit_date1" class="easyui-datebox" style="width: 30%; height: 100%"> &emsp;&emsp;
-													<span>~</span>&emsp;&emsp;
-													<input id="visit_date2" class="easyui-datebox" style="width: 30%; height: 100%">
-												</td>
-											</tr>
-										</table>
-									</div>
-									<h4
-										style="margin-bottom: 10px; border-left: 3px solid #31708f; padding-left: 4px;">
-										<b>상세정보</b>
-									</h4>
-									<div class="row table basic">
-										<table class="table">
-											<thead>
-												<tr>
-													<th>목적지</th>
-													<th>담당자</th>
-													<th>방문목적</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td><input class="easyui-combobox" style="width: 80%;"
-														data-options="panelHeight:'auto'"></td>
-													<td><input class="easyui-textbox" style="width: 80%;"></td>
-													<td><input class="easyui-textbox" style="width: 80%;"></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-							<div id="section2" class="panel panel-success">
-								<div class="panel-heading">방문자 등록</div>
-								<div class="panel-body">
-									<div class="row">
-										<div class="col-lg-8">
-											<h4
-												style="border-left: 3px solid #3c763d; padding-left: 4px;">
-												<b>방문자 정보</b>
-											</h4>
-										</div>
-									</div>
-									<div class="row table visitor">
-										<table id="tb_visitor" class="table">
-											<thead>
-												<tr>
-													<th><input id="chkAllVisitor" type="checkbox"></th>
-													<th style="width: 40%;">성명</th>
-													<th style="width: 50%;">연락처</th>
-												</tr>
-											</thead>
-											<tbody>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-							<div id="section3" class="panel panel-warning">
-								<div class="panel-heading">반입기기</div>
-								<div class="panel-body">
-									<div class="row">
-										<div class="col-lg-8">
-											<h4
-												style="border-left: 3px solid #8a6d3b; padding-left: 4px;">
-												<b>반입기기 정보</b>
-											</h4>
-										</div>
-									</div>
-									<div class="row table device">
-										<table id="tb_device" class="table">
-											<thead>
-												<tr>
-													<th><input id="chkAllDevice" type="checkbox"></th>
-													<th style="width: 30%;">기종</th>
-													<th style="width: 30%;">제조사</th>
-													<th style="width: 30%;">모델명</th>
-												</tr>
-											</thead>
-											<tbody>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-							<div id="section4" class="panel panel-default">
-								<div class="panel-heading">주차등록</div>
-								<div class="panel-body">
-									<div class="row">
-										<div class="col-lg-8">
-											<h4
-												style="border-left: 3px solid #333333; padding-left: 4px;">
-												<b>차량 정보</b>
-											</h4>
-										</div>
-									</div>
-									<div class="row table parking">
-										<table id="tb_parking" class="table">
-											<thead>
-												<tr>
-													<th><input id="chkAllParking" type="checkbox"></th>
-													<th style="width: 40%;">차량번호</th>
-													<th style="width: 20%;">차종</th>
-													<th style="width: 30%;">차량모델명</th>
-												</tr>
-											</thead>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
+						<table class="table table-bordered" style="width: 100%;margin-top:20px;" border="1">
+							<tr>
+								<th></th>
+								<th>방문자명</th>
+								<th>방문자 연락처</th>		
+								<th>위치</th>
+								<th>신청자명</th>
+								<th>신청자 연락처</th>
+								<th></th>
+							</tr>
+						</table>
 					</div>
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" id="change" class="btn btn-warning">방문 신청 변경</button>
-					<button type="button" id="permission" class="btn btn-primary">방문 신청 승인</button>
-					<button type="button" id="return" class="btn btn-danger">방문 신청 반려</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
-
 		</div>
 	</div>
+
 <!-- 공통 Footer -->
 <%@ include file="/View/CommonForm/Footer.jsp"%>
 

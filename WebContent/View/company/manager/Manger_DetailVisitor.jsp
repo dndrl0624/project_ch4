@@ -460,7 +460,7 @@ $(document).ready(function(){
 			<div style="float: right; margin-bottom:20%;">
 				<button type="button" id="permission" class="btn btn-primary">방문 신청 승인</button>
 				<button type="button" id="return" class="btn btn-danger">방문 신청 반려</button>
-				<button type="button" class="btn btn-default" onclick="location.href='/project_ch4_pojo/View/company/manager/Manager_SearchVisitor.jsp'">조회페이지 이동</button>
+				<button type="button" class="btn btn-default" onClick="location.href='javascript:history.back()'">이전 페이지</button>
 			</div>
 		</div>
 </div>

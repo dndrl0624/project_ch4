@@ -30,22 +30,100 @@ th {
 
 /* 메인 페이지 프레임 구간 설정 */
 .mainContent {
-	margin:30px 20px 10px 17%;
+	margin:20px 20px 10px 17%;
 }
+
+/* 로그아웃 버튼 */
+ .logout{
+      text-decoration: none;
+      
+      color: white;
+      background-color: teal;
+      padding:10px 20px 10px 20px;
+      margin:20px;
+      display:inline-block;
+      border-radius: 10px;
+      transition:all 0.1s;
+      text-shadow: 0px -2px rgba(0, 0, 0, 0.44);
+    }
+    .logout:active{
+      transform: translateY(3px);
+    }
+
 </style>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script>
+/* 테이블 data insert 기능 */
+$(function () {
+		$.ajax({
+				url : "/project_ch4_pojo/json/logGoodsJson.json",
+				//data: $("#폼 태그 아이디").serialize();
+				//type : 'post',
+				dataType : "json",
+				success : function(data) {
+					$.each(data, function() {
+						$('#logGoodsTable').append(
+								"<tr><td>" + this["GMNG_NO"]
+								+ "</td><td>" + this["APLG_NAME"]
+								+ "</td><td>" + this["APLG_HP"]
+								+ "</td><td>" + this["COM_NAME"]
+								+ "</td><td>" + this["APLG_DESTI"]
+								+ "</td><td>" + this["APLG_REASON"]
+								+ "</td><td>" + this["APLG_TRANS_DATE"]
+								+ "</td><td>" + this["GMNG_NAME"]
+								+ "</td><td>" + this["GMNG_TYPE"]
+								+ "</td><td>" + this["GMNG_QUAN"]
+								+ "</td><td>" + this["GMNG_NOTES"]
+								+ "</td></tr>");
+					});
+					$.each(data, function(index, entry) {
+						$('#logGoodsTable').append(
+								"<tr><td>" + entry["GMNG_NO"]
+								+ "</td><td>" + entry["APLG_NAME"]
+								+ "</td><td>" + entry["APLG_HP"]
+								+ "</td><td>" + entry["COM_NAME"]
+								+ "</td><td>" + entry["APLG_DESTI"]
+								+ "</td><td>" + entry["APLG_REASON"]
+								+ "</td><td>" + entry["APLG_TRANS_DATE"]
+								+ "</td><td>" + entry["GMNG_NAME"]
+								+ "</td><td>" + entry["GMNG_TYPE"]
+								+ "</td><td>" + entry["GMNG_QUAN"]
+								+ "</td><td>" + entry["GMNG_NOTES"]
+								+ "</td></tr>");
+					});
+				},
+				error : function() {
+					alert("에러발생");
+				}
+			});
+		});
+</script>
 </head>
 <body>
 <script type="text/javascript">
+/* 검색방법 콤보박스로 textbox name값 변경 */
 $(document).ready(function(){
 	$('#SearchType').combobox({
 		onChange: function(newVal,oldVal){
-			$("#search").textbox('textbox').attr('name',newVal);
-			$("#search").attr('textboxname',newVal);
+			$("#SearchType").textbox('textbox').attr('name',newVal);
+			$("#SearchType").attr('textboxname',newVal);
 			$("span.textbox > .textbox-value").attr('name',newVal);
-			//alert($("span.textbox > .textbox-value").attr('name'));
 		}
 	});
 });
+
+/* 검색버튼 기능 */
+function btn_search(){
+	alert(
+			 "콤보:검색  :"+$('#SearchType').combobox('getValue')
+			 +"// text Name : "+$("span.textbox > .textbox-value").attr('name')
+			 +"// text value :"+document.getElementById("searchText").value
+			 +"// 콤보:처리 :"+$('#GMNG_CONFM').combobox('getValue')
+			 +"// 시작일  :"+$('#datepicker1').datebox('getValue')
+			 +"// 종료일   :"+$('#datepicker2').datebox('getValue')
+	)};
+	
 </script>
 <%@ include file="../../CommonForm/Top.jsp"%>
 
@@ -55,7 +133,8 @@ $(document).ready(function(){
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<a href="/project_ch4_pojo/View/company/manager/Manager_Main.jsp">메인페이지</a>
+					<a href="/project_ch4_pojo/View/company/manager/Manager_Main.jsp">
+					<i class="fas fa-home"></i>메인페이지</a>
 				</h4>
 			</div>
 		</div>
@@ -72,6 +151,7 @@ $(document).ready(function(){
 				</div>
 			</div>
 		</div>
+		
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h4 class="panel-title">
@@ -85,6 +165,7 @@ $(document).ready(function(){
 				</div>
 			</div>
 		</div>
+		<!-- 
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h4 class="panel-title">
@@ -99,35 +180,42 @@ $(document).ready(function(){
 				</div>
 			</div>
 		</div>
+		-->
 	</div>
 </aside>
 
 <!-- Content -->
 <div class="mainContent">
-	<div style="margin:30px 20px 10px 0px;font-size:35px;">
-	물품 반입 현황 조회
+<!-- 페이지 이름 / 환영+ 로그아웃 버튼 -->
+	<div class="col-lg-12">
+		<div style="margin:30px 20px 10px 0px;font-size:35px;width: 75%;float: left;"> 물품 반입 현황 조회 </div>
+		<div style="width:20%; float: right;"> 
+			<!-- 관리자명 -->@@@님 환영합니다.
+<!-- 로그아웃 기능 + 로그인하는 페이지로 이동 --><!-- 로그아웃 기능 + 로그인하는 페이지로 이동 --><!-- 로그아웃 기능 + 로그인하는 페이지로 이동 --><!-- 로그아웃 기능 + 로그인하는 페이지로 이동 -->
+			<a class="logout" href="/project_ch4_pojo/View/로그인하는 페이지.jsp">로그아웃</a> 
+		</div>
 	</div>
-	
+<!-- 검색 조건 설정 -->
 	<div class='col-sm-2'>
 	<!-- 검색 타입 설정 --><br>
 		<select class="easyui-combobox" id="SearchType" name='SearchType' label="검색방법" labelPosition="left" style="width:100%;">
-			<option value="visitorName" selected>방문자명</option>
-			<option value="visitorTel">연락처</option>
-			<option value="visitorCompany">회사</option>
+			<option value="VISITOR_NAME">방문자명</option>
+			<option value="VISITOR_HP">연락처</option>
+			<option value="COM_NAME">회사명</option>
 		</select>
 	</div>
 	<div class='col-sm-2'>
 		<!-- 검색창 : 콤보박스에 의한 분기 --><br>
 		<!-- 텍스트 박스에 대해 name값 변경 : 처음 값은 방문자명 // onChange 이벤트로 Name속성을 바꾸어 주기 -->
-		<input class="easyui-textbox" id="search" name="visitorName" style="width:230px;height:25px;">
+		<input class="easyui-textbox" id="searchText" name="VISITOR_NAME" style="width:230px;height:25px;" data-options="prompt:'필요한 정보를 입력하세요'">
 	
 	</div>
 	<div class='col-sm-2'><br>
-		<select class="easyui-combobox" name="permissionSearch" label="처리결과" labelPosition="left" style="width:100%;">
+		<select class="easyui-combobox" id="GMNG_CONFM" name="GMNG_CONFM" label="현황" labelPosition="left" style="width:100%;">
 			<option value="all" selected>전체</option>
-			<option value="permission">승인</option>
+			<option value="beforemove">미반입</option>
+			<option value="aftermove">반입완료</option>
 			<option value="return">반려</option>
-			<option value="cancle">취소</option>
 		</select>
 	</div>
 	<div  class='col-sm-4'>
@@ -161,114 +249,50 @@ $(document).ready(function(){
 			</div>
 		</div>
 	</div>
-<div  class='col-sm-1'>
-<button type="button" class="btn btn-success" style="margin-top: 5px;margin-bottom: 15px;float: bottom;">Search</button>
-</div>
+<!-- 검색 버튼 -->
+	<div  class='col-sm-1'>
+		<button type="button" class="btn btn-success" onclick="javascript:btn_search()"
+		style="margin-top: 5px;margin-bottom: 15px;float: bottom;">Search</button>
+	</div>
 	</div>
 	
 
 <!-- 검색 결과 테이블 -->
-<table class="table table-bordered" style="width: 100%;margin-top:20px;" border="1">
+<table class="table table-bordered" id="logGoodsTable" style="width: 100%;margin-top:20px;" border="1">
 	<thead style="font-size:20px;">
 	<tr>
-		<th>신청번호</th>
+		<th>물품번호</th>
 		<th>신청자</th>
-		<th>방문지</th>
+		<th>연락처</th>
+		<th>반입장소</th>
 		<th>목적지</th>
-		<th>방문목적</th>
-		<th>신청자연락처</th>
-		<th>방문유형</th>
-		<th>방문일자</th>
-		<th>방문주기</th>
-		<th>방문요일</th>
+		<th>반입사유</th>
+		<th>반입일자</th>
 		<th>반입물품명</th>
-		<th>물품종류</th>
-		<th>물품수량</th>
+		<th>종류</th>
+		<th>수량</th>
+		<th>비고</th>
 	</tr>
 	</thead>
 <!-- ========================================================================================================== -->
 <!-- 1. if  : 검색결과가 없습니다 / 검색결과 보여주기 -->
 <!-- 2. for : 모든 검색결과 보여주기 -->
-	<tbody>
-	
 	<tr>
-		<td colspan= "13" style="text-align: center;font-size:20px;font-weight: bold;text-decoration: underline;height:100px;">검색결과가 없습니다</td>
+		<td colspan= "11" style="text-align: center;font-size:20px;
+			font-weight: bold;text-decoration: underline;">
+		검색결과가 없습니다</td>
 	</tr>
-	
-	<tr style="height:30px;">
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-	</tr>
-	
-	<tr>
-		<td colspan= "13" id="modalopen" data-toggle="modal" data-target="#detailModal"
-		style="text-align: center;font-size:20px; font-weight: bold;text-decoration: underline;height:100px;" >
+<!--	
+	<tr style="cursor: pointer;" onClick="location.href='/project_ch4_pojo/View/company/manager/Manger_DetailGoods.jsp'">
+		<td colspan= "11" style="text-align: center;font-size:20px; font-weight: bold;text-decoration: underline;" >
 		상세정보 예시</td>
 	</tr>
-	
-	</tbody>
+ -->
 </table>
-
- 
-<!-- The Modal -->
-    <div id="detailModal" class="modal">
- 
-      <!-- Modal content -->
-      <div class="modal-content">
-        <span class="close">&times;</span>                                                               
-        <p>디테일 페이지 만든 후, 적용??</p>
-      </div>
- 
-    </div>
 
 </div>
 <!-- 공통 Footer -->
 <%@ include file="/View/CommonForm/Footer.jsp"%>
-<!-- java script -->
-<script type="text/javascript">
-/* 라디오버튼 */
- //라디오 버튼 변경시 이벤트
-$("input[name='SearchType']:radio").change(function () {
- //라디오 버튼 값을 가져온다.
-var SearchType = this.value;
-                         
-if(SearchType == "CompanyName"){//스포츠인 경우
-	//방문자명 연락처 검색 hide
-	$( "#NameTelSearchBox" ).hide();
-	//회사명 검색 show
-	$( "#CompanyNameSearchBox" ).show();
-	}
-else if(SearchType == "NameTel"){//공연/전시인 경우
-	//회사명 검색 hide
-	$( "#CompanyNameSearchBox" ).hide();
-	//방문자명 연락처 검색 show
-	$( "#NameTelSearchBox" ).show();
-	}                     
-});
 
-/*<!-- ========================================================================================================== --> */
-/* 달력 기능 */
-
-/* searchBox Enter 검색 기능 */
-   function proc_key() {
-      if(event.keyCode == 13) {
-         item.focus();
-         event.returnValue = false;
-      }
-   }
-</script>
-<!-- Bottom Link Import --> 
-<%-- <%@ include file="/Style/common/BottomUI.jsp"%> --%>
 </body>
 </html>
