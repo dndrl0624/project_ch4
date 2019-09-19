@@ -9,9 +9,6 @@
 <title>고객지원 페이지</title>
 <!-- Link Import --> 
 <%@ include file="/Style/common/HeadUI.jsp"%> 
-<!-- CSS Style Import --> 
-<style type="text/css"> 
-<%@ include file="/Style/css/CssStyle.css"%>
 </style>
 
 <style type="text/css">
@@ -131,7 +128,5 @@
 
 <!-- 공통 Footer -->
 <%@ include file="/View/CommonForm/Footer.jsp"%>
-<!-- Bottom Link Import --> 
-<%@ include file="/Style/common/BottomUI.jsp"%>
 </body>
 </html>

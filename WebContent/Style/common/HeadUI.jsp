@@ -8,6 +8,12 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script src="/project_ch4_pojo/Style/js/jquery.easyui.min.js"></script>
 <!-- Custom styles for this template -->
+<!-- Project Common Javascript -->
+<script src="/project_ch4_pojo/Style/js/ch4commons.js"></script>
+<!-- Project Common CSS -->
+<link rel="stylesheet" type="text/css" href="/project_ch4_pojo/Style/css/ch4commons.css">
+<!-- ------------------------- -->
+
 <!-- i Tag Font Image -->
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <!-- 부트스트랩 테이블 공통 코오오드 -->
