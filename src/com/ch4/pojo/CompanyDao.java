@@ -1,6 +1,5 @@
 package com.ch4.pojo;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -22,8 +21,9 @@ public class CompanyDao {
 
 	public int mngPermit(Map<String, Object> pMap) {
 		int result = 0;
-		result = sqlSession.update("mngPermit", pMap);
-		
+		/*
+		 * 이부분에 visit // goods 승인테이블에 insert후 신청테이블 상태 update해줘야함 
+		 */
 		return result;
 	}
 	public int mngUpdate(Map<String, Object> pMap) {

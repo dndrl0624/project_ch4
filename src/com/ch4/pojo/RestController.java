@@ -75,10 +75,12 @@ public class RestController implements Rcontroller {
 		else if ("goods".equals(work)) {/////////start of goods
 			GoodsLogic gLogic = new GoodsLogic();
 			if (requestName.equals("list")) {
-				
+				List<Map<String,Object>> goodsList = gLogic.goodsList();
+				jsonStr = g.toJson(goodsList);
 			} 
 			else if (requestName.equals("detail")) {
-
+				List<Map<String,Object>> goodsDetail = gLogic.goodsDetail(pMap); 
+				jsonStr = g.toJson(goodsDetail);
 			}
 			else if (requestName.equals("preGoodsList")) {
 				List<Map<String,Object>> preGoodsList = gLogic.preGoodsList(pMap);
@@ -88,14 +90,15 @@ public class RestController implements Rcontroller {
 				List<Map<String, Object>> preGoodsDetail = gLogic.preGoodsDetail(pMap);
 				jsonStr = g.toJson(preGoodsDetail);
 			}
-		} else if ("info".equals(work)) {
+		}////////////////////////////////////////end of goods 
+		else if ("info".equals(work)) {
 			InfoLogic iLogic = new InfoLogic();
 			if (requestName.equals("list")) {
-
+				
 			} else if (requestName.equals("detail")) {
 
 			}
-		}////////////////////////////////////////end of goods
+		}
 
 		return jsonStr;
 	}

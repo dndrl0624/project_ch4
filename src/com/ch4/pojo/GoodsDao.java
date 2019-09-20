@@ -51,6 +51,7 @@ public class GoodsDao {
 	public int goodsUpdate(Map<String, Object> pMap) {
 		int result = 0;
 		result = sqlSession.update("goodsUpdate", pMap);
+		sqlSession.commit();
 		return result;
 	}
 
@@ -69,6 +70,16 @@ public class GoodsDao {
 	public List<Map<String, Object>> preGoodsDetail(Map<String, Object> pMap) {
 		List<Map<String, Object>> preGoodsDetail = sqlSession.selectList("goodsDetail", pMap);
 		return preGoodsDetail;
+	}
+
+	public List<Map<String, Object>> goodsList() {
+		List<Map<String,Object>> goodsList = sqlSession.selectList("goodsList");
+		return goodsList;
+	}
+
+	public List<Map<String, Object>> goodsDetail(Map<String, Object> pMap) {
+		List<Map<String,Object>> goodsDetail = sqlSession.selectList("goodsDetail");
+		return goodsDetail;
 	}
 
 }
