@@ -16,8 +16,13 @@
 		padding-top: 70px;
 		position: fixed;
 	}
-	div.col-lg-7 #section1,#section2 {
+	#section1 {
 		height: 300px;
+		margin-bottom: 10px;
+		font-size: 28px;
+	}
+	#section2 {
+		height: 500px;
 		margin-bottom: 10px;
 		font-size: 28px;
 	}

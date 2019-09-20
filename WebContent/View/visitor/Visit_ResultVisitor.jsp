@@ -13,12 +13,12 @@
 	body {
 		position: relative;
 	}
-	div.col-lg-7 #section1 {
-		height: 500px;
+	#section1 {
+		height: 450px;
 		margin-bottom: 10px;
 		font-size: 28px;
 	}
-	div.col-lg-7 #section2,#section3,#section4 {
+	#section2,#section3,#section4 {
 		height: 300px;
 		margin-bottom: 10px;
 		font-size: 28px;
@@ -67,12 +67,39 @@
 </head>
 <body>
 <%@ include file="/View/CommonForm/Top.jsp"%>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var vRow = "<tr><td>이름</td><td>연락처</td></tr>";
+		var dRow = "<tr><td>기종</td><td>제조사</td><td>모델명</td></tr>";
+		var pRow = "<tr><td>차량번호</td><td>차종</td><td>차량모델명</td></tr>";
+		for(var i=0;i<8;i++){
+			$("#tb_visitor tbody").append(vRow);
+			$("#tb_device tbody").append(dRow);
+			$("#tb_parking tbody").append(pRow);
+		}
+	});
+</script>
 <div class="container-fluid">
 	<div class="row">
 	    <div class="col-lg-8 col-lg-offset-2"> 
+	    	<div style="text-align:center;">
+	    		<img src="../../Style/images/crud/visitor_logo_default.png" class="img-thumbnail" style="width:30%;border:0px;">
+	    		<h3 style="margin-top:10px;">"고객님의 방문신청이 <b style="font-size:40px; color:#b22222;">접수</b><b style="font-size:24px; color:#4169e1;">(신청번호)</b>되었습니다."</h3>
+	    	</div><br>
+	    	<div class="row" style="text-align:center;">
+	    		<h5 style="margin-bottom:20px;font-weight:bold;">※신청내용 변경 또는 취소는 당일 오후 4시까지 가능하며</h5>
+	    		<h5 style="font-weight:bold;">신청번호를 모를 경우 이용에 제한될 수 있는 점 양해바랍니다.</h5>
+	    	</div><br>
+	    	<div class="row">
+		    	<div style="text-align:center;"> 
+					<button id="btn_update" class="btn btn-primary" type="button" onclick="" style="width:150px;margin-right:20px;">신청변경</button>
+					<button id="btn_navi" class="btn btn-default" type="button" onclick="location.href='Visit_Navigation.jsp'" style="width:150px;margin-right:20px;">오시는길</button>
+					<button id="btn_main" class="btn btn-info" type="button" onclick="location.href='Visit_Main.jsp'" style="width:150px;">메인으로</button>
+				</div>
+			</div><br><br>
 			<div class="row">
 		    	<div class="col-lg-10">
-					<h2 style="margin-bottom:20px; border-left: 4px solid #17405D; padding-left:8px;"><b>방문 신청 결과</b> ()</h2>
+					<h2 style="margin-bottom:20px; border-left: 4px solid #17405D; padding-left:8px;"><b>방문 신청 정보</b></h2>
 		    	</div>
 			</div>
 	    	<input id="com_no" type="hidden" name="com_no" value="">
@@ -82,14 +109,20 @@
 			    	<h4 style="margin-bottom:10px; border-left: 3px solid #31708f; padding-left:4px;"><b>신청자 정보</b></h4>
 			    	<div class="row table basic">
 			    		<table class="table">
-			    			<tr>
-			    				<th>신청번호</th>
-			    				<td></td>
-			    				<th>성명</th>
-			    				<td></td>
-			    				<th>연락처</th>
-			    				<td></td>
-			    			</tr>
+			    			<thead>
+				    			<tr>
+				    				<th>신청번호</th>
+				    				<th>성명</th>
+				    				<th>연락처</th>
+				    			</tr>
+			    			</thead>
+			    			<tbody>
+				    			<tr>
+				    				<td></td>
+				    				<td></td>
+				    				<td></td>
+				    			</tr>
+			    			</tbody>
 			    		</table>
 			    	</div>
 			    	<h4 style="margin-bottom:10px; border-left: 3px solid #31708f; padding-left:4px;"><b>방문기간</b></h4>
@@ -201,10 +234,6 @@
 				    	</table>
 				    </div>
 			    </div>
-			</div><br>
-			<div style="text-align:center;"> 
-				<button id="btn_update" class="btn btn-primary" type="button" onclick="" style="width:150px;margin-right:20px;">신청변경</button>
-				<button id="btn_main" class="btn btn-info" type="button" onclick="location.href='Visit_Main.jsp'" style="width:150px;">메인으로</button>
 			</div>
 	    </div>
   	</div>

@@ -38,12 +38,12 @@
 		padding-top: 70px;
 		position: fixed;
 	}
-	div.col-lg-7 #section1 {
+	#section1 {
 		height: 500px;
 		margin-bottom: 10px;
 		font-size: 28px;
 	}
-	div.col-lg-7 #section2,#section3,#section4 {
+	#section2,#section3,#section4 {
 		height: 300px;
 		margin-bottom: 10px;
 		font-size: 28px;
