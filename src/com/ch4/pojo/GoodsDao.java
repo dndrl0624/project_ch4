@@ -21,6 +21,9 @@ public class GoodsDao {
 
 	public String goodsApplyAdd(Map<String, Object> applyAdd) {
 		String aplg_no = null;
+		
+		aplg_no = RuleOfGeneratingPK.getPK(100);
+		
 		int result = 0;
 		applyAdd.put("aplg_no", aplg_no);
 		result = sqlSession.insert("goodsApplyAdd", applyAdd);

@@ -29,6 +29,7 @@ public class VisitorLogic {
 		else {
 			result = vDao.visitSubAdd(vtAddList,tnAddList,pkAddList,visit_no);
 		}
+		pMap.put("visit_no", visit_no);
 		
 		return result;
 	}

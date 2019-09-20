@@ -24,8 +24,10 @@ public class GoodsLogic {
 		else {
 			result = gDao.goodsSubAdd(gmAddList,aplg_no);
 		}
-		return result;
 		
+		pMap.put("aplg_no", aplg_no);
+		
+		return result;
 	}
 
 	public int goodsUpdate(Map<String, Object> pMap) {

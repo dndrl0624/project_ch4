@@ -24,7 +24,7 @@ public class VisitorController implements Controller{
 	@Override
 	public ModelAndView excute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		logger.info("execute 호출 성공");
-		ModelAndView mav = new ModelAndView();
+		ModelAndView mav = new ModelAndView(req, res);
 		Map<String,Object> pMap = new HashMap<>();
 		HashMapBinder hmb = new HashMapBinder(req);
 		hmb.bind(pMap);
@@ -58,6 +58,7 @@ public class VisitorController implements Controller{
 			
 			if(result == 1) {
 				mav.isRedirect(false);
+				mav.addObject("visit_no", pMap.get("visit_no"));
 				mav.setViewName("Visit_ResultVisitor.jsp");
 			}
 			else if(result == 0) {

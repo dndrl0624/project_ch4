@@ -28,9 +28,9 @@ public class VisitorDao {
 	 *******************/
 	public String visitApplyAdd(Map<String,Object> applyAdd) {
 		String visit_no = null;
-		/*
-		 * 여기에 visit_no 발급 규칙 작성
-		 */
+		
+		visit_no = RuleOfGeneratingPK.getPK(100);
+
 		int result = 0;
 		applyAdd.put("visit_no", visit_no);
 		result = sqlSession.insert("visitApplyAdd", applyAdd);

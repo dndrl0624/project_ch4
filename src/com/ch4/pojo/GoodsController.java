@@ -23,7 +23,7 @@ public class GoodsController implements Controller{
 	@Override
 	public ModelAndView excute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		logger.info("execute 호출 성공");
-		ModelAndView mav = new ModelAndView();
+		ModelAndView mav = new ModelAndView(req, res);
 		Map<String,Object> pMap = new HashMap<>();
 		HashMapBinder hmb = new HashMapBinder(req);
 		if(requestName.equals("add")) {
@@ -33,6 +33,8 @@ public class GoodsController implements Controller{
 			result = gLogic.goodsApplyAdd(pMap);
 			
 			if(result == 1) {
+				mav.isRedirect(false);
+				mav.addObject("aplg_no",pMap.get("aplg_no"));
 				mav.setViewName("Visit_ResultGoods.jsp");
 			}
 			else if(result == 0) {

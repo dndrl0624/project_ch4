@@ -18,7 +18,7 @@ public class AdminContoller implements Controller{
 	@Override
 	public ModelAndView excute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		logger.info("execute 호출 성공");
-		ModelAndView mav = new ModelAndView();
+		ModelAndView mav = new ModelAndView(req, res);
 		Map<String,Object> pMap = new HashMap<>();
 		HashMapBinder hmb = new HashMapBinder(req);
 		hmb.bind(pMap);

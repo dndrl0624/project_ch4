@@ -14,9 +14,6 @@ public class ModelAndView {
 	List<Map<String,Object>> reqList = new ArrayList<>();
 	Object obj = null;
 	public boolean isRedirect = false;
-	public ModelAndView() {
-		
-	}
 	public ModelAndView(HttpServletRequest req, HttpServletResponse res) {
 		this.req = req;
 		this.res = res;
@@ -24,8 +21,8 @@ public class ModelAndView {
 	public void setViewName(String viewName) {
 		this.viewName = viewName;
 	}
-	public void addObject(Object obj) {
-		this.obj = obj;
+	public void addObject(String name, Object obj) {
+		req.setAttribute(name, obj);
 	}
 	public void isRedirect(boolean isRedirect) {
 		this.isRedirect = isRedirect;

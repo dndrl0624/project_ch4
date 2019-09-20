@@ -21,9 +21,15 @@ public class CompanyDao {
 
 	public int mngPermit(Map<String, Object> pMap) {
 		int result = 0;
-		/*
-		 * 이부분에 visit // goods 승인테이블에 insert후 신청테이블 상태 update해줘야함 
-		 */
+		
+		result = sqlSession.insert("mngPermit",pMap);
+		if(result==0) {
+			return result;
+		}
+		else if(result==1) {
+			result = sqlSession.update("mngPermitUpd",pMap);
+		}
+		
 		return result;
 	}
 	public int mngUpdate(Map<String, Object> pMap) {

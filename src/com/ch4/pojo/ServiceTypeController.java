@@ -16,7 +16,7 @@ public class ServiceTypeController implements Controller{
 	@Override
 	public ModelAndView excute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		logger.info("execute 호출 성공");
-		ModelAndView mav = new ModelAndView();
+		ModelAndView mav = new ModelAndView(req, res);
 		mav.isRedirect(true);
 		if("visitor".equals(requestName)) {
 			mav.setViewName("Visit_Main.jsp");
