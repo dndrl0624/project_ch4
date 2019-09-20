@@ -20,28 +20,30 @@
 <%@ include file="../CommonForm/Top.jsp"%>
 <script type="text/javascript">
 	function applyVisitor(){
-		var param = document.createElement('input');
-		param.setAttribute('type','hidden');
-		param.setAttribute('name','pp');
-		param.setAttribute('value','visitor');
-		var form = document.createElement('form');
-		form.appendChild(param);
-		form.setAttribute('method','POST');
-		form.setAttribute('action','/visitor/visitPurpose.ch4');
-		document.body.appendChild(form);
-		form.submit();
+// 		var param = document.createElement('input');
+// 		param.setAttribute('type','hidden');
+// 		param.setAttribute('name','pp');
+// 		param.setAttribute('value','visitor');
+// 		var form = document.createElement('form');
+// 		form.appendChild(param);
+// 		form.setAttribute('method','POST');
+// 		form.setAttribute('action','/visitor/visitPurpose.ch4');
+// 		document.body.appendChild(form);
+// 		form.submit();
+		location.href = "/visitor/visitPurpose.ch4?pp=visitor";
 	}
 	function applyGoods(){
-		var param = document.createElement('input');
-		param.setAttribute('type','hidden');
-		param.setAttribute('name','pp');
-		param.setAttribute('value','goods');
-		var form = document.createElement('form');
-		form.appendChild(param);
-		form.setAttribute('method','POST');
-		form.setAttribute('action','/visitor/visitPurpose.ch4');
-		document.body.appendChild(form);
-		form.submit();
+// 		var param = document.createElement('input');
+// 		param.setAttribute('type','hidden');
+// 		param.setAttribute('name','pp');
+// 		param.setAttribute('value','goods');
+// 		var form = document.createElement('form');
+// 		form.appendChild(param);
+// 		form.setAttribute('method','POST');
+// 		form.setAttribute('action','/visitor/visitPurpose.ch4');
+// 		document.body.appendChild(form);
+// 		form.submit();
+		location.href = "/visitor/visitPurpose.ch4?pp=goods";
 	}
 </script>
 <div class="container-fluid">
@@ -49,12 +51,12 @@
 		<h1><b>방문/반입 선택</b></h1>
 		<div class="row" style="padding-top:40px;">
 			<div class="col-lg-offset-1 col-lg-5">
-				<button onClick="applyVisitor()"><!-- 이동할 페이지 URL 설정 해야함 -->
+				<button onClick="applyVisitor()">
 					<img src="../../Style/images/crud/visitor_logo.png" class="img-thumbnail" style="background-color:#E8E8E8;">
 				</button>
 			</div>
 			<div class="col-lg-5">
-				<button onClick="applyGoods()"><!-- 이동할 페이지 URL 설정 해야함 -->
+				<button onClick="applyGoods()">
 					<img src="../../Style/images/crud/transport_logo.png" class="img-thumbnail" style="background-color:#E8E8E8;">
 				</button>		
 			</div>

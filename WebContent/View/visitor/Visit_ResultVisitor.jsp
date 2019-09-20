@@ -1,5 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String[] visitor_name = {"김용현","김현태","이하나","현태호"};
+	//String[] visitor_name = request.getParameterValues("visitor_name");
+	String[] visitor_hp = {"010-1111-1111","010-2222-2222","010-3333-3333","010-4444-4444"};
+	//String[] visitor_hp = request.getParameterValues("visitor_hp");
+	String[] tkin_kind = {"노트북","휴대전화"};
+	//String[] tkin_kind = request.getParameterValues("tkin_kind");
+	String[] tkin_brand = {"LG전자","삼성전자",};
+	//String[] tkin_brand = request.getParameterValues("tkin_brand");
+	String[] tkin_model = {"lg그램","갤럭시노트10+"};
+	//String[] tkin_model = request.getParameterValues("tkin_model");
+	String[] parking_num = {"123가4567"};
+	//String[] parking_num = request.getParameterValues("parking_num");
+	String[] parking_kind = {"승용차"};
+	//String[] parking_kind = request.getParameterValues("parking_kind");
+	String[] parking_model = {"BMW"};
+	//String[] parking_model = request.getParameterValues("parking_model");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,12 +87,32 @@
 <%@ include file="/View/CommonForm/Top.jsp"%>
 <script type="text/javascript">
 	$(document).ready(function(){
-		var vRow = "<tr><td>이름</td><td>연락처</td></tr>";
-		var dRow = "<tr><td>기종</td><td>제조사</td><td>모델명</td></tr>";
-		var pRow = "<tr><td>차량번호</td><td>차종</td><td>차량모델명</td></tr>";
-		for(var i=0;i<8;i++){
+		var visitor_name = new Array();
+		<% for(String name : visitor_name){%>visitor_name.push('<%=name%>');<%}%>
+		var visitor_hp = new Array();
+		<% for(String hp : visitor_hp){%>visitor_hp.push('<%=hp%>');<%}%>
+		for(var i=0;i<visitor_name.length;i++){
+			var vRow = "<tr><td>"+visitor_name[i]+"</td><td>"+visitor_hp[i]+"</td></tr>";
 			$("#tb_visitor tbody").append(vRow);
+		}
+		var tkin_kind = new Array();
+		<% for(String kind : tkin_kind){%>tkin_kind.push('<%=kind%>');<%}%>
+		var tkin_brand = new Array();
+		<% for(String brand : tkin_brand){%>tkin_brand.push('<%=brand%>');<%}%>
+		var tkin_model = new Array();
+		<% for(String model : tkin_model){%>tkin_model.push('<%=model%>');<%}%>
+		for(var i=0;i<tkin_kind.length;i++){
+			var dRow = "<tr><td>"+tkin_kind[i]+"</td><td>"+tkin_brand[i]+"</td><td>"+tkin_model[i]+"</td></tr>";
 			$("#tb_device tbody").append(dRow);
+		}
+		var parking_num = new Array();
+		<% for(String num : parking_num){%>parking_num.push('<%=num%>');<%}%>
+		var parking_kind = new Array();
+		<% for(String kind : parking_kind){%>parking_kind.push('<%=kind%>');<%}%>
+		var parking_model = new Array();
+		<% for(String model : parking_model){%>parking_model.push('<%=model%>');<%}%>
+		for(var i=0;i<parking_num.length;i++){
+			var pRow = "<tr><td>"+parking_num[i]+"</td><td>"+parking_kind[i]+"</td><td>"+parking_model[i]+"</td></tr>";
 			$("#tb_parking tbody").append(pRow);
 		}
 	});
@@ -92,14 +130,15 @@
 	    	</div><br>
 	    	<div class="row">
 		    	<div style="text-align:center;"> 
-					<button id="btn_update" class="btn btn-primary" type="button" onclick="" style="width:150px;margin-right:20px;">신청변경</button>
-					<button id="btn_navi" class="btn btn-default" type="button" onclick="location.href='Visit_Navigation.jsp'" style="width:150px;margin-right:20px;">오시는길</button>
-					<button id="btn_main" class="btn btn-info" type="button" onclick="location.href='Visit_Main.jsp'" style="width:150px;">메인으로</button>
+					<button id="btn_update" class="btn btn-primary" type="button" onclick="" style="width:120px;margin-right:20px;">신청변경</button>
+					<button id="btn_cancle" class="btn btn-danger" type="button" onclick="" style="width:120px;margin-right:20px;">신청취소</button>
+					<button id="btn_navi" class="btn btn-default" type="button" onclick="location.href='Visit_Navigation.jsp'" style="width:120px;margin-right:20px;">오시는길</button>
+					<button id="btn_main" class="btn btn-info" type="button" onclick="location.href='Visit_Main.jsp'" style="width:120px;">메인으로</button>
 				</div>
 			</div><br><br>
 			<div class="row">
 		    	<div class="col-lg-10">
-					<h2 style="margin-bottom:20px; border-left: 4px solid #17405D; padding-left:8px;"><b>방문 신청 정보</b></h2>
+					<h2 style="margin-bottom:20px; border-left: 4px solid #17405D; padding-left:8px;"><b>신청 정보</b></h2>
 		    	</div>
 			</div>
 	    	<input id="com_no" type="hidden" name="com_no" value="">

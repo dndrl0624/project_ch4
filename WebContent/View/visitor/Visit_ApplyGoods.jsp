@@ -38,14 +38,8 @@
 		padding-top: 70px;
 		position: fixed;
 	}
-<<<<<<< HEAD
 	#section1 {
-		height: 300px;
-=======
-	div.col-lg-7 #section1,#section2 {
-		/* height: 300px; */
-		height:100%;
->>>>>>> refs/heads/hn_view_uk
+		height: 350px;
 		margin-bottom: 10px;
 		font-size: 28px;
 	}
@@ -235,12 +229,12 @@
 			var goodsinfo = $("#v_goodsinfo").val();
 			var row = "<tr id='gRow"+gIndex+"'><td><input id='chkGoods' type='checkbox' value='"+gIndex+"'></td>"
 					+"<td><input id='gmng_name' type='hidden' name='gmng_name' value='"+goodsname+"'>"+goodsname+"</td>"
-					+"<td><input id='gmng_quan' type='hidden' name='gmng_quan' value='"+EA+"'>"+EA+"</td>"
-					+"<td><input id='gmng_type' type='hidden' name='gmng_type' value='"+goodsinfo+"'>"+goodsinfo+"</td></tr>";
+					+"<td><input id='gmng_type' type='hidden' name='gmng_type' value='"+goodsinfo+"'>"+goodsinfo+"</td>"
+					+"<td><input id='gmng_quan' type='hidden' name='gmng_quan' value='"+EA+"'>"+EA+"</td></tr>";
 			$("#tb_goods tbody").append(row);
 			$("#v_goodsname").textbox('setValue',null);
-			$("#v_ea").textbox('setValue',null);
 			$("#v_goodsinfo").textbox('setValue',null);
+			$("#v_ea").textbox('setValue',null);
 			$("#md_goods").modal("hide");
 			gIndex++;
 		});
@@ -421,8 +415,8 @@
 				    				<tr>
 				    					<th><input id="chkAllGoods" type="checkbox"></th>
 					    				<th style="width:30%;">물품명</th>
-					    				<th style="width:20%;">EA</th>
 					    				<th style="width:40%;">물품 정보</th>
+					    				<th style="width:20%;">EA</th>
 				    				</tr>
 				    			</thead>
 				    			<tbody>
@@ -454,12 +448,12 @@
 						<td><input id="v_goodsname" class="easyui-textbox"></td>
 					</tr>
 					<tr>
-						<th><p>EA</p></th>
-						<td><input id="v_ea" class="easyui-textbox"></td>
-					</tr>
-					<tr>
 						<th><p>물품종류</p></th>
 						<td><input id="v_goodsinfo" class="easyui-textbox" data-options="prompt:'예시)노트북,의자,도서'"></td>
+					</tr>
+					<tr>
+						<th><p>EA</p></th>
+						<td><input id="v_ea" class="easyui-textbox"></td>
 					</tr>
 				</table>
 			</div>
