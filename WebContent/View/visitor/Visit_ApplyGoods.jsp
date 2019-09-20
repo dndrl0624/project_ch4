@@ -38,14 +38,8 @@
 		padding-top: 70px;
 		position: fixed;
 	}
-<<<<<<< HEAD
 	#section1 {
 		height: 300px;
-=======
-	div.col-lg-7 #section1,#section2 {
-		/* height: 300px; */
-		height:100%;
->>>>>>> refs/heads/hn_view_uk
 		margin-bottom: 10px;
 		font-size: 28px;
 	}
