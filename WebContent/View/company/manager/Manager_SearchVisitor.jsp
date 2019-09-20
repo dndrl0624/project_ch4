@@ -9,46 +9,13 @@
 <title>방문 신청 조회 페이지</title>
 <!-- 공통코드 -->
 <%@ include file="../../../Style/common/HeadUI.jsp"%>
-<!-- CSS Style Import --> 
-<style type="text/css"> 
-/* 사이드바 설정 */
-aside {
-    width: 15%;
-    height: 80%;
-    position: fixed;
-    background: #2f323a;
-    overflow: auto;
-}
-/* 사이드바 overflow 시 스크롤바 안보이게 하기 */
-aside::-webkit-scrollbar { 
-    display: none; 
-}
-/* 테이블 제목 구간 가운데 정렬 */
-th {
-	text-align: center;
-}
-
-/* 메인 페이지 프레임 구간 설정 */
-.mainContent {
-	margin:30px 20px 10px 17%;
-}
-
-</style>
+<link rel="stylesheet" type="text/css" href="/project_ch4_pojo/Style/css/maxCss.css">
 </head>
 <body>
 <script type="text/javascript">
-$(document).ready(function(){
-	$('#SearchType').combobox({
-		onChange: function(newVal,oldVal){
-			$("#search").textbox('textbox').attr('name',newVal);
-			$("#search").attr('textboxname',newVal);
-			$("span.textbox > .textbox-value").attr('name',newVal);
-			//alert($("span.textbox > .textbox-value").attr('name'));
-		}
-	});
-});
+<%@ include file="../../CommonForm/maxJavascript.jsp"%>
 </script>
-<%@ include file="../../CommonForm/Top.jsp"%> 
+<%@ include file="../../CommonForm/Top.jsp"%>
 
 <!-- Side Bar -->
 <aside>
@@ -56,36 +23,45 @@ $(document).ready(function(){
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<a href="/project_ch4_pojo/View/company/manager/Manager_Main.jsp">메인페이지</a>
+					<a href="/project_ch4_pojo/View/company/manager/Manager_Main.jsp">
+					<i class="fa fa-home" aria-hidden="true"></i>메인페이지</a>
 				</h4>
 			</div>
 		</div>
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<a data-toggle="collapse" href="#collapse1">방문 신청 조회</a>
+					<a data-toggle="collapse" href="#collapse1">
+					<i class="fa fa-users" aria-hidden="true"></i>방문 신청 조회</a>
 				</h4>
 			</div>
 			<div id="collapse1" class="panel-collapse collapse in">
 				<div class="panel-body">
-					<a  href="/project_ch4_pojo/View/company/manager/Manager_SearchVisitor.jsp">방문 신청 조회</a><br> 
-					<a  href="/project_ch4_pojo/View/company/manager/Manager_LogVisitor.jsp">방문현황 조회</a><br> 
+					<a  href="/project_ch4_pojo/View/company/manager/Manager_SearchVisitor.jsp">
+					<i class="fa fa-search-plus" aria-hidden="true"></i>방문 신청 조회</a><br> 
+					<a  href="/project_ch4_pojo/View/company/manager/Manager_LogVisitor.jsp">
+					<i class="fa fa-list-alt" aria-hidden="true"></i>방문현황 조회</a><br> 
 				</div>
 			</div>
 		</div>
+		
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<a data-toggle="collapse" href="#collapse2">물품 반입 신청 조회</a>
+					<a data-toggle="collapse" href="#collapse2">
+					<i class="fa fa-truck" aria-hidden="true"></i>물품 반입 신청 조회</a>
 				</h4>
 			</div>
 			<div id="collapse2" class="panel-collapse collapse">
 				<div class="panel-body">
-					<a  href="/project_ch4_pojo/View/company/manager/Manager_SearchGoods.jsp">반입 신청 조회</a><br> 
-					<a  href="/project_ch4_pojo/View/company/manager/Manager_LogGoods.jsp">반입 현황 조회</a><br> 
+					<a  href="/project_ch4_pojo/View/company/manager/Manager_SearchGoods.jsp">
+					<i class="fa fa-search-plus" aria-hidden="true"></i>반입 신청 조회</a><br> 
+					<a  href="/project_ch4_pojo/View/company/manager/Manager_LogGoods.jsp">
+					<i class="fa fa-list-alt" aria-hidden="true"></i>반입 현황 조회</a><br> 
 				</div>
 			</div>
 		</div>
+		<!-- 
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h4 class="panel-title">
@@ -100,13 +76,16 @@ $(document).ready(function(){
 				</div>
 			</div>
 		</div>
+		-->
 	</div>
 </aside>
 
 <!-- Content -->
 <div class="mainContent">
-	<div style="margin:30px 20px 10px 0px;font-size:35px;">
-	방문 신청 조회
+<!-- 페이지 이름 / 환영+ 로그아웃 버튼 -->
+	<div class="col-lg-12">
+		<div style="margin:30px 20px 10px 0px;font-size:35px;width: 50%;float: left;">방문 신청 조회</div>
+		<%@ include file="../../CommonForm/logout.jsp"%>
 	</div>
 	
 	<div class='col-sm-2'>
@@ -120,7 +99,15 @@ $(document).ready(function(){
 	<div class='col-sm-2'>
 		<!-- 검색창 : 콤보박스에 의한 분기 --><br>
 		<!-- 텍스트 박스에 대해 name값 변경 : 처음 값은 방문자명 // onChange 이벤트로 Name속성을 바꾸어 주기 -->
-		<input class="easyui-textbox" id="search" name="VISITOR_NAME" style="width:230px;height:25px;">
+		<input class="easyui-textbox" id="searchText" name="VISITOR_NAME" style="width:230px;height:25px;">
+	</div>
+	<div class='col-sm-2'><br>
+		<select class="easyui-combobox" id="state" name="state" label="승인상태" labelPosition="left" style="width:100%;">
+			<option value="all" selected>전체</option>
+			<option value="commit">승인</option>
+			<option value="return">반려</option>
+			<option value="cancle">취소</option>
+		</select>
 	</div>
 	<div  class='col-sm-4'>
 <!-- 날짜 검색 -->
@@ -154,7 +141,8 @@ $(document).ready(function(){
 		</div>
 	</div>
 <div  class='col-sm-1'>
-<button type="button" class="btn btn-success" style="margin-top: 5px;margin-bottom: 15px;float: bottom;">Search</button>
+	<button type="button" class="btn btn-success" onclick="javascript:btn_search()"
+	style="margin-top: 5px;margin-bottom: 15px;float: bottom;">Search</button>
 </div>
 	</div>
 	

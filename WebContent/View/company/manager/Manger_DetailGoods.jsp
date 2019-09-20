@@ -10,28 +10,8 @@
 <!-- 공통코드 -->
 <%@ include file="../../../Style/common/HeadUI.jsp"%>
 <!-- CSS Style Import --> 
+<link rel="stylesheet" type="text/css" href="/project_ch4_pojo/Style/css/maxCss.css">
 <style type="text/css">
-/* 사이드바 설정 */ aside {
-	width: 15%;
-	height: 80%;
-	position: fixed;
-	background: #2f323a;
-	overflow: auto;
-}
-/* 사이드바 overflow 시 스크롤바 안보이게 하기 */
-aside::-webkit-scrollbar {
-	display: none;
-}
-/* 테이블 제목 구간 가운데 정렬 */
-th {
-	text-align: center;
-}
-
-/* 메인 페이지 프레임 구간 설정 */
-.mainContent {
-	margin: 3% 0px 0px 17%;
-}
-
 /* 스크롤 메뉴 */
 ul.nav-pills {
 	position: fixed;
@@ -99,127 +79,17 @@ table.table {
 	background-color: #DDDDDD;
 }
 
-/* 캘린더 */
-.calendar-saturday {
-	color: #CC2222;
-}
-
-.calendar-today {
-	font-weight: bold;
-	color: #0000ff;
-}
-
-.calendar-disabled {
-	opacity: 0.3;
-	filter: alpha(opacity = 60);
-	cursor: default;
-}
-
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button {
-	-webkit-appearance: none;
-	margin: 0;
-}
 </style>
 <script type="text/javascript">
 	var now = new Date();
 </script>
 </head>
+<link rel="stylesheet" type="text/css" href="/project_ch4_pojo/Style/css/maxCss.css">
 <body>
 <!-- java script -->
 <script type="text/javascript">
-//combobox 직접입력 방지
-$.fn.combobox.defaults.editable = false
-
-//datebox 날짜형식 YYYY-MM-DD로 설정
-$.fn.datebox.defaults.formatter = function(date){
-    var y = date.getFullYear();
-    var m = date.getMonth()+1;
-    var d = date.getDate();
-    return y+'-'+(m<10 ? "0"+m:m)+'-'+(d<10 ? "0"+d:d);
-}  
-//datebox parser설정
-$.fn.datebox.defaults.parser = function(s){
-    var t = Date.parse(s);
-    if (!isNaN(t)){
-       return new Date(t);
-    } else {
-       return new Date();
-    }
-}
-//datebox 한글화
-$.fn.datebox.defaults.currentText = '오늘'
-$.fn.datebox.defaults.closeText = '닫기'
-$.fn.calendar.defaults.weeks = ['일','월','화','수','목','금','토']
-$.fn.calendar.defaults.months = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
-
-$(document).ready(function(){
-    ///////////////////////// 방문날짜 이벤트  //////////////////////////
-    $("#visit_term").combobox("disable");
-    $("#visit_day").combobox("disable");
-    //방문유형 선택시 입력폼 Enable,Disable
-    $("#visit_type").combobox({
-       onChange: function(newValue){
-          if("일일방문"==newValue){   //datebox 1개만 Enable
-             $("#visit_term").combobox("disable");
-             $("#visit_day").combobox("disable");
-             $("#visit_date2").datebox("disable");
-          }
-          else if("기간방문"==newValue){   //datebox 2개만 Enable
-             $("#visit_term").combobox("disable");
-             $("#visit_day").combobox("disable");
-             $("#visit_date2").datebox("enable");
-          }
-          else {   //정기방문 : 전부 Enable
-             $("#visit_term").combobox("enable");
-             $("#visit_day").combobox("enable");
-             $("#visit_date2").datebox("enable");
-          }
-       }
-    });
-    //방문시작일 선택시 마지막일 선택범위 (시작일+1~내년 당일) 제한
-    $('#visit_date1').datebox({
-       onSelect: function(date){
-          firstDate = date;
-          $('#visit_date2').datebox().datebox('calendar').calendar({
-                validator: function(date){
-                    var now = new Date();
-                    var d1 = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate()+1);
-                    var d2 = new Date(now.getFullYear()+1, now.getMonth(), now.getDate());
-                    return d1<=date && date<=d2;
-                }
-            });
-          //최소기간을 정해버리면 disable이 풀림.....
-          //그래서 '일일방문'에선 다시 사용못하게 막아야함
-          if("일일방문"==$("#visit_type").val()){
-             $("#visit_date2").datebox("disable");
-          }
-       }
-    });
-    //방문일자 선택범위 (당일~내년 당일) 제한
-    $('#visit_date1').datebox().datebox('calendar').calendar({
-          validator: function(date){
-              var now = new Date();
-              var d1 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-              var d2 = new Date(now.getFullYear()+1, now.getMonth(), now.getDate());
-              return d1<=date && date<=d2;
-          }
-      });
-    //방문일자 마지막일 범위 초기세팅
-    $('#visit_date2').datebox().datebox('calendar').calendar({
-          validator: function(date){
-              var now = new Date();
-              var d1 = new Date(now.getFullYear(), now.getMonth(), now.getDate()+1);
-              var d2 = new Date(now.getFullYear()+1, now.getMonth(), now.getDate());
-              return d1<=date && date<=d2;
-          }
-      });
-    $("#visit_date2").datebox("disable");
-    //방문일자  초기세팅 당일로 : js와 충돌 : DB에서 값 받아서 넣어주기
-    $('#visit_date1').datebox('setValue',now.getFullYear()+'-'+now.getMonth()+'-'+(now.getDate()+1));
-});
+<%@ include file="../../CommonForm/maxJavascript.jsp"%>
 </script>
-
 <%@ include file="../../CommonForm/Top.jsp"%> 
 
 <!-- Side Bar -->
@@ -228,36 +98,45 @@ $(document).ready(function(){
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<a href="/project_ch4_pojo/View/company/manager/Manager_Main.jsp">메인페이지</a>
+					<a href="/project_ch4_pojo/View/company/manager/Manager_Main.jsp">
+					<i class="fa fa-home" aria-hidden="true"></i>메인페이지</a>
 				</h4>
 			</div>
 		</div>
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<a data-toggle="collapse" href="#collapse1">방문 신청 조회</a>
+					<a data-toggle="collapse" href="#collapse1">
+					<i class="fa fa-users" aria-hidden="true"></i>방문 신청 조회</a>
 				</h4>
 			</div>
 			<div id="collapse1" class="panel-collapse collapse">
 				<div class="panel-body">
-					<a  href="/project_ch4_pojo/View/company/manager/Manager_SearchVisitor.jsp">방문 신청 조회</a><br> 
-					<a  href="/project_ch4_pojo/View/company/manager/Manager_LogVisitor.jsp">방문현황 조회</a><br> 
+					<a  href="/project_ch4_pojo/View/company/manager/Manager_SearchVisitor.jsp">
+					<i class="fa fa-search-plus" aria-hidden="true"></i>방문 신청 조회</a><br> 
+					<a  href="/project_ch4_pojo/View/company/manager/Manager_LogVisitor.jsp">
+					<i class="fa fa-list-alt" aria-hidden="true"></i>방문현황 조회</a><br> 
 				</div>
 			</div>
 		</div>
+		
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<a data-toggle="collapse" href="#collapse2">물품 반입 신청 조회</a>
+					<a data-toggle="collapse" href="#collapse2">
+					<i class="fa fa-truck" aria-hidden="true"></i>물품 반입 신청 조회</a>
 				</h4>
 			</div>
 			<div id="collapse2" class="panel-collapse collapse in">
 				<div class="panel-body">
-					<a  href="/project_ch4_pojo/View/company/manager/Manager_SearchGoods.jsp">반입 신청 조회</a><br> 
-					<a  href="/project_ch4_pojo/View/company/manager/Manager_LogGoods.jsp">반입 현황 조회</a><br> 
+					<a  href="/project_ch4_pojo/View/company/manager/Manager_SearchGoods.jsp">
+					<i class="fa fa-search-plus" aria-hidden="true"></i>반입 신청 조회</a><br> 
+					<a  href="/project_ch4_pojo/View/company/manager/Manager_LogGoods.jsp">
+					<i class="fa fa-list-alt" aria-hidden="true"></i>반입 현황 조회</a><br> 
 				</div>
 			</div>
 		</div>
+		<!-- 
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h4 class="panel-title">
@@ -272,18 +151,21 @@ $(document).ready(function(){
 				</div>
 			</div>
 		</div>
+		-->
 	</div>
 </aside>
 
-<div class="mainContent" style="padding-left:16%">
-		<div class="col-lg-8">
-			<div class="row">
-				<div class="col-lg-9">
-					<h2 style="margin-bottom: 20px; border-left: 4px solid #17405D;">
-						<b>물품 반입 상세 조회</b> (승인자용)
-					</h2>
-				</div>
+<div class="mainContent" >
+<!-- 페이지 이름 / 환영+ 로그아웃 버튼 -->
+	<div class="col-lg-12" style="padding-bottom:3%">
+		<div class="row">
+			<div style="margin:30px 0px 10px 16%;">
+			<b style="font-size:35px;width: 50%;float: left;">물품 반입 상세 조회 (승인자용)</b>
+			<%@ include file="../../CommonForm/logout.jsp"%>
 			</div>
+		</div>
+	</div>
+	<div class="col-lg-9" style="padding-left:16%">
 			<div id="section1" class="panel panel-info">
 				<div class="panel-heading">기본 방문정보</div>
 				<div class="panel-body">
