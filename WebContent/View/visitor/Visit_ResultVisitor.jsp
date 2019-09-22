@@ -1,22 +1,85 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+	//신청번호
+	String visit_no = "null";
+	if(null!=(request.getAttribute("visit_no"))){
+		visit_no = (String)request.getAttribute("visit_no");
+	}
+	//신청일자
+	String visit_apply_date = "null";
+	Date date = new Date();
+	SimpleDateFormat form = new SimpleDateFormat("yyyy-MM-dd");
+	visit_apply_date = form.format(date);
+	//신청자 이름
+	String visit_apply_name = "null";
+	if(null!=request.getParameter("visit_apply_name")){
+		visit_apply_name = (String)request.getParameter("visit_apply_name");
+	}
+	//신청자 연락처
+	String visit_apply_hp = "null";
+	if(null!=request.getParameter("visit_apply_hp")){
+		visit_apply_hp = (String)request.getParameter("visit_apply_hp");
+	}
+	//방문유형
+	String visit_type = "null";
+	if(null!=request.getParameter("visit_type")){
+		visit_type = (String)request.getParameter("visit_type");
+	}
+	//방문주기
+	String visit_term = "헤딩없음";
+	if(null!=request.getParameter("visit_term")){
+		visit_term = (String)request.getParameter("visit_term");
+	}
+	//방문요일
+	String visit_day = "해당없음";
+	if(null!=request.getParameter("visit_day")){
+		visit_day = (String)request.getParameter("visit_day");
+	}
+	//방문날짜
+	String visit_date = "null";
+	if(null!=request.getParameter("visit_date")){
+		visit_date = (String)request.getParameter("visit_date");
+	}
+	//방문지
+	String com_name = "null";
+	if(null!=request.getParameter("com_name")){
+		com_name = (String)request.getParameter("com_name");
+	}
+	//목적지
+	String visit_desti = "null";
+	if(null!=request.getParameter("visit_desti")){
+		visit_desti = (String)request.getParameter("visit_desti");
+	}
+	//방문목적
+	String visit_purps = "null";
+	if(null!=request.getParameter("visit_purps")){
+		visit_purps = (String)request.getParameter("visit_purps");
+	}
+	
+	//방문자 이름 & 연락처
 	String[] visitor_name = {"김용현","김현태","이하나","현태호"};
-	//String[] visitor_name = request.getParameterValues("visitor_name");
+		//String[] visitor_name = request.getParameterValues("visitor_name");
 	String[] visitor_hp = {"010-1111-1111","010-2222-2222","010-3333-3333","010-4444-4444"};
-	//String[] visitor_hp = request.getParameterValues("visitor_hp");
+		//String[] visitor_hp = request.getParameterValues("visitor_hp");
+	
+	//반입기기
 	String[] tkin_kind = {"노트북","휴대전화"};
-	//String[] tkin_kind = request.getParameterValues("tkin_kind");
+		//String[] tkin_kind = request.getParameterValues("tkin_kind");
 	String[] tkin_brand = {"LG전자","삼성전자",};
-	//String[] tkin_brand = request.getParameterValues("tkin_brand");
+		//String[] tkin_brand = request.getParameterValues("tkin_brand");
 	String[] tkin_model = {"lg그램","갤럭시노트10+"};
-	//String[] tkin_model = request.getParameterValues("tkin_model");
+		//String[] tkin_model = request.getParameterValues("tkin_model");
+	
+	//주차	
 	String[] parking_num = {"123가4567"};
-	//String[] parking_num = request.getParameterValues("parking_num");
+		//String[] parking_num = request.getParameterValues("parking_num");
 	String[] parking_kind = {"승용차"};
-	//String[] parking_kind = request.getParameterValues("parking_kind");
+		//String[] parking_kind = request.getParameterValues("parking_kind");
 	String[] parking_model = {"BMW"};
-	//String[] parking_model = request.getParameterValues("parking_model");
+		//String[] parking_model = request.getParameterValues("parking_model");
 %>
 <!DOCTYPE html>
 <html>
@@ -116,13 +179,24 @@
 			$("#tb_parking tbody").append(pRow);
 		}
 	});
+	function applyUpdate(){
+		alert("수정");
+		$("#form_next").attr("action","/visitor/update.ch4");
+		$("#form_next").submit();
+	}
+	
+	function applyCancle(){
+		alert("취소");
+		$("#form_next").attr("action","/visitor/cancle.ch4");
+		$("#form_next").submit();
+	}
 </script>
 <div class="container-fluid">
 	<div class="row">
 	    <div class="col-lg-8 col-lg-offset-2"> 
 	    	<div style="text-align:center;">
 	    		<img src="../../Style/images/crud/visitor_logo_default.png" class="img-thumbnail" style="width:30%;border:0px;">
-	    		<h3 style="margin-top:10px;">"고객님의 방문신청이 <b style="font-size:40px; color:#b22222;">접수</b><b style="font-size:24px; color:#4169e1;">(신청번호)</b>되었습니다."</h3>
+	    		<h3 style="margin-top:10px;">"고객님의 방문신청이 <b style="font-size:40px; color:#b22222;">접수</b><b style="font-size:24px; color:#4169e1;">(<%=visit_no %>)</b>되었습니다."</h3>
 	    	</div><br>
 	    	<div class="row" style="text-align:center;">
 	    		<h5 style="margin-bottom:20px;font-weight:bold;">※신청내용 변경 또는 취소는 당일 오후 4시까지 가능하며</h5>
@@ -130,8 +204,8 @@
 	    	</div><br>
 	    	<div class="row">
 		    	<div style="text-align:center;"> 
-					<button id="btn_update" class="btn btn-primary" type="button" onclick="" style="width:120px;margin-right:20px;">신청변경</button>
-					<button id="btn_cancle" class="btn btn-danger" type="button" onclick="" style="width:120px;margin-right:20px;">신청취소</button>
+					<button id="btn_update" class="btn btn-primary" type="button" onclick="applyUpdate()" style="width:120px;margin-right:20px;">신청변경</button>
+					<button id="btn_cancle" class="btn btn-danger" type="button" onclick="applyCancle()" style="width:120px;margin-right:20px;">신청취소</button>
 					<button id="btn_navi" class="btn btn-default" type="button" onclick="location.href='Visit_Navigation.jsp'" style="width:120px;margin-right:20px;">오시는길</button>
 					<button id="btn_main" class="btn btn-info" type="button" onclick="location.href='Visit_Main.jsp'" style="width:120px;">메인으로</button>
 				</div>
@@ -151,15 +225,17 @@
 			    			<thead>
 				    			<tr>
 				    				<th>신청번호</th>
+				    				<th>신청일자</th>
 				    				<th>성명</th>
 				    				<th>연락처</th>
 				    			</tr>
 			    			</thead>
 			    			<tbody>
 				    			<tr>
-				    				<td></td>
-				    				<td></td>
-				    				<td></td>
+				    				<td><%=visit_no %></td>
+				    				<td><%=visit_apply_date %></td>
+				    				<td><%=visit_apply_name %></td>
+				    				<td><%=visit_apply_hp %></td>
 				    			</tr>
 			    			</tbody>
 			    		</table>
@@ -177,10 +253,10 @@
 			    			</thead>
 			    			<tbody>
 			    				<tr>
-			    					<td></td>
-			    					<td></td>
-			    					<td></td>
-			    					<td></td>
+			    					<td><%=visit_type %></td>
+			    					<td><%=visit_term %></td>
+			    					<td><%=visit_day %></td>
+			    					<td><%=visit_date %></td>
 			    				</tr>
 			    			</tbody>
 			    		</table>
@@ -197,9 +273,9 @@
 			    			</thead>
 			    			<tbody>
 			    				<tr>
-			    					<td></td>
-			    					<td></td>
-			    					<td></td>
+			    					<td><%=com_name %></td>
+			    					<td><%=visit_desti %></td>
+			    					<td><%=visit_purps %></td>
 			    				</tr>
 			    			</tbody>
 			    		</table>
@@ -277,5 +353,8 @@
 	    </div>
   	</div>
 </div>
+<form id="form_next" method="POST">
+	<input type="hidden" name="visit_no" value="<%=visit_no %>">
+</form>
 </body>
 </html>

@@ -1,5 +1,57 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%
+	//신청번호
+	String aplg_no = "null";
+	if(null!=(request.getAttribute("aplg_no"))){
+		aplg_no = (String)request.getAttribute("aplg_no");
+	}
+	//신청일자
+	String aplg_date = "null";
+	Date date = new Date();
+	SimpleDateFormat form = new SimpleDateFormat("yyyy-MM-dd");
+	aplg_date = form.format(date);
+	//신청자 이름
+	String aplg_name = "null";
+	if(null!=request.getParameter("aplg_name")){
+		aplg_name = (String)request.getParameter("aplg_name");
+	}
+	//신청자 연락처
+	String aplg_hp = "null";
+	if(null!=request.getParameter("aplg_hp")){
+		aplg_hp = (String)request.getParameter("aplg_hp");
+	}
+	//반입날짜
+	String aplg_trans_date = "null";
+	if(null!=request.getParameter("aplg_trans_date")){
+		aplg_trans_date = (String)request.getParameter("aplg_trans_date");
+	}
+	//방문지
+	String com_name = "null";
+	if(null!=request.getParameter("com_name")){
+		com_name = (String)request.getParameter("com_name");
+	}
+	//목적지
+	String aplg_desti = "null";
+	if(null!=request.getParameter("aplg_desti")){
+		aplg_desti = (String)request.getParameter("aplg_desti");
+	}
+	//반입목적
+	String aplg_reason = "null";
+	if(null!=request.getParameter("aplg_reason")){
+		aplg_reason = (String)request.getParameter("aplg_reason");
+	}
+	
+	//반입물품
+	String[] gmng_name = {"LG그램","갤럭시 노트10+","시디즈 의자"};
+		//String[] gmng_name = request.getParameterValues("gmng_name");
+	String[] gmng_type = {"전자제품","전자제품","의자"};
+		//String[] gmng_name = request.getParameterValues("gmng_name");
+	String[] gmng_quan = {"5","10","30"};
+		//String[] gmng_quan = request.getParameterValues("gmng_quan");
+ %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,18 +113,34 @@
 <%@ include file="/View/CommonForm/Top.jsp"%>
 <script type="text/javascript">
 	$(document).ready(function(){
-		var gRow = "<tr><td>lg그램</td><td>노트북</td><td>10개</td></tr>";
-		for(var i=0;i<15;i++){
+		var gmng_name = new Array();
+		<% for(String name : gmng_name){%>gmng_name.push('<%=name%>');<%}%>
+		var gmng_type = new Array();
+		<% for(String type : gmng_type){%>gmng_type.push('<%=type%>');<%}%>
+		var gmng_quan = new Array();
+		<% for(String quan : gmng_quan){%>gmng_quan.push('<%=quan%>');<%}%>
+		for(var i=0;i<gmng_name.length;i++){
+			var gRow = "<tr><td>"+gmng_name[i]+"</td><td>"+gmng_type[i]+"</td><td>"+gmng_quan[i]+"</td></tr>";
 			$("#tb_goods tbody").append(gRow);
 		}
 	});
+	function applyUpdate(){
+		//alert("수정");
+		$("#form_next").attr("action","/goods/update.ch4");
+		$("#form_next").submit();
+	}
+	function applyCancle(){
+		//alert("취소");
+		$("#form_next").attr("action","/goods/cancle.ch4");
+		$("#form_next").submit();
+	}
 </script>
 <div class="container-fluid">
 	<div class="row">
 	    <div class="col-lg-8 col-lg-offset-2"> 
 	    	<div style="text-align:center;">
 	    		<img src="../../Style/images/crud/transport_logo_default.png" class="img-thumbnail" style="width:30%;border:0px;">
-	    		<h3 style="margin-top:10px;">"고객님의 반입신청이 <b style="font-size:40px; color:#b22222;">접수</b><b style="font-size:24px; color:#4169e1;">(신청번호)</b>되었습니다."</h3>
+	    		<h3 style="margin-top:10px;">"고객님의 반입신청이 <b style="font-size:40px; color:#b22222;">접수</b><b style="font-size:24px; color:#4169e1;">(<%=aplg_no %>)</b>되었습니다."</h3>
 	    	</div><br>
 	    	<div class="row" style="text-align:center;">
 	    		<h5 style="margin-bottom:20px;font-weight:bold;">※신청내용 변경 또는 취소는 당일 오후 4시까지 가능하며</h5>
@@ -80,8 +148,8 @@
 	    	</div><br>
 	    	<div class="row">
 		    	<div style="text-align:center;"> 
-					<button id="btn_update" class="btn btn-primary" type="button" onclick="" style="width:120px;margin-right:20px;">신청변경</button>
-					<button id="btn_cancle" class="btn btn-danger" type="button" onclick="" style="width:120px;margin-right:20px;">신청취소</button>
+					<button id="btn_update" class="btn btn-primary" type="button" onclick="applyUpdate()" style="width:120px;margin-right:20px;">신청변경</button>
+					<button id="btn_cancle" class="btn btn-danger" type="button" onclick="applyCancle()" style="width:120px;margin-right:20px;">신청취소</button>
 					<button id="btn_navi" class="btn btn-default" type="button" onclick="location.href='Visit_Navigation.jsp'" style="width:120px;margin-right:20px;">오시는길</button>
 					<button id="btn_main" class="btn btn-info" type="button" onclick="location.href='Visit_Main.jsp'" style="width:120px;">메인으로</button>
 				</div>
@@ -108,9 +176,10 @@
 			    			</thead>
 			    			<tbody>
 				    			<tr>
-				    				<td></td>
-				    				<td></td>
-				    				<td></td>
+				    				<td><%=aplg_no %></td>
+				    				<td><%=aplg_date %></td>
+				    				<td><%=aplg_name %></td>
+				    				<td><%=aplg_hp %></td>
 				    			</tr>
 			    			</tbody>
 			    		</table>
@@ -127,9 +196,9 @@
 			    			</thead>
 			    			<tbody>
 			    				<tr>
-			    					<td></td>
-			    					<td></td>
-			    					<td></td>
+			    					<td><%=aplg_trans_date %></td>
+			    					<td><%=aplg_desti %></td>
+			    					<td><%=aplg_reason %></td>
 			    				</tr>
 			    			</tbody>
 			    		</table>
@@ -162,5 +231,8 @@
 	    </div>
   	</div>
 </div>
+<form id="form_next" method="POST">
+	<input type="hidden" name="aplg_no" value="<%=aplg_no %>">
+</form>
 </body>
 </html>
