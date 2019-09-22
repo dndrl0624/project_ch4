@@ -337,6 +337,7 @@
 				if("일일방문"==newValue){	//datebox 1개만 Enable
 					$("#visit_term").combobox("clear");
 					$("#visit_day").combobox("clear");
+					$("#visit_date2").datebox("setValue",null);
 					$("#visit_term").combobox("disable");
 					$("#visit_day").combobox("disable");
 					$("#visit_date2").datebox("disable");
@@ -815,7 +816,7 @@
 			    							<option value="test">테스트</option>
 			    						</select>
 			    					</td>
-			    					<td><input id="visit_purps" class="easyui-textbox" name="visit_purps" data-options="prompt:'예시)업무협의'" style="width:80%;"></td>
+			    					<td><input id="visit_purps" class="easyui-textbox" name="visit_purps" value="<%=visit_purps %>" data-options="prompt:'예시)업무협의'" style="width:80%;"></td>
 			    				</tr>
 			    			</tbody>
 			    		</table>
