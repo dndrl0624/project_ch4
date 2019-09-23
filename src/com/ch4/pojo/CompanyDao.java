@@ -18,23 +18,35 @@ public class CompanyDao {
 		sqlSessionFactory = MyBatisCommonFactory.getSqlSessionFactory();
 		sqlSession = sqlSessionFactory.openSession();
 	}
+	
 
 	public int mngPermit(Map<String, Object> pMap) {
 		int result = 0;
-		
-		result = sqlSession.insert("mngPermit",pMap);
+		if(pMap.get("visit_no")!=null) {
+			result = sqlSession.insert("mngVPermit",pMap); // VISIT_CONFM테이블에 insert
+		}
+		else if(pMap.get("aplg_no")!=null) {
+			int amount = ((String[])pMap.get("gmng_name")).length;
+			for(int i=0;i<amount;i++) {
+				result = sqlSession.insert("mngGPermit",pMap); // GOODS_COMFM테이블에 insert
+				if(result==0) {
+					return result;
+				}
+			}
+		}
 		if(result==0) {
 			return result;
 		}
 		else if(result==1) {
 			result = sqlSession.update("mngPermitUpd",pMap);
 		}
-		
+		sqlSession.commit();
 		return result;
 	}
 	public int mngUpdate(Map<String, Object> pMap) {
 		int result = 0;
 		result = sqlSession.update("mngUpdate",pMap);
+		sqlSession.commit();
 		return result;
 	}
 
@@ -46,6 +58,28 @@ public class CompanyDao {
 	public List<Map<String, Object>> inOutList(Map<String, Object> pMap) {
 		List<Map<String, Object>> inOutList = sqlSession.selectList("inOutList", pMap);
 		return inOutList;
+	}
+
+
+	public int companyLogin(Map<String, Object> pMap) {
+		int result = 0;
+		result = sqlSession.selectOne("companyLogin", pMap);
+		return result;
+	}
+
+
+	public int companyJoin(Map<String, Object> pMap) {
+		int result = 0;
+		result = sqlSession.insert("companyJoin",pMap);
+		sqlSession.commit();
+		return result;
+	}
+
+
+	public int isExistID(Map<String, Object> pMap) {
+		int result = 0;
+		result = sqlSession.selectOne("isExistID", pMap);
+		return result;
 	}
 
 

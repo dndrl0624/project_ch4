@@ -31,5 +31,23 @@ public class CompanyLogic {
 		return inOutList;
 	}
 
+	public int companyLogin(Map<String, Object> pMap) {
+		int result = 0;
+		result = cDao.companyLogin(pMap);
+		return result;
+	}
+
+	public int companyJoin(Map<String, Object> pMap) {
+		int result = 0;
+		result = cDao.companyJoin(pMap);
+		return result;
+	}
+
+	public int isExistID(Map<String, Object> pMap) {
+		int result = 0;
+		result = cDao.isExistID(pMap);
+		return result;
+	}
+
 
 }

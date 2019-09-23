@@ -29,7 +29,7 @@ public class VisitorDao {
 	public String visitApplyAdd(Map<String,Object> applyAdd) {
 		String visit_no = null;
 		
-		visit_no = RuleOfGeneratingPK.getPK(100);
+		visit_no = "VA" + RuleOfGeneratingPK.getPK(100);
 
 		int result = 0;
 		applyAdd.put("visit_no", visit_no);

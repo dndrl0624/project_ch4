@@ -27,26 +27,62 @@ public class CompanyController implements Controller{
 		ModelAndView mav = new ModelAndView(req, res);
 		Map<String,Object> pMap = new HashMap<>();
 		HashMapBinder hmb = new HashMapBinder(req);
+		hmb.multiBind(pMap);
 		if(requestName.equals("mngPermit")) {
 			int result = 0;
-			hmb.multiBind(pMap);
 			logger.info("pMap : " + pMap);
 			result = cLogic.mngPermit(pMap);
-			if(result == 0) {
-				mav.setViewName("Visit_ResultGoods.jsp");
+			if(result == 1) {
+				mav.setViewName(".jsp");
 			}
-			else if(result == 1) {
-				mav.setViewName("Visit_ApplyFail.jsp");
+			else if(result ==0) {
+				mav.setViewName(".jsp");
 			}
 		}
 		else if(requestName.equals("mngUpdate")) {
 			int result = 0;
-			hmb.multiBind(pMap);
 			logger.info("pMap : " + pMap);
 			result = cLogic.mngUpdate(pMap);
+			if(result == 1) {
+				mav.setViewName(".jsp");
+			}
+			else if(result ==0) {
+				mav.setViewName(".jsp");
+			}
+		}
+		else if(requestName.equals("login")) {
+			int result = 0;
+			result = cLogic.companyLogin(pMap);
+			if(result == 1) {
+				mav.setViewName(".jsp");
+			}
+			else if(result ==0) {
+				mav.setViewName(".jsp");
+			}
+		}
+		else if(requestName.equals("join")) {
+			int result = 0;
+			result = cLogic.companyJoin(pMap);
+			if(result == 1) {
+				mav.setViewName(".jsp");
+			}
+			else if(result ==0) {
+				mav.setViewName(".jsp");
+			}
+		}
+		else if(requestName.equals("isExistID")) {
+			int result = 0;
+			result = cLogic.isExistID(pMap);
+			if(result == 1) {
+				mav.setViewName(".jsp");
+			}
+			else if(result ==0) {
+				mav.setViewName(".jsp");
+			}
 		}
 
 		return mav;
+		
 	}
 
 }
