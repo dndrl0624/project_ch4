@@ -261,7 +261,7 @@
 			    			</tbody>
 			    		</table>
 			    	</div>
-			    	<h4 style="margin-bottom:10px; border-left: 3px solid #31708f; padding-left:4px;"><b>상세정보</b></h4>
+			    	<h4 style="margin-bottom:10px; border-left: 3px solid #31708f; padding-left:4px;"><b>방문상세</b></h4>
 			    	<div class="row table basic">
 			    		<table class="table">
 			    			<thead>

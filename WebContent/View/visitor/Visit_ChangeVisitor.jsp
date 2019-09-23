@@ -245,6 +245,7 @@
 						+"<td><input id='visitor_name' type='hidden' name='visitor_name' value='"+visitor_name[i]+"'>"+visitor_name[i]+"</td>"
 						+"<td><input id='visitor_hp' type='hidden' name='visitor_hp' value='"+visitor_hp[i]+"'>"+visitor_hp[i]+"</td></tr>";
 			$("#tb_visitor tbody").append(vRow);
+			vIndex++;
 		}
 		//////////////////////////////  방문자 정보 세팅  끝 //////////////////////////////
 		//////////////////////////////  반입기기정보 세팅  //////////////////////////////
@@ -260,6 +261,7 @@
 						+"<td><input id='tkin_brand' type='hidden' name='tkin_brand' value='tkin_brand'>"+tkin_brand[i]+"</td>"
 						+"<td><input id='tkin_model' type='hidden' name='tkin_model' value='tkin_model'>"+tkin_model[i]+"</td></tr>";
 			$("#tb_device tbody").append(dRow);
+			dIndex++;
 		}
 		//////////////////////////////  반입기기정보 세팅 끝 //////////////////////////////
 		//////////////////////////////  주차정보 세팅  //////////////////////////////
@@ -275,6 +277,7 @@
 			+"<td><input id='parking_kind' type='hidden' name='parking_kind' value='parking_kind'>"+parking_kind[i]+"</td>"
 			+"<td><input id='parking_model' type='hidden' name='parking_model' value='parking_model'>"+parking_model[i]+"</td>"+"</tr>";
 			$("#tb_parking tbody").append(pRow);
+			pIndex++;
 		}
 		//////////////////////////////  주차정보 세팅  끝 //////////////////////////////
 		
@@ -635,8 +638,8 @@
 				$("#visit_date2").datebox('textbox').focus();
 				return;
 			}
-			//input에 넣을 value '시작일,마지막일'
-			visit_date += "," + $("#visit_date2").datebox('getValue');
+			//input에 넣을 value '시작일~마지막일'
+			visit_date += "~" + $("#visit_date2").datebox('getValue');
 			if("정기방문"==$("#visit_type").combobox('getValue')){
 				if(!($("#visit_term").combobox('getValue'))){
 					alert("방문주기를 선택해 주세요.");

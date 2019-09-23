@@ -584,8 +584,8 @@
 				$("#visit_date2").datebox('textbox').focus();
 				return;
 			}
-			//input에 넣을 value '시작일,마지막일'
-			visit_date += "," + $("#visit_date2").datebox('getValue');
+			//input에 넣을 value '시작일~마지막일'
+			visit_date += "~" + $("#visit_date2").datebox('getValue');
 			if("정기방문"==$("#visit_type").combobox('getValue')){
 				if(!($("#visit_term").combobox('getValue'))){
 					alert("방문주기를 선택해 주세요.");

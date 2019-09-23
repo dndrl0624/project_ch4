@@ -76,37 +76,11 @@
 		width: 80px;
 	}
 </style>
-<script>
-	var searchUrl = "visitor";
-	var searchKeyword = "number";
-</script>
 </head>
 <body>
 <%@ include file="/View/CommonForm/Top.jsp"%>
 <script>
 	$(document).ready(function(){
-		//방문을 선택하면 신청번호 name이 visit_no로 변경
-		$("#radio_visitor").on('click',function(){
-			//$("#input_num").textbox('textbox').attr("name","visit_no");
-			//$("#input_num").attr("textboxname","visit_no");
-			$("#form_search_num > .textbox > .textbox-value").attr('name',"visit_no");
-			//alert($("#input_num").textbox('getValue'));
-			//$("#input_search_name").textbox('textbox').attr("name","visit_apply_name");
-			$("#form_search_name > .textbox:first-of-type > .textbox-value").attr('name',"visit_apply_name");
-			$("#input_search_hp").attr("name","visit_apply_hp");
-			searchUrl = "visitor";
-		});
-		//반입을 선택하면 신청번호 name이 apl_no로 변경
-		$("#radio_goods").on('click',function(){
-			//$("#input_num").textbox('textbox').attr("name","aplg_no");
-			//$("#input_num").attr("textboxname","aplg_no");
-			$("#form_search_num > .textbox > .textbox-value").attr('name',"aplg_no");
-			//alert($("#input_num").textbox('getValue'));
-			//$("#input_search_name").textbox('textbox').attr("name","aplg_name");
-			$("#form_search_name > .textbox:first-of-type > .textbox-value").attr('name',"aplg_name");
-			$("#input_search_hp").attr("name","aplg_hp");
-			searchUrl = "goods";
-		});
 		//방문지 초기화
 		$("#combo_company").combobox({
 			valueField: 'com_no',
@@ -122,15 +96,6 @@
 					url: "/visitor/deptList.ch4?cmpCode="+newValue
 				});
 			}
-		});
-		//신청조회 검색조건이 신청번호일때
-		$('.nav-tabs a[href="#nav_search1"]').on('shown.bs.tab', function(){
-			//form전송 할때 조건문 조건값
-			searchKeyword = "number";
-		});
-		//신청조회 검색조건이 신청자이름 & 연락처일때
-		$('.nav-tabs a[href="#nav_search2"]').on('shown.bs.tab', function(){
-			searchKeyword = "name&hp";
 		});
 	});
 	//입력값을 약관동의 페이지로 가져가는 함수
@@ -176,50 +141,11 @@
 		$("#form_apply").submit();
 	}
 	//조회페이지 넘어가는 함수
-	function searchApply(){
-		//신청번호로 조회니?
-		if("number"==searchKeyword){
-			if(!($("#input_num").textbox('getValue'))){
-				alert("신청번호를 입력해 주세요.");
-				$("#input_num").textbox('textbox').focus();
-				return;
-			}
-			$("#form_search_num").attr('action',"/"+searchUrl+"/"+"detail.ch4");
-			//alert($("#input_num").textbox('getValue'));
-			//alert($("#form_search_num").attr('action'));
-			$("#form_search_num").submit();
-		}
-		//이름 & 연락처로 조회니?
-		else if("name&hp"==searchKeyword){
-			if(!($("#input_search_name").textbox('getValue'))){
-				alert("신청자 성명을 입력해 주세요.");
-				$("#input_search_name").textbox('textbox').focus();
-				return;
-			}
-			if(!($("#input_search_hp1").textbox('getValue'))){
-				alert("신청자 연락처를 입력해 주세요.");
-				$("#input_search_hp1").textbox('textbox').focus();
-				return;
-			}
-			if(!($("#input_search_hp2").textbox('getValue'))){
-				alert("신청자 연락처를 입력해 주세요.");
-				$("#input_search_hp2").textbox('textbox').focus();
-				return;
-			}
-			if(!($("#input_search_hp3").textbox('getValue'))){
-				alert("신청자 연락처를 입력해 주세요.");
-				$("#input_search_hp3").textbox('textbox').focus();
-				return;
-			}
-			var search_hp = $("#input_search_hp1").textbox('getValue') + "-"
-							+ $("#input_search_hp2").textbox('getValue') + "-"
-							+ $("#input_search_hp3").textbox('getValue');
-			$("#input_search_hp").attr("value",search_hp);
-			//url주소 정해지면 활성화 예정
-			$("#form_search_name").attr('action',"/"+searchUrl+"/"+"detail.ch4");
-			//alert($("#form_search_name").attr('action'));
-			$("#form_search_name").submit();
-		}
+	function searchVisitor(){
+		
+	}
+	function searchGoods(){
+		
 	}
 </script>
 <div class="container-fluid" style="text-align:center;">
@@ -290,43 +216,11 @@
 								<div class="col-lg-2">
 									<img class="img-circle" src="../../Style/images/crud/searchbox.png" style="background-color:#6EAFA8">
 								</div>
-									<div class="col-lg-4" style="padding-left:0px;padding-right:10px;">
-										<ul class="nav nav-tabs">
-											<li class="active"><a data-toggle="tab" href="#nav_search1">신청번호</a></li>
-											<li><a data-toggle="tab" href="#nav_search2">신청자정보</a></li>
-										</ul>
-										<div class="tab-content">
-											<div id="nav_search1" class="tab-pane fade in active">
-												<!------------------ 이 구간은 신청번호로 조회시 값이 전송되는 구간 -------------------->
-												<form id="form_search_num" method="POST">
-													<input id="serachType_num" type="hidden" name="searchType" value="num">
-													<br>
-													<input id="input_num" class="easyui-textbox" name="visit_no" data-options="prompt:'신청번호를 입력하세요.'" style="width:300px;">
-												</form>
-												<!------------------ 이 구간은 조회시 값이 전송되는 구간 끝 ------------------>
-											</div>
-											<div id="nav_search2" class="tab-pane fade" style="padding-top:10px;">
-												<!------------------ 이 구간은 이름 & 연락처로 조회시 값이 전송되는 구간 -------------------->
-												<form id="form_search_name" method="POST">
-													<input id="searchType_name" type="hidden" name="searchType" value="info">
-													<input id="input_search_name" class="easyui-textbox" name="visit_apply_name" data-options="prompt:'성명'" style="width:300px;"><br><br>
-													<input id="input_search_hp" type="hidden" name="visit_apply_hp">
-													<input id="input_search_hp1" class="easyui-textbox" type="number" data-options="prompt:'010'"> - 
-													<input id="input_search_hp2" class="easyui-textbox" type="number" data-options="prompt:'XXXX'"> - 
-													<input id="input_search_hp3" class="easyui-textbox" type="number" data-options="prompt:'XXXX'">
-												</form>
-												<!------------------ 이 구간은 조회시 값이 전송되는 구간 끝 ------------------>
-											</div>
-										</div>
-									</div>
-									<div class="col-lg-2" style="padding-left:0px;padding-right:40px;margin : 10px 0px 10px 0px;">
-										<div>
-											<label class="radio-inline"><input id="radio_visitor" type="radio" name="search" value="visitor" checked>방문</label>
-											<label class="radio-inline"><input id="radio_goods" type="radio" name="search" value="goods" >반입</label>
-										</div>
-										<button id="btn_search" class="btn btn-info" type="button" onClick="javascript:searchApply()">조회</button>
-									</div>
-								<div class="col-lg-4" style="padding-left:0px;padding-right:0px;">
+								<div class="col-lg-4" style="padding-left:0px;padding-right:10px;">
+									<button id="btn_search_visitor" class="btn btn-info" type="button" onClick="searchVisiot()">방문조회</button>
+									<button id="btn_search_goods" class="btn btn-info" type="button" onClick="searchGoods()">반입조회</button>
+								</div>
+								<div class="col-lg-5" style="padding-left:0px;padding-right:0px;">
 									<label for="img_process">신청 절차안내</label>
 									<img id="img_process" src="../../Style/images/crud/img_process.png">
 								</div>
