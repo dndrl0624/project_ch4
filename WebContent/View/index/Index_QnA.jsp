@@ -8,9 +8,8 @@
 <%@ include file="../CommonForm/TapLogo.jsp"%>
 <!-- Link Import --> 
 <%@ include file="/Style/common/HeadUI.jsp"%> 
-<title>Insert title here</title>
+<title>Index_QnA</title>
 <style type="text/css">
-	
 	div .textbox {
 		margin-top:7px;
 	}
@@ -21,9 +20,29 @@
 		padding : 10px;
 		padding-left: 15px;
 	}
-	.panel-body {
-		/* padding : 10px;
-		padding-left: 15px; */
+	h2 {
+		text-align: left;
+		padding-left: 20px;
+		border-left: solid 7px;
+		color: black;
+ 	}
+	.banner_Content {
+		margin-top: 0px;
+		padding-top: 10px;
+		height: 300px;
+		background-image: url('../../Style/images/banner/speedGate (3).jpg');
+	}
+	.jumbotron_Content a{
+		font-size: 25px;
+	}
+	.Content_title h1{
+		padding-top: 12px;
+		padding-bottom: 12px;
+	    border-width: thick;
+	    margin-bottom: -10px;
+	}
+	#qa_title{
+		background-color: #5c5c5c;
 	}
 </style>
 <script type="text/javascript">
@@ -51,7 +70,7 @@
 		}
 		//url보내기
 		$('#f_write').attr("method","post");
-		$('#f_write').attr("action","url"); //전송을 하는 곳.
+		$('#f_write').attr("action","index/question.ch4"); //전송을 하는 곳.
 		$('#f_write').submit();
 		
 	}
@@ -68,22 +87,28 @@
 <!-- Banner -->
 <section class="banner_Content">
 	<div class="jumbotron_Content">
-		<div class="container_Banner_Content" style="color: white;">
-			<h1 style="font-size:50px; text-shadow: 4px 2px 2px gray;">Q&A</h1><br>
-			<p style="font-size:20px; text-shadow: 2px 2px 2px gray; ">이부분에 사진을 넣어보자구</p>
-			<div class="page_link">
-				<a href="Index_Main.jsp">Home</a> → <a href="Index_Notice.jsp">Notice</a>
+		<div class="container_Banner_Content col-lg-offset-2 col-lg-2 col-lg-8" 
+			 style="color: white;">
+			<div class="row Content_title">
+				<h1 style="font-size:60px; text-shadow: 4px 2px 2px gray;  margin-top: 70px;">Q&A</h1>
+			</div>
+			<div class="row page_link"  style="padding-left: 5px;">
+				<a href="Index_Main.jsp">Home</a> → <a href="Index_QnA.jsp">Q&A</a>
 			</div>
 		</div>
 	</div> 
 </section>
-<p>질문을 남겨주세요.</p>
+	<div class="well col-lg-offset-2 col-lg-8 col-lg-offset-2" id="qa_title" >
+		<h1><font color="tomato" style="font-family: fantasy;" >1:1문의</font><font color="white">게시판</font></h1>
+		<p><font color="white">서비스를 이용하시는 중 궁금한 사항 및 불편한 사항을 문의해주세요.<br>
+		      문의하신 내용의 처리 및 답변은 평일기준 24시간 이내 처리됩니다.</font></p>
+	</div>
 <!-- 카드 시작 -->
-<div class="container">
-    <div class="col-lg-offset-1 col-lg-10 col-lg-offset-1">
+<div class="container" >
+    <div class="col-lg-offset-1 col-lg-10 col-lg-offset-1" style="margin-top: 30px;">
     <!-- 메세지 입력 부분 -->
 	    <div class="row">
-		    <div class="well" align="center" style="text-align: center;">
+		    <div class="well" align="center" style="text-align: center; ">
 				<form id="f_question">
 					<input type="hidden" name="q_no" value="0">
 					<input type="hidden" name="q_date" value="0">

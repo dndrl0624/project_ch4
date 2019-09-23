@@ -128,7 +128,5 @@
 
 <!-- 공통 Footer -->
 <%@ include file="/View/CommonForm/Footer.jsp"%>
-<!-- Bottom Link Import --> 
-<%@ include file="/Style/common/BottomUI.jsp"%>
 </body>
 </html>
