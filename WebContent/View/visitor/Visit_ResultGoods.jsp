@@ -31,7 +31,7 @@
 	if(null!=request.getParameter("aplg_trans_date")){
 		aplg_trans_date = (String)request.getParameter("aplg_trans_date");
 	}
-	//방문지
+	//반입지
 	String com_name = "null";
 	if(null!=request.getParameter("com_name")){
 		com_name = (String)request.getParameter("com_name");
@@ -46,12 +46,13 @@
 	if(null!=request.getParameter("aplg_reason")){
 		aplg_reason = (String)request.getParameter("aplg_reason");
 	}
-	
 	//반입물품
-	List<Map<String,Object>> gmList = new ArrayList<>();
-	if(null!=request.getAttribute("gmList")){
-		gmList = (List<Map<String,Object>>)request.getAttribute("gmList");
+	List<Map<String,Object>> gmAddList = new ArrayList<>();
+	if(null!=request.getAttribute("gmAddList")){
+		gmAddList = (List<Map<String,Object>>)request.getAttribute("gmAddList");
 	}
+	
+	//버릴거
 	String[] gmng_name = {"LG그램","갤럭시 노트10+","시디즈 의자"};
 	String[] gmng_type = {"전자제품","전자제품","의자"};
 	String[] gmng_quan = {"5","10","30"};
@@ -111,15 +112,21 @@
 	.table th {
 		background-color: #DDDDDD;
 	}
+	#md_cancle_body {
+		padding-left: 0px;
+		padding-right: 0px;
+		text-align: center;
+	}
+	#md_cancle_header {
+		background-color: #DDDDDD;
+	}
 </style>
 </head>
 <body>
 <%@ include file="/View/CommonForm/Top.jsp"%>
 <script type="text/javascript">
 	$(document).ready(function(){
-		
-		//////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////// 수우우우우우우우우웅 저어어어어어어어어어엉  //////////////////////////////
+		////////// 버릴거  //////////
 		var gmng_name = new Array();
 		<% for(String name : gmng_name){%>gmng_name.push('<%=name%>');<%}%>
 		var gmng_type = new Array();
@@ -130,18 +137,28 @@
 			var gRow = "<tr><td>"+gmng_name[i]+"</td><td>"+gmng_type[i]+"</td><td>"+gmng_quan[i]+"</td></tr>";
 			$("#tb_goods tbody").append(gRow);
 		}
-		////////////////////////// 수우우우우우우우우웅 저어어어어어어어어어엉  //////////////////////////////
-		//////////////////////////////////////////////////////////////////////////////////////
-	
+		////////// 버릴거  //////////
+		
+		//쓸거
+		<% for(int i=0;i<gmAddList.size();i++){ %>
+		var gRow = "<tr><td>"+<%=gmAddList.get(i).get("gmng_name") %>
+					+"</td><td>"+<%=gmAddList.get(i).get("gmng_type") %>+"</td>"
+					+"</td><td>"+<%=gmAddList.get(i).get("gmng_quan") %>+"</td></tr>";
+		$("#tb_goods tbody").append(gRow);
+		<% } %>
 	});
 	function applyUpdate(){
 		//alert("수정");
-		$("#form_next").attr("action","/goods/update.ch4");
+		$("#form_next").attr("action","/goods/changeGoods.ch4");
 		$("#form_next").submit();
 	}
-	function applyCancle(){
-		//alert("취소");
-		$("#form_next").attr("action","/goods/cancle.ch4");
+	//반입신청 확인 Modal 띄우기
+	function confirmCancle(){
+		$("#md_cancle").modal("show");
+	}
+	//반입신청 취소
+	function applyCancle(){	
+		$("#form_next").attr('action','/goods/cancle.ch4');
 		$("#form_next").submit();
 	}
 </script>
@@ -159,7 +176,7 @@
 	    	<div class="row">
 		    	<div style="text-align:center;"> 
 					<button id="btn_update" class="btn btn-primary" type="button" onclick="applyUpdate()" style="width:120px;margin-right:20px;">신청변경</button>
-					<button id="btn_cancle" class="btn btn-danger" type="button" onclick="applyCancle()" style="width:120px;margin-right:20px;">신청취소</button>
+					<button id="btn_cancle" class="btn btn-danger" type="button" onclick="confirmCancle()" style="width:120px;margin-right:20px;">신청취소</button>
 					<button id="btn_navi" class="btn btn-default" type="button" onclick="location.href='Visit_Navigation.jsp'" style="width:120px;margin-right:20px;">오시는길</button>
 					<button id="btn_main" class="btn btn-info" type="button" onclick="location.href='/service/visitor.ch4'" style="width:120px;">메인으로</button>
 				</div>
@@ -240,6 +257,22 @@
 			</div>
 	    </div>
   	</div>
+</div>
+<!-- 신청취소 확인 Modal -->
+<div id="md_cancle" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div id="md_cancle_header" class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">신청 취소</h4>
+			</div>
+			<div id="md_cancle_body" class="modal-body">
+				<p>접수하신 반입신청을 취소하시겠습니까?</p>
+				<button type="button" class="btn btn-basic" data-dismiss="modal">아니요</button>
+				<button type="button" class="btn btn-danger" onClick="applyCancle()">예</button>
+			</div>
+		</div>
+	</div>
 </div>
 <form id="form_next" method="POST">
 	<input type="hidden" name="aplg_no" value="<%=aplg_no %>">

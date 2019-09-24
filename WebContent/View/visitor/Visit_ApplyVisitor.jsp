@@ -887,9 +887,9 @@
 					<tr>
 						<th><p>전화번호</p></th>
 						<td>
-							<input id="v_hp1" class="easyui-textbox" type="number" style="width:60px;"> -
-							<input id="v_hp2" class="easyui-textbox" type="number" style="width:60px;"> -
-							<input id="v_hp3" class="easyui-textbox" type="number" style="width:60px;">
+							<input id="v_hp1" class="easyui-numberbox" style="width:60px;"> -
+							<input id="v_hp2" class="easyui-numberbox" style="width:60px;"> -
+							<input id="v_hp3" class="easyui-numberbox" style="width:60px;">
 						</td>
 					</tr>
 				</table>

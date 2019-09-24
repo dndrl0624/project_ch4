@@ -20,29 +20,9 @@
 <%@ include file="../CommonForm/Top.jsp"%>
 <script type="text/javascript">
 	function applyVisitor(){
-// 		var param = document.createElement('input');
-// 		param.setAttribute('type','hidden');
-// 		param.setAttribute('name','pp');
-// 		param.setAttribute('value','visitor');
-// 		var form = document.createElement('form');
-// 		form.appendChild(param);
-// 		form.setAttribute('method','POST');
-// 		form.setAttribute('action','/visitor/visitPurpose.ch4');
-// 		document.body.appendChild(form);
-// 		form.submit();
 		location.href = "/visitor/visitPurpose.ch4?pp=visitor";
 	}
 	function applyGoods(){
-// 		var param = document.createElement('input');
-// 		param.setAttribute('type','hidden');
-// 		param.setAttribute('name','pp');
-// 		param.setAttribute('value','goods');
-// 		var form = document.createElement('form');
-// 		form.appendChild(param);
-// 		form.setAttribute('method','POST');
-// 		form.setAttribute('action','/visitor/visitPurpose.ch4');
-// 		document.body.appendChild(form);
-// 		form.submit();
 		location.href = "/visitor/visitPurpose.ch4?pp=goods";
 	}
 </script>

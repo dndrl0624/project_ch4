@@ -61,29 +61,32 @@
 	if(null!=request.getParameter("visit_purps")){
 		visit_purps = (String)request.getParameter("visit_purps");
 	}
-	
 	//방문자 이름 & 연락처
-	List<Map<String,Object>> vtList = new ArrayList<>();
-	if(null!=request.getAttribute("vtList")){
-		vtList = (List<Map<String,Object>>)request.getAttribute("vtList");
+	List<Map<String,Object>> vtAddList = new ArrayList<>();
+	if(null!=request.getAttribute("vtAddList")){
+		vtAddList = (List<Map<String,Object>>)request.getAttribute("vtAddList");
 	}
-	String[] visitor_name = {"김용현","김현태","이하나","현태호"};
-	String[] visitor_hp = {"010-1111-1111","010-2222-2222","010-3333-3333","010-4444-4444"};
 	
 	//반입기기
-	List<Map<String,Object>> tnList = new ArrayList<>();
-	if(null!=request.getAttribute("tnList")){
-		tnList = (List<Map<String,Object>>)request.getAttribute("tnList");
+	List<Map<String,Object>> tnAddList = new ArrayList<>();
+	if(null!=request.getAttribute("tnAddList")){
+		tnAddList = (List<Map<String,Object>>)request.getAttribute("tnAddList");
 	}
+	
+	//주차	
+	List<Map<String,Object>> pkAddList = new ArrayList<>();
+	if(null!=request.getAttribute("pkAddList")){
+		pkAddList = (List<Map<String,Object>>)request.getAttribute("pkAddList");
+	}
+	
+	//버릴거
+	String[] visitor_name = {"김용현","김현태","이하나","현태호"};
+	String[] visitor_hp = {"010-1111-1111","010-2222-2222","010-3333-3333","010-4444-4444"};
+	//버릴거
 	String[] tkin_kind = {"노트북","휴대전화"};
 	String[] tkin_brand = {"LG전자","삼성전자",};
 	String[] tkin_model = {"lg그램","갤럭시노트10+"};
-	
-	//주차	
-	List<Map<String,Object>> pkList = new ArrayList<>();
-	if(null!=request.getAttribute("pkList")){
-		pkList = (List<Map<String,Object>>)request.getAttribute("pkList");
-	}
+	//버릴거
 	String[] parking_num = {"123가4567"};
 	String[] parking_kind = {"승용차"};
 	String[] parking_model = {"BMW"};
@@ -151,15 +154,21 @@
 	.table th {
 		background-color: #DDDDDD;
 	}
+	#md_cancle_body {
+		padding-left: 0px;
+		padding-right: 0px;
+		text-align: center;
+	}
+	#md_cancle_header {
+		background-color: #DDDDDD;
+	}
 </style>
 </head>
 <body>
 <%@ include file="/View/CommonForm/Top.jsp"%>
 <script type="text/javascript">
 	$(document).ready(function(){
-		
-		//////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////// 수우우우우우우우우웅 저어어어어어어어어어엉  //////////////////////////////
+		////////// 버릴거  //////////
 		var visitor_name = new Array();
 		<% for(String name : visitor_name){%>visitor_name.push('<%=name%>');<%}%>
 		var visitor_hp = new Array();
@@ -168,6 +177,16 @@
 			var vRow = "<tr><td>"+visitor_name[i]+"</td><td>"+visitor_hp[i]+"</td></tr>";
 			$("#tb_visitor tbody").append(vRow);
 		}
+		////////// 버릴거  //////////
+		
+		//쓸거
+		<% for(int i=0;i<vtAddList.size();i++){ %>
+		var vRow = "<tr><td>"+<%=vtAddList.get(i).get("visitor_name") %>
+					+"</td><td>"+<%=vtAddList.get(i).get("visitor_hp") %>+"</td></tr>";
+		$("#tb_visitor tbody").append(vRow);
+		<% } %>
+		
+		////////// 버릴거  //////////
 		var tkin_kind = new Array();
 		<% for(String kind : tkin_kind){%>tkin_kind.push('<%=kind%>');<%}%>
 		var tkin_brand = new Array();
@@ -178,6 +197,17 @@
 			var dRow = "<tr><td>"+tkin_kind[i]+"</td><td>"+tkin_brand[i]+"</td><td>"+tkin_model[i]+"</td></tr>";
 			$("#tb_device tbody").append(dRow);
 		}
+		////////// 버릴거  //////////
+		
+		//쓸거
+		<% for(int i=0;i<tnAddList.size();i++){ %>
+		var dRow = "<tr><td>"+<%=tnAddList.get(i).get("tkin_kind") %>
+					+"</td><td>"+<%=tnAddList.get(i).get("tkin_brand") %>+"</td>"
+					+"</td><td>"+<%=tnAddList.get(i).get("tkin_model") %>+"</td></tr>";
+		$("#tb_device tbody").append(dRow);
+		<% } %>
+		
+		////////// 버릴거  //////////
 		var parking_num = new Array();
 		<% for(String num : parking_num){%>parking_num.push('<%=num%>');<%}%>
 		var parking_kind = new Array();
@@ -188,19 +218,28 @@
 			var pRow = "<tr><td>"+parking_num[i]+"</td><td>"+parking_kind[i]+"</td><td>"+parking_model[i]+"</td></tr>";
 			$("#tb_parking tbody").append(pRow);
 		}
-		////////////////////////// 수우우우우우우우우웅 저어어어어어어어어어엉  //////////////////////////////
-		//////////////////////////////////////////////////////////////////////////////////////
+		////////// 버릴거  //////////
 		
+		//쓸거
+		<% for(int i=0;i<pkAddList.size();i++){ %>
+		var pRow = "<tr><td>"+<%=pkAddList.get(i).get("parking_num") %>
+					+"</td><td>"+<%=pkAddList.get(i).get("parking_kind") %>+"</td>"
+					+"</td><td>"+<%=pkAddList.get(i).get("parking_model") %>+"</td></tr>";
+		$("#tb_parking tbody").append(pRow);
+		<% } %>
 	});
 	function applyUpdate(){
-		alert("수정");
+		//alert("수정");
 		$("#form_next").attr("action","/visitor/changeVisitor.ch4");
 		$("#form_next").submit();
 	}
-	
-	function applyCancle(){
-		alert("취소");
-		$("#form_next").attr("action","/visitor/cancle.ch4");
+	//방문신청 확인 Modal 띄우기
+	function confirmCancle(){
+		$("#md_cancle").modal("show");
+	}
+	//방문신청 취소
+	function applyCancle(){	
+		$("#form_next").attr('action','/visitor/cancle.ch4');
 		$("#form_next").submit();
 	}
 </script>
@@ -218,7 +257,7 @@
 	    	<div class="row">
 		    	<div style="text-align:center;"> 
 					<button id="btn_update" class="btn btn-primary" type="button" onclick="applyUpdate()" style="width:120px;margin-right:20px;">신청변경</button>
-					<button id="btn_cancle" class="btn btn-danger" type="button" onclick="applyCancle()" style="width:120px;margin-right:20px;">신청취소</button>
+					<button id="btn_cancle" class="btn btn-danger" type="button" onclick="confirmCancle()" style="width:120px;margin-right:20px;">신청취소</button>
 					<button id="btn_navi" class="btn btn-default" type="button" onclick="location.href='Visit_Navigation.jsp'" style="width:120px;margin-right:20px;">오시는길</button>
 					<button id="btn_main" class="btn btn-info" type="button" onclick="location.href='/service/visitor.ch4'" style="width:120px;">메인으로</button>
 				</div>
@@ -365,6 +404,22 @@
 			</div>
 	    </div>
   	</div>
+</div>
+<!-- 신청취소 확인 Modal -->
+<div id="md_cancle" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div id="md_cancle_header" class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">신청 취소</h4>
+			</div>
+			<div id="md_cancle_body" class="modal-body">
+				<p>접수하신 방문신청을 취소하시겠습니까?</p>
+				<button type="button" class="btn btn-basic" data-dismiss="modal">아니요</button>
+				<button type="button" class="btn btn-danger" onClick="applyCancle()">예</button>
+			</div>
+		</div>
+	</div>
 </div>
 <form id="form_next" method="POST">
 	<input type="hidden" name="visit_no" value="<%=visit_no %>">

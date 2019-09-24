@@ -234,6 +234,21 @@
 		////////////물품 추가 modal 띄우기 끝.
 		//입력값 테이블에 row추가하기 
 		$("#addGoods").on('click',function(){
+			f(!($("#v_goodsname").val())){
+				alert("물품명을 입력해 주세요.");
+				$("#v_goodsname").textbox('textbox').focus();
+				return;
+			}
+			if(!($("#v_goodsinfo").val())){
+				alert("물품종류를 입력해 주세요.");
+				$("#v_goodsinfo").textbox('textbox').focus();
+				return;
+			}
+			if(!($("#v_ea").val())){
+				alert("물품수량를 입력해 주세요.");
+				$("#v_ea").numberbox('textbox').focus();
+				return;
+			}
 			var goodsname = $("#v_goodsname").val();
 			var EA = $("#v_ea").val();
 			var goodsinfo = $("#v_goodsinfo").val();
@@ -244,7 +259,7 @@
 			$("#tb_goods tbody").append(row);
 			$("#v_goodsname").textbox('setValue',null);
 			$("#v_goodsinfo").textbox('setValue',null);
-			$("#v_ea").textbox('setValue',null);
+			$("#v_ea").numberbox('setValue',null);
 			$("#md_goods").modal("hide");
 			gIndex++;
 		});
@@ -464,7 +479,7 @@
 					</tr>
 					<tr>
 						<th><p>EA</p></th>
-						<td><input id="v_ea" class="easyui-textbox"></td>
+						<td><input id="v_ea" class="easyui-numberbox"></td>
 					</tr>
 				</table>
 			</div>
