@@ -67,6 +67,14 @@
 		padding-left: 100px;
 		padding-right: 100px;
 	}
+	#md_cancle_body {
+		padding-left: 0px;
+		padding-right: 0px;
+		text-align: center;
+	}
+	#md_cancle_header {
+		background-color: #DDDDDD;
+	}
 	.modal-body.detail {
 		padding-left: 50px;
 		padding-right: 50px;
@@ -132,24 +140,26 @@
 			],
 			onClickRow:function(row,$element,field){
 				var visit_no = $element.find("td:first").html();
+				$("#input_update").attr('value',visit_no);
 // 				$.ajax({
 // 					type: 'get',
 // 					dataType: 'json',
 // 					url: '/visitor/detail.ch4?visit_no='+visit_no,
 // 					success: function(result){
-						
+//						//////////////////////  값 뿌려주기  /////////////////////////
+//
+//					
+//						//////////////////////  값 뿌려주기  /////////////////////////
 // 					}
 // 				});
 				//방문이력 조회 Modal 띄우기
 				$("#md_detail").modal('show');
 			},
-			onDblClickRow:function(row,$element,field){
-				alert("뭐할까");
-			}
 		});
 	});
 	//조회페이지 넘어가는 함수
 	function searchApply(){
+		//테스트용
 		$.ajax({
 			url: "../../json/testLog3.json",
 			dataType: "json",
@@ -225,6 +235,28 @@
 // 			});
 // 		}
 	}
+	//방문신청 변경 페이지 이동
+	function applyUpdate(){
+		$("#form_next").attr('action','/visitor/changeVisitor.ch4');
+		$("#form_next").submit();
+	}
+	//방문신청 확인 Modal 띄우기
+	function confirmCancle(){
+		$("#md_cancle").modal("show");
+	}
+	//방문신청 취소
+	function applyCancle(){	
+		$("#form_next").attr('action','/visitor/cancle.ch4');
+		$("#form_next").submit();
+	}
+	//신청취소 Modal 끄기
+	function closeCancle(){
+		$("#md_cancle").modal("hide");
+		//모달 하나를 끄면 원래있던 모달의 스크롤이 해제됨..
+		//그래서 같이 꺼버림
+		$("#md_detail").modal('hide');
+	}
+	
 </script>
 <div class="container">
 	<div class="row">
@@ -388,12 +420,29 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<form id="form_update" method="POST">
+				<form id="form_next" method="POST">
 					<input id="input_update" type="hidden" name="visit_no" value="">
 				</form>
-        		<button id="btn_update" type="button" class="btn btn-primary">수정</button>
-        		<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+        		<button id="btn_update" type="button" class="btn btn-primary" onClick="applyUpdate()">신청변경</button>
+        		<button id="btn_cancle" type="button" class="btn btn-danger" onClick="confirmCancle()">신청취소</button>
+        		<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
         	</div>
+		</div>
+	</div>
+</div>
+<!-- 신청취소 확인 Modal -->
+<div id="md_cancle" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div id="md_cancle_header" class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">신청 취소</h4>
+			</div>
+			<div id="md_cancle_body" class="modal-body">
+				<p>접수하신 방문신청을 취소하시겠습니까?</p>
+				<button type="button" class="btn btn-basic" onClick="closeCancle()">아니요</button>
+				<button type="button" class="btn btn-danger" onClick="applyCancle()">예</button>
+			</div>
 		</div>
 	</div>
 </div>

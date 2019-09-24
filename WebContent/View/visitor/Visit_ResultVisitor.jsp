@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -60,26 +63,30 @@
 	}
 	
 	//방문자 이름 & 연락처
+	List<Map<String,Object>> vtList = new ArrayList<>();
+	if(null!=request.getAttribute("vtList")){
+		vtList = (List<Map<String,Object>>)request.getAttribute("vtList");
+	}
 	String[] visitor_name = {"김용현","김현태","이하나","현태호"};
-		//String[] visitor_name = request.getParameterValues("visitor_name");
 	String[] visitor_hp = {"010-1111-1111","010-2222-2222","010-3333-3333","010-4444-4444"};
-		//String[] visitor_hp = request.getParameterValues("visitor_hp");
 	
 	//반입기기
+	List<Map<String,Object>> tnList = new ArrayList<>();
+	if(null!=request.getAttribute("tnList")){
+		tnList = (List<Map<String,Object>>)request.getAttribute("tnList");
+	}
 	String[] tkin_kind = {"노트북","휴대전화"};
-		//String[] tkin_kind = request.getParameterValues("tkin_kind");
 	String[] tkin_brand = {"LG전자","삼성전자",};
-		//String[] tkin_brand = request.getParameterValues("tkin_brand");
 	String[] tkin_model = {"lg그램","갤럭시노트10+"};
-		//String[] tkin_model = request.getParameterValues("tkin_model");
 	
 	//주차	
+	List<Map<String,Object>> pkList = new ArrayList<>();
+	if(null!=request.getAttribute("pkList")){
+		pkList = (List<Map<String,Object>>)request.getAttribute("pkList");
+	}
 	String[] parking_num = {"123가4567"};
-		//String[] parking_num = request.getParameterValues("parking_num");
 	String[] parking_kind = {"승용차"};
-		//String[] parking_kind = request.getParameterValues("parking_kind");
 	String[] parking_model = {"BMW"};
-		//String[] parking_model = request.getParameterValues("parking_model");
 %>
 <!DOCTYPE html>
 <html>
@@ -150,6 +157,9 @@
 <%@ include file="/View/CommonForm/Top.jsp"%>
 <script type="text/javascript">
 	$(document).ready(function(){
+		
+		//////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////// 수우우우우우우우우웅 저어어어어어어어어어엉  //////////////////////////////
 		var visitor_name = new Array();
 		<% for(String name : visitor_name){%>visitor_name.push('<%=name%>');<%}%>
 		var visitor_hp = new Array();
@@ -178,10 +188,13 @@
 			var pRow = "<tr><td>"+parking_num[i]+"</td><td>"+parking_kind[i]+"</td><td>"+parking_model[i]+"</td></tr>";
 			$("#tb_parking tbody").append(pRow);
 		}
+		////////////////////////// 수우우우우우우우우웅 저어어어어어어어어어엉  //////////////////////////////
+		//////////////////////////////////////////////////////////////////////////////////////
+		
 	});
 	function applyUpdate(){
 		alert("수정");
-		$("#form_next").attr("action","/visitor/update.ch4");
+		$("#form_next").attr("action","/visitor/changeVisitor.ch4");
 		$("#form_next").submit();
 	}
 	

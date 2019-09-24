@@ -1,25 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+	//Main -> Agreement -> Select -> ApplyVisit (세션값 꺼내기)
 	String com_no = "null";
-	if(null!=request.getParameter("com_no")){
-		com_no = (String)request.getParameter("com_no");
+	if(null!=request.getSession().getAttribute("com_no")){
+		com_no = (String)request.getSession().getAttribute("com_no");
 	}
 	String com_name = "null";
-	if(null!=request.getParameter("com_name")){
-		com_name = (String)request.getParameter("com_name");
+	if(null!=request.getSession().getAttribute("com_name")){
+		com_name = (String)request.getSession().getAttribute("com_name");
 	}
 	String visit_desti = "null";
-	if(null!=request.getParameter("visit_desti")){
-		visit_desti = (String)request.getParameter("visit_desti");
+	if(null!=request.getSession().getAttribute("visit_desti")){
+		visit_desti = (String)request.getSession().getAttribute("visit_desti");
 	}
 	String visit_apply_name = "null";
-	if(null!=request.getParameter("visit_apply_name")){
-		visit_apply_name = (String)request.getParameter("visit_apply_name");
+	if(null!=request.getSession().getAttribute("visit_apply_name")){
+		visit_apply_name = (String)request.getSession().getAttribute("visit_apply_name");
 	}
 	String visit_apply_hp = "null";
-	if(null!=request.getParameter("visit_apply_hp")){
-		visit_apply_hp = (String)request.getParameter("visit_apply_hp");
+	if(null!=request.getSession().getAttribute("visit_apply_hp")){
+		visit_apply_hp = (String)request.getSession().getAttribute("visit_apply_hp");
 	}
 %>
 <!DOCTYPE html>

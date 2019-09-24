@@ -50,6 +50,18 @@
 		padding-left : 0px;
 		padding-right : 0px;
 	}
+	#btn_search_visitor,
+	#btn_search_goods {
+		display: inline;
+		width : 35%;
+		height : 110px;
+		font-size : 22px;
+		padding-top : 0px;
+		padding-bottom : 0px;
+		padding-left : 0px;
+		padding-right : 0px;
+		margin-right: 30px;
+	}
 	.btn#btn_search {
 		width : 100%;
 		height : 80px;
@@ -142,10 +154,10 @@
 	}
 	//조회페이지 넘어가는 함수
 	function searchVisitor(){
-		
+		location.href = "/visitor/searchVisitor.ch4";
 	}
 	function searchGoods(){
-		
+		location.href = "/goods/searchGoods.ch4";
 	}
 </script>
 <div class="container-fluid" style="text-align:center;">
@@ -217,11 +229,13 @@
 									<img class="img-circle" src="../../Style/images/crud/searchbox.png" style="background-color:#6EAFA8">
 								</div>
 								<div class="col-lg-4" style="padding-left:0px;padding-right:10px;">
-									<button id="btn_search_visitor" class="btn btn-info" type="button" onClick="searchVisiot()">방문조회</button>
-									<button id="btn_search_goods" class="btn btn-info" type="button" onClick="searchGoods()">반입조회</button>
+									<div class="row" style="text-align:center;padding-top:15px;">
+										<button id="btn_search_visitor" class="btn btn-info" type="button" onClick="searchVisitor()">방문조회</button>
+										<button id="btn_search_goods" class="btn btn-warning" type="button" onClick="searchGoods()">반입조회</button>
+									</div>
 								</div>
-								<div class="col-lg-5" style="padding-left:0px;padding-right:0px;">
-									<label for="img_process">신청 절차안내</label>
+								<div class="col-lg-6" style="padding-left:0px;padding-right:0px;text-align:center;">
+									<label for="img_process">신청 절차안내</label><br>
 									<img id="img_process" src="../../Style/images/crud/img_process.png">
 								</div>
 							</div>

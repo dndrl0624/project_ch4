@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -45,12 +48,13 @@
 	}
 	
 	//반입물품
+	List<Map<String,Object>> gmList = new ArrayList<>();
+	if(null!=request.getAttribute("gmList")){
+		gmList = (List<Map<String,Object>>)request.getAttribute("gmList");
+	}
 	String[] gmng_name = {"LG그램","갤럭시 노트10+","시디즈 의자"};
-		//String[] gmng_name = request.getParameterValues("gmng_name");
 	String[] gmng_type = {"전자제품","전자제품","의자"};
-		//String[] gmng_name = request.getParameterValues("gmng_name");
 	String[] gmng_quan = {"5","10","30"};
-		//String[] gmng_quan = request.getParameterValues("gmng_quan");
  %>
 <!DOCTYPE html>
 <html>
@@ -113,6 +117,9 @@
 <%@ include file="/View/CommonForm/Top.jsp"%>
 <script type="text/javascript">
 	$(document).ready(function(){
+		
+		//////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////// 수우우우우우우우우웅 저어어어어어어어어어엉  //////////////////////////////
 		var gmng_name = new Array();
 		<% for(String name : gmng_name){%>gmng_name.push('<%=name%>');<%}%>
 		var gmng_type = new Array();
@@ -123,6 +130,9 @@
 			var gRow = "<tr><td>"+gmng_name[i]+"</td><td>"+gmng_type[i]+"</td><td>"+gmng_quan[i]+"</td></tr>";
 			$("#tb_goods tbody").append(gRow);
 		}
+		////////////////////////// 수우우우우우우우우웅 저어어어어어어어어어엉  //////////////////////////////
+		//////////////////////////////////////////////////////////////////////////////////////
+	
 	});
 	function applyUpdate(){
 		//alert("수정");
