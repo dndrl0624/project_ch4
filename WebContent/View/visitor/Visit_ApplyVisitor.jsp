@@ -214,7 +214,9 @@
 						var visitor = item.visitor[0].visitor_name +" 외"+ (item.visitor.length-1) + "명";
 						//alert(index + ")\n"+ item.visit_apply_date+"\n"+visitor+"\n"+item.visit_desti+"\n"+item.visit_type+"\n"+item.visit_date+"\n"+item.visit_purps);
 						var row = "<tr id='tr_log'>"
-								+"<td><input id='visit_no' type='radio' name='visit_no' value='"+item.visit_no+"'></td>"
+								+"<td><input id='visit_no' type='radio' name='visit_no' value='"+item.visit_no+"'>"
+								+"<input id='log_term' type='hidden' name='log_term' value='"+item.visit_term+"'>"
+								+"<input id='log_day' type='hidden' name='log_day' value='"+item.visit_day+"'></td>"
 								+"<td>"+item.visit_apply_date+"</td>"
 								+"<td>"+visitor+"</td>"
 								+"<td>"+item.visit_desti+"</td>"
@@ -237,8 +239,11 @@
 				url: '/visitor/preVisitListDetail.ch4',
 				success: function(result){
 					//정보 걸러내기
-					
+					var vtList = result.vtList;
+					var tnList = result.tnList;
+					var pkList = result.pkList;
 					//받은정보 뿌리기
+					
 					
 					//모달끄기
 					$("#md_log").modal('hide');
