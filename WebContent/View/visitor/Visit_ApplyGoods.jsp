@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+	//Main -> Agreement -> Select -> ApplyGoods (세션값 꺼내기)
 	String com_no = "null";
 	if(null!=request.getSession().getAttribute("com_no")){
 		com_no = (String)request.getSession().getAttribute("com_no");
@@ -215,12 +216,26 @@
 				type: 'POST',
 				data: $("#form_reflect").serialize(),
 				dataType: 'json',
-				url: '/goods/preGoodsListDetail.ch4',
+// 				url: '/goods/preGoodsListDetail.ch4',
+				url: '../../json/testLog6.json',
 				success: function(result){
 					//정보 걸러내기
-					
+					var gmList;
+					$.each(result,function(index,item){
+						gmList = item.gmList;
+					});
 					//받은정보 뿌리기
-					
+					for(i=0;i<gmList.length;i++){
+						var goodsname = gmList[i].gmng_name;
+						var goodsinfo = gmList[i].gmng_type;
+						var EA = gmList[i].gmng_quan;
+						var row = "<tr id='gRow"+gIndex+"'><td><input id='chkGoods' type='checkbox' value='"+gIndex+"'></td>"
+								+"<td><input id='gmng_name' type='hidden' name='gmng_name' value='"+goodsname+"'>"+goodsname+"</td>"
+								+"<td><input id='gmng_type' type='hidden' name='gmng_type' value='"+goodsinfo+"'>"+goodsinfo+"</td>"
+								+"<td><input id='gmng_quan' type='hidden' name='gmng_quan' value='"+EA+"'>"+EA+"</td></tr>";
+						$("#tb_goods tbody").append(row);
+						gIndex++;
+					}
 					//모달끄기
 					$("#md_log").modal('hide');
 				}
@@ -234,7 +249,7 @@
 		////////////물품 추가 modal 띄우기 끝.
 		//입력값 테이블에 row추가하기 
 		$("#addGoods").on('click',function(){
-			f(!($("#v_goodsname").val())){
+			if(!($("#v_goodsname").val())){
 				alert("물품명을 입력해 주세요.");
 				$("#v_goodsname").textbox('textbox').focus();
 				return;
@@ -246,7 +261,7 @@
 			}
 			if(!($("#v_ea").val())){
 				alert("물품수량를 입력해 주세요.");
-				$("#v_ea").numberbox('textbox').focus();
+				$("#v_ea").textbox('textbox').focus();
 				return;
 			}
 			var goodsname = $("#v_goodsname").val();
@@ -259,7 +274,7 @@
 			$("#tb_goods tbody").append(row);
 			$("#v_goodsname").textbox('setValue',null);
 			$("#v_goodsinfo").textbox('setValue',null);
-			$("#v_ea").numberbox('setValue',null);
+			$("#v_ea").textbox('setValue',null);
 			$("#md_goods").modal("hide");
 			gIndex++;
 		});
@@ -479,7 +494,7 @@
 					</tr>
 					<tr>
 						<th><p>EA</p></th>
-						<td><input id="v_ea" class="easyui-numberbox"></td>
+						<td><input id="v_ea" class="easyui-textbox" type="number"></td>
 					</tr>
 				</table>
 			</div>

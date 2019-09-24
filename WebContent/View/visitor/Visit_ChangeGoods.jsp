@@ -211,7 +211,7 @@
 			}
 			if(!($("#v_ea").val())){
 				alert("물품수량를 입력해 주세요.");
-				$("#v_ea").numberbox('textbox').focus();
+				$("#v_ea").textbox('textbox').focus();
 				return;
 			}
 			var goodsname = $("#v_goodsname").val();
@@ -224,7 +224,7 @@
 			$("#tb_goods tbody").append(row);
 			$("#v_goodsname").textbox('setValue',null);
 			$("#v_goodsinfo").textbox('setValue',null);
-			$("#v_ea").numberbox('setValue',null);
+			$("#v_ea").textbox('setValue',null);
 			$("#md_goods").modal("hide");
 			gIndex++;
 		});
@@ -441,7 +441,7 @@
 					</tr>
 					<tr>
 						<th><p>EA</p></th>
-						<td><input id="v_ea" class="easyui-numberbox"></td>
+						<td><input id="v_ea" class="easyui-textbox" type="number"></td>
 					</tr>
 				</table>
 			</div>

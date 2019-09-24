@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	//Main -> Agreement -> Select -> ApplyVisit (세션값 꺼내기)
+	//Main -> Agreement -> Select -> ApplyVisitor (세션값 꺼내기)
 	String com_no = "null";
 	if(null!=request.getSession().getAttribute("com_no")){
 		com_no = (String)request.getSession().getAttribute("com_no");
@@ -236,15 +236,50 @@
 				type: 'POST',
 				data: $("#form_reflect").serialize(),
 				dataType: 'json',
-				url: '/visitor/preVisitListDetail.ch4',
+// 				url: '/visitor/preVisitListDetail.ch4',
+				url: '../../json/testLog5.json',
 				success: function(result){
 					//정보 걸러내기
-					var vtList = result.vtList;
-					var tnList = result.tnList;
-					var pkList = result.pkList;
+					var vtList;
+					var tnList;
+					var pkList;
+					$.each(result,function(index,item){
+						vtList = item.vtList;
+						tnList = item.tnList;
+						pkList = item.pkList;
+					});
 					//받은정보 뿌리기
-					
-					
+					for(i=0;i<vtList.length;i++){
+						var name = vtList[i].visitor_name;
+						var hp = vtList[i].visitor_hp;
+						var row = "<tr id='vRow"+vIndex+"'><td><input id='chkVisitor' type='checkbox'></td>"
+								+"<td><input id='visitor_name' type='hidden' name='visitor_name' value='"+name+"'>"+name+"</td>"
+								+"<td><input id='visitor_hp' type='hidden' name='visitor_hp' value='"+hp+"'>"+hp+"</td></tr>";
+						$("#tb_visitor tbody").append(row);
+						vIndex++;
+					}
+					for(i=0;i<tnList.length;i++){
+						var kind = tnList[i].tkin_kind;
+						var brand = tnList[i].tkin_brand;
+						var model = tnList[i].tkin_model;
+						var row = "<tr id='dRow"+dIndex+"'><td><input id='chkDevice' type='checkbox'></td>"
+								+"<td><input id='tkin_kind' type='hidden' name='tkin_kind' value='"+kind+"'>"+kind+"</td>"
+								+"<td><input id='tkin_brand' type='hidden' name='tkin_brand' value='"+brand+"'>"+brand+"</td>"
+								+"<td><input id='tkin_model' type='hidden' name='tkin_model' value='"+model+"'>"+model+"</td></tr>";
+						$("#tb_device tbody").append(row);
+						dIndex++;
+					}
+					for(i=0;i<pkList.length;i++){
+						var num = pkList[i].parking_num;
+						var kind = pkList[i].parking_kind;
+						var model = pkList[i].parking_model;
+						var row = "<tr id='pRow"+pIndex+"'><td><input id='chkParking' type='checkbox'></td>"
+								+"<td><input id='parking_num' type='hidden' name='parking_num' value='"+num+"'>"+num+"</td>"
+								+"<td><input id='parking_kind' type='hidden' name='parking_kind' value='"+kind+"'>"+kind+"</td>"
+								+"<td><input id='parking_model' type='hidden' name='parking_model' value='"+model+"'>"+model+"</td></tr>";
+						$("#tb_parking tbody").append(row);
+						pIndex++;
+					}
 					//모달끄기
 					$("#md_log").modal('hide');
 				}
@@ -892,9 +927,9 @@
 					<tr>
 						<th><p>전화번호</p></th>
 						<td>
-							<input id="v_hp1" class="easyui-numberbox" style="width:60px;"> -
-							<input id="v_hp2" class="easyui-numberbox" style="width:60px;"> -
-							<input id="v_hp3" class="easyui-numberbox" style="width:60px;">
+							<input id="v_hp1" class="easyui-textbox" type="number" style="width:60px;"> -
+							<input id="v_hp2" class="easyui-textbox" type="number" style="width:60px;"> -
+							<input id="v_hp3" class="easyui-textbox" type="number" style="width:60px;">
 						</td>
 					</tr>
 				</table>
