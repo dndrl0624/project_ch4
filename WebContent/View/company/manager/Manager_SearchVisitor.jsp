@@ -13,7 +13,64 @@
 </head>
 <body>
 <script type="text/javascript">
-<%@ include file="../../CommonForm/maxJavascript.jsp"%>
+/* 검색방법 콤보박스로 textbox name값 변경 */
+$(document).ready(function(){
+	$('#SearchType').combobox({
+		onChange: function(newVal){
+			$("#searchText").textbox('textbox').attr('name',newVal);
+			$("#searchText").attr('textboxname',newVal);
+			$("span.textbox > .textbox-value").attr('name',newVal);
+		}
+	});
+});
+
+//combobox 직접입력 방지
+$.fn.combobox.defaults.editable = false
+
+/* 테이블 데이터 */
+$(document).ready(function(){
+	$("#tb_searchGood").bootstrapTable({
+	    columns:[
+	         {field:'VISIT_NO',title:'신청번호'}
+	         ,{field:'VISIT_APPLY_NAME',title:'신청자명'}
+	         ,{field:'COM_NAME',title:'방문지'}
+	         ,{field:'VISIT_DESTI',title:'목적지'}
+	         ,{field:'VISIT_PURPS',title:'방문사유'}
+	         ,{field:'VISIT_APPLY_HP',title:'신청자연락처'}
+	         ,{field:'VISIT_TYPE',title:'방문유형'}
+	         ,{field:'VISIT_APPLY_DATE',title:'방문일자'}
+	         ,{field:'VISIT_TERM',title:'방문주기'}
+	         ,{field:'VISIT_DAY',title:'방문요일'}
+	    ]
+	    ,onLoadError: function(status,jqXHR){
+	    	alert("error");
+	    }
+	    ,pagination:'true'//페이지 네이션
+	    ,paginationPreText:"Previous"
+	    ,paginationNextText:"Next"
+	    ,pageSize:15//기본 페이지 사이즈
+	    ,pageList:[10, 15, 20, 30] //칸수
+	    ,onClickRow:function(row,$element,field){
+	       //$element.attr('data-index',10)
+	       $element.toggleClass('single-select');//로우 클릭했을 때 색 변함.
+	       //alert(row.N_NO);
+	     }
+	    ,onDblClickRow:function(row,$element,field){
+	       alert("상세조회 모달");
+	     }
+	});
+});
+
+/* 검색버튼 기능 */
+function btn_search(){
+	$.ajax({
+		url: "/project_ch4_pojo/json/searchVisitorJson.json"
+		,dataType: "json"
+		,success: function(result){
+			$("#tb_searchGood").bootstrapTable('load',result);
+		}
+	});
+}
 </script>
 <%@ include file="../../CommonForm/Top.jsp"%>
 
@@ -61,22 +118,6 @@
 				</div>
 			</div>
 		</div>
-		<!-- 
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<h4 class="panel-title">
-					<a data-toggle="collapse" href="#collapse3">안내데스크</a>
-				</h4>
-			</div>
-			<div id="collapse3" class="panel-collapse collapse">
-				<div class="panel-body">
-					<a  href="/project_ch4_pojo/View/company/info/Info_Main.jsp">안내데스크 메인</a><br> 
-					<a  href="/project_ch4_pojo/View/company/info/Info_Notice.jsp">안내데스크 공지</a><br> 
-					<a  href="/project_ch4_pojo/View/company/info/Info_ManageLog.jsp">방문자 현황 관리</a><br> 
-				</div>
-			</div>
-		</div>
-		-->
 	</div>
 </aside>
 
@@ -146,52 +187,12 @@
 </div>
 	</div>
 	
-
-<!-- 검색 결과 테이블 -->
-<table class="table table-bordered" style="width: 100%;">
-	<thead style="font-size:20px;">
-	<tr>
-		<th>신청번호</th>
-		<th>신청자</th>
-		<th>방문지</th>
-		<th>목적지</th>
-		<th>방문목적</th>
-		<th>신청자연락처</th>
-		<th>방문유형</th>
-		<th>방문일자</th>
-		<th>방문주기</th>
-		<th>방문요일</th>
-	</tr>
-	</thead>
-<!-- ========================================================================================================== -->
-<!-- 1. if  : 검색결과가 없습니다 / 검색결과 보여주기 -->
-<!-- 2. for : 모든 검색결과 보여주기 -->
-	<tbody>
 	
-	<tr>
-		<td colspan= "10" style="text-align: center;font-size:20px;font-weight: bold;text-decoration: underline;height:100px;">검색결과가 없습니다</td>
-	</tr>
-	
-	<tr style="height:30px;">
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-	</tr>
-	
-	<tr style="cursor: pointer;" onClick="location.href='/project_ch4_pojo/View/company/manager/Manger_DetailVisitor.jsp'">
-		<td colspan= "10" style="text-align: center;font-size:20px; font-weight: bold;text-decoration: underline;" >
-		상세정보 예시</td>
-	</tr>
-	
-	</tbody>
-</table>
+<!-- 부트 테이블 : search_ResultVisitor 참조-->
+	<div class="row">
+		<table class="table table-bordered table-hover" id="tb_searchGood" >
+		</table>
+	</div>
 
 </div>
 

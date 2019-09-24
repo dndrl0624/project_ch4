@@ -6,12 +6,10 @@
 <meta charset="UTF-8">
 <!-- Web icon 설정 --> 
 <%@ include file="../../CommonForm/TapLogo.jsp"%>
-<title>관리자 메인 페이지</title>
+<title>안내관리인 메인 페이지</title>
 <!-- 공통코드 -->
 <%@ include file="../../../Style/common/HeadUI.jsp"%>
 <link rel="stylesheet" type="text/css" href="/project_ch4_pojo/Style/css/maxCss.css">
-</head>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,500,800">
 <style>
 figure.snip1200 {
   font-family: 'Raleway', Arial, sans-serif;
@@ -23,7 +21,7 @@ figure.snip1200 {
   max-height: 310px;
   width: 100%;
   background: #000000;
-  color: white;
+  color: #ffffff;
   text-align: center;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
   font-size: 16px;
@@ -35,8 +33,7 @@ figure.snip1200 * {
   transition: all 0.45s ease-in-out;
 }
 figure.snip1200 img {
-  max-width: 400px;
-  max-height : 100%;
+  max-width: 100%;
   position: relative;
   opacity: 0.9;
 }
@@ -131,7 +128,9 @@ $(".hover").mouseleave(
 	    }
 	  );
 </style>
+</head>
 <body>
+
 <%@ include file="../../CommonForm/Top.jsp"%>
 
 <!-- Side Bar -->
@@ -140,7 +139,7 @@ $(".hover").mouseleave(
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<a href="/project_ch4_pojo/View/company/manager/Manager_Main.jsp">
+					<a href="/project_ch4_pojo/View/company/info/Info_Main.jsp">
 					<i class="fa fa-home" aria-hidden="true"></i>메인페이지</a>
 				</h4>
 			</div>
@@ -148,16 +147,50 @@ $(".hover").mouseleave(
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<a data-toggle="collapse" href="#collapse1">
-					<i class="fa fa-users" aria-hidden="true"></i>방문 신청 조회</a>
+					<a href="/project_ch4_pojo/View/company/info/Info_Notice.jsp">
+					<i class="fa fa-search-plus" aria-hidden="true"></i>안내 공지</a>
 				</h4>
 			</div>
-			<div id="collapse1" class="panel-collapse collapse">
+		</div>
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a href="/project_ch4_pojo/View/company/info/Info_ManageLog.jsp">
+					<i class="fa fa-list-alt" aria-hidden="true"></i>방문자현황관리</a>
+				</h4>
+			</div>
+		</div>
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a href="/project_ch4_pojo/View/company/info/Info_ManageKiosk.jsp">
+					<i class="fa fa-search-plus" aria-hidden="true"></i>키오스크 공지</a>
+				</h4>
+			</div>
+		</div>
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a href="/project_ch4_pojo/View/company/info/Info_ManageDesti.jsp">
+					<i class="fa fa-list-alt" aria-hidden="true"></i>옥내 목적지 관리</a>
+				</h4>
+			</div>
+		</div>
+		
+		
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a data-toggle="collapse" href="#collapse1">
+					<i class="fa fa-users" aria-hidden="true"></i>안내</a>
+				</h4>
+			</div>
+			<div id="collapse1" class="panel-collapse collapse in">
 				<div class="panel-body">
-					<a  href="/project_ch4_pojo/View/company/manager/Manager_SearchVisitor.jsp">
-					<i class="fa fa-search-plus" aria-hidden="true"></i>방문 신청 조회</a><br> 
-					<a  href="/project_ch4_pojo/View/company/manager/Manager_LogVisitor.jsp">
-					<i class="fa fa-list-alt" aria-hidden="true"></i>방문현황 조회</a><br> 
+					<a  href="/project_ch4_pojo/View/company/info/Info_Notice.jsp">
+					<i class="fa fa-search-plus" aria-hidden="true"></i>안내 공지</a><br> 
+					<a  href="/project_ch4_pojo/View/company/info/Info_ManageLog.jsp">
+					<i class="fa fa-list-alt" aria-hidden="true"></i>방문자현황관리</a><br> 
 				</div>
 			</div>
 		</div>
@@ -166,15 +199,15 @@ $(".hover").mouseleave(
 			<div class="panel-heading">
 				<h4 class="panel-title">
 					<a data-toggle="collapse" href="#collapse2">
-					<i class="fa fa-truck" aria-hidden="true"></i>물품 반입 신청 조회</a>
+					<i class="fa fa-truck" aria-hidden="true"></i>시설관리</a>
 				</h4>
 			</div>
-			<div id="collapse2" class="panel-collapse collapse">
+			<div id="collapse2" class="panel-collapse collapse in">
 				<div class="panel-body">
-					<a  href="/project_ch4_pojo/View/company/manager/Manager_SearchGoods.jsp">
-					<i class="fa fa-search-plus" aria-hidden="true"></i>반입 신청 조회</a><br> 
-					<a  href="/project_ch4_pojo/View/company/manager/Manager_LogGoods.jsp">
-					<i class="fa fa-list-alt" aria-hidden="true"></i>반입 현황 조회</a><br> 
+					<a  href="/project_ch4_pojo/View/company/info/Info_ManageKiosk.jsp">
+					<i class="fa fa-search-plus" aria-hidden="true"></i>키오스크 관리</a><br> 
+					<a  href="/project_ch4_pojo/View/company/info/Info_ManageDesti.jsp">
+					<i class="fa fa-list-alt" aria-hidden="true"></i>옥내 목적지 관리</a><br> 
 				</div>
 			</div>
 		</div>
@@ -182,35 +215,38 @@ $(".hover").mouseleave(
 </aside>
 
 <!-- Content -->	<!-- https://blackrockdigital.github.io/startbootstrap-freelancer/ -->
-<div class="mainContent">
-<!-- 페이지 이름 / 환영+ 로그아웃 버튼 -->
-	<div class="col-lg-12">
-		<div style="margin:30px 20px 10px 0px;font-size:35px;width:55%;float:left;">
-			<h1 style="text-align: right">CH4 방문/반입 관리 시스템</h1>
-		</div>
-		<%@ include file="../../CommonForm/logout.jsp"%>
-	</div>
-	<div style="text-align: center; width: 80%;height: 50%;">
-		<img alt="abc" src="/project_ch4_pojo/Style/images/banner/gate.gif" >
-	</div>
-</div>
-	<!-- 하단 : 분할 : 소개 -->
+	<!-- Masthead -->
+  <header style="margin-left:15%;text-align: center;">
+    <div class="container d-flex align-items-center flex-column">
+	<div style="width: 70%; float: left;">
+      <!-- Masthead Heading -->
+      <h1>CH4 방문자 관리 시스템</h1>
+    </div>
+      <%@ include file="../../CommonForm/logout.jsp"%>
+
+      <!-- Masthead Avatar Image -->
+      <img src="/project_ch4_pojo/Style/images/crud/manager.jpg" alt="">
+
+    </div>
+  </header>
+
+	<!-- 하단 : 3개로 분할 : 신청 / 방문/물류/ 인포 소개 -->
 
   <!-- Portfolio Section -->
-  <section style="margin-left: 5%;margin-top: 1%;">
+  <section style="margin-left:5%">
     <div class="container">
 
         <!-- Portfolio Item 1 -->
         <div class="col-md-6 col-lg-3">
 			<figure class="snip1200">
-				<img src="/project_ch4_pojo/Style/images/mainPage/knok.gif" alt="sq-sample27" />
+				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample27.jpg" alt="sq-sample27" />
 				<figcaption>
-					<p>귀사에 방문 신청한 자료들을 조회합니다.이 페이지에서 신청에 대한 승인/반려를 처리합니다.신청 취소는 승인자가 할 수 없으며,신청자만이 취소처리가 가능합니다.</p>
+					<p>안쪽 내용 설명이 들어간 부분이지롱</p>
 					<div class="heading">
-						<h2> 방문<span> 신청 조회</span> </h2>
+						<h2> <span>안내 공지</span> </h2>
 					</div>
 				</figcaption>
-				<a href="/project_ch4_pojo/View/company/manager/Manager_SearchVisitor.jsp"></a>
+				<a href="#"></a>
 			</figure>
          </div>
 
@@ -219,46 +255,46 @@ $(".hover").mouseleave(
 			<figure class="snip1200">
 				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample27.jpg" alt="sq-sample27" />
 				<figcaption>
-					<p>귀사에 대한 방문 신청을 처리한 건들을 조회합니다. 승인된 신청에 대해서 방문자들의 위치를 파악 할 수 있습니다.</p>
+					<p>안쪽 내용 설명이 들어간 부분이지롱</p>
 					<div class="heading">
-						<h2> 방문<span> 현황 조회</span> </h2>
+						<h2> <span>방문자 현황 관리</span> </h2>
 					</div>
 				</figcaption>
-				<a href="/project_ch4_pojo/View/company/manager/Manager_LogVisitor.jsp"></a>
+				<a href="#"></a>
 			</figure>
         </div>
 
         <!-- Portfolio Item 3 -->
         <div class="col-md-6 col-lg-3">
 			<figure class="snip1200">
-				<img src="/project_ch4_pojo/Style/images/mainPage/move.JPG" alt="sq-sample27" />
+				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample27.jpg" alt="sq-sample27" />
 				<figcaption>
-					<p>귀사에 반입할 물품에 대해서 반입 신청한 자료를 조회합니다. 이 페이지에서 신청에 대하 승인/반려를 처리합니다. 신청 취소는 승인자가 할 수 없으며, 신청자만이 취소처리가 가능합니다.</p>
+					<p>안쪽 내용 설명이 들어간 부분이지롱</p>
 					<div class="heading">
-						<h2> 반입<span>신청 조회</span> </h2>
+						<h2> <span>키오스크 관리</span> </h2>
 					</div>
 				</figcaption>
-				<a href="/project_ch4_pojo/View/company/manager/Manager_SearchGoods.jsp"></a>
+				<a href="#"></a>
 			</figure>
           </div>
           
            <!-- Portfolio Item 4 -->
         <div class="col-md-6 col-lg-3">
 			<figure class="snip1200">
-				<img src="/project_ch4_pojo/Style/images/mainPage/goods.JPG" alt="sq-sample27" />
+				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample27.jpg" alt="sq-sample27" />
 				<figcaption>
-					<p>귀사에 대한 반입 신청을 처리한 건들을 조회합니다. 승인된 신청에 대해서 반입 물품들의 처리상태를 파악 할 수 있습니다.</p>
+					<p>안쪽 내용 설명이 들어간 부분이지롱</p>
 					<div class="heading">
-						<h2> 반입<span> 현황 조회</span> </h2>
+						<h2> <span>옥내 목적지 관리</span> </h2>
 					</div>
 				</figcaption>
-				<a href="/project_ch4_pojo/View/company/manager/Manager_LogGoods.jsp"></a>
+				<a href="#"></a>
 			</figure>
           </div>
           
         </div>
-      
   </section>
+  
  
 <!-- 공통 Footer -->
 <%@ include file="/View/CommonForm/Footer.jsp"%>

@@ -13,52 +13,6 @@
 </head>
 <body>
 <script type="text/javascript">
-<%-- <%@ include file="../../CommonForm/maxJavascript.jsp"%> --%>
-/* 테이블 data insert 기능 */
-$(function () {
-		$.ajax({
-				url : "/project_ch4_pojo/json/logGoodsJson.json",
-				//data: $("#폼 태그 아이디").serialize();
-				//type : 'post',
-				dataType : "json",
-				success : function(data) {
-					$.each(data, function() {
-						$('#logGoodsTable').append(
-								"<tr><td>" + this["GMNG_NO"]
-								+ "</td><td>" + this["APLG_NAME"]
-								+ "</td><td>" + this["APLG_HP"]
-								+ "</td><td>" + this["COM_NAME"]
-								+ "</td><td>" + this["APLG_DESTI"]
-								+ "</td><td>" + this["APLG_REASON"]
-								+ "</td><td>" + this["APLG_TRANS_DATE"]
-								+ "</td><td>" + this["GMNG_NAME"]
-								+ "</td><td>" + this["GMNG_TYPE"]
-								+ "</td><td>" + this["GMNG_QUAN"]
-								+ "</td><td>" + this["GMNG_NOTES"]
-								+ "</td></tr>");
-					});
-					$.each(data, function(index, entry) {
-						$('#logGoodsTable').append(
-								"<tr><td>" + entry["GMNG_NO"]
-								+ "</td><td>" + entry["APLG_NAME"]
-								+ "</td><td>" + entry["APLG_HP"]
-								+ "</td><td>" + entry["COM_NAME"]
-								+ "</td><td>" + entry["APLG_DESTI"]
-								+ "</td><td>" + entry["APLG_REASON"]
-								+ "</td><td>" + entry["APLG_TRANS_DATE"]
-								+ "</td><td>" + entry["GMNG_NAME"]
-								+ "</td><td>" + entry["GMNG_TYPE"]
-								+ "</td><td>" + entry["GMNG_QUAN"]
-								+ "</td><td>" + entry["GMNG_NOTES"]
-								+ "</td></tr>");
-					});
-				},
-				error : function() {
-					alert("에러발생");
-				}
-			});
-});
-
 /* 검색방법 콤보박스로 textbox name값 변경 */
 $(document).ready(function(){
 	$('#SearchType').combobox({
@@ -70,16 +24,53 @@ $(document).ready(function(){
 	});
 });
 
+//combobox 직접입력 방지
+$.fn.combobox.defaults.editable = false
+
+/* 테이블 데이터 */
+$(document).ready(function(){
+	$("#tb_searchGood").bootstrapTable({
+	    columns:[
+	         {field:'APLG_NO',title:'신청번호'}
+	         ,{field:'APLG_NAME',title:'신청자명'}
+	         ,{field:'COM_NAME',title:'방문지'}
+	         ,{field:'APLG_DESTI',title:'목적지'}
+	         ,{field:'APLG_REASON',title:'반입사유'}
+	         ,{field:'APLG_HP',title:'신청자연락처'}
+	         ,{field:'APLG_DATE',title:'신청일자'}
+	         ,{field:'GMNG_NAME',title:'반입물품명'}
+	         ,{field:'GMNG_TYPE',title:'물품종류'}
+	         ,{field:'GMNG_QUAN',title:'물품수량'}
+	    ]
+	    ,onLoadError: function(status,jqXHR){
+	    	alert("error");
+	    }
+	    ,pagination:'true'//페이지 네이션
+	    ,paginationPreText:"Previous"
+	    ,paginationNextText:"Next"
+	    ,pageSize:15//기본 페이지 사이즈
+	    ,pageList:[10, 15, 20, 30] //칸수
+	    ,onClickRow:function(row,$element,field){
+	       //$element.attr('data-index',10)
+	       $element.toggleClass('single-select');//로우 클릭했을 때 색 변함.
+	       //alert(row.N_NO);
+	     }
+	    ,onDblClickRow:function(row,$element,field){
+	       alert("상세조회 모달");
+	     }
+	});
+});
+
 /* 검색버튼 기능 */
 function btn_search(){
-	alert(
-			 "콤보:검색  :"+$('#SearchType').combobox('getValue')
-			 +"// text Name : "+$("span.textbox > .textbox-value").attr('name')
-			 +"// text value :"+document.getElementById("searchText").value
-			 +"// 콤보:상태 :"+$('#state').combobox('getValue')
-			 +"// 시작일  :"+$('#datepicker1').datebox('getValue')
-			 +"// 종료일   :"+$('#datepicker2').datebox('getValue')
-	)};
+	$.ajax({
+		url: "/project_ch4_pojo/json/searchGoodsJson.json"
+		,dataType: "json"
+		,success: function(result){
+			$("#tb_searchGood").bootstrapTable('load',result);
+		}
+	});
+}
 </script>
 <%@ include file="../../CommonForm/Top.jsp"%>
 
@@ -127,22 +118,6 @@ function btn_search(){
 				</div>
 			</div>
 		</div>
-		<!-- 
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<h4 class="panel-title">
-					<a data-toggle="collapse" href="#collapse3">안내데스크</a>
-				</h4>
-			</div>
-			<div id="collapse3" class="panel-collapse collapse">
-				<div class="panel-body">
-					<a  href="/project_ch4_pojo/View/company/info/Info_Main.jsp">안내데스크 메인</a><br> 
-					<a  href="/project_ch4_pojo/View/company/info/Info_Notice.jsp">안내데스크 공지</a><br> 
-					<a  href="/project_ch4_pojo/View/company/info/Info_ManageLog.jsp">방문자 현황 관리</a><br> 
-				</div>
-			</div>
-		</div>
-		-->
 	</div>
 </aside>
 
@@ -212,58 +187,11 @@ function btn_search(){
 </div>
 	</div>
 	
-
-<!-- 검색 결과 테이블 -->
-<table class="table table-bordered" style="width: 100%;" border="1">
-	<thead style="font-size:20px;">
-	<tr>
-		<th>신청번호</th>
-		<th>신청자</th>
-		<th>방문지</th>
-		<th>목적지</th>
-		<th>방문목적</th>
-		<th>신청자연락처</th>
-		<th>방문유형</th>
-		<th>방문일자</th>
-		<th>방문주기</th>
-		<th>방문요일</th>
-		<th>반입물품명</th>
-		<th>물품종류</th>
-		<th>물품수량</th>
-	</tr>
-	</thead>
-<!-- ========================================================================================================== -->
-<!-- 1. if  : 검색결과가 없습니다 / 검색결과 보여주기 -->
-<!-- 2. for : 모든 검색결과 보여주기 -->
-	<tbody>
-	
-	<tr>
-		<td colspan= "13" style="text-align: center;font-size:20px;font-weight: bold;text-decoration: underline;height:100px;">검색결과가 없습니다</td>
-	</tr>
-	
-	<tr style="height:30px;">
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-	</tr>
-	
-	<tr style="cursor: pointer;" onClick="location.href='/project_ch4_pojo/View/company/manager/Manger_DetailGoods.jsp'">
-		<td colspan= "10" style="text-align: center;font-size:20px; font-weight: bold;text-decoration: underline;" >
-		상세정보 예시</td>
-	</tr>
-	
-	</tbody>
-</table>
+<!-- 부트 테이블 : search_ResultVisitor 참조-->
+	<div class="row">
+		<table class="table table-bordered table-hover" id="tb_searchGood" >
+		</table>
+	</div>
 
 </div>
 <!-- 공통 Footer -->

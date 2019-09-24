@@ -13,7 +13,63 @@
 </head>
 <body>
 <script type="text/javascript">
-<%@ include file="../../CommonForm/maxJavascript.jsp"%>
+/* 검색방법 콤보박스로 textbox name값 변경 */
+$(document).ready(function(){
+	$('#SearchType').combobox({
+		onChange: function(newVal){
+			$("#searchText").textbox('textbox').attr('name',newVal);
+			$("#searchText").attr('textboxname',newVal);
+			$("span.textbox > .textbox-value").attr('name',newVal);
+		}
+	});
+});
+
+//combobox 직접입력 방지
+$.fn.combobox.defaults.editable = false
+
+/* 테이블 데이터 */
+$(document).ready(function(){
+	$("#tb_logVisitor").bootstrapTable({
+	    columns:[
+	         {field:'CONFM_NO',title:'방문번호'}
+	         ,{field:'CMG_INOUT',title:'처리시간'}
+	         ,{field:'CMG_NOTESz',title:'처리내용'}/* 처리내용 : 입장 퇴장 */
+	         ,{field:'CMG_NOTES',title:'현재위치'}/* 현재위치 : 내부 외부 사내 .. */
+	         ,{field:'CONFM_NAME',title:'방문자명'}
+	         ,{field:'CONFM_HP',title:'연락처'}
+	         ,{field:'COM_NAME',title:'방문지'}
+	         ,{field:'VISIT_DESTI',title:'목적지'}
+	         ,{field:'VISIT_TYPE',title:'방문유형'}
+	         ,{field:'VISIT_DATE',title:'방문일자'}
+	    ]
+	    ,onLoadError: function(status,jqXHR){
+	    	alert("error");
+	    }
+	    ,pagination:'true'//페이지 네이션
+	    ,paginationPreText:"Previous"
+	    ,paginationNextText:"Next"
+	    ,pageSize:10//기본 페이지 사이즈
+	    ,pageList:[10, 15, 20, 30] //칸수
+	    ,onClickRow:function(row,$element,field){
+	       //$element.attr('data-index',10)
+	       $element.toggleClass('single-select');//로우 클릭했을 때 색 변함.
+	       //alert(row.N_NO);
+	     }
+	    ,onDblClickRow:function(row,$element,field){
+	       alert("상세조회 모달");
+	     }
+	});
+});
+/* 버튼 검색 */
+function search(){
+	$.ajax({
+		url: "/project_ch4_pojo/json/logVisitorJson.json"
+		,dataType: "json"
+		,success: function(result){
+			$("#tb_logVisitor").bootstrapTable('load',result);
+		}
+	});
+}
 </script>
 <%@ include file="../../CommonForm/Top.jsp"%>
 
@@ -144,80 +200,18 @@
 			</div>
 	<!-- 검색 버튼 -->
 		<div  class='col-sm-1'>
-			<button type="button" class="btn btn-success" onclick="javascript:btn_search()"
+			<button type="button" class="btn btn-success" onclick="javascript:search()"
 				style="margin-top: 5px;margin-bottom: 15px;float: bottom;">Search</button>
 		</div>
 	</div>
 	
-<!-- 검색 결과 테이블 -->
-<table class="table table-bordered" style="width: 100%;margin-top:20px;" border="1">
-	<thead style="font-size:20px;">
-	<tr>
-		<th>방문번호</th>
-		<th>처리시간</th>		<!-- 시간 -->
-		<th>처리내용</th>		<!-- 들어옴,나감 // 입장 : 사내  // 퇴장:외출 // 퇴장:퇴근-->
-		<th>현재 위치</th>		<!-- 미방문, 사내, 사외  // 외출, 퇴근 -->
-		<th>방문자명</th>
-		<th>연락처</th>		<!-- 방문자 연락처 -->
-		<th>방문지</th>
-		<th>목적지</th>
-		<th>방문유형</th>
-		<th>방문일자</th>
-	</tr>
-	</thead>
-<!-- ========================================================================================================== -->
-<!-- 1. if  : 검색결과가 없습니다 / 검색결과 보여주기 -->
-<!-- 2. for : 모든 검색결과 보여주기 -->
-	<tbody>
-	
-	<tr>
-		<td colspan= "12" style="text-align: center;font-size:20px;font-weight: bold;text-decoration: underline;">검색결과가 없습니다</td>
-	</tr>
-<!--
-	<tr style="cursor: pointer;" onClick="location.href='/project_ch4_pojo/View/company/manager/Manger_DetailVisitor.jsp'">
-		<td colspan= "12" style="text-align: center;font-size:20px; font-weight: bold;text-decoration: underline;" >
-		상세정보 예시 - 페이지 이동</td>
-	</tr>
-	
-	<tr>
-		<td colspan= "10" id="modalopen" data-toggle="modal" data-target="#detailModal"
-		style="text-align: center;font-size:20px; font-weight: bold;text-decoration: underline;" >
-		상세정보 예시 - 모달창</td>
-	</tr>
--->
-	</tbody>
-</table>
+<!-- 부트 테이블 : search_ResultVisitor 참조-->
+	<div class="row">
+		<table class="table table-bordered table-hover" id="tb_logVisitor" >
+		</table>
+	</div>
 
 </div>
-
-<!-- Modal -->
-	<div class="modal fade" id="detailModal" role="dialog">
-		<div class="modal-dialog modal-lg">
-
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h1 class="modal-title" style="text-align: center;font-weight: bold;">모달제목이다</h1>
-				</div>
-				<div class="modal-body">
-					<div class="row">
-						<table class="table table-bordered" style="width: 100%;margin-top:20px;" border="1">
-							<tr>
-								<th></th>
-								<th>방문자명</th>
-								<th>방문자 연락처</th>		
-								<th>위치</th>
-								<th>신청자명</th>
-								<th>신청자 연락처</th>
-								<th></th>
-							</tr>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 
 <!-- 공통 Footer -->
 <%@ include file="/View/CommonForm/Footer.jsp"%>

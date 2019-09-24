@@ -1,51 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-/* 테이블 data insert 기능 */
-$(function () {
-		$.ajax({
-				url : "/project_ch4_pojo/json/logGoodsJson.json",
-				//data: $("#폼 태그 아이디").serialize();
-				//type : 'post',
-				dataType : "json",
-				success : function(data) {
-					$.each(data, function() {
-						$('#logGoodsTable').append(
-								"<tr><td>" + this["GMNG_NO"]
-								+ "</td><td>" + this["APLG_NAME"]
-								+ "</td><td>" + this["APLG_HP"]
-								+ "</td><td>" + this["COM_NAME"]
-								+ "</td><td>" + this["APLG_DESTI"]
-								+ "</td><td>" + this["APLG_REASON"]
-								+ "</td><td>" + this["APLG_TRANS_DATE"]
-								+ "</td><td>" + this["GMNG_NAME"]
-								+ "</td><td>" + this["GMNG_TYPE"]
-								+ "</td><td>" + this["GMNG_QUAN"]
-								+ "</td><td>" + this["GMNG_NOTES"]
-								+ "</td></tr>");
-					});
-					$.each(data, function(index, entry) {
-						$('#logGoodsTable').append(
-								"<tr><td>" + entry["GMNG_NO"]
-								+ "</td><td>" + entry["APLG_NAME"]
-								+ "</td><td>" + entry["APLG_HP"]
-								+ "</td><td>" + entry["COM_NAME"]
-								+ "</td><td>" + entry["APLG_DESTI"]
-								+ "</td><td>" + entry["APLG_REASON"]
-								+ "</td><td>" + entry["APLG_TRANS_DATE"]
-								+ "</td><td>" + entry["GMNG_NAME"]
-								+ "</td><td>" + entry["GMNG_TYPE"]
-								+ "</td><td>" + entry["GMNG_QUAN"]
-								+ "</td><td>" + entry["GMNG_NOTES"]
-								+ "</td></tr>");
-					});
-				},
-				error : function() {
-					alert("에러발생");
-				}
-			});
-});
-
 /* 검색방법 콤보박스로 textbox name값 변경 */
 $(document).ready(function(){
 	$('#SearchType').combobox({
@@ -76,7 +31,7 @@ $.fn.datebox.defaults.formatter = function(date){
     var y = date.getFullYear();
     var m = date.getMonth()+1;
     var d = date.getDate();
-    return y+'-'+(m<10 ? "0"+m:m)+'-'+(d<10 ? "0"+d:d);
+   return y+'-'+(m<10 ? "0"+m:m)+'-'+(d<10 ? "0"+d:d);
 }  
 //datebox parser설정
 $.fn.datebox.defaults.parser = function(s){

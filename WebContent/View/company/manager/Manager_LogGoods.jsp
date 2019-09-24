@@ -13,7 +13,64 @@
 </head>
 <body>
 <script type="text/javascript">
-<%@ include file="../../CommonForm/maxJavascript.jsp"%>
+/* 검색방법 콤보박스로 textbox name값 변경 */
+$(document).ready(function(){
+	$('#SearchType').combobox({
+		onChange: function(newVal){
+			$("#searchText").textbox('textbox').attr('name',newVal);
+			$("#searchText").attr('textboxname',newVal);
+			$("span.textbox > .textbox-value").attr('name',newVal);
+		}
+	});
+});
+
+//combobox 직접입력 방지
+$.fn.combobox.defaults.editable = false
+
+/* 테이블 데이터 */
+$(document).ready(function(){
+	$("#tb_logGood").bootstrapTable({
+	    columns:[
+	         {field:'GMNG_NO',title:'반입번호'}
+	         ,{field:'APLG_NAME',title:'신청자명'}
+	         ,{field:'APLG_HP',title:'연락처'}
+	         ,{field:'COM_NAME',title:'방문지'}
+	         ,{field:'APLG_DESTI',title:'목적지'}
+	         ,{field:'APLG_REASON',title:'반입상'}
+	         ,{field:'APLG_TRANS_DATE',title:'반입일자'}
+	         ,{field:'GMNG_NAME',title:'물품명'}
+	         ,{field:'GMNG_TYPE',title:'물품종류'}
+	         ,{field:'GMNG_QUAN',title:'물품수량'}
+	         ,{field:'GMNG_NOTES',title:'비고'}
+	    ]
+	    ,onLoadError: function(status,jqXHR){
+	    	alert("error");
+	    }
+	    ,pagination:'true'//페이지 네이션
+	    ,paginationPreText:"Previous"
+	    ,paginationNextText:"Next"
+	    ,pageSize:10//기본 페이지 사이즈
+	    ,pageList:[2, 4, 6, 8] //칸수
+	    ,onClickRow:function(row,$element,field){
+	       //$element.attr('data-index',10)
+	       $element.toggleClass('single-select');//로우 클릭했을 때 색 변함.
+	       //alert(row.N_NO);
+	     }
+	    ,onDblClickRow:function(row,$element,field){
+	       alert("상세조회 모달");
+	     }
+	});
+});
+/* 버튼 검색 */
+function search(){
+	$.ajax({
+		url: "/project_ch4_pojo/json/logGoodsJson.json"
+		,dataType: "json"
+		,success: function(result){
+			$("#tb_logGood").bootstrapTable('load',result);
+		}
+	});
+}
 </script>
 <%@ include file="../../CommonForm/Top.jsp"%>
 
@@ -143,45 +200,18 @@
 	</div>
 <!-- 검색 버튼 -->
 	<div  class='col-sm-1'>
-		<button type="button" class="btn btn-success" onclick="javascript:btn_search()"
+		<button type="button" class="btn btn-success" onclick="search()"
 		style="margin-top: 5px;margin-bottom: 15px;float: bottom;">Search</button>
 	</div>
 	</div>
 	
-
-<!-- 검색 결과 테이블 -->
-<table class="table table-bordered" id="logGoodsTable" style="width: 100%;margin-top:20px;" border="1">
-	<thead style="font-size:20px;">
-	<tr>
-		<th>물품번호</th>
-		<th>신청자</th>
-		<th>연락처</th>
-		<th>반입장소</th>
-		<th>목적지</th>
-		<th>반입사유</th>
-		<th>반입일자</th>
-		<th>반입물품명</th>
-		<th>종류</th>
-		<th>수량</th>
-		<th>비고</th>
-	</tr>
-	</thead>
-<!-- ========================================================================================================== -->
-<!-- 1. if  : 검색결과가 없습니다 / 검색결과 보여주기 -->
-<!-- 2. for : 모든 검색결과 보여주기 -->
-	<tr>
-		<td colspan= "11" style="text-align: center;font-size:20px;
-			font-weight: bold;text-decoration: underline;">
-		검색결과가 없습니다</td>
-	</tr>
-<!--	
-	<tr style="cursor: pointer;" onClick="location.href='/project_ch4_pojo/View/company/manager/Manger_DetailGoods.jsp'">
-		<td colspan= "11" style="text-align: center;font-size:20px; font-weight: bold;text-decoration: underline;" >
-		상세정보 예시</td>
-	</tr>
- -->
-</table>
-
+<!-- 부트 테이블 : search_ResultVisitor 참조-->
+	<div class="row">
+		<table class="table table-bordered table-hover" id="tb_logGood" >
+<!--                <thead style=""> -->
+		</table>
+	</div>
+	
 </div>
 <!-- 공통 Footer -->
 <%@ include file="/View/CommonForm/Footer.jsp"%>

@@ -4,18 +4,13 @@ aside {
     width: 15%;
     height: 80%;
     position: fixed;
-    background: #2f323a;
+    background-color: rgb(14,30,43);
     overflow: auto;
 }
 /* 사이드바 overflow 시 스크롤바 안보이게 하기 */
 aside::-webkit-scrollbar { 
     display: none; 
 }
-/* 테이블 제목 구간 가운데 정렬 */
-th {
-	text-align: center;
-}
-
 /* 메인 페이지 프레임 구간 설정 */
 .mainContent {
 	margin:20px 20px 10px 17%;
@@ -37,3 +32,9 @@ th {
     .logout:active{
       transform: translateY(3px);
     }
+    
+/* 테이블 제목 구간 가운데 정렬 */
+th {
+	text-align: center;
+	background-color: #e1f1fd;
+}
