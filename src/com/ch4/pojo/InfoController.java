@@ -27,8 +27,15 @@ public class InfoController implements Controller{
 		Map<String,Object> pMap = new HashMap<>();
 		HashMapBinder hmb = new HashMapBinder(req);
 		hmb.bind(pMap);
-		if(requestName.equals("")) {
-			
+		if(requestName.equals("QRconfirm")) {
+			int result = 0;
+			result = iLogic.confirmQR(pMap);
+			if(result==1) {
+				mav.addObject("pMap", pMap);
+			}
+			else if(result==0) {
+				
+			}
 		}
 		return mav;
 	}

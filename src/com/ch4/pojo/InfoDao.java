@@ -1,5 +1,7 @@
 package com.ch4.pojo;
 
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.log4j.Logger;
@@ -14,6 +16,12 @@ public class InfoDao {
 	public InfoDao() {
 		sqlSessionFactory = MyBatisCommonFactory.getSqlSessionFactory();
 		sqlSession = sqlSessionFactory.openSession();
+	}
+
+	public int confirmQR(Map<String, Object> pMap) {
+		int result = 0;
+		result = sqlSession.selectOne("confirmQR",pMap);
+		return result;
 	}
 
 }

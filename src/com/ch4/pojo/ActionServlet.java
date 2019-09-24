@@ -16,7 +16,7 @@ public class ActionServlet extends HttpServlet {
 	public void doService(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException,IOException{
 		
-		/******************************************************
+		/******************************************************s
 		 * requestURI  : 요청주소에서 호스트부분을 제외한 주소                   *
 		 * contextPath : 해당 요청에 해당하는 폴더 이름(View아래)       *
 		 * command     : 사용자가 요청한 실제 내용(컨트롤러/요청내용)     *
@@ -65,6 +65,9 @@ public class ActionServlet extends HttpServlet {
 				logger.info("CompanyController 호출 성공");
 				viewName = mav.viewName;
 				boolean isRedirect = mav.isRedirect;
+				if(viewName.equals("Fail.jsp")) {
+					contextPath = "";
+				}
 				if(isRedirect) {
 					res.sendRedirect(viewPath + contextPath + viewName);
 				}
@@ -78,6 +81,9 @@ public class ActionServlet extends HttpServlet {
 				logger.info("VisitorController 호출 성공");
 				viewName = mav.viewName;
 				boolean isRedirect = mav.isRedirect;
+				if(viewName.equals("Fail.jsp")) {
+					contextPath = "";
+				}
 				if(isRedirect) {
 					res.sendRedirect(viewPath + contextPath + viewName);
 				}
@@ -90,6 +96,9 @@ public class ActionServlet extends HttpServlet {
 				logger.info("InfoController 호출 성공");
 				viewName = mav.viewName;
 				boolean isRedirect = mav.isRedirect;
+				if(viewName.equals("Fail.jsp")) {
+					contextPath = "";
+				}
 				if(isRedirect) {
 					res.sendRedirect(viewPath + contextPath + viewName);
 				}
@@ -102,6 +111,9 @@ public class ActionServlet extends HttpServlet {
 				logger.info("GoodsController 호출 성공");
 				viewName = mav.viewName;
 				boolean isRedirect = mav.isRedirect;
+				if(viewName.equals("Fail.jsp")) {
+					contextPath = "";
+				}
 				if(isRedirect) {
 					res.sendRedirect(viewPath + "/visitor/" + viewName);
 				}
