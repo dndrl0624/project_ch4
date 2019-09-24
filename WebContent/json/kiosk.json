@@ -1,0 +1,10 @@
+[
+
+	{"KIOSK_NO":"일련번호1","KIOSK_GATE":"위치"
+	,"KIOSK_ST":"정상","KIOSK_NOTES":"비고"
+	,"CON_NO":"회사코드"}
+	,
+	{"KIOSK_NO":"일련번호2","KIOSK_GATE":"위치"
+	,"KIOSK_ST":"고장","KIOSK_NOTES":"비고"
+	,"CON_NO":"회사코드"}
+ ]

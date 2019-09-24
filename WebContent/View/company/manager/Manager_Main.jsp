@@ -13,6 +13,7 @@
 </head>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,500,800">
 <style>
+/* 소개 메뉴 스타일 설정 */
 figure.snip1200 {
   font-family: 'Raleway', Arial, sans-serif;
   position: relative;
@@ -35,8 +36,7 @@ figure.snip1200 * {
   transition: all 0.45s ease-in-out;
 }
 figure.snip1200 img {
-  max-width: 400px;
-  max-height : 100%;
+  max-width: 100%;
   position: relative;
   opacity: 0.9;
 }
@@ -123,13 +123,6 @@ figure.snip1200.hover p {
   -webkit-transition-delay: 0.35s;
   transition-delay: 0.35s;
 }
-</script>
-<script type="text/javascript">
-$(".hover").mouseleave(
-	    function () {
-	      $(this).removeClass("hover");
-	    }
-	  );
 </style>
 <body>
 <%@ include file="../../CommonForm/Top.jsp"%>
@@ -203,9 +196,9 @@ $(".hover").mouseleave(
         <!-- Portfolio Item 1 -->
         <div class="col-md-6 col-lg-3">
 			<figure class="snip1200">
-				<img src="/project_ch4_pojo/Style/images/mainPage/knok.gif" alt="sq-sample27" />
+				<img src="/project_ch4_pojo/Style/images/postIt/yellow.png" alt="sq-sample27" />
 				<figcaption>
-					<p>귀사에 방문 신청한 자료들을 조회합니다.이 페이지에서 신청에 대한 승인/반려를 처리합니다.신청 취소는 승인자가 할 수 없으며,신청자만이 취소처리가 가능합니다.</p>
+					<p>귀사에 방문 신청한 자료들을 조회합니다.이 페이지에서 신청에 대한 승인/반려를 처리합니다.</p>
 					<div class="heading">
 						<h2> 방문<span> 신청 조회</span> </h2>
 					</div>
@@ -217,7 +210,7 @@ $(".hover").mouseleave(
         <!-- Portfolio Item 2 -->
        	<div class="col-md-6 col-lg-3">
 			<figure class="snip1200">
-				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample27.jpg" alt="sq-sample27" />
+				<img src="/project_ch4_pojo/Style/images/postIt/red.png" alt="sq-sample27" />
 				<figcaption>
 					<p>귀사에 대한 방문 신청을 처리한 건들을 조회합니다. 승인된 신청에 대해서 방문자들의 위치를 파악 할 수 있습니다.</p>
 					<div class="heading">
@@ -231,9 +224,9 @@ $(".hover").mouseleave(
         <!-- Portfolio Item 3 -->
         <div class="col-md-6 col-lg-3">
 			<figure class="snip1200">
-				<img src="/project_ch4_pojo/Style/images/mainPage/move.JPG" alt="sq-sample27" />
+				<img src="/project_ch4_pojo/Style/images/postIt/greenblue.png" alt="sq-sample27" />
 				<figcaption>
-					<p>귀사에 반입할 물품에 대해서 반입 신청한 자료를 조회합니다. 이 페이지에서 신청에 대하 승인/반려를 처리합니다. 신청 취소는 승인자가 할 수 없으며, 신청자만이 취소처리가 가능합니다.</p>
+					<p>귀사에 반입할 물품에 대해서 반입 신청한 자료를 조회합니다. 이 페이지에서 신청에 대하 승인/반려를 처리합니다.</p>
 					<div class="heading">
 						<h2> 반입<span>신청 조회</span> </h2>
 					</div>
@@ -245,7 +238,7 @@ $(".hover").mouseleave(
            <!-- Portfolio Item 4 -->
         <div class="col-md-6 col-lg-3">
 			<figure class="snip1200">
-				<img src="/project_ch4_pojo/Style/images/mainPage/goods.JPG" alt="sq-sample27" />
+				<img src="/project_ch4_pojo/Style/images/postIt/blue.png" alt="sq-sample27" />
 				<figcaption>
 					<p>귀사에 대한 반입 신청을 처리한 건들을 조회합니다. 승인된 신청에 대해서 반입 물품들의 처리상태를 파악 할 수 있습니다.</p>
 					<div class="heading">

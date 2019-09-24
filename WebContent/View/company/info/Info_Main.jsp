@@ -10,7 +10,10 @@
 <!-- 공통코드 -->
 <%@ include file="../../../Style/common/HeadUI.jsp"%>
 <link rel="stylesheet" type="text/css" href="/project_ch4_pojo/Style/css/maxCss.css">
+</head>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,500,800">
 <style>
+/* 소개메뉴 스타일 */
 figure.snip1200 {
   font-family: 'Raleway', Arial, sans-serif;
   position: relative;
@@ -120,15 +123,8 @@ figure.snip1200.hover p {
   -webkit-transition-delay: 0.35s;
   transition-delay: 0.35s;
 }
-</script>
-<script type="text/javascript">
-$(".hover").mouseleave(
-	    function () {
-	      $(this).removeClass("hover");
-	    }
-	  );
 </style>
-</head>
+
 <body>
 
 <%@ include file="../../CommonForm/Top.jsp"%>
@@ -164,7 +160,7 @@ $(".hover").mouseleave(
 			<div class="panel-heading">
 				<h4 class="panel-title">
 					<a href="/project_ch4_pojo/View/company/info/Info_ManageKiosk.jsp">
-					<i class="fa fa-search-plus" aria-hidden="true"></i>키오스크 공지</a>
+					<i class="fa fa-search-plus" aria-hidden="true"></i>키오스크 관리</a>
 				</h4>
 			</div>
 		</div>
@@ -176,59 +172,22 @@ $(".hover").mouseleave(
 				</h4>
 			</div>
 		</div>
-		
-		
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<h4 class="panel-title">
-					<a data-toggle="collapse" href="#collapse1">
-					<i class="fa fa-users" aria-hidden="true"></i>안내</a>
-				</h4>
-			</div>
-			<div id="collapse1" class="panel-collapse collapse in">
-				<div class="panel-body">
-					<a  href="/project_ch4_pojo/View/company/info/Info_Notice.jsp">
-					<i class="fa fa-search-plus" aria-hidden="true"></i>안내 공지</a><br> 
-					<a  href="/project_ch4_pojo/View/company/info/Info_ManageLog.jsp">
-					<i class="fa fa-list-alt" aria-hidden="true"></i>방문자현황관리</a><br> 
-				</div>
-			</div>
-		</div>
-		
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<h4 class="panel-title">
-					<a data-toggle="collapse" href="#collapse2">
-					<i class="fa fa-truck" aria-hidden="true"></i>시설관리</a>
-				</h4>
-			</div>
-			<div id="collapse2" class="panel-collapse collapse in">
-				<div class="panel-body">
-					<a  href="/project_ch4_pojo/View/company/info/Info_ManageKiosk.jsp">
-					<i class="fa fa-search-plus" aria-hidden="true"></i>키오스크 관리</a><br> 
-					<a  href="/project_ch4_pojo/View/company/info/Info_ManageDesti.jsp">
-					<i class="fa fa-list-alt" aria-hidden="true"></i>옥내 목적지 관리</a><br> 
-				</div>
-			</div>
-		</div>
 	</div>
 </aside>
 
-<!-- Content -->	<!-- https://blackrockdigital.github.io/startbootstrap-freelancer/ -->
-	<!-- Masthead -->
-  <header style="margin-left:15%;text-align: center;">
-    <div class="container d-flex align-items-center flex-column">
-	<div style="width: 70%; float: left;">
-      <!-- Masthead Heading -->
-      <h1>CH4 방문자 관리 시스템</h1>
-    </div>
-      <%@ include file="../../CommonForm/logout.jsp"%>
-
-      <!-- Masthead Avatar Image -->
-      <img src="/project_ch4_pojo/Style/images/crud/manager.jpg" alt="">
-
-    </div>
-  </header>
+<!-- Content -->
+<div class="mainContent">
+<!-- 페이지 이름 / 환영+ 로그아웃 버튼 -->
+	<div class="col-lg-12">
+		<div style="margin:30px 20px 10px 0px;font-size:35px;width:55%;float:left;">
+			<h1 style="text-align: right">CH4 방문자 관리 시스템</h1>
+		</div>
+		<%@ include file="../../CommonForm/logout.jsp"%>
+	</div>
+	<div style="text-align: center;">
+		<img alt="abc" src="/project_ch4_pojo/Style/images/banner/speedGate (1).jpg">
+	</div>
+</div>
 
 	<!-- 하단 : 3개로 분할 : 신청 / 방문/물류/ 인포 소개 -->
 
@@ -239,56 +198,56 @@ $(".hover").mouseleave(
         <!-- Portfolio Item 1 -->
         <div class="col-md-6 col-lg-3">
 			<figure class="snip1200">
-				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample27.jpg" alt="sq-sample27" />
+				<img src="/project_ch4_pojo/Style/images/postIt/yellow.png" alt="sq-sample27" />
 				<figcaption>
 					<p>안쪽 내용 설명이 들어간 부분이지롱</p>
 					<div class="heading">
 						<h2> <span>안내 공지</span> </h2>
 					</div>
 				</figcaption>
-				<a href="#"></a>
+				<a href="/project_ch4_pojo/View/company/info/Info_Notice.jsp"></a>
 			</figure>
          </div>
 
         <!-- Portfolio Item 2 -->
        	<div class="col-md-6 col-lg-3">
 			<figure class="snip1200">
-				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample27.jpg" alt="sq-sample27" />
+				<img src="/project_ch4_pojo/Style/images/postIt/red.png" alt="sq-sample27" />
 				<figcaption>
 					<p>안쪽 내용 설명이 들어간 부분이지롱</p>
 					<div class="heading">
-						<h2> <span>방문자 현황 관리</span> </h2>
+						<h2>방문자 <span>현황</span> </h2>
 					</div>
 				</figcaption>
-				<a href="#"></a>
+				<a href="/project_ch4_pojo/View/company/info/Info_ManageLog.jsp"></a>
 			</figure>
         </div>
 
         <!-- Portfolio Item 3 -->
         <div class="col-md-6 col-lg-3">
 			<figure class="snip1200">
-				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample27.jpg" alt="sq-sample27" />
+				<img src="/project_ch4_pojo/Style/images/postIt/green.png" alt="sq-sample27" />
 				<figcaption>
 					<p>안쪽 내용 설명이 들어간 부분이지롱</p>
 					<div class="heading">
 						<h2> <span>키오스크 관리</span> </h2>
 					</div>
 				</figcaption>
-				<a href="#"></a>
+				<a href="/project_ch4_pojo/View/company/info/Info_ManageKiosk.jsp"></a>
 			</figure>
           </div>
           
            <!-- Portfolio Item 4 -->
         <div class="col-md-6 col-lg-3">
 			<figure class="snip1200">
-				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample27.jpg" alt="sq-sample27" />
+				<img src="/project_ch4_pojo/Style/images/postIt/puple.png" alt="sq-sample27" />
 				<figcaption>
 					<p>안쪽 내용 설명이 들어간 부분이지롱</p>
 					<div class="heading">
-						<h2> <span>옥내 목적지 관리</span> </h2>
+						<h2> <span>목적지 관리</span> </h2>
 					</div>
 				</figcaption>
-				<a href="#"></a>
+				<a href="/project_ch4_pojo/View/company/info/Info_ManageDesti.jsp"></a>
 			</figure>
           </div>
           
@@ -298,8 +257,5 @@ $(".hover").mouseleave(
  
 <!-- 공통 Footer -->
 <%@ include file="/View/CommonForm/Footer.jsp"%>
-<!-- java script -->
-<script type="text/javascript">
-</script>
 </body>
 </html>
