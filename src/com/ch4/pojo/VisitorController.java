@@ -62,7 +62,7 @@ public class VisitorController implements Controller{
 				mav.setViewName("Visit_ResultVisitor.jsp");
 			}
 			else if(result == 0) {
-				mav.setViewName("Visit_ApplyFail.jsp");
+				mav.setViewName("Fail.jsp");
 			}
 		}
 		else if(requestName.equals("update")) {
@@ -73,8 +73,13 @@ public class VisitorController implements Controller{
 				mav.setViewName("Visit_ResultVisitor.jsp");
 			}
 			else if(result == 0) {
-				mav.setViewName("Visit_ApplyFail.jsp");
+				mav.setViewName("Fail.jsp");
 			}
+		}
+		else if(requestName.equals("changeVisitor")) {
+			Map<String,Object> rMap = vLogic.applyDetail(pMap);
+			mav.addObject("rMap", rMap);
+			mav.setViewName("Visit_ChangeVisitor.jsp");
 		}
 		else if(requestName.equals("cancle")) {
 			int result = 0;
@@ -87,6 +92,10 @@ public class VisitorController implements Controller{
 				mav.setViewName("Visit_ApplyFail.jsp");
 			}
 		}
+		else if(requestName.equals("searchVisitor")) {
+			mav.setViewName("Visit_SearchVisitor.jsp");
+		}
+
 		
 		return mav;
 	}

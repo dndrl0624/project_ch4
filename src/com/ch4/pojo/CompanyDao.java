@@ -28,6 +28,8 @@ public class CompanyDao {
 		else if(pMap.get("aplg_no")!=null) {
 			int amount = ((String[])pMap.get("gmng_name")).length;
 			for(int i=0;i<amount;i++) {
+				String confm_no = "GC" + RuleOfGeneratingPK.getPK(i);
+				pMap.put("confm_no", confm_no);
 				result = sqlSession.insert("mngGPermit",pMap); // GOODS_COMFM테이블에 insert
 				if(result==0) {
 					return result;

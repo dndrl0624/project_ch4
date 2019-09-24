@@ -1,5 +1,6 @@
 package com.ch4.pojo;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -75,14 +76,25 @@ public class GoodsDao {
 		return preGoodsDetail;
 	}
 
-	public List<Map<String, Object>> goodsList() {
-		List<Map<String,Object>> goodsList = sqlSession.selectList("goodsList");
+	public Map<String, Object> goodsSearch(Map<String, Object> pMap) {
+		Map<String,Object> goodsSearch = sqlSession.selectOne("goodsSearch", pMap);
+		return goodsSearch;
+	}
+
+	public List<Map<String, Object>> goodsList(Map<String, Object> pMap) {
+		List<Map<String, Object>> goodsList = sqlSession.selectList("goodsList", pMap);
 		return goodsList;
 	}
 
-	public List<Map<String, Object>> goodsDetail(Map<String, Object> pMap) {
-		List<Map<String,Object>> goodsDetail = sqlSession.selectList("goodsDetail");
-		return goodsDetail;
+	public Map<String, Object> goodsDetail(Map<String, Object> pMap) {
+		Map<String, Object> rMap = new HashMap<String, Object>();
+		
+		Map<String, Object> infoMap = sqlSession.selectOne("goodsInfoMap",pMap);
+		List<Map<String,Object>> preGoodsList = sqlSession.selectList("preGoodsList", pMap);
+		
+		rMap.put("infoMap", infoMap);
+		rMap.put("preGoodsList", preGoodsList);
+		return rMap;
 	}
 
 }

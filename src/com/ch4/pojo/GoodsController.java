@@ -38,7 +38,7 @@ public class GoodsController implements Controller{
 				mav.setViewName("Visit_ResultGoods.jsp");
 			}
 			else if(result == 0) {
-				mav.setViewName("Visit_ApplyFail.jsp");
+				mav.setViewName("Fail.jsp");
 			}
 			
 		}
@@ -63,8 +63,16 @@ public class GoodsController implements Controller{
 				mav.setViewName("Visit_Main.jsp");
 			}
 			else if(result == 0) {
-				mav.setViewName("Visit_ApplyFail.jsp");
+				mav.setViewName("Fail.jsp");
 			}
+		}
+		else if(requestName.equals("changeGoods")) {
+			Map<String,Object> rMap = gLogic.goodsDetail(pMap);
+			mav.addObject("rMap", rMap);
+			mav.setViewName("Visit_ChangeGoods.jsp");
+		}
+		else if(requestName.equals("searchGoods")) {
+			mav.setViewName("Visit_SearchGoods.jsp");
 		}
 		return mav;
 	}

@@ -50,9 +50,9 @@ public class VisitorLogic {
 		return companyList;
 	}
 
-	public Map<String, Object> applyDetail(Map<String, Object> pMap) {
-		Map<String, Object> applyDetail = vDao.applyDetail(pMap);
-		return applyDetail;
+	public Map<String, Object> applySearch(Map<String, Object> pMap) {
+		Map<String, Object> applySearch = vDao.applySearch(pMap);
+		return applySearch;
 	}
 	public List<Map<String, Object>> applyList(Map<String, Object> pMap) {
 		List<Map<String, Object>> applyList = vDao.applyList(pMap);
@@ -72,6 +72,11 @@ public class VisitorLogic {
 	public Map<String, Object> previsitDetail(Map<String, Object> pMap) {
 		Map<String,Object> preDetailList = vDao.previsitDetail(pMap);
 		return preDetailList;
+	}
+
+	public Map<String, Object> applyDetail(Map<String, Object> pMap) {
+		Map<String,Object> rMap = vDao.applyDetail(pMap);
+		return rMap;
 	}
 
 }

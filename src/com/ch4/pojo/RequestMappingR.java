@@ -25,6 +25,7 @@ public class RequestMappingR {
 						(RequestMapping.requestName.indexOf("list")>-1)
 						||(RequestMapping.requestName.indexOf("List")>-1)
 						||("detail".equals(RequestMapping.requestName))
+						||("search".equals(RequestMapping.requestName))
 				)
 			) {
 			rController = new RestController(work,RequestMappingR.requestName);

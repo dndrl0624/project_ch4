@@ -100,9 +100,9 @@ public class VisitorDao {
 		return deptList;
 	}
 
-	public Map<String, Object> applyDetail(Map<String, Object> pMap) {
-		Map<String, Object> applyDetail = sqlSession.selectOne("applyDetail", pMap);
-		return applyDetail;
+	public Map<String, Object> applySearch(Map<String, Object> pMap) {
+		Map<String, Object> applySearch = sqlSession.selectOne("applySearch", pMap);
+		return applySearch;
 	}
 	public List<Map<String, Object>> applyList(Map<String, Object> pMap) {
 		List<Map<String, Object>> applyList = sqlSession.selectList("applyList", pMap);
@@ -126,6 +126,22 @@ public class VisitorDao {
 		preDetailList.put("carList", carList);
 		
 		return preDetailList;
+	}
+
+	public Map<String, Object> applyDetail(Map<String, Object> pMap) {
+		Map<String,Object> rMap = new HashMap<String, Object>();
+		
+		Map<String, Object> infoMap = sqlSession.selectOne("infoMap", pMap);
+		List<Map<String, Object>> visitorList = sqlSession.selectList("visitorList", pMap);
+		List<Map<String, Object>> equipList = sqlSession.selectList("equipList", pMap);
+		List<Map<String, Object>> carList = sqlSession.selectList("carList", pMap);
+		
+		rMap.put("infoMap", infoMap);
+		rMap.put("visitorList", visitorList);
+		rMap.put("equipList", equipList);
+		rMap.put("carList", carList);
+		
+		return rMap;
 	}
 
 

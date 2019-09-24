@@ -16,6 +16,7 @@ public class RequestMapping {
 		if((RequestMapping.requestName.indexOf("list")>-1)
 				||(RequestMapping.requestName.indexOf("List")>-1)
 				||("detail".equals(RequestMapping.requestName))
+				||("search".equals(RequestMapping.requestName))
 		  ) {
 			return controller;
 		}

@@ -52,14 +52,20 @@ public class GoodsLogic {
 		return preGoodsDetail;
 	}
 
-	public List<Map<String, Object>> goodsList() {
-		List<Map<String,Object>> goodsList = gDao.goodsList();
+
+	public Map<String, Object> goodsSearch(Map<String, Object> pMap) {
+		Map<String,Object> goodsSearch = gDao.goodsSearch(pMap);  
+		return goodsSearch;
+	}
+
+	public List<Map<String, Object>> goodsList(Map<String, Object> pMap) {
+		List<Map<String, Object>> goodsList = gDao.goodsList(pMap);
 		return goodsList;
 	}
 
-	public List<Map<String, Object>> goodsDetail(Map<String, Object> pMap) {
-		List<Map<String,Object>> goodsDetail = gDao.goodsDetail(pMap);  
-		return goodsDetail;
+	public Map<String, Object> goodsDetail(Map<String, Object> pMap) {
+		Map<String, Object> rMap = gDao.goodsDetail(pMap);
+		return rMap;
 	}
 
 

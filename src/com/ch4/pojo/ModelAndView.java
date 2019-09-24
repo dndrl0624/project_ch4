@@ -27,6 +27,4 @@ public class ModelAndView {
 	public void isRedirect(boolean isRedirect) {
 		this.isRedirect = isRedirect;
 	}
-
-
 }
