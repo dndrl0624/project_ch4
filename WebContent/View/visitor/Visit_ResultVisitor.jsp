@@ -220,7 +220,7 @@
 					<button id="btn_update" class="btn btn-primary" type="button" onclick="applyUpdate()" style="width:120px;margin-right:20px;">신청변경</button>
 					<button id="btn_cancle" class="btn btn-danger" type="button" onclick="applyCancle()" style="width:120px;margin-right:20px;">신청취소</button>
 					<button id="btn_navi" class="btn btn-default" type="button" onclick="location.href='Visit_Navigation.jsp'" style="width:120px;margin-right:20px;">오시는길</button>
-					<button id="btn_main" class="btn btn-info" type="button" onclick="location.href='Visit_Main.jsp'" style="width:120px;">메인으로</button>
+					<button id="btn_main" class="btn btn-info" type="button" onclick="location.href='/service/visitor.ch4'" style="width:120px;">메인으로</button>
 				</div>
 			</div><br><br>
 			<div class="row">

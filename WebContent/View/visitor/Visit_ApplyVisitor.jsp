@@ -863,7 +863,7 @@
 		    </div><br>
 			<div style="text-align:center;"> 
 				<button id="btn_apply" class="btn btn-primary" type="button" onclick="javascript:apply()" style="width:150px;margin-right:20px;">신청</button>
-				<button id="btn_cancel" class="btn" type="button" onclick="location.href='Visit_Main.jsp'" style="width:150px;">취소</button>
+				<button id="btn_cancel" class="btn" type="button" onclick="location.href='/service/visitor.ch4'" style="width:150px;">취소</button>
 			</div>
 	    </form>
 	    <!------------------------------------- 신청 폼 끝 -------------------------------------->

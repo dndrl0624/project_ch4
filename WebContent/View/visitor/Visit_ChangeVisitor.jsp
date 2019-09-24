@@ -46,7 +46,7 @@
 	//visit_apply_hp = (String)infoMap.get("visit_apply_hp");
 	//방문유형
 	String visit_type = "정기방문";
-	visit_type = (String)infoMap.get("visit_type");
+	//visit_type = (String)infoMap.get("visit_type");
 	String visit_term = "해당없음";
 	String visit_day = "해당없음";
 	if("정기방문".equals(visit_type)){
@@ -220,9 +220,8 @@
 <%@ include file="/View/CommonForm/Top.jsp"%>
 <script type="text/javascript">
 	$(document).ready(function(){
-		//////////////////////////////  기본 정보 세팅  //////////////////////////////
-		//////////////////////////////  기본 정보 세팅 끝  //////////////////////////////
 		//////////////////////////////  방문자 정보 세팅  //////////////////////////////
+		//////////  버릴 애들  ////////////
 		var visitor_name = new Array();
 		<% for(String name : visitor_name){%>visitor_name.push('<%=name%>');<%}%>
 		var visitor_hp = new Array();
@@ -234,18 +233,20 @@
 			$("#tb_visitor tbody").append(vRow);
 			vIndex++;
 		}
+		//////////  버릴 애들  ////////////
 		//실제로 쓸 for문
-<%-- 		<% for(int i=0;i<vtList.size();i++){ %> --%>
-// 		var vRow = "<tr id='vRow'><td><input id='chkVisitor' type='checkbox'></td>"
-// 					+"<td><input id='visitor_name' type='hidden' name='visitor_name' value='"
-<%-- 					+<%=vtList.get(i).get("visitor_name") %>+"'>"+<%=vtList.get(i).get("visitor_name") %>+"</td>" --%>
-// 					+"<td><input id='visitor_hp' type='hidden' name='visitor_hp' value='"
-<%-- 					+<%=vtList.get(i).get("visitor_hp") %>+"'>"+<%=vtList.get(i).get("visitor_hp") %>+"</td></tr>"; --%>
-// 		$("#tb_visitor tbody").append(vRow);
-// 		vIndex++;
-<%-- 		<% } %> --%>
+		<% for(int i=0;i<vtList.size();i++){ %>
+		var vRow = "<tr id='vRow'><td><input id='chkVisitor' type='checkbox'></td>"
+					+"<td><input id='visitor_name' type='hidden' name='visitor_name' value='"
+					+<%=vtList.get(i).get("visitor_name") %>+"'>"+<%=vtList.get(i).get("visitor_name") %>+"</td>"
+					+"<td><input id='visitor_hp' type='hidden' name='visitor_hp' value='"
+					+<%=vtList.get(i).get("visitor_hp") %>+"'>"+<%=vtList.get(i).get("visitor_hp") %>+"</td></tr>";
+		$("#tb_visitor tbody").append(vRow);
+		vIndex++;
+		<% } %>
 		//////////////////////////////  방문자 정보 세팅  끝 //////////////////////////////
 		//////////////////////////////  반입기기정보 세팅  //////////////////////////////
+		//////////  버릴 애들  ////////////
 		var tkin_kind = new Array();
 		<% for(String kind : tkin_kind){%>tkin_kind.push('<%=kind%>');<%}%>
 		var tkin_brand = new Array();
@@ -254,22 +255,28 @@
 		<% for(String model : tkin_model){%>tkin_model.push('<%=model%>');<%}%>
 		for(var i=0;i<tkin_kind.length;i++){
 			var dRow = "<tr id='dRow'><td><input id='chkDevice' type='checkbox'></td>"
-						+"<td><input id='tkin_kind' type='hidden' name='tkin_kind' value='tkin_kind'>"+tkin_kind[i]+"</td>"
-						+"<td><input id='tkin_brand' type='hidden' name='tkin_brand' value='tkin_brand'>"+tkin_brand[i]+"</td>"
-						+"<td><input id='tkin_model' type='hidden' name='tkin_model' value='tkin_model'>"+tkin_model[i]+"</td></tr>";
+						+"<td><input id='tkin_kind' type='hidden' name='tkin_kind' value='"+tkin_kind[i]+"'>"+tkin_kind[i]+"</td>"
+						+"<td><input id='tkin_brand' type='hidden' name='tkin_brand' value='"+tkin_brand[i]+"'>"+tkin_brand[i]+"</td>"
+						+"<td><input id='tkin_model' type='hidden' name='tkin_model' value='"+tkin_model[i]+"'>"+tkin_model[i]+"</td></tr>";
 			$("#tb_device tbody").append(dRow);
 			dIndex++;
 		}
-<%-- 		<% for(int i=0;i<tnList.size();i++){ %> --%>
-// 		var dRow = "<tr id='dRow'><td><input id='chkDevice' type='checkbox'></td>"
-// 					+"<td><input id='tkin_kind' type='hidden' name='tkin_kind' value='tkin_kind'>"+tkin_kind[i]+"</td>"
-// 					+"<td><input id='tkin_brand' type='hidden' name='tkin_brand' value='tkin_brand'>"+tkin_brand[i]+"</td>"
-// 					+"<td><input id='tkin_model' type='hidden' name='tkin_model' value='tkin_model'>"+tkin_model[i]+"</td></tr>";
-// 		$("#tb_device tbody").append(dRow);
-// 		dIndex++;
-<%-- 		<% } %> --%>
+		//////////  버릴 애들  ////////////
+		//실제로 쓸 for문
+		<% for(int i=0;i<tnList.size();i++){ %>
+		var dRow = "<tr id='dRow'><td><input id='chkDevice' type='checkbox'></td>"
+					+"<td><input id='tkin_kind' type='hidden' name='tkin_kind' value='"
+					+<%=tnList.get(i).get("tkin_kind") %>+"'>"+<%=tnList.get(i).get("tkin_kind") %>+"</td>"
+					+"<td><input id='tkin_brand' type='hidden' name='tkin_brand' value='"
+					+<%=tnList.get(i).get("tkin_brand") %>+"'>"+<%=tnList.get(i).get("tkin_brand") %>+"</td>"
+					+"<td><input id='tkin_model' type='hidden' name='tkin_model' value='"
+					+<%=tnList.get(i).get("tkin_model") %>+"'>"+<%=tnList.get(i).get("tkin_model") %>+"</td></tr>";
+		$("#tb_device tbody").append(dRow);
+		dIndex++;
+		<% } %>
 		//////////////////////////////  반입기기정보 세팅 끝 //////////////////////////////
 		//////////////////////////////  주차정보 세팅  //////////////////////////////
+		//////////  버릴 애들  ////////////
 		var parking_num = new Array();
 		<% for(String num : parking_num){%>parking_num.push('<%=num%>');<%}%>
 		var parking_kind = new Array();
@@ -278,12 +285,25 @@
 		<% for(String model : parking_model){%>parking_model.push('<%=model%>');<%}%>
 		for(var i=0;i<parking_num.length;i++){
 			var pRow = "<tr id='pRow'><td><input id='chkParking' type='checkbox'></td>"
-			+"<td><input id='parking_num' type='hidden' name='parking_num' value='parking_num'>"+parking_num[i]+"</td>"
-			+"<td><input id='parking_kind' type='hidden' name='parking_kind' value='parking_kind'>"+parking_kind[i]+"</td>"
-			+"<td><input id='parking_model' type='hidden' name='parking_model' value='parking_model'>"+parking_model[i]+"</td>"+"</tr>";
+					+"<td><input id='parking_num' type='hidden' name='parking_num' value='"+parking_num[i]+"'>"+parking_num[i]+"</td>"
+					+"<td><input id='parking_kind' type='hidden' name='parking_kind' value='"+parking_kind[i]+"'>"+parking_kind[i]+"</td>"
+					+"<td><input id='parking_model' type='hidden' name='parking_model' value='"+parking_model[i]+"'>"+parking_model[i]+"</td>"+"</tr>";
 			$("#tb_parking tbody").append(pRow);
 			pIndex++;
 		}
+		//////////  버릴 애들  ////////////
+		//실제로 쓸 for문
+		<% for(int i=0;i<pkList.size();i++){ %>
+		var pRow = "<tr id='pRow'><td><input id='chkParking' type='checkbox'></td>"
+					+"<td><input id='parking_num' type='hidden' name='parking_num' value='"
+					+<%=pkList.get(i).get("parking_num") %>+"'>"+<%=pkList.get(i).get("parking_num") %>+"</td>"
+					+"<td><input id='parking_kind' type='hidden' name='parking_kind' value='"
+					+<%=pkList.get(i).get("parking_kind") %>+"'>"+<%=pkList.get(i).get("parking_kind") %>+"</td>"
+					+"<td><input id='parking_model' type='hidden' name='parking_model' value='"
+					+<%=pkList.get(i).get("parking_model") %>+"'>"+<%=pkList.get(i).get("parking_model") %>+"</td>"+"</tr>";
+		$("#tb_parking tbody").append(pRow);
+		pIndex++;
+		<% } %>
 		//////////////////////////////  주차정보 세팅  끝 //////////////////////////////
 		
 		//목적지 combobox 초기화 + 이전페이지 정보 반영
@@ -918,7 +938,7 @@
 		    </div><br>
 			<div style="text-align:center;"> 
 				<button id="btn_update" class="btn btn-primary" type="button" onclick="javascript:update()" style="width:150px;margin-right:20px;">수정</button>
-				<button id="btn_cancel" class="btn" type="button" onclick="location.href='Visit_Main.jsp'" style="width:150px;">취소</button>
+				<button id="btn_cancel" class="btn" type="button" onclick="location.href='/service/visitor.ch4'" style="width:150px;">취소</button>
 			</div>
 	    </form>
 	    <!------------------------------------- 신청 폼 끝 -------------------------------------->

@@ -2,24 +2,24 @@
     pageEncoding="UTF-8"%>
 <%
 	String com_no = "null";
-	if(null!=request.getParameter("com_no")){
-		com_no = (String)request.getParameter("com_no");
+	if(null!=request.getSession().getAttribute("com_no")){
+		com_no = (String)request.getSession().getAttribute("com_no");
 	}
 	String com_name = "null";
-	if(null!=request.getParameter("com_name")){
-		com_name = (String)request.getParameter("com_name");
+	if(null!=request.getSession().getAttribute("com_name")){
+		com_name = (String)request.getSession().getAttribute("com_name");
 	}
 	String aplg_desti = "null";
-	if(null!=request.getParameter("aplg_desti")){
-		aplg_desti = (String)request.getParameter("aplg_desti");
+	if(null!=request.getSession().getAttribute("aplg_desti")){
+		aplg_desti = (String)request.getSession().getAttribute("aplg_desti");
 	}
 	String aplg_name = "null";
-	if(null!=request.getParameter("aplg_name")){
-		aplg_name = (String)request.getParameter("aplg_name");
+	if(null!=request.getSession().getAttribute("aplg_name")){
+		aplg_name = (String)request.getSession().getAttribute("aplg_name");
 	}
 	String aplg_hp = "null";
-	if(null!=request.getParameter("aplg_hp")){
-		aplg_hp = (String)request.getParameter("aplg_hp");
+	if(null!=request.getSession().getAttribute("aplg_hp")){
+		aplg_hp = (String)request.getSession().getAttribute("aplg_hp");
 	}
 %>
 <!DOCTYPE html>
@@ -39,7 +39,7 @@
 		position: fixed;
 	}
 	#section1 {
-		height: 350px;
+		height: 420px;
 		margin-bottom: 10px;
 		font-size: 28px;
 	}
@@ -129,11 +129,21 @@
 		$("#aplg_desti").combobox({
 			valueField: 'dept_name',
 			textField: 'dept_name',
-			url: "/goods/deptList.ch4?cmpCode="+<%=com_no %>
+			url: "/visitor/deptList.ch4?cmpCode="+<%=com_no %>
 		});
 		$("#aplg_desti").combobox('select','<%=aplg_desti%>');
+		//반입일자 선택 범위 (당일~내년 당일) 제한
+		$('#aplg_trans_date').datebox().datebox('calendar').calendar({
+            validator: function(date){
+                var now = new Date();
+                var d1 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                var d2 = new Date(now.getFullYear()+1, now.getMonth(), now.getDate());
+                return d1<=date && date<=d2;
+            }
+        });
+		$('#aplg_trans_date').datebox('setValue',now.getFullYear()+'-'+now.getMonth()+'-'+now.getDate());
 		///////////////////////// 반입이력 이벤트  //////////////////////////
-		//방문이력 조회 Modal 띄우기
+		//반입이력 조회 Modal 띄우기
 		$("#btn_log").on('click',function(){
 			$("#md_log").modal('show');
 		});
@@ -250,7 +260,7 @@
 		    }
 		});
 		//전체선택 끝.
-		//선택된 row 제거하기 (미완성)
+		//선택된 row 제거하기
 		$("#btn_delRowGoods").on('click',function(){
 			var doRemove = false; //체크박스가 선택이되어 삭제가 된경우만 true
 			$("#tb_goods #chkGoods:checked").each(function(){
@@ -291,9 +301,9 @@
 	});
 	function apply(){
 		//필수 입력사항 체크
-		if(!($("#aplg_date").datebox('getValue'))){
-			alert("반입 날짜를 선택해 주세요.");
-			$("#aplg_date").datebox('textbox').focus();
+		if(!($("#aplg_trans_date").datebox('getValue'))){
+			alert("반입일자를 선택해 주세요.");
+			$("#aplg_trans_date").datebox('textbox').focus();
 			return;
 		}
 		if(!($("#aplg_desti").combobox('getValue'))){
@@ -306,7 +316,7 @@
 			$("#aplg_reason").textbox('textbox').focus();
 			return;
 		}
-		//방입물품 최소 1건 등록
+		//반입물품 최소 1건 등록
 		if(gIndex==1){
 			alert("반입물품을 등록하세요.");
 			var offset = $("#section2").offset();
@@ -354,10 +364,12 @@
 				    	<h4 style="margin-bottom:10px; border-left: 3px solid #31708f; padding-left:4px;"><b>신청자 정보</b></h4>
 				    	<div class="row table basic">
 				    		<table class="table">
-				    			<th>성명</th>
-				    			<td><%=aplg_name %></td>
-				    			<th>전화번호</th>
-				    			<td><%=aplg_hp %></td>
+				    			<tr>
+					    			<th>성명</th>
+					    			<td><%=aplg_name %></td>
+					    			<th>전화번호</th>
+					    			<td><%=aplg_hp %></td>
+				    			</tr>
 				    		</table>
 				    	</div>
 				    	<h4 style="margin-bottom:10px; border-left: 3px solid #31708f; padding-left:4px;"><b>반입일자</b></h4>
@@ -365,9 +377,9 @@
 				    	<div class="row table basic">
 				    		<table class="table">
 								<tr>
-									<th>반입날짜</th>
+									<th>반입일자</th>
 									<td>
-										<input id="aplg_date" class="easyui-datebox" name="aplg_date" style="height:100%">
+										<input id="aplg_trans_date" class="easyui-datebox" name="aplg_trans_date" style="height:100%">
 									</td>
 								</tr>
 				    		</table>
@@ -402,9 +414,8 @@
 						<div class="row">
 				    		<div class="col-lg-8">
 						    	<h4 style="border-left: 3px solid #3c763d; padding-left:4px;"><b>반입 물품 정보</b></h4>
-						    	<!-- <h6 style="margin-bottom:10px;">방문자는 최대 10명으로 제한합니다.</h6> -->
 						    </div>
-						    <div class="col-lg-4" style="text-align:right;padding-top:20px;">
+						    <div class="col-lg-4" style="text-align:right;">
 								<button id="btn_addRowGoods" type="button" class="btn btn-default">물품 추가</button>
 								<button id="btn_delRowGoods" type="button" class="btn btn-danger">선택삭제</button>
 			    			</div>
@@ -427,13 +438,13 @@
 			    </div><br>
 				<div style="text-align:center;"> 
 					<button id="btn_apply" class="btn btn-primary" type="button" onclick="javascript:apply()" style="width:150px;margin-right:20px;">신청</button>
-					<button id="btn_cancel" class="btn" type="button" onclick="location.href='Visit_Main.jsp'" style="width:150px;">취소</button>
+					<button id="btn_cancel" class="btn" type="button" onclick="location.href='/service/visitor.ch4'" style="width:150px;">취소</button>
 				</div>
 			</form>
 	    </div>
   	</div>
 </div>
-<!-- 방문자 추가 시 입력폼 Modal -->
+<!-- 반입물품 추가 시 입력폼 Modal -->
 <div id="md_goods" class="modal fade" role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
