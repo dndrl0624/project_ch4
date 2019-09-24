@@ -1,59 +1,65 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
 <%@page import="java.util.StringTokenizer"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	//방문지(회사) 코드
-	String com_no = "null";
-	if(null!=(request.getAttribute("com_no"))){
-		com_no = (String)request.getAttribute("com_no");
+	//기본정보
+	Map<String,Object> infoMap = new HashMap<>();
+	if(null!=request.getAttribute("infoMap")){
+		infoMap = (Map<String,Object>)request.getAttribute("infoMap");
+	}
+	//방문자 리스트
+	List<Map<String,Object>> vtList = new ArrayList<>();
+	if(null!=request.getAttribute("vtList")){
+		vtList = (List<Map<String,Object>>)request.getAttribute("vtList");
+	}
+	//반입기기 리스트
+	List<Map<String,Object>> tnList = new ArrayList<>();
+	if(null!=request.getAttribute("tnList")){
+		tnList = (List<Map<String,Object>>)request.getAttribute("tnList");
+	}
+	//주차 리스트
+	List<Map<String,Object>> pkList = new ArrayList<>();
+	if(null!=request.getAttribute("pkList")){
+		pkList = (List<Map<String,Object>>)request.getAttribute("pkList");
 	}
 	
+	//방문지(회사) 코드
+	String com_no = "null";
+	//com_no = (String)infoMap.get("com_no");
 	//신청번호
 	String visit_no = "null";
-	if(null!=(request.getAttribute("visit_no"))){
-		visit_no = (String)request.getAttribute("visit_no");
-	}
+	//visit_no = (String)infoMap.get("visit_no");
 	//신청일자
 	String visit_apply_date = "null";
-	Date date = new Date();
-	SimpleDateFormat form = new SimpleDateFormat("yyyy-MM-dd");
-	visit_apply_date = form.format(date);
+	//visit_apply_date = (String)infoMap.get("visit_apply_date");
 	//신청자 이름
 	String visit_apply_name = "null";
-	if(null!=request.getParameter("visit_apply_name")){
-		visit_apply_name = (String)request.getParameter("visit_apply_name");
-	}
+	//visit_apply_name = (String)infoMap.get("visit_apply_name");
 	//신청자 연락처
 	String visit_apply_hp = "null";
-	if(null!=request.getParameter("visit_apply_hp")){
-		visit_apply_hp = (String)request.getParameter("visit_apply_hp");
-	}
+	//visit_apply_hp = (String)infoMap.get("visit_apply_hp");
 	//방문유형
 	String visit_type = "정기방문";
-	if(null!=request.getParameter("visit_type")){
-		visit_type = (String)request.getParameter("visit_type");
-	}
-	String visit_term = new String();
-	String visit_day = new String();
+	visit_type = (String)infoMap.get("visit_type");
+	String visit_term = "해당없음";
+	String visit_day = "해당없음";
 	if("정기방문".equals(visit_type)){
 		//방문주기
 		visit_term = "격주";
-		if(null!=request.getParameter("visit_term")){
-			visit_term = (String)request.getParameter("visit_term");
-		}
+		//visit_term = (String)infoMap.get("visit_term");
 		//방문요일
 		visit_day = "수요일";
-		if(null!=request.getParameter("visit_day")){
-			visit_day = (String)request.getParameter("visit_day");
-		}
+		//visit_day = (String)infoMap.get("visit_day");
 	}
 	//방문날짜
 	String visit_date = "2019-10-31~2019-11-04";
-	if(null!=request.getParameter("visit_date")){
-		visit_date = (String)request.getParameter("visit_date");
-	}
+	//visit_date = (String)infoMap.get("visit_date");
 	StringTokenizer st = new StringTokenizer(visit_date,"~");
 	String visit_date1 = st.nextToken();
 	String visit_date2 = new String();
@@ -63,48 +69,29 @@
 	}
 	//방문지
 	String com_name = "null";
-	if(null!=request.getParameter("com_name")){
-		com_name = (String)request.getParameter("com_name");
-	}
+	//com_name = (String)infoMap.get("com_name");
 	//목적지
 	String visit_desti = "null";
-	if(null!=request.getParameter("visit_desti")){
-		visit_desti = (String)request.getParameter("visit_desti");
-	}
+	//visit_desti = (String)infoMap.get("visit_desti");
 	//방문목적
 	String visit_purps = "null";
-	if(null!=request.getParameter("visit_purps")){
-		visit_purps = (String)request.getParameter("visit_purps");
-	}
+	//visit_purps = (String)infoMap.get("visit_purps");
 	
+	/////////// 나중에 버릴 애들  /////////////
 	//방문자 이름 & 연락처
 	String[] visitor_name = {"김용현","김현태","이하나","현태호"};
-		//String[] visitor_name = request.getParameterValues("visitor_name");
 	String[] visitor_hp = {"010-1111-1111","010-2222-2222","010-3333-3333","010-4444-4444"};
-		//String[] visitor_hp = request.getParameterValues("visitor_hp");
-	
 	//반입기기
 	String[] tkin_kind = {"노트북","휴대전화"};
-		//String[] tkin_kind = request.getParameterValues("tkin_kind");
 	String[] tkin_brand = {"LG전자","삼성전자",};
-		//String[] tkin_brand = request.getParameterValues("tkin_brand");
 	String[] tkin_model = {"lg그램","갤럭시노트10+"};
-		//String[] tkin_model = request.getParameterValues("tkin_model");
 	String visit_tkin_encc = "X";
-	if(tkin_kind.length>0){
-		visit_tkin_encc = "O";
-	}
 	//주차
 	String[] parking_num = {"123가4567"};
-		//String[] parking_num = request.getParameterValues("parking_num");
 	String[] parking_kind = {"승용차"};
-		//String[] parking_kind = request.getParameterValues("parking_kind");
 	String[] parking_model = {"BMW"};
-		//String[] parking_model = request.getParameterValues("parking_model");
 	String visit_vhcle_encc = "X";
-	if(parking_num.length>0){
-		visit_vhcle_encc = "O";
-	}
+	/////////// 나중에 버릴 애들  /////////////
 %>
 <!DOCTYPE html>
 <html>
@@ -247,6 +234,16 @@
 			$("#tb_visitor tbody").append(vRow);
 			vIndex++;
 		}
+		//실제로 쓸 for문
+<%-- 		<% for(int i=0;i<vtList.size();i++){ %> --%>
+// 		var vRow = "<tr id='vRow'><td><input id='chkVisitor' type='checkbox'></td>"
+// 					+"<td><input id='visitor_name' type='hidden' name='visitor_name' value='"
+<%-- 					+<%=vtList.get(i).get("visitor_name") %>+"'>"+<%=vtList.get(i).get("visitor_name") %>+"</td>" --%>
+// 					+"<td><input id='visitor_hp' type='hidden' name='visitor_hp' value='"
+<%-- 					+<%=vtList.get(i).get("visitor_hp") %>+"'>"+<%=vtList.get(i).get("visitor_hp") %>+"</td></tr>"; --%>
+// 		$("#tb_visitor tbody").append(vRow);
+// 		vIndex++;
+<%-- 		<% } %> --%>
 		//////////////////////////////  방문자 정보 세팅  끝 //////////////////////////////
 		//////////////////////////////  반입기기정보 세팅  //////////////////////////////
 		var tkin_kind = new Array();
@@ -263,6 +260,14 @@
 			$("#tb_device tbody").append(dRow);
 			dIndex++;
 		}
+<%-- 		<% for(int i=0;i<tnList.size();i++){ %> --%>
+// 		var dRow = "<tr id='dRow'><td><input id='chkDevice' type='checkbox'></td>"
+// 					+"<td><input id='tkin_kind' type='hidden' name='tkin_kind' value='tkin_kind'>"+tkin_kind[i]+"</td>"
+// 					+"<td><input id='tkin_brand' type='hidden' name='tkin_brand' value='tkin_brand'>"+tkin_brand[i]+"</td>"
+// 					+"<td><input id='tkin_model' type='hidden' name='tkin_model' value='tkin_model'>"+tkin_model[i]+"</td></tr>";
+// 		$("#tb_device tbody").append(dRow);
+// 		dIndex++;
+<%-- 		<% } %> --%>
 		//////////////////////////////  반입기기정보 세팅 끝 //////////////////////////////
 		//////////////////////////////  주차정보 세팅  //////////////////////////////
 		var parking_num = new Array();

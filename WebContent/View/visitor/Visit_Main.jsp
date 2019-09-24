@@ -157,7 +157,7 @@
 		location.href = "/visitor/searchVisitor.ch4";
 	}
 	function searchGoods(){
-		location.href = "/goods/searchGoods.ch4";
+		location.href = "/visitor/searchGoods.ch4";
 	}
 </script>
 <div class="container-fluid" style="text-align:center;">
