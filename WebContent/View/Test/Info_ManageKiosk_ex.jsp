@@ -5,44 +5,39 @@
 <head>
 <meta charset="UTF-8">
 <!-- Web icon 설정 --> 
-<%@ include file="../../CommonForm/TapLogo.jsp"%>
+<%@ include file="../CommonForm/TapLogo.jsp"%>
 <title>키오스크 관리</title>
 <!-- 공통코드 -->
 <%@ include file="../../../Style/common/HeadUI.jsp"%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.15.4/extensions/toolbar/bootstrap-table-toolbar.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/project_ch4_pojo/Style/css/maxCss.css">
 </head>
-<body><!-- ID로 이름 받아오는 것 // 키오스크 변경 함수 만들기 : 폼태그 전송 -->
+<body>
 <script type="text/javascript">
 //combobox 직접입력 방지
 $.fn.combobox.defaults.editable = false
 /* 테이블 데이터 */
 $(document).ready(function(){
 	$("#bt_table").bootstrapTable({
-		height:'530'
+		height:'460'
 		,toolbar:'#toolbar'
+// 		,showColumns:'true'
+// 		,showRefresh:'true'
+// 		,queryParams:'queryParams'
 		,url:'/project_ch4_pojo/json/kiosk.json'
 		,pagination:'true'
+// 		,sidePagination:'server'
 	    ,onClickRow:function(row,$element,field){
 	       $element.toggleClass('single-select');//로우 클릭했을 때 색 변함.
 	     }
 	    ,onDblClickRow:function(row,$element,field){
-	    	var ki_no = $element.find("td").eq(0).html();
-			var ki_gate = $element.find("td").eq(1).html();
-			var ki_st = $element.find("td").eq(2).html();
-			var ki_note = $element.find("td").eq(3).html();
-
-			$("#kiosk_no").textbox('setValue',ki_no);
- 			$("#kiosk_location").textbox('setValue',ki_gate);
- 			$("#kiosk_condtion").textbox('setValue',ki_st);
- 			$("#kiosk_notice").textbox('setValue',ki_note);
-			
-			$("#kioskModal").modal('show');
+	       alert("상세조회 모달");
 	     }
 	});
 	$("#search").click(function(){
+		alert("눌림?");
 		var combo = $("#combo").val();
-		//alert(combo);
+		alert(combo);
 		$("#bt_table").bootstrapTable('refreshOptions',{
 			filterOptions:{
 				filterAlgorithm : 'or'
@@ -53,8 +48,25 @@ $(document).ready(function(){
 		});
 	});
 });
+// var $table = $('#bt_table')
+// var $ok = $('#ok')
+
+// $(function() {
+//   $ok.click(function () {
+//     $table.bootstrapTable('refresh')
+//   })
+// })
+
+// function queryParams() {
+//   var params = {}
+//   $('#toolbar').find('select[name]').each(function () {
+//     params[$(this).attr('name')] = $(this).val()
+//   })
+//   return params
+// }
+	
 </script>
-<%@ include file="../../CommonForm/Top.jsp"%>
+<%@ include file="../CommonForm/Top.jsp"%>
 
 <!-- Side Bar -->
 <aside>
@@ -107,7 +119,7 @@ $(document).ready(function(){
 <!-- 페이지 이름 / 환영+ 로그아웃 버튼 -->
 	<div class="col-lg-12">
 		<div style="margin:30px 20px 10px 0px;font-size:35px;width: 50%;float: left;"> 키오스크 관리 </div>
-		<%@ include file="../../CommonForm/logout.jsp"%>
+		<%@ include file="../CommonForm/logout.jsp"%>
 	</div>
 <!-- 검색 조건 설정 -->
 <div id="toolbar">
@@ -155,10 +167,10 @@ $(document).ready(function(){
         
         <div class="modal-body" style="align: center;padding-left: 30%">
         	<table>
-        		<tr><td>일련번호</td>	<td><input class="easyui-textbox" id="kiosk_no" readonly="readonly"></td></tr>
-        		<tr><td>위치</td>		<td><input class="easyui-textbox" id="kiosk_location"></td></tr>
-        		<tr><td>상태</td>		<td><input class="easyui-textbox" id="kiosk_condtion"></td></tr>
-        		<tr><td>비고</td>		<td><input class="easyui-textbox" id="kiosk_notice"></td></tr>
+        		<tr><td>일련번호</td>	<td><input class="text" id="kiosk_no"></td></tr>
+        		<tr><td>위치</td>		<td><input class="text" id="kiosk_location"></td></tr>
+        		<tr><td>상태</td>		<td><input class="text" id="kiosk_condtion"></td></tr>
+        		<tr><td>비고</td>		<td><input class="text" id="kiosk_notice"></td></tr>
         	</table>
         </div>
         

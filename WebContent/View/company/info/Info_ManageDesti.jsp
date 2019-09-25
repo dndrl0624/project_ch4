@@ -185,7 +185,8 @@ function deletDesti(){
         </div>
         
         <div class="modal-footer">
-          <button type="button" class="btn btn-info" id="desti_delete" onclick="javascript:deletDesti();">삭제</button>
+          <button type="button" class="btn btn-info" id="desti_change" onclick="javascript:changeDesti();">수정</button>
+          <button type="button" class="btn btn-danger" id="desti_delete" onclick="javascript:deletDesti();">삭제</button>
           <button type="button" class="btn" id="btn_close" data-dismiss="modal">Close</button>
         </div>
 	</div>
