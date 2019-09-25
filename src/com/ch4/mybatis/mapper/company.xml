@@ -2,26 +2,24 @@
 <!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ch4.mybatis.mapper.CompanyMapper">
 
-	<!-- 로그인 -->
-	<select id="proc_login" parameterType="map" statementType="CALLABLE">
-		{call proc_login(#{cmng_id,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
-						,#{cmng_pw,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
-						,#{cmng_name,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
-						,#{msg,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
-						)}
+	<!-- 로그인 프로시저-->
+	<select id="companyLogin" parameterType="map" statementType="CALLABLE">
+		{call proc_companyLogin(#{cmng_id,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+								,#{cmng_pw,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+								,#{msg,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+								)}
 	</select>
 	
-	<!-- 회원가입  -->
-	<insert id="proc_join" parameterType="map" statementType="CALLABLE">
-		{call proc_join(#{dept_no,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
-						,#{cmng_id,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
-						,#{cmng_pw,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
-						,#{cmng_name,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
-						,#{cmng_grade,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
-						,#{cmng_hp,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
-						,#{cmng_name,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
-						,#{msg,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
-						)}	
+	<!-- 회원가입 아이디 중복검사 프로시저  -->
+	<insert id="isExistID" parameterType="map" statementType="CALLABLE">
+		{call proc_isExistID(#{cmng_id,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+							,#{msg,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+							)}	
 	</insert>
 	
+	<!-- 회원가입  -->
+	<insert id="companyJoin" parameterType="map">
+		insert into company_manage(cmng_id, cmng_pw, cmng_name, cmng_grade, cmng_hp, dept_no)
+		values (#{mem_id},#{mem_pw},#{mem_name},#{mem_addr},#{mem_zipcode})
+	</insert>
 </mapper>
