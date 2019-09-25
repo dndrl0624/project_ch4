@@ -172,7 +172,7 @@ function deletDesti(){
 	<div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">키오스크 상세정보</h4>
+          <h4 class="modal-title">목적지 상세정보</h4>
         </div>
         
         <div class="modal-body" style="align: center;padding-left: 30%">

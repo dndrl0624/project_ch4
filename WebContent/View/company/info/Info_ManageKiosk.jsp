@@ -10,7 +10,6 @@
 <!-- 공통코드 -->
 <%@ include file="../../../Style/common/HeadUI.jsp"%>
 <link rel="stylesheet" type="text/css" href="/project_ch4_pojo/Style/css/maxCss.css">
-<!-- <link rel="stylesheet" type="text/css" href="/project_ch4_pojo/Style/css/maxModal.css"> -->
 </head>
 <body>
 <script type="text/javascript">
@@ -52,13 +51,28 @@ $(document).ready(function(){
 });
 /* 버튼 검색 */
 function search(){
-	$.ajax({
-		url: "/project_ch4_pojo/json/kiosk.json"
-		,dataType: "json"
-		,success: function(result){
-			$("#tb_kiosk").bootstrapTable('load',result);
-		}
-	});
+	// 콤보박스 value 값 가져오기
+	var combo_id = document.getElementById("KIOSK_ST");
+	var combo_val = combo_id.options[combo_id.selectedIndex].value;
+	var cv = $("#KIOSK_ST").combobox.attr
+	// 테이블 필드 값 가져오기
+	//var tb_field =  jQuery.fn.bootstrapTable.columnDefaults.data-field;
+	//alert("콤보 value = "+combo_val);
+		$.ajax({
+			url: "/project_ch4_pojo/json/kiosk.json"
+			,dataType: "json"
+			,success: function(result){
+// 				var jsonDoc = JSON.parse(result);
+// 				var obj = JSON.parse(result, function(key, value){
+// 				if(key==combo_val){
+// 				    alert("combo_val:"+combo_val+", value:"+value);
+// 				}else{
+// 				    alert("없을 때");
+// 				}
+// 				});
+				$("#tb_kiosk").bootstrapTable('load',result);
+			}
+		});
 }
 </script>
 <%@ include file="../../CommonForm/Top.jsp"%>
