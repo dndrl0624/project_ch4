@@ -1,4 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +24,7 @@
 		margin-top: 0px;
 		padding-top: 10px;
 		height: 300px;
-		background-image: url('../../Style/images/banner/speedGate (3).jpg');
+		background-image: url('../../Style/images/banner/banner_top.jpg');
 	}
 	.jumbotron_Content a{
 		font-size: 25px;
@@ -31,9 +35,63 @@
 	    border-width: thick;
 	    margin-bottom: -10px;
 	}
+	.modal-head{
+	    padding: 30px;
+    	border-bottom: groove;
+    	background-color: aliceblue;
+	}
 </style>
 </head>
 <body>
+<script type="text/javascript">
+var grade;
+	$(document).ready(function(){
+		$("#tb_notice").bootstrapTable({
+			columns:[[
+		        {field:'n_no',title:'no'}
+		        ,{field:'n_title',title:'title'}
+		        ,{field:'n_date',title:'date'}
+		        ,{field:'n_file',title:'file'}
+		        ,{field:'n_writer',title:'writer'}
+		        ,{field:'n_hit',title:'hit'}
+		   ]]
+			,url:'/project_ch4_pojo/View/Test/jsonNoticeList.json'
+			//,url:'/index/notice.ch4'
+			,pagination:'true'//페이지 네이션
+			,paginationPreText:"Previous"
+			,paginationNextText:"Next"
+			,pageSize:5//기본 페이지 사이즈
+			,pageList:[5, 10, 15, 20] //칸수
+			,onClickRow:function(row,$element,field){
+				//$element.attr('data-index',10)
+				$element.toggleClass('single-select');//로우 클릭했을 때 색 변함.
+				var n_no = $element.find("td:first").html();
+				$.ajax({
+ 					type: 'get',
+ 					dataType: 'json',
+ 					url: '/project_ch4_pojo/View/Test/jsonNoticeDetail.json',
+ 					success: function(data){
+ 						 $.each(data,function(index,item){
+	 						$("#n_title").text(item.n_title);
+	 						$("#n_date").text(item.n_date);
+	 						$("#n_writer").text(item.n_writer);
+	 						$("#n_content").textbox('setValue',item.n_content);
+	 						$("#n_file").textbox('setValue',item.n_file);
+	 						$("#n_hit").text(item.n_hit); 
+	 						grade = item.n_grade;
+	 						if(grade!=null){
+	 							var img = "<img src='../../Style/images/write-board.png' style='margin-right: 20px;' >";
+	 							$("#td_grade").html(img);
+	 						}
+ 						});
+ 					}
+ 				});
+				$("#DetailNotice").modal('show');
+			 }
+		});////////////////end of bootstrapTable
+	});
+
+</script>
 <script type="text/javascript">
 	//검색하기
 	function NoticeList(){
@@ -46,30 +104,8 @@
 			url:"/index/notice.ch4?cb_search="+cb_search+"&tb_search="+tb_search
 		}); 
 	}////////////////////////end of NoticeList
-	$("#tb_notice").bootstrapTable({
-		columns:[[
-	        {field:'n_no',title:'no'}
-	        ,{field:'n_title',title:'title'}
-	        ,{field:'n_date',title:'date'}
-	        ,{field:'n_file',title:'file'}
-	        ,{field:'n_writer',title:'writer'}
-	        ,{field:'n_hit',title:'hit'}
-	   ]]
-		,url:'/index/notice.ch4'
-		,pagination:'true'//페이지 네이션
-		,paginationPreText:"Previous"
-		,paginationNextText:"Next"
-		,pageSize:2//기본 페이지 사이즈
-		,pageList:[2, 4, 6, 8] //칸수
-		,onClickRow:function(row,$element,field){
-			//$element.attr('data-index',10)
-			$element.toggleClass('single-select');//로우 클릭했을 때 색 변함.
-			//alert(row.N_NO);
-		 }
-		,onDblClickRow:function(row,$element,field){
-			alert("상세조회 모달");
-		 }
-	});////////////////end of bootstrapTable
+	
+	
 </script>
 	<!-- 미결과제 : 사진선택 디자인을 다시해야한다 게시판 형식 작성 -->
 <!-- Top -->	<!-- 선택된 페이지 class : nav-item active // 나머지 페이지: nav-item -->
@@ -132,5 +168,53 @@
 </div>
 <!-- 공통 Footer -->
 <%@ include file="/View/CommonForm/Footer.jsp"%>
+<!-- 상세조회 모달 창 -->
+<div class="modal fade" id="DetailNotice" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<form id="f_Detail">
+				<div class="modal-head" style="padding-top: 50px;">
+					<table style="margin-left: 38px; margin-bottom: 20px;">
+						<tr style="width:700px;">
+							<td id="td_grade" style="width: auto"></td>
+							<td id="n_title" name="n_title" style="width: auto;font-size: 30px; margin-right: 30px;">
+							</td>
+						</tr>
+					</table>
+					<table style="margin-left: 38px;">
+						<tr>
+							<td style="width:580px; font-size: 20px;" value="n_writer" id="n_writer" name="n_writer"> 
+							</td>
+							<td style="display: flex;">
+								<p id="date" style="margin: 4px 10px;">작성일 : 
+								<span value="n_date" id="n_date" name="n_date"
+								   	style="width:auto; font-size: 13px;"></span></p>
+							</td>
+							<td>
+								<img src='../../Style/images/open-eye.png' style='margin-right: 5px;' >
+								<span class="badge" value="n_hit" id="n_hit" name="n_hit" ></span>
+							</td>
+						</tr>
+					</table>
+				</div>
+					<!-- Modal body -->
+				<div class="modal-body" style="margin-left: 70px; ">
+					<div class="row">
+						<input class="easyui-textbox" style="width: 750px; height: 300px; padding: 15px; " multiline="true"
+							   id="n_content" name="n_content" readonly="readonly">
+					</div>
+					<div class="row" style="margin-top: 10px;">
+						<input class="easyui-textbox" id="n_file" name="n_file" 
+							   style="margin-left: 50px; width: 600px; padding-left: 15px;" readonly="readonly">
+					</div>
+				</div>
+					<!-- Modal footer -->
+				<div class="modal-footer" style="margin-right: 61px;">
+					<button role="button" class="btn btn-danger" id="closeDetail" name="closeDetail"  data-dismiss="modal">닫기</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
 </body>
 </html>
