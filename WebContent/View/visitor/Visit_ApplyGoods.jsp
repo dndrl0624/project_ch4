@@ -210,6 +210,21 @@
 		});
 		//선택한 이력 재사용
 		$("#btn_reflect").on('click',function(){
+			var radio = $("input[name=aplg_no]:checked");
+			if(!(radio.val())){
+				alert("재사용할 이력을 선택하세요.");
+				return;
+			}
+			//선택된 라디오의 부모의 부모요소 = <tr>
+			var tr = radio.parent().parent();
+			//선택된 row의 값 가져오기
+			var aplg_desti = tr.find("td").eq(2).text();
+			var aplg_reason = tr.find("td").eq(3).text();
+			var aplg_trans_date = tr.find("td").eq(4).text();
+			//가져온 값 입력폼에 반영하기
+			$("#aplg_desti").combobox('select',aplg_desti);
+			$("#aplg_reason").textbox('setValue',aplg_reason);
+			$("#aplg_trans_date").datebox('setValue',aplg_trans_date);
 			$("#input_reflect").attr('value',$("input[name=aplg_no]:checked").val());
 			//alert($("#input_reflect").val());
 			$.ajax({

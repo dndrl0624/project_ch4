@@ -210,6 +210,7 @@
 				success: function(result){
 					//재검색 할 경우 이전 검색기록 제거
 					$("#tb_log #tr_log").remove();
+					//이력을 테이블에 뿌리기
 					$.each(result,function(index,item){
 						var visitor = item.visitor[0].visitor_name +" 외"+ (item.visitor.length-1) + "명";
 						//alert(index + ")\n"+ item.visit_apply_date+"\n"+visitor+"\n"+item.visit_desti+"\n"+item.visit_type+"\n"+item.visit_date+"\n"+item.visit_purps);
@@ -230,8 +231,38 @@
 		});
 		//선택한 이력 재사용
 		$("#btn_reflect").on('click',function(){
+			//선택한 라디오버튼(row) 찾기
+			var radio = $("input[name=visit_no]:checked");
+			if(!(radio.val())){
+				alert("재사용할 이력을 선택하세요.");
+				return;
+			}
+			//선택된 라디오버튼의 부모요소 = <td>
+			var td = radio.parent();
+			//선택된 라디오의 부모의 부모요소 = <tr>
+			var tr = td.parent();
+			//선택된 row의 값 가져오기
+			var visit_term = td.find("input[name=log_term]").val();
+			var visit_day = td.find("input[name=log_day]").val();
+			var visit_desti = tr.find("td").eq(3).text();
+			var visit_type = tr.find("td").eq(4).text();
+			var visit_date = tr.find("td").eq(5).text();
+			var visit_purps = tr.find("td").eq(6).text();
+			//가져온 값 입력폼에 반영하기
+			$("#visit_type").combobox('select',visit_type);
+			if("정기방문"==visit_type){
+				$("#visit_term").combobox('select',visit_term);
+				$("#visit_day").combobox('select',visit_day);
+			}
+			var date_array = visit_date.split("~");
+			$("#visit_date1").datebox('setValue',date_array[0]);
+			if(date_array[1]){
+				$("#visit_date2").datebox('setValue',date_array[1]);
+			}
+			$("#visit_desti").combobox('select',visit_desti);
+			$("#visit_purps").textbox('setValue',visit_purps);
+			//선택 이력의 visit_no로 방문자/반입기기/주차 정보 조회
 			$("#input_reflect").attr('value',$("input[name=visit_no]:checked").val());
-			//alert($("#input_reflect").val());
 			$.ajax({
 				type: 'POST',
 				data: $("#form_reflect").serialize(),
@@ -880,7 +911,7 @@
 			    		<div class="col-lg-8">
 			    			<h4 style="border-left: 3px solid #333333; padding-left:4px;"><b>차량 정보</b></h4>
 				    	</div>
-				    	<div class="col-lg-4" style="text-align:right;padding-top:5px;">
+				    	<div class="col-lg-4" style="text-align:right;">
 							<button id="btn_addRowParking" class="btn btn-default" type="button">차량 추가</button>
 							<button id="btn_delRowParking" class="btn btn-danger" type="button">선택삭제</button>
 		    			</div>
