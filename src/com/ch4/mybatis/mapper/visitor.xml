@@ -16,7 +16,7 @@
 	</select>	
 	
 	<!-- 이전 방문 기록 조회 -->
-	<select id="preVisitList" parameterType="map" resultType="map">
+	<select id="preVisitorApplyList" parameterType="map" resultType="map">
 		select visit_no, visit_apply_date, visit_desti, visit_type
 				,visit_purps, visit_date, visit_term, visit_day
 		from visit_apply
@@ -49,38 +49,35 @@
 	</select>
 	          	
 	<!-- 신청 내용 작성 -->
-	<insert id="visitorAdd" parameterType="map">
-		insert into visit_apply (com_no, visit_no, visit_apply_name, visit_apply_date,  visit_purps
-                                ,visit_desti, visit_type, visit_date, visit_apply_hp, visit_vhcle_encc
-                                ,visit_tkin_encc, visit_permit_id, visit_permit_st, visit_notes
-                                ,visit_term, visit_day)
-				values (#{com_no}, #{visit_no}, #{visit_apply_name}, #{visit_apply_date}, #{visit_purps}
-		               ,#{visit_desti}, #{visit_type}, #{visit_date}, #{visit_apply_hp}, #{visit_vhcle_encc}
-		               ,#{visit_tkin_encc}, #{visit_permit_id}, #{visit_permit_st}, #{visit_notes}
-		               ,#{visit_term}, #{visit_day}
-		               )
+	<insert id="visitorApplyAdd" parameterType="map">
+		insert into visit_apply (com_no, visit_no, visit_apply_name, visit_purps, visit_desti
+								,visit_type, visit_date, visit_apply_hp, visit_vhcle_encc, visit_tkin_encc
+								,visit_permit_id, visit_notes, visit_term, visit_day)
+				values (#{com_no}, #{visit_no}, #{visit_apply_name}, #{visit_purps}, #{visit_desti}
+					   ,#{visit_type}, #{visit_date}, #{visit_apply_hp}, #{visit_vhcle_encc}, #{visit_tkin_encc}
+		               ,#{visit_permit_id}, #{visit_notes}, #{visit_term}, #{visit_day})
 	</insert>
 	
 	<!-- 신청 내용 작성 (방문자) -->
-	<insert id="visitApplyAdd" parameterType="map">
-		insert into parking_mng(parking_kind, parking_num, parking_model, visit_no)
-			values(#{parking_kind}, #{parking_num}, #{parking_model}, #{visit_no})
+	<insert id="visitorAdd" parameterType="map">
+		insert into visitor_mng(visitor_name, visitor_hp, visit_no)
+			values(#{visitor_name},#{visitor_hp},#{visit_no})
 	</insert>
 	
 	<!-- 신청 내용 작성 (반입기기) -->
 	<insert id="equipAdd" parameterType="map">
-		insert into visitor_mng(visitor_name, visitor_hp, visit_no)
-			values(#{visitor_name},#{visitor_hp},#{visit_no})	
+		insert into tkin_mng(tkin_model, tkin_kind, tkin_posbl_encc, tkin_brand, visit_no)
+			values(#{tkin_model}, #{tkin_kind}, #{tkin_posbl_encc}, #{tkin_brand}, #{visit_no})	
 	</insert>
 	
 	<!-- 신청 내용 작성 (주차) -->
 	<insert id="carAdd" parameterType="map">
-		insert into tkin_mng(tkin_model, tkin_kind, tkin_posbl_encc, tkin_brand, visit_no)
-			values(#{tkin_model}, #{tkin_kind}, #{tkin_posbl_encc}, #{tkin_brand}, #{visit_no})
+		insert into parking_mng(parking_kind, parking_num, parking_model, visit_no)
+			values(#{parking_kind}, #{parking_num}, #{parking_model}, #{visit_no})
 	</insert>
 	
 	<!-- 방문 신청 내용 신청번호로 조회  -->
-	<select id="applySearch" parameterType="map" resultType="map">
+	<select id="visitorApplySearch" parameterType="map" resultType="map">
 		select visit_no, visit_apply_date, com_name, visit_purps, visit_date, visit_permit_st
 				from visit_apply vi, company co
 				where vi.com_no = co.com_no
@@ -88,7 +85,7 @@
 	</select>
 	
 	<!-- 방문 신청 내용 신청자정보로 조회  -->
-	<select id="applyList" parameterType="map" resultType="map">
+	<select id="visitorApplyList" parameterType="map" resultType="map">
 		select visit_no, visit_apply_date, com_name, visit_purps, visit_date, visit_permit_st
 				from visit_apply vi, company co
 				where vi.com_no = co.com_no
@@ -96,202 +93,102 @@
 				and visit_apply_hp = #{visit_apply_hp}
 	</select>
 	
-	<!-- 방문 신청 한 건에 대한 상세정보 조회 (전체)  --><!-- 작업중!!!!!!!!!!!!!!!!!!!! -->
-	<select id="visitInfoMap" parameterType="map" resultType="map">
-		select com_no, visit_no, visit_apply_name, visit_apply_date,  visit_purps
-                                ,visit_desti, visit_type, visit_date, visit_apply_hp, visit_vhcle_encc
-                                ,visit_tkin_encc, visit_permit_id, visit_permit_st, visit_notes
-                                ,visit_term, visit_day, com_name
-				from visit_apply vi, company co
-				where visit_no = #{visit_no}
-	</select>
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<!-- 방문자 신청 신청번호 조회 -->
-	<select id="applyDetail" parameterType="map" resultType="map">
+	<!-- 방문 신청 한 건에 대한 상세정보 조회 (전체) -->
+	<select id="visitorApplyMap" parameterType="map" resultType="map">
+		select vi.com_no, visit_no,  visit_apply_name, visit_apply_date, visit_purps, visit_desti
+                ,visit_type, visit_date, visit_apply_hp, visit_vhcle_encc, visit_tkin_encc
+                ,visit_permit_id, visit_permit_st, visit_notes, visit_term, visit_day
+                ,com_name
+                from visit_apply vi, company co
+                where vi.com_no = co.com_no
+                and visit_no = #{visit_no}
 	</select>
 	
-	<!-- 방문자 신청 신청자 정보 조회 -->
-	<select id="applyList" parameterType="map" resultType="map">
-	</select>
-	
-	<!-- 반입 신청 신청번호 조회 -->
-	<select id="goodsDetail" parameterType="map" resultType="map">
-	</select>
-	
-	<!-- 반입 신청 신청자 정보 조회 -->
-	<select id="goodsList" parameterType="map" resultType="map">
-	</select>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-	<!-- 방문자의 방문신청조회 중 신청번호로 검색했을 때 전체조회 -->
-	<select id="applyList" parameterType="map" resultType="map">
-		select visit_no, visit_apply_name, visit_apply_date, visit_purps, visit_desti
-				,visit_charge ,visit_type, visit_date, visit_apply_hp, visit_vhcle_encc
-				,visit_tkin_encc, visit_permit_st, visit_notes, visit_term, visit_day
-				,com_no, visitor_name, tkin_kind, parking_model
-			from (
-				select vi.visit_no, vi.visit_apply_name, vi.visit_apply_date, vi.visit_purps
-				,vi.visit_desti, vi.visit_charge, vi.visit_type, vi.visit_date, vi.visit_apply_hp
-				,vi.visit_vhcle_encc, vi.visit_tkin_encc, vi.visit_permit_st, vi.visit_notes
-				,vi.visit_term, vi.visit_day, co.com_no, vir.visitor_name, tk.tkin_kind, pa.parking_model
-				from visit_apply vi, visitor_mng vir, tkin_mng tk, parking_mng pa, company co
-				where co.com_no = vi.com_no
-				and vi.visit_no = vir.visit_no
-				and vir.visit_no = tk.visit_no
-				and tk.visit_no = pa.visit_no
-				)
+	<!-- 방문 신청 취소 (결제상태 변경)-->
+	<update id="visitorApplyCancle" parameterType="map">
+		update visit_apply
+			set
+				visit_permit_st = '취소'
 			where visit_no = #{visit_no}
-	</select>
-	
-	<!-- 방문자의 방문신청조회 중 이름과 연락처로 검색했을 때 전체조회 -->
-	<select id="applyList2" parameterType="map" resultType="map">
-		select visit_no, visit_apply_name, visit_apply_date, visit_purps, visit_desti
-				,visit_charge ,visit_type, visit_date, visit_apply_hp, visit_vhcle_encc
-				,visit_tkin_encc, visit_permit_st, visit_notes, visit_term, visit_day
-				,com_no, visitor_name, tkin_kind, parking_model
-			from (
-				select vi.visit_no, vi.visit_apply_name, vi.visit_apply_date, vi.visit_purps
-				,vi.visit_desti, vi.visit_charge, vi.visit_type, vi.visit_date, vi.visit_apply_hp
-				,vi.visit_vhcle_encc, vi.visit_tkin_encc, vi.visit_permit_st, vi.visit_notes
-				,vi.visit_term, vi.visit_day, co.com_no, vir.visitor_name, tk.tkin_kind, pa.parking_model
-				from visit_apply vi, visitor_mng vir, tkin_mng tk, parking_mng pa, company co
-				where co.com_no = vi.com_no
-				and vi.visit_no = vir.visit_no
-				and vir.visit_no = tk.visit_no
-				and tk.visit_no = pa.visit_no
-				)
-			where visit_apply_name = #{visit_apply_name} 
-			and visit_apply_hp = #{visit_apply_hp}
-	</select>
-	
-	<!-- 방문자의 방문신청조회 중 승인이 허가가 된 경우 조회 -->
-	<select id="applyList3" parameterType="map" resultType="map">
-		select visit_permit_id, confm_no, confm_qrcode, confm_date
-			from  (
-					select app.visit_permit_id, app.visit_permit_st, con.confm_no
-					   		,con.confm_qrcode, con.confm_date
-					from visit_confm con, visit_apply app
-					where con.visit_no = app.visit_no
-				  )
-	</select>
-	
-	<!-- 방문 신청 취소 -->
-	<update id="visitorCancle">
-	
 	</update>
 	
 	<!-- 방문 신청 변경 -->
-	<update id="visitorUpdate">
-	
+	<update id="visitorApplyUpdate" parameterType="map">
+		update visit_apply
+           set 
+                visit_purps = #{visit_purps}
+                ,visit_desti = #{visit_desti}
+                ,visit_type = #{visit_type}
+                ,visit_date = #{visit_date}
+                ,visit_apply_hp = #{visit_apply_hp}
+                ,visit_vhcle_encc = #{visit_vhcle_encc}
+                ,visit_tkin_encc = #{visit_tkin_encc}
+                ,visit_permit_st = #{visit_permit_st}
+                ,visit_notes = #{visit_notes}
+                ,visit_term = #{visit_term}
+                ,visit_day = #{visit_day}
+         where visit_no = #{visit_no}
 	</update>
 	
-	<!-- 반출 기록 조회 -->
-	<select id="preGoodsList" parameterType="map" resultType="map">
+   <!-- 반출 기록 조회 -->
+   <select id="preGoodsApplyList" parameterType="map" resultType="map">
+   		select app.aplg_no, aplg_date, aplg_desti, aplg_trans_date
+				,aplg_reason, gmng_name 
+			from goods_apply app, goods_mng mng
+			where app.aplg_no = mng.aplg_no
+			and com_no = #{com_no}
+			and aplg_name = #{aplg_name}
+			and aplg_hp = #{aplg_hp}
+			and aplg_date >= #{aplg_date1}
+			<![CDATA[ and aplg_date <= #{aplg_date2} ]]>
+   </select>
 	
-	</select>
-	
-	<!-- 반출 기록 상세 조회 -->
-	<select id="goodsDetail" parameterType="map" resultType="map">
-	
-	</select>
-	
-	<!-- 반출 신청 등록 -->
-	<insert id="goodsAdd">
-	
-	</insert>
-	
-	<!-- ????? -->
-	<insert id="goodsSubAdd">
-	
-	</insert>
-	
-	<!-- 반출 조회 및 승인 결과 조회 -->
-	<select id="goodsList">
-		
-	</select>
-	
-	<!-- 반출 상세페이지 -->
-	<select id="goodsDetail">
-		
-	</select>
-	
-	<!-- 반출 취소 -->
-	<update id="goodsCancle">
-	
-	</update>
-	
-	<!-- 반출 변경 -->
-	<update id="goodsUpdate">
-	
-	</update>
-	
-	<!-- 길 안내 API : 어플 연결//////회사주소 조회 -->
-	<select id="">
-	
-	</select>
-
-	<!-- 방문 신청 승인 등록 -->
-	<insert id="mngVPermit">
-	
-	</insert>
-	
-	<!-- 신청 현황 승인으로 변경 -->
-	<update id="mngGPermit">
-	
-	</update>
-
-	<!-- 반출 신청 승인 등록 -->
-	<insert id="mngVPermit">
-	
-	</insert>
-	
-	<!-- 신청 변경 -->
-	<update id="mngUpdate">
-	
-	</update>
-	
-	<!-- 전체 조회 / 기간별 조회 -->
-	<select id="inOutList ">
-	
-	</select>
+   <!-- 반출 기록 상세 조회 -->
+   <select id="goodsList" parameterType="map" resultType="map">
+      select gmng_name, gmng_type, gmng_quan
+            ,gmng_confm, gmng_notes
+      from goods_mng
+      where aplg_no = #{aplg_no}
+   </select>
+   
+   <!-- 반출 신청 등록 -->
+   <insert id="goodsApplyAdd" parameterType="map">
+      insert into goods_apply(aplg_no, aplg_name, aplg_reason
+                        ,aplg_desti, aplg_trans_date, aplg_hp, com_no)
+            values(#{aplg_no}, #{aplg_name}, #{aplg_reason}
+                  ,#{aplg_desti}, #{aplg_trans_date}, #{aplg_hp}, #{com_no})
+   </insert>
+   
+   <!-- 반출 물품정보 등록 -->
+   <insert id="goodsAdd" parameterType="map">
+      insert into goods_mng(aplg_no, gmng_name, gmng_type, gmng_quan)
+            values(#{aplg_no}, #{gmng_name}, #{gmng_type}, #{gmng_quan})
+   </insert>
+   
+   <!-- 반입 신청건에 대한 상세정보 조회 -->
+   <select id="goodsApplyMap" parameterType="map" resultType="map">
+      select aplg_no, aplg_name, aplg_date, aplg_reason
+            ,aplg_desti, aplg_trans_date, aplg_hp
+            ,aplg_notes, aplg_permit_id, com_no, com_name
+      from goods_apply ga, company co
+      where ga.com_no = co.com_no
+      and aplg_no = #{aplg_no}
+   </select>
+   
+   <!-- 반출 조회 및 승인 결과 신청번호로 조회 -->
+   <select id="goodsApplySearch" parameterType="map" resultType="map">
+   		select aplg_no, aplg_trans_date, aplg_name, aplg_date, aplg_permit_st, com_name
+   			from goods_apply app, company co
+   			where app.com_no = co.com_no
+   			and aplg_no = #{aplg_no}
+   </select>
+   
+   <!-- 반출 조회 및 승인 결과 신청자정보로 조회 -->
+   <select id="goodsApplyList">
+   		select aplg_no, aplg_trand_date, aplg_date, aplg_permit_st, com_name
+   			from goods_apply app, company co
+   			where app.com_no = co.com_no
+   			and aplg_name = #{aplg_name}
+   			and aplg_hp = #{aplg_hp}
+   </select>
 </mapper>

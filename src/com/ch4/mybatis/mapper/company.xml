@@ -22,4 +22,39 @@
 		insert into company_manage(cmng_id, cmng_pw, cmng_name, cmng_grade, cmng_hp, dept_no)
 		values (#{mem_id},#{mem_pw},#{mem_name},#{mem_addr},#{mem_zipcode})
 	</insert>
+	
+	<!-- 회사승인자 방문신청 승인 -->
+	<insert id="mngVPermit" parameterType="map">
+		insert into visit_confm(confm_no, confm_notes, visit_no)
+		values (#{confm_no}, #{confm_notes}, #{visit_no})
+	</insert>
+	
+	<!-- 회사승인자 방문신청 결제상태 변경 -->
+	<update id="mngPermitUpd" parameterType="map">
+		update visit_apply
+			set
+				visit_permit_st = #{visit_permit_st}
+			where visit_no = #{visit_no}
+	</update>
+	
+	<!-- 반입 신청 등록 -->
+	<insert id="mngGPermit" parameterType="map">
+		insert into goods_apply (com_no, aplg_no, aplg_name, aplg_reason, aplg_desti
+								,aplg_trans_date, aplg_hp, aplg_notes, aplg_permit_id)
+				values (#{com_no}, #{aplg_no}, #{aplg_name}, #{aplg_reason}, #{aplg_desti}
+					   ,#{aplg_trans_date}, #{aplg_hp}, #{aplg_notes}, #{aplg_permit_id})
+	</insert>
+
+	<!-- 반입 신청 변경 -->
+	<update id="mngPermitUpd" parameterType="map">
+		update goods_apply
+			set
+				aplg_reason = #{aplg_reason}
+				,aplg_desti = #{aplg_desti}
+				,aplg_trans_date = #{aplg_trans_date}
+				,aplg_hp = #{aplg_hp}
+				,aplg_notes = #{aplg_notes}
+				,aplg_permit_id = #{aplg_permit_id}
+			where aplg_no = #{aplg_no}
+	</update>
 </mapper>
