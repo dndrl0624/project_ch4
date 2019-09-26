@@ -191,4 +191,33 @@
    			and aplg_name = #{aplg_name}
    			and aplg_hp = #{aplg_hp}
    </select>
+   
+   <!-- 반출 신청 취소 (결제상태 변경)-->
+	<update id="goodsApplyCancle" parameterType="map">
+		update goods_apply
+			set
+				aplg_permit_st = '취소'
+			where aplg_no = #{aplg_no}
+	</update>
+	
+	<!-- 반출 신청 취소 (결제상태 변경)-->
+	<update id="goodsApplyCancle" parameterType="map">
+		update goods_apply
+			set
+				aplg_permit_st = '취소'
+			where aplg_no = #{aplg_no}
+	</update>
+	
+	<!-- 반출 변경 -->
+	<update id="goodsApplyUpdate" parameterType="map">
+		update goods_apply
+           set 
+                aplg_reason = #{aplg_reason}
+                ,aplg_desti = #{aplg_desti}
+                ,aplg_trans_date = #{aplg_trans_date}
+                ,aplg_hp = #{aplg_hp}
+                ,aplg_permit_st = #{aplg_permit_st}
+                ,aplg_notes = #{aplg_notes}
+         where aplg_no = #{aplg_no}
+	</update>
 </mapper>

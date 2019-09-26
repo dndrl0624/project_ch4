@@ -57,4 +57,12 @@
 				,aplg_permit_id = #{aplg_permit_id}
 			where aplg_no = #{aplg_no}
 	</update>
+	
+	<!-- 방문신청 승인 -->
+	<insert id = "visitorQR" parameterType="map">
+		insert into goods_apply (com_no, aplg_no, aplg_name, aplg_reason, aplg_desti
+								,aplg_trans_date, aplg_hp, aplg_notes, aplg_permit_id)
+				values (#{com_no}, #{aplg_no}, #{aplg_name}, #{aplg_reason}, #{aplg_desti}
+					   ,#{aplg_trans_date}, #{aplg_hp}, #{aplg_notes}, #{aplg_permit_id}) 
+	</insert>
 </mapper>
