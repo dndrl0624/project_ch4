@@ -71,7 +71,7 @@ public class ActionServlet extends HttpServlet {
 				if(isRedirect) {
 					res.sendRedirect(viewPath + contextPath + viewName);
 				}
-				else {					
+				else {
 					RequestDispatcher view = req.getServletContext().getRequestDispatcher("/View" + contextPath + viewName);
 					view.forward(req, res);
 				}

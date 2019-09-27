@@ -45,31 +45,26 @@ public class CompanyController implements Controller{
 			int result = 0;
 			result = cLogic.companyLogin(pMap);
 			if(result == 1) {
-				mav.setViewName(".jsp");
+				mav.setViewName("Manager_Main.jsp");
 			}
 			else if(result ==0) {
-				mav.setViewName(".jsp");
+				mav.setViewName("Fail.jsp");
 			}
 		}
 		else if(requestName.equals("join")) {
 			int result = 0;
 			result = cLogic.companyJoin(pMap);
 			if(result == 1) {
-				mav.setViewName(".jsp");
+				mav.setViewName("Company_Login.jsp");
 			}
 			else if(result ==0) {
-				mav.setViewName(".jsp");
+				mav.setViewName("Fail.jsp");
 			}
 		}
 		else if(requestName.equals("isExistID")) {
 			int result = 0;
 			result = cLogic.isExistID(pMap);
-			if(result == 1) {
-				mav.setViewName(".jsp");
-			}
-			else if(result ==0) {
-				mav.setViewName(".jsp");
-			}
+			
 		}
 
 		return mav;

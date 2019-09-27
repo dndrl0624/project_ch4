@@ -31,11 +31,6 @@ public class CompanyDao {
 		}
 		return qrCode;
 	}
-	public String getKioskNo(Map<String, Object> pMap) {
-		String kiosk_no = null;
-		kiosk_no = sqlSession.selectOne("kiosk_no",pMap);
-		return kiosk_no;
-	}
 /////////////////////////////////////////////////////////////////////////
 	public int mngPermit(Map<String, Object> pMap) {
 		int result = 0;

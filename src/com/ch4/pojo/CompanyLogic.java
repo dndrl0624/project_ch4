@@ -31,17 +31,17 @@ public class CompanyLogic {
 		}
 		if(result==1) {
 			String qrCode = cDao.getQRcode(pMap);
-			String kiosk_no = cDao.getKioskNo(pMap);
 			String savedFilePath = CompanyController.QRImagePath;
 			String path = null;
 			String url = null;
 			
 			if(pMap.get("visit_no")!=null) {
 				path = savedFilePath + "visit/";
-				url = "http://localhost:8080/Info/QRconfirm.ch4?confm_qrcode=" + qrCode + "&kiosk_no=" + kiosk_no;
+				url = "http://localhost:8080/Info/QRconfirm.ch4?confm_qrcode=" + qrCode;
 			}
 			else if(pMap.get("aplg_no")!=null) {
 				path = savedFilePath + "goods/";
+				url = "http://localhost:8080/Info/QRconfirm.ch4?confm_qrcode=" + qrCode;
 			}
 			File file = new File(path);
 			QRCodeWriter writer = new QRCodeWriter();
