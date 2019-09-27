@@ -29,21 +29,21 @@
 	
 	<!-- 이전 방문 기록 상세 조회 (방문자) -->
 	<select id="visitorList" parameterType="map" resultType="map">
-		select visitor_name, visitor_hp, visit_no
+		select visitor_name, visitor_hp
 		from visitor_mng
 		where visit_no = #{visit_no}
 	</select>
 	
 	<!-- 이전 방문 기록 상세 조회 (반입기기) -->
 	<select id="equipList" parameterType="map" resultType="map">
-		select tkin_model, tkin_kind, tkin_posbl_encc, tkin_brand, visit_no
+		select tkin_model, tkin_kind, tkin_posbl_encc, tkin_brand
 		from tkin_mng
 		where visit_no = #{visit_no}
 	</select>
 	
 	<!-- 이전 방문 기록 상세 조회 (주차) -->
 	<select id="carList" parameterType="map" resultType="map">
-		select parking_kind, parking_num, parking_model, visit_no
+		select parking_kind, parking_num, parking_model
 		from parking_mng
 		where visit_no = #{visit_no}
 	</select>
@@ -66,8 +66,8 @@
 	
 	<!-- 신청 내용 작성 (반입기기) -->
 	<insert id="equipAdd" parameterType="map">
-		insert into tkin_mng(tkin_model, tkin_kind, tkin_posbl_encc, tkin_brand, visit_no)
-			values(#{tkin_model}, #{tkin_kind}, #{tkin_posbl_encc}, #{tkin_brand}, #{visit_no})	
+		insert into tkin_mng(tkin_model, tkin_kind, tkin_brand, visit_no)
+			values(#{tkin_model}, #{tkin_kind}, #{tkin_brand}, #{visit_no})	
 	</insert>
 	
 	<!-- 신청 내용 작성 (주차) -->
@@ -104,35 +104,19 @@
                 and visit_no = #{visit_no}
 	</select>
 	
-	<!-- 방문 신청 취소 (결제상태 변경)-->
-	<update id="visitorApplyCancle" parameterType="map">
-		update visit_apply
-			set
-				visit_permit_st = '취소'
-			where visit_no = #{visit_no}
-	</update>
-	
-	<!-- 방문 신청 변경 -->
-	<update id="visitorApplyUpdate" parameterType="map">
-		update visit_apply
-           set 
-                visit_purps = #{visit_purps}
-                ,visit_desti = #{visit_desti}
-                ,visit_type = #{visit_type}
-                ,visit_date = #{visit_date}
-                ,visit_apply_hp = #{visit_apply_hp}
-                ,visit_vhcle_encc = #{visit_vhcle_encc}
-                ,visit_tkin_encc = #{visit_tkin_encc}
-                ,visit_permit_st = #{visit_permit_st}
-                ,visit_notes = #{visit_notes}
-                ,visit_term = #{visit_term}
-                ,visit_day = #{visit_day}
-         where visit_no = #{visit_no}
-	</update>
+	<!-- 방문 신청 취소 (결제상태 변경) 프로시저-->
+   <update id="visitorApplyCancle" parameterType="map" statementType="CALLABLE">
+      {call proc_visitorCancle(#{visit_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String})}
+   </update>
+   
+	<!-- 방문 신청 변경(방문자,반입기기,주차 삭제) 프로시저 -->
+   <update id="visitorSubDelete" parameterType="map" statementType="CALLABLE">
+      {call proc_visitorSubDelete(#{visit_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String})}
+   </update>
 	
    <!-- 반출 기록 조회 -->
    <select id="preGoodsApplyList" parameterType="map" resultType="map">
-   		select app.aplg_no, aplg_date, aplg_desti, aplg_trans_date
+   		select app.aplg_no, aplg_date, aplg_desti, aplg_trans_date, aplg_permit_st
 				,aplg_reason, gmng_name 
 			from goods_apply app, goods_mng mng
 			where app.aplg_no = mng.aplg_no
@@ -177,37 +161,26 @@
    
    <!-- 반출 조회 및 승인 결과 신청번호로 조회 -->
    <select id="goodsApplySearch" parameterType="map" resultType="map">
-   		select aplg_no, aplg_trans_date, aplg_name, aplg_date, aplg_permit_st, com_name
+   		select aplg_no, aplg_trans_date, aplg_name, aplg_date, aplg_permit_st, aplg_reason, com_name
    			from goods_apply app, company co
    			where app.com_no = co.com_no
    			and aplg_no = #{aplg_no}
    </select>
    
    <!-- 반출 조회 및 승인 결과 신청자정보로 조회 -->
-   <select id="goodsApplyList">
-   		select aplg_no, aplg_trand_date, aplg_date, aplg_permit_st, com_name
+   <select id="goodsApplyList" parameterType="map" resultType="map">
+   		select aplg_no, aplg_trand_date, aplg_date, aplg_permit_st, aplg_reason, com_name
    			from goods_apply app, company co
    			where app.com_no = co.com_no
    			and aplg_name = #{aplg_name}
    			and aplg_hp = #{aplg_hp}
    </select>
    
-   <!-- 반출 신청 취소 (결제상태 변경)-->
-	<update id="goodsApplyCancle" parameterType="map">
-		update goods_apply
-			set
-				aplg_permit_st = '취소'
-			where aplg_no = #{aplg_no}
-	</update>
-	
-	<!-- 반출 신청 취소 (결제상태 변경)-->
-	<update id="goodsApplyCancle" parameterType="map">
-		update goods_apply
-			set
-				aplg_permit_st = '취소'
-			where aplg_no = #{aplg_no}
-	</update>
-	
+   <!-- 반출 신청 취소 (결제상태 변경) 프로시저-->
+   <update id="goodsApplyCancle" parameterType="map" statementType="CALLABLE">
+      {call proc_goodsCancle(#{aplg_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String})}
+   </update>
+
 	<!-- 반출 변경 -->
 	<update id="goodsApplyUpdate" parameterType="map">
 		update goods_apply
@@ -215,9 +188,31 @@
                 aplg_reason = #{aplg_reason}
                 ,aplg_desti = #{aplg_desti}
                 ,aplg_trans_date = #{aplg_trans_date}
-                ,aplg_hp = #{aplg_hp}
-                ,aplg_permit_st = #{aplg_permit_st}
-                ,aplg_notes = #{aplg_notes}
          where aplg_no = #{aplg_no}
 	</update>
+	   
+   <!-- 반입 신청 변경(물품관리 삭제) -->
+   <update id="goodsSubDelete" parameterType="map">
+      delete from goods_mng
+       where aplg_no = #{aplg_no}
+   </update>
+   
+   <!-- QR코드 조회(visitor) -->
+   <select id="visitorQRcode" parameterType="map" resultType="map">
+		select confm_qrcode
+			from cmg_confm
+			where confm_name = #{confm_name}
+			and confm_hp = #{confm_hp}
+			and confm_no = #{confm_no}
+   </select>
+   
+   <!-- QR코드 조회(goods) -->
+   <select id="visitorQRcode" parameterType="map" resultType="map">
+   		select confm_qrcode
+			from goods_confm
+			where confm_no = #{confm_no}
+			and confm_name = #{confm_name}
+			and aplg_no = {aplg_no}
+   </select>
+   
 </mapper>

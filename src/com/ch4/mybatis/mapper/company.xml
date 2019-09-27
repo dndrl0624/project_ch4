@@ -20,13 +20,13 @@
 	<!-- 회원가입  -->
 	<insert id="companyJoin" parameterType="map">
 		insert into company_manage(cmng_id, cmng_pw, cmng_name, cmng_grade, cmng_hp, dept_no)
-		values (#{mem_id},#{mem_pw},#{mem_name},#{mem_addr},#{mem_zipcode})
+		values (#{cmng_id},#{cmng_pw},#{cmng_name},#{cmng_grade},#{cmng_hp},#{dept_no})
 	</insert>
 	
 	<!-- 회사승인자 방문신청 승인 -->
 	<insert id="mngVPermit" parameterType="map">
-		insert into visit_confm(confm_no, confm_notes, visit_no)
-		values (#{confm_no}, #{confm_notes}, #{visit_no})
+		insert into visit_confm(confm_no, visit_no)
+		values (#{confm_no}, #{visit_no})
 	</insert>
 	
 	<!-- 회사승인자 방문신청 결제상태 변경 -->
@@ -37,32 +37,67 @@
 			where visit_no = #{visit_no}
 	</update>
 	
-	<!-- 반입 신청 등록 -->
+	<!-- 회사승인자 반입신청 승인 -->
 	<insert id="mngGPermit" parameterType="map">
-		insert into goods_apply (com_no, aplg_no, aplg_name, aplg_reason, aplg_desti
-								,aplg_trans_date, aplg_hp, aplg_notes, aplg_permit_id)
-				values (#{com_no}, #{aplg_no}, #{aplg_name}, #{aplg_reason}, #{aplg_desti}
-					   ,#{aplg_trans_date}, #{aplg_hp}, #{aplg_notes}, #{aplg_permit_id})
+		insert into goods_confm(confm_no, aplg_no)
+		values (#{confm_no}, #{aplg_no})
 	</insert>
-
-	<!-- 반입 신청 변경 -->
-	<update id="mngPermitUpd" parameterType="map">
+	
+	<!-- 회사승인자 반입신청 결제상태 변경 -->
+	<update id="mngPermitGpd" parameterType="map">
 		update goods_apply
 			set
-				aplg_reason = #{aplg_reason}
-				,aplg_desti = #{aplg_desti}
-				,aplg_trans_date = #{aplg_trans_date}
-				,aplg_hp = #{aplg_hp}
-				,aplg_notes = #{aplg_notes}
-				,aplg_permit_id = #{aplg_permit_id}
+				aplg_permit_st = #{aplg_permit_st}
 			where aplg_no = #{aplg_no}
 	</update>
 	
-	<!-- 방문신청 승인 -->
-	<insert id = "visitorQR" parameterType="map">
-		insert into goods_apply (com_no, aplg_no, aplg_name, aplg_reason, aplg_desti
-								,aplg_trans_date, aplg_hp, aplg_notes, aplg_permit_id)
-				values (#{com_no}, #{aplg_no}, #{aplg_name}, #{aplg_reason}, #{aplg_desti}
-					   ,#{aplg_trans_date}, #{aplg_hp}, #{aplg_notes}, #{aplg_permit_id}) 
+	<!-- 방문 출입 QR코드 등록 -->
+	<insert id = "visitorQRAdd" parameterType="map">
+		insert into cmg_confm (confm_qrcode, confm_name, confm_hp, confm_no)
+				values (#{confm_qrcode}, #{confm_name}, #{confm_hp}, #{confm_no}) 
 	</insert>
+	
+	<!-- 방문 출입 QR코드 조회 -->
+	<select id="visitorQR" parameterType="map" resultType="map">
+		select confm_qrcode
+			from cmg_confm
+			where confm_name = #{confm_name}
+			and confm_hp = #{confm_hp}
+			and confm_no = #{confm_no}
+	</select>
+	
+	<!-- 승인된 반입 QR코드 등록 -->
+	<insert id = "goodsQRAdd" parameterType="map">
+		insert into goods_confm (confm_no, confm_name, confm_type, confm_date, confm_quan, confm_tkin_quan
+									confm_time, confm_qrcode, aplg_no)
+				values (#{confm_no}, #{confm_name}, #{confm_type}, #{confm_date}, #{confm_quan}
+						,#{confm_tkin_quan}, #{confm_time}, #{confm_qrcode}, #{aplg_no}) 
+	</insert>
+	  
+	<!-- 승인된 반입 QR코드 조회 -->
+	<select id="goodsQR" parameterType="map" resultType="map">
+		select confm_qrcode
+			from goods_confm
+			where confm_no = #{confm_no}
+			and confm_name = #{confm_name}
+			and aplg_no = {aplg_no}
+	</select>
+
+	<!-- 출입로그 조회  -->
+   <select id="inOutList" parameterType="map" resultType="map">
+   		select cmg_inout, cmg_entrc, cmg_notes
+   			from cmg_log
+   			where confm_qrcode = #{confm_qrcode}
+   </select>
+   
+   <!-- 방문신청 현황 조회 -->
+   <select id="applyVisitList" parameterType="map" resultType="map">
+   		select vi.com_no, visit_no,  visit_apply_name, visit_apply_date, visit_purps, visit_desti
+                ,visit_type, visit_date, visit_apply_hp, visit_vhcle_encc, visit_tkin_encc
+                ,visit_permit_id, visit_permit_st, visit_notes, visit_term, visit_day
+                ,com_name
+                from visit_apply vi, company co
+                where vi.com_no = co.com_no
+                and visit_no = #{visit_no}
+   </select>
 </mapper>
