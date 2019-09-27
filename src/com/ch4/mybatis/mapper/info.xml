@@ -12,4 +12,11 @@
 		insert into answer(a_no, a_content, a_date, q_no)
 			values(#{a_no},#{a_content},#{a_date},#{q_no})
 	</insert>
+	
+	<!-- QR전송 프로시저 -->
+	<select id="confirmQR" parameterType="map" statementType="CALLABLE">
+		{call proc_confirmQR(#{confm_qrcode,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+							,#{msg,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+							)}
+	</select>
 </mapper>  
