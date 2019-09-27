@@ -1,26 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ch4.mybatis.mapper.VisitorMapper">
-	
-	
-	
+	<!-- 신청 내용 작성  (기본정보)-->
+	<insert id="visitorApplyAdd" parameterType="map">
+		insert into visit_apply (com_no, visit_no, visit_apply_name, visit_purps, visit_desti
+								,visit_type, visit_date, visit_apply_hp, visit_vhcle_encc, visit_tkin_encc
+								,visit_permit_id, visit_notes, visit_term, visit_day)
+				values (#{com_no}, #{visit_no}, #{visit_apply_name}, #{visit_purps}, #{visit_desti}
+					   ,#{visit_type}, #{visit_date}, #{visit_apply_hp}, #{visit_vhcle_encc}, #{visit_tkin_encc}
+		               ,#{visit_permit_id}, #{visit_notes}, #{visit_term}, #{visit_day})
+	</insert>
+	<!-- 신청 내용 작성 (방문자) -->
+	<insert id="visitorAdd" parameterType="map">
+		insert into visitor_mng(visitor_name, visitor_hp, visit_no)
+			values(#{visitor_name},#{visitor_hp},#{visit_no})
+	</insert>
+	<!-- 신청 내용 작성 (반입기기) -->
+	<insert id="deviceAdd" parameterType="map">
+		insert into tkin_mng(tkin_model, tkin_kind, tkin_posbl_encc, tkin_brand, visit_no)
+			values(#{tkin_model}, #{tkin_kind}, #{tkin_posbl_encc}, #{tkin_brand}, #{visit_no})	
+	</insert>
+	<!-- 신청 내용 작성 (주차) -->
+	<insert id="parkingAdd" parameterType="map">
+		insert into parking_mng(parking_kind, parking_num, parking_model, visit_no)
+			values(#{parking_kind}, #{parking_num}, #{parking_model}, #{visit_no})
+	</insert>
 	<!-- 방문 신청 취소 (결제상태 변경)-->
 	<update id="visitorApplyCancle" parameterType="map" statementType="CALLABLE">
 		{call proc_visitorCancle(#{visit_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String})}
 	</update>
-	
 	<!-- 방문 신청 변경(방문자,반입기기,주차 삭제) -->
 	<update id="visitorSubDelete" parameterType="map" statementType="CALLABLE">
 		{call proc_visitorSubDelete(#{visit_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String})}
 	</update>
 	
-	<!-- 반입 신청 변경(물품관리 삭제) -->
-	<update id="goodsSubDelete" parameterType="map">
-		delete from goods_mng
-		 where aplg_no = #{aplg_no}
-	</update>
-	<!-- 반입 신청 취소 (결제상태 변경)-->
-	<update id="goodsApplyCancle" parameterType="map" statementType="CALLABLE">
-		{call proc_goodsCancle(#{aplg_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String})}
-	</update>
 </mapper>
