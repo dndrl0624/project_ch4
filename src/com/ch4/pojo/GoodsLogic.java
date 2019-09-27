@@ -68,5 +68,10 @@ public class GoodsLogic {
 		return rMap;
 	}
 
+	public List<Map<String, Object>> qrCodeList(Map<String, Object> pMap) {
+		List<Map<String,Object>> qrCodeList = gDao.qrCodeList(pMap);
+		return qrCodeList;
+	}
+
 
 }

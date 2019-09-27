@@ -1,6 +1,5 @@
 package com.ch4.pojo;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,9 +37,12 @@ public class RestController implements Rcontroller {
 			if (requestName.equals("list")) {
 				List<Map<String, Object>> applyList =  cLogic.applyList(pMap);
 				jsonStr = g.toJson(applyList);
-			} else if (requestName.equals("inOutList")) {
+			} 
+			else if (requestName.equals("inOutList")) {
 				List<Map<String, Object>> inOutList = cLogic.inOutList(pMap);
 				jsonStr = g.toJson(inOutList);
+			}
+			else if (requestName.equals("goodsList")) {
 			}
 		} ////////////////////////////////////end of company
 		else if ("visitor".equals(work)) {/////////start of visitor
@@ -75,6 +77,10 @@ public class RestController implements Rcontroller {
 				Map<String,Object> preVisitDetail = vLogic.previsitDetail(pMap);
 				jsonStr = g.toJson(preVisitDetail);
 			}
+			else if (requestName.equals("qrCodeList")) {
+				List<Map<String,Object>> qrCodeList = vLogic.qrCodeList(pMap);
+				jsonStr = g.toJson(qrCodeList);
+			}			
 		} //////////////////////////////////////////end of visitor
 		else if ("goods".equals(work)) {/////////start of goods
 			GoodsLogic gLogic = new GoodsLogic();			
@@ -101,6 +107,10 @@ public class RestController implements Rcontroller {
 				List<Map<String, Object>> preGoodsDetail = gLogic.preGoodsDetail(pMap);
 				jsonStr = g.toJson(preGoodsDetail);
 			}
+			else if (requestName.equals("qrCodeList")) {
+				List<Map<String,Object>> qrCodeList = gLogic.qrCodeList(pMap);
+				jsonStr = g.toJson(qrCodeList);
+			}			
 		}////////////////////////////////////////end of goods 
 		else if ("info".equals(work)) {
 			InfoLogic iLogic = new InfoLogic();

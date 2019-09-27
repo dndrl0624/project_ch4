@@ -1,8 +1,18 @@
 package com.ch4.pojo;
 
-import java.util.ArrayList;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+
+import javax.imageio.ImageIO;
+
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 
 public class CompanyLogic {
 	CompanyDao cDao = null;
@@ -13,11 +23,41 @@ public class CompanyLogic {
 	public int mngPermit(Map<String, Object> pMap) {
 		int result = 0;
 		result = cDao.mngPermit(pMap);
-		return result;
-	}
-	public int mngUpdate(Map<String, Object> pMap) {
-		int result = 0;
-		result = cDao.mngUpdate(pMap);
+		if(result==0) {
+			return result;
+		}
+		else if(result==1) {
+			result = cDao.mngUpdate(pMap);
+		}
+		if(result==1) {
+			String qrCode = cDao.getQRcode(pMap);
+			String kiosk_no = cDao.getKioskNo(pMap);
+			String savedFilePath = CompanyController.QRImagePath;
+			String path = null;
+			String url = null;
+			
+			if(pMap.get("visit_no")!=null) {
+				path = savedFilePath + "visit/";
+				url = "http://localhost:8080/Info/QRconfirm.ch4?confm_qrcode=" + qrCode + "&kiosk_no=" + kiosk_no;
+			}
+			else if(pMap.get("aplg_no")!=null) {
+				path = savedFilePath + "goods/";
+			}
+			File file = new File(path);
+			QRCodeWriter writer = new QRCodeWriter();
+		    try {
+				BitMatrix qr = writer.encode(url, BarcodeFormat.QR_CODE, 200, 200);
+				BufferedImage qrImage = MatrixToImageWriter.toBufferedImage(qr);
+				ImageIO.write(qrImage, "PNG", new File(file,qrCode +".png"));
+			} catch (WriterException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}  
+		}
+		else if(result==0) {
+			return result;
+		}
 		return result;
 	}
 	

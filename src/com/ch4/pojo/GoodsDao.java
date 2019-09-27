@@ -68,6 +68,11 @@ public class GoodsDao {
 
 	public List<Map<String, Object>> preGoodsList(Map<String, Object> pMap) {
 		List<Map<String,Object>> preGoodsList = sqlSession.selectList("preGoodsList", pMap);
+		for(int i=0;i<preGoodsList.size();i++) {
+			Map<String,Object> indexMap = preGoodsList.get(i);
+			List<Map<String, Object>> goodsDetail = sqlSession.selectList("goodsDetail", indexMap);
+			indexMap.put("goodsDetail", goodsDetail);
+		}
 		return preGoodsList;
 	}
 
@@ -95,6 +100,11 @@ public class GoodsDao {
 		rMap.put("infoMap", infoMap);
 		rMap.put("preGoodsList", preGoodsList);
 		return rMap;
+	}
+
+	public List<Map<String, Object>> qrCodeList(Map<String, Object> pMap) {
+		List<Map<String,Object>> qrCodeList = sqlSession.selectList("goodsQRcode",pMap);
+		return qrCodeList;
 	}
 
 }

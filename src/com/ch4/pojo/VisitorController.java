@@ -95,6 +95,9 @@ public class VisitorController implements Controller{
 		else if(requestName.equals("searchVisitor")) {
 			mav.setViewName("Visit_SearchVisitor.jsp");
 		}
+		else if(requestName.equals("searchVQRcode")) {
+			mav.setViewName("Visit_SearchVisitorQR.jsp");
+		}
 
 		
 		return mav;

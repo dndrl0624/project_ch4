@@ -111,6 +111,12 @@ public class VisitorDao {
 
 	public List<Map<String, Object>> preVisitList(Map<String, Object> pMap) {
 		List<Map<String, Object>> preVisitList = sqlSession.selectList("applyList", pMap);
+		for(int i=0;i<preVisitList.size();i++) {
+			Map<String,Object> indexMap = preVisitList.get(i);
+			List<Map<String, Object>> visitorList = sqlSession.selectList("visitorList", indexMap);
+			indexMap.put("visitorList", visitorList);
+		}
+		
 		return preVisitList;
 	}
 
@@ -142,6 +148,11 @@ public class VisitorDao {
 		rMap.put("carList", carList);
 		
 		return rMap;
+	}
+
+	public List<Map<String, Object>> qrCodeList(Map<String, Object> pMap) {
+		List<Map<String,Object>> qrCodeList = sqlSession.selectList("visitorQRcode",pMap);
+		return qrCodeList;
 	}
 
 

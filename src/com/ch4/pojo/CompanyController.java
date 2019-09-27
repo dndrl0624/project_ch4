@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import com.ch4.util.HashMapBinder;
 
 public class CompanyController implements Controller{
+	static String QRImagePath = "";
 	Logger logger = Logger.getLogger(CompanyController.class);
 	String requestName = null;
 	CompanyLogic cLogic = null;
@@ -24,6 +25,7 @@ public class CompanyController implements Controller{
 	@Override
 	public ModelAndView excute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		logger.info("execute 호출 성공");
+		QRImagePath = req.getRealPath("/QR/");
 		ModelAndView mav = new ModelAndView(req, res);
 		Map<String,Object> pMap = new HashMap<>();
 		HashMapBinder hmb = new HashMapBinder(req);
@@ -32,17 +34,6 @@ public class CompanyController implements Controller{
 			int result = 0;
 			logger.info("pMap : " + pMap);
 			result = cLogic.mngPermit(pMap);
-			if(result == 1) {
-				mav.setViewName(".jsp");
-			}
-			else if(result ==0) {
-				mav.setViewName(".jsp");
-			}
-		}
-		else if(requestName.equals("mngUpdate")) {
-			int result = 0;
-			logger.info("pMap : " + pMap);
-			result = cLogic.mngUpdate(pMap);
 			if(result == 1) {
 				mav.setViewName(".jsp");
 			}
