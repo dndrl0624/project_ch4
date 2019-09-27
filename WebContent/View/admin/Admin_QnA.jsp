@@ -60,7 +60,7 @@
 	function sendAnswer(q_no){
 		var content = $("#a_content").val();
 		$('#sendAnswer').attr("method","post");
-		$('#sendAnswer').attr("action","company/qnaAnswer.ch4"); //전송을 하는 곳.
+		$('#sendAnswer').attr("action","admin/sendAnswer.ch4?"); //전송을 하는 곳.
 		$('#sendAnswer').submit(); 
 	}
 	//더보기 눌렀을 때 새로운 리스트 호출
@@ -68,7 +68,7 @@
 		//rno = 리스트를 불러올 때 시작 값.
 		rno = $(".panel-heading").length+1;//현재 화면에 있는 패널의 길이 만큼 구한것.
 			$.ajax({
-			url : 'test.hana?crud=qnaList&rno='+rno
+			url : 'admin/qnaList.ch4&rno='+rno
 					//이 url에서 연결될 화면이 qnaList.jsp임.
 			,method:'get'
 			,success:function(data){
@@ -150,7 +150,9 @@
       		</div>
 		<!-- 내용 부분  끝-->
 		<!-- 더보기 -->
-		<input type="button" onclick="moreView(<%=qnaList.size()%>)" value="더보기">
+		<div align="center">
+			<button class="btn btn-default" onclick="moreView(<%=qnaList.size()%>)">더 보 기</button>
+		</div>
     	</div>
 	</div>
 </div>

@@ -70,8 +70,10 @@ h2 {
             return;
         }
         else{
-        	//url 부분
-           // $('#fsignin').submit();
+        	//전송
+        	$('#fsignin').attr("method","get");
+    		$('#fsignin').attr("action","company/login.ch4?"); //전송을 하는 곳.
+    		$('#fsignin').submit(); 
         }
 	
 	}

@@ -30,7 +30,7 @@
 		margin-top: 0px;
 		padding-top: 10px;
 		height: 300px;
-		background-image: url('../../Style/images/banner/speedGate (3).jpg');
+		background-image: url('../../Style/images/banner/speedGate (2).jpg');
 	}
 	.jumbotron_Content a{
 		font-size: 25px;

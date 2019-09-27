@@ -51,8 +51,10 @@
             return;
         }
         else{
-			//전송할 부분
-       	   //$("#f_adminlogin").submit();
+			//전송
+        	$('#f_adminlogin').attr("method","get");
+    		$('#f_adminlogin').attr("action","company/login.ch4?"); //전송을 하는 곳.
+    		$('#f_adminlogin').submit(); 
         }
 	} 
 	

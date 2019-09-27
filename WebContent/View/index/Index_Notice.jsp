@@ -26,6 +26,7 @@
 		height: 300px;
 		background-image: url('../../Style/images/banner/banner_top.jpg');
 	}
+	
 	.jumbotron_Content a{
 		font-size: 25px;
 	}

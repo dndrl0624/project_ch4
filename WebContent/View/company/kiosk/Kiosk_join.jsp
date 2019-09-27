@@ -50,7 +50,10 @@
 			return;
 		}
 		else{
-			//$("#f_kioskjoin").submit();
+			//전송
+        	$('#f_kioskjoin').attr("method","post");
+    		$('#f_kioskjoin').attr("action","kiosk/kioskJoin.ch4?"); //전송을 하는 곳.
+    		$('#f_kioskjoin').submit(); 
 		}
 		
 	}
@@ -62,7 +65,7 @@
 		var g_com_no;//전역변수_회사 코드
 		//콤보박스 - 회사 이름을 받을 부분
 		$("#cb_com").combobox({
-			url:'combobox_data.json'//회사 이름을 받을 url
+			url:'visitor/companyList.ch4'//회사 이름을 받을 url
 			,valueField:'COM_NO'
 			,textField:'COM_NAME'
 			,panelHeight : 'auto'
@@ -84,7 +87,7 @@
 				<div class="well">
 				<form id="f_kioskjoin">
 					<div class="row">
-						<input id="cb_com" name="cb_com" label="회사 이름" style="height: 40px;">
+						<input id="com_no" name="com_name" label="회사 이름" style="height: 40px;">
 					</div>
 					<div class="row">
 						<input class="easyui-textbox" id="kiosk_gate" label="설치 위치"/>
