@@ -22,12 +22,22 @@ public class CompanyLogic {
 
 	public int mngPermit(Map<String, Object> pMap) {
 		int result = 0;
-		result = cDao.mngPermit(pMap);
+		result = cDao.mngUpdate(pMap); // update
+		/*
+		 * 반려일경우, 
+		 * if(){
+		 * 
+		 * }
+		 * else if(){
+		 * 
+		 * }
+		 * 승인일경우
+		 */
 		if(result==0) {
 			return result;
 		}
 		else if(result==1) {
-			result = cDao.mngUpdate(pMap);
+			result = cDao.mngPermit(pMap); // insert
 		}
 		if(result==1) {
 			String qrCode = cDao.getQRcode(pMap);
@@ -61,9 +71,9 @@ public class CompanyLogic {
 		return result;
 	}
 	
-	public List<Map<String, Object>> applyList(Map<String, Object> pMap) {
-		List<Map<String, Object>> applyList = cDao.applyList(pMap);
-		return applyList;
+	public List<Map<String, Object>> applyVisitList(Map<String, Object> pMap) {
+		List<Map<String, Object>> applyVisitList = cDao.applyVisitList(pMap);
+		return applyVisitList;
 	}
 
 	public List<Map<String, Object>> inOutList(Map<String, Object> pMap) {
@@ -87,6 +97,11 @@ public class CompanyLogic {
 		int result = 0;
 		result = cDao.isExistID(pMap);
 		return result;
+	}
+
+	public List<Map<String, Object>> applyGoodsList(Map<String, Object> pMap) {
+		List<Map<String, Object>> applyGoodsList = cDao.applyGoodsList(pMap);
+		return applyGoodsList;
 	}
 
 

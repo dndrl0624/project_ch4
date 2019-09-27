@@ -34,15 +34,17 @@ public class RestController implements Rcontroller {
 		
 		if ("company".equals(work)) {/////////start of company
 			CompanyLogic cLogic = new CompanyLogic();
-			if (requestName.equals("list")) {
-				List<Map<String, Object>> applyList =  cLogic.applyList(pMap);
-				jsonStr = g.toJson(applyList);
+			if (requestName.equals("applyVisitList")) {
+				List<Map<String, Object>> applyVisitList =  cLogic.applyVisitList(pMap);
+				jsonStr = g.toJson(applyVisitList);
 			} 
 			else if (requestName.equals("inOutList")) {
 				List<Map<String, Object>> inOutList = cLogic.inOutList(pMap);
 				jsonStr = g.toJson(inOutList);
 			}
-			else if (requestName.equals("goodsList")) {
+			else if (requestName.equals("applyGoodsList")) {
+				List<Map<String, Object>> applyGoodsList = cLogic.applyGoodsList(pMap);
+				jsonStr = g.toJson(applyGoodsList);
 			}
 		} ////////////////////////////////////end of company
 		else if ("visitor".equals(work)) {/////////start of visitor
@@ -54,6 +56,14 @@ public class RestController implements Rcontroller {
 			else if (requestName.equals("deptList")) {
 				List<Map<String, Object>> deptList = vLogic.deptList(pMap);
 				jsonStr = g.toJson(deptList);
+			}
+			else if (requestName.equals("preVisitList")) {
+				List<Map<String,Object>> preVisitList = vLogic.preVisitList(pMap);
+				jsonStr = g.toJson(preVisitList);
+			}
+			else if (requestName.equals("preVisitListDetail")) {
+				Map<String,Object> preVisitDetail = vLogic.previsitDetail(pMap);
+				jsonStr = g.toJson(preVisitDetail);
 			}
 			else if (requestName.equals("search")) {
 				if(pMap.get("searchType").equals("applyNo")) {
@@ -69,22 +79,22 @@ public class RestController implements Rcontroller {
 				Map<String,Object> rMap = vLogic.applyDetail(pMap);
 				jsonStr = g.toJson(rMap);
 			}
-			else if (requestName.equals("preVisitList")) {
-				List<Map<String,Object>> preVisitList = vLogic.preVisitList(pMap);
-				jsonStr = g.toJson(preVisitList);
-			}
-			else if (requestName.equals("preVisitListDetail")) {
-				Map<String,Object> preVisitDetail = vLogic.previsitDetail(pMap);
-				jsonStr = g.toJson(preVisitDetail);
-			}
 			else if (requestName.equals("qrCodeList")) {
 				List<Map<String,Object>> qrCodeList = vLogic.qrCodeList(pMap);
 				jsonStr = g.toJson(qrCodeList);
 			}			
 		} //////////////////////////////////////////end of visitor
 		else if ("goods".equals(work)) {/////////start of goods
-			GoodsLogic gLogic = new GoodsLogic();			
-			if (requestName.equals("search")) {
+			GoodsLogic gLogic = new GoodsLogic();	
+			if (requestName.equals("preGoodsList")) {
+				List<Map<String,Object>> preGoodsList = gLogic.preGoodsList(pMap);
+				jsonStr = g.toJson(preGoodsList);
+			}
+			else if (requestName.equals("preGoodsListDetail")) {
+				List<Map<String, Object>> preGoodsDetail = gLogic.preGoodsDetail(pMap);
+				jsonStr = g.toJson(preGoodsDetail);
+			}
+			else if (requestName.equals("search")) {
 				if(pMap.get("searchType").equals("applyNo")) {
 					Map<String, Object> goodsSearch = gLogic.goodsSearch(pMap);
 					jsonStr = g.toJson(goodsSearch);
@@ -95,17 +105,9 @@ public class RestController implements Rcontroller {
 				}
 			
 			}
-			else if (requestName.equals("goodsDetail")) {
+			else if (requestName.equals("detail")) {
 				Map<String, Object> rMap = gLogic.goodsDetail(pMap);
 				jsonStr = g.toJson(rMap);
-			}
-			else if (requestName.equals("preGoodsList")) {
-				List<Map<String,Object>> preGoodsList = gLogic.preGoodsList(pMap);
-				jsonStr = g.toJson(preGoodsList);
-			}
-			else if (requestName.equals("preGoodsListDetail")) {
-				List<Map<String, Object>> preGoodsDetail = gLogic.preGoodsDetail(pMap);
-				jsonStr = g.toJson(preGoodsDetail);
 			}
 			else if (requestName.equals("qrCodeList")) {
 				List<Map<String,Object>> qrCodeList = gLogic.qrCodeList(pMap);

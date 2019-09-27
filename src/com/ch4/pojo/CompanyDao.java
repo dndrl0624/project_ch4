@@ -85,22 +85,24 @@ public class CompanyDao {
 		if(result==0) {
 			return result;
 		}
-		else if(result==1) {
-			result = sqlSession.update("mngPermitUpd",pMap);
-		}
 		sqlSession.commit();
 		return result;
 	}
 	public int mngUpdate(Map<String, Object> pMap) {
 		int result = 0;
-		result = sqlSession.update("mngUpdate",pMap);
+		if(pMap.get("visit_no")!=null) {
+			result = sqlSession.update("mngPermitVpd",pMap);
+		}
+		else if(pMap.get("aplg_no")!=null) {
+			result = sqlSession.update("mngPermitGpd",pMap);
+		}
 		sqlSession.commit();
 		return result;
 	}
 
-	public List<Map<String, Object>> applyList(Map<String, Object> pMap) {
-		List<Map<String, Object>> applyList = sqlSession.selectList("applyList", pMap);
-		return applyList;
+	public List<Map<String, Object>> applyVisitList(Map<String, Object> pMap) {
+		List<Map<String, Object>> applyVisitList = sqlSession.selectList("applyVisitList", pMap);
+		return applyVisitList;
 	}
 
 	public List<Map<String, Object>> inOutList(Map<String, Object> pMap) {
@@ -128,6 +130,12 @@ public class CompanyDao {
 		int result = 0;
 		result = sqlSession.selectOne("isExistID", pMap);
 		return result;
+	}
+
+
+	public List<Map<String, Object>> applyGoodsList(Map<String, Object> pMap) {
+		List<Map<String, Object>> applyGoodsList = sqlSession.selectList("applyGoodsList", pMap);
+		return applyGoodsList;
 	}
 
 

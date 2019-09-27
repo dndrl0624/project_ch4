@@ -42,18 +42,6 @@ public class GoodsController implements Controller{
 			}
 			
 		}
-		else if(requestName.equals("update")) {
-			int result = 0;
-			hmb.multiBind(pMap);
-			logger.info("pMap : " + pMap);
-			result = gLogic.goodsUpdate(pMap);
-			if(result == 1) {
-				mav.setViewName("Visit_ResultGoods.jsp");
-			}
-			else if(result == 0) {
-				mav.setViewName("Visit_ApplyFail.jsp");
-			}
-		}
 		else if(requestName.equals("cancle")) {
 			int result = 0;
 			hmb.multiBind(pMap);
@@ -70,6 +58,18 @@ public class GoodsController implements Controller{
 			Map<String,Object> rMap = gLogic.goodsDetail(pMap);
 			mav.addObject("rMap", rMap);
 			mav.setViewName("Visit_ChangeGoods.jsp");
+		}
+		else if(requestName.equals("update")) {
+			int result = 0;
+			hmb.multiBind(pMap);
+			logger.info("pMap : " + pMap);
+			result = gLogic.goodsUpdate(pMap);
+			if(result == 1) {
+				mav.setViewName("Visit_ResultGoods.jsp");
+			}
+			else if(result == 0) {
+				mav.setViewName("Visit_ApplyFail.jsp");
+			}
 		}
 		else if(requestName.equals("searchGoods")) {
 			mav.setViewName("Visit_SearchGoods.jsp");
