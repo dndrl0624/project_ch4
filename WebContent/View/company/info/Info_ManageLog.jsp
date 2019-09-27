@@ -30,46 +30,58 @@ $.fn.combobox.defaults.editable = false
 /* 테이블 데이터 */
 $(document).ready(function(){
 	$("#tb_logVisitor").bootstrapTable({
-	    columns:[
-	         {field:'CONFM_NO',title:'방문번호'}
-	         ,{field:'CMG_INOUT',title:'처리시간'}
-	         ,{field:'CMG_NOTESz',title:'처리내용'}/* 처리내용 : 입장 퇴장 */
-	         ,{field:'CMG_NOTES',title:'현재위치'}/* 현재위치 : 내부 외부 사내 .. */
-	         ,{field:'CONFM_NAME',title:'방문자명'}
-	         ,{field:'CONFM_HP',title:'연락처'}
-	         ,{field:'COM_NAME',title:'방문지'}
-	         ,{field:'VISIT_DESTI',title:'목적지'}
-	         ,{field:'VISIT_TYPE',title:'방문유형'}
-	         ,{field:'VISIT_DATE',title:'방문일자'}
-	    ]
-	    ,onLoadError: function(status,jqXHR){
-	    	alert("error");
-	    }
-	    ,pagination:'true'//페이지 네이션
-	    ,paginationPreText:"Previous"
-	    ,paginationNextText:"Next"
-	    ,pageSize:10//기본 페이지 사이즈
-	    ,pageList:[10, 15, 20, 30] //칸수
-	    ,onClickRow:function(row,$element,field){
-	       //$element.attr('data-index',10)
-	       $element.toggleClass('single-select');//로우 클릭했을 때 색 변함.
-	       //alert(row.N_NO);
-	     }
-	    ,onDblClickRow:function(row,$element,field){
-	       alert("상세조회 모달");
-	     }
-	});
-});
-/* 버튼 검색 */
-function search(){
-	$.ajax({
-		url: "/project_ch4_pojo/json/logVisitorJson.json"
-		,dataType: "json"
-		,success: function(result){
-			$("#tb_logVisitor").bootstrapTable('load',result);
+		height:'630'
+		,toolbar:'#toolbar'
+		,url:'/project_ch4_pojo/json/logVisitorJson.json'
+		,pagination : 'true'
+		,onClickRow : function(row, $element, field) {
+					$element.toggleClass('single-select');//로우 클릭했을 때 색 변함.
 		}
 	});
-}
+	$("#search").click(function() {
+		var check = $("#SearchType").val();
+		var searchT = $("#searchText").val();
+		
+		var st = $("#state").val();
+		var date1 = $("#datepicker1").val();
+		var date2 = $("#datepicker2").val();
+		
+//		alert(check);
+//		alert(searchT);
+// 		alert(st);
+// 		alert(date1);
+// 		alert(date2);
+
+		$("#tb_logVisitor").bootstrapTable('refreshOptions', {
+			filterOptions : {
+				filterAlgoritdm : 'or'
+			}
+		});//			DESTI_NAME(field) : nameSearch(var)
+		$("#tb_logVisitor").bootstrapTable('filterBy', {
+// 			if(check==VISITOR_NAME){
+// 				CONFM_NAME : searchT
+// 			}
+// 			else if(check==VISITOR_HP){
+// 				CONFM_HP : searchT
+// 			}
+// 			else if(check==COM_NAME){
+// 				VISIT_DESTI : searchT
+// 			}
+// 			VISIT_DATE : date1
+		});
+// 상태 콤보박스 값으로 필터링
+		var now = $("#state").val();
+		alert(now);
+		$("#tb_logVisitor").bootstrapTable('refreshOptions',{
+			filterOptions:{
+				filterAlgorithm : 'or'
+			}
+		});
+		$("#tb_logVisitor").bootstrapTable('filterBy',{
+			CMG_NOTES: now
+		});
+	});
+});
 </script>
 <%@ include file="../../CommonForm/Top.jsp"%>
 
@@ -123,13 +135,18 @@ function search(){
 <div class="mainContent">
 <!-- 페이지 이름 / 환영+ 로그아웃 버튼 -->
 	<div class="col-lg-12">
-		<div style="margin:30px 20px 10px 0px;font-size:35px;width: 50%;float: left;"> 방문/반입 현황 조회 </div>
+		<div style="margin:30px 20px 10px 0px;font-size:35px;widtd: 50%;float: left;"> 방문/반입 현황 조회 </div>
 		<%@ include file="../../CommonForm/logout.jsp"%>
 	</div>
+	
 <!-- 검색 조건 설정 -->
+<div id="toolbar">
+  <div class="form-inline" role="form">
+    <div class="form-group">
 	<div class='col-sm-2'>
 	<!-- 검색 타입 설정 --><br>
-		<select class="easyui-combobox" id="SearchType" name='SearchType' label="검색방법" labelPosition="left" style="width:100%;">
+		<select class="easyui-combobox" id="SearchType" name='SearchType' label="검색방법" labelPosition="left" style="width:90%;">
+			<option value="">선택하세요</option>
 			<option value="VISITOR_NAME">방문자명</option>
 			<option value="VISITOR_HP">연락처</option>
 			<option value="COM_NAME">회사명</option>
@@ -138,18 +155,18 @@ function search(){
 	<div class='col-sm-2'>
 		<!-- 검색창 : 콤보박스에 의한 분기 --><br>
 		<!-- 텍스트 박스에 대해 name값 변경 : 처음 값은 방문자명 // onChange 이벤트로 Name속성을 바꾸어 주기 -->
-		<input class="easyui-textbox" id="searchText" name="VISITOR_NAME" style="width:230px;height:25px;" data-options="prompt:'필요한 정보를 입력하세요'">
+		<input class="easyui-textbox" id="searchText" name="VISITOR_NAME" style="widtd:230px;" data-options="prompt:'필요한 정보를 입력하세요'">
 	
 	</div>
 	<div class='col-sm-2'><br>
-		<select class="easyui-combobox" id="state" name="state" label="현황" labelPosition="left" style="width:100%;">
-			<option value="all" selected>전체</option>
-			<option value="beforemove">미반입</option>
-			<option value="aftermove">반입완료</option>
-			<option value="return">반려</option>
+		<select class="easyui-combobox" id="state" name="state" label="현황" labelPosition="left" style="width:80%;">
+			<option value="전체" selected>전체</option>
+			<option value="사내">사내</option>
+			<option value="외출">외출</option>
+			<option value="방문종료">방문종료</option>
 		</select>
 	</div>
-	<div  class='col-sm-4'>
+	<div  class='col-sm-5'>
 <!-- 날짜 검색 -->
 	<div class="form-group">
 		<div class='col-sm-5'>
@@ -180,17 +197,33 @@ function search(){
 			</div>
 		</div>
 	</div>
+	</div>
 <!-- 검색 버튼 -->
 	<div  class='col-sm-1'>
-		<button type="button" class="btn btn-success" onclick="javascript:search()"
-				style="margin-top: 5px;margin-bottom: 15px;float: bottom;">Search</button>
+		<button id="search" class="btn btn-primary">search</button>
 	</div>
 	
 	</div>
+</div>
+</div>
 
-<!-- 부트 테이블 : search_ResultVisitor 참조-->
+<!-- 부트 테이블 : search_ResultVisitor 참조-->	<!-- 처리내용 : 입장 퇴장 --><!-- 현재위치 : 내부 외부 사내 .. -->
 	<div class="row">
 		<table class="table table-bordered table-hover" id="tb_logVisitor" >
+			<thead>
+				<tr>
+					<th data-field="CONFM_NO">방문번호</th>
+					<th data-field="CMG_INOUT">처리시간</th>
+					<th data-field="CMG_NOTESz">처리내용</th>
+					<th data-field="CMG_NOTES">현재위치</th>
+					<th data-field="CONFM_NAME">방문자명</th>
+					<th data-field="CONFM_HP">연락처</th>
+					<th data-field="COM_NAME">방문지</th>
+					<th data-field="VISIT_DESTI">목적지</th>
+					<th data-field="VISIT_TYPE">방문유형</th>
+					<th data-field="VISIT_DATE">방문일자</th>
+				</tr>
+			</thead>
 		</table>
 	</div>
 </div>	

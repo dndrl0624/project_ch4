@@ -18,11 +18,12 @@
 $.fn.combobox.defaults.editable = false
 /* 테이블 데이터 */
 $(document).ready(function(){
-	$("#bt_table").bootstrapTable({
+	$("#bt_kio").bootstrapTable({
 		height:'530'
 		,toolbar:'#toolbar'
 		,url:'/project_ch4_pojo/json/kiosk.json'
 		,pagination:'true'
+		,toolbarAlign : 'right'
 	    ,onClickRow:function(row,$element,field){
 	       $element.toggleClass('single-select');//로우 클릭했을 때 색 변함.
 	     }
@@ -34,7 +35,7 @@ $(document).ready(function(){
 
 			$("#kiosk_no").textbox('setValue',ki_no);
  			$("#kiosk_location").textbox('setValue',ki_gate);
- 			$("#kiosk_condtion").textbox('setValue',ki_st);
+ 			$("#kiosk_condtion").val(ki_st);
  			$("#kiosk_notice").textbox('setValue',ki_note);
 			
 			$("#kioskModal").modal('show');
@@ -43,16 +44,31 @@ $(document).ready(function(){
 	$("#search").click(function(){
 		var combo = $("#combo").val();
 		//alert(combo);
-		$("#bt_table").bootstrapTable('refreshOptions',{
+		$("#bt_kio").bootstrapTable('refreshOptions',{
 			filterOptions:{
 				filterAlgorithm : 'or'
 			}
 		});
-		$("#bt_table").bootstrapTable('filterBy',{
+		$("#bt_kio").bootstrapTable('filterBy',{
 			KIOSK_ST: combo
 		});
 	});
 });
+
+//키오스크 상태 변경 : 버튼 > 함수 > 내용변경
+function save() {
+	//url로 값 주기
+	var kio_no = $('#kiosk_no').val();
+	var kio_loc = $('#kiosk_location').val();
+	var kio_con = $('#kiosk_condtion').val();
+	var Kio_not = $('#kiosk_notice').val();
+	//url로 값 주기
+	location.href="/kiosk.ch4?kiosk_no="+kio_no+"&kiosk_location="+kio_loc+"&kiosk_condtion="+kio_con+"&kiosk_notice="+Kio_not
+	//폼태그
+	$("#f_kio_change").attr("method","get");
+	$("#f_kio_change").attr("action","/kiosk.ch4?kiosk_no="+kio_no+"&kiosk_location="+kio_loc+"&kiosk_condtion="+kio_con+"&kiosk_notice="+Kio_not);
+	$("#f_kio_change").submit();
+}
 </script>
 <%@ include file="../../CommonForm/Top.jsp"%>
 
@@ -128,7 +144,7 @@ $(document).ready(function(){
 <div class='col-lg-12' style="margin-left: auto; margin-right: auto;">
 	<div class="col-lg-1"></div>
 	<div class="col-lg-8">
-		<table class="table table-bordered table-hover" id="bt_table">
+		<table class="table table-bordered table-hover" id="bt_kio">
 					<thead>
 						<tr>
 							<th data-field="KIOSK_NO">일련번호</th>
@@ -154,16 +170,27 @@ $(document).ready(function(){
         </div>
         
         <div class="modal-body" style="align: center;padding-left: 30%">
+        <form id="f_kio_change">
         	<table>
         		<tr><td>일련번호</td>	<td><input class="easyui-textbox" id="kiosk_no" readonly="readonly"></td></tr>
         		<tr><td>위치</td>		<td><input class="easyui-textbox" id="kiosk_location"></td></tr>
-        		<tr><td>상태</td>		<td><input class="easyui-textbox" id="kiosk_condtion"></td></tr>
+        		<tr><td>상태</td>		
+        		    <td>
+        				<select class="form-control"  id="kiosk_condtion" name="combo" style="width:100%;">
+							<option value="정상">정상</option>
+							<option value="고장">고장</option>
+							<option value="수리요청">수리요청</option>
+							<option value="수리중">수리중</option>
+						</select>
+        		    </td>
+        		</tr>
         		<tr><td>비고</td>		<td><input class="easyui-textbox" id="kiosk_notice"></td></tr>
         	</table>
+        </form>
         </div>
         
         <div class="modal-footer">
-          <button type="button" class="btn btn-info" id="state_change">상태 변경</button>
+          <button type="button" class="btn btn-info" id="changeSave" onclick='save()'>변경 저장</button>
           <button type="button" class="btn" id="btn_close" data-dismiss="modal">Close</button>
         </div>
 	</div>

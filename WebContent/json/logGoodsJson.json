@@ -5,4 +5,10 @@
 	,"APLG_TRANS_DATE":"0123년45월78일","GMNG_NAME":"컴퓨터"
 	,"GMNG_TYPE":"Computer","GMNG_QUAN":"500"
 	,"GMNG_NOTES":"450대 반입 승인 / 50대 반품"}
+	,
+	{"GMNG_NO":"반입번호","APLG_NAME":"tester","APLG_HP":"01012123200"
+	,"COM_NAME":"코스모","APLG_DESTI":"413호","APLG_REASON":"택배배달"
+	,"APLG_TRANS_DATE":"0123년45월78일","GMNG_NAME":"컴퓨터"
+	,"GMNG_TYPE":"Computer","GMNG_QUAN":"500"
+	,"GMNG_NOTES":"450대 반입 승인 / 50대 반품"}
  ]

@@ -30,26 +30,14 @@ $.fn.combobox.defaults.editable = false
 /* 테이블 데이터 */
 $(document).ready(function(){
 	$("#tb_logGood").bootstrapTable({
-	    columns:[
-	         {field:'GMNG_NO',title:'반입번호'}
-	         ,{field:'APLG_NAME',title:'신청자명'}
-	         ,{field:'APLG_HP',title:'연락처'}
-	         ,{field:'COM_NAME',title:'방문지'}
-	         ,{field:'APLG_DESTI',title:'목적지'}
-	         ,{field:'APLG_REASON',title:'반입상'}
-	         ,{field:'APLG_TRANS_DATE',title:'반입일자'}
-	         ,{field:'GMNG_NAME',title:'물품명'}
-	         ,{field:'GMNG_TYPE',title:'물품종류'}
-	         ,{field:'GMNG_QUAN',title:'물품수량'}
-	         ,{field:'GMNG_NOTES',title:'비고'}
-	    ]
-	    ,onLoadError: function(status,jqXHR){
+		height:'672'
+		,pagination:'true'
+		,toolbarAlign : 'right'
+		,url: "/project_ch4_pojo/json/logGoodsJson.json"
+		,onLoadError: function(status,jqXHR){
 	    	alert("error");
 	    }
-	    ,pagination:'true'//페이지 네이션
-	    ,paginationPreText:"Previous"
-	    ,paginationNextText:"Next"
-	    ,pageSize:10//기본 페이지 사이즈
+	    ,pageSize:11//기본 페이지 사이즈
 	    ,pageList:[2, 4, 6, 8] //칸수
 	    ,onClickRow:function(row,$element,field){
 	       //$element.attr('data-index',10)
@@ -63,13 +51,24 @@ $(document).ready(function(){
 });
 /* 버튼 검색 */
 function search(){
-	$.ajax({
-		url: "/project_ch4_pojo/json/logGoodsJson.json"
-		,dataType: "json"
-		,success: function(result){
-			$("#tb_logGood").bootstrapTable('load',result);
+	var now = $("#state").val();
+	alert(now);
+	$("#tb_logGood").bootstrapTable('refreshOptions',{
+		filterOptions:{
+			filterAlgorithm : 'or'
 		}
 	});
+	$("#tb_logGood").bootstrapTable('filterBy',{
+		CMG_NOTES: now
+	});
+// 	//테이블 데이터 넣기 : 그냥 처음 부터 다 보여주자
+// 	$.ajax({
+// 		url: "/project_ch4_pojo/json/logGoodsJson.json"
+// 		,dataType: "json"
+// 		,success: function(result){
+// 			$("#tb_logGood").bootstrapTable('load',result);
+// 		}
+// 	});
 }
 </script>
 <%@ include file="../../CommonForm/Top.jsp"%>
@@ -118,22 +117,6 @@ function search(){
 				</div>
 			</div>
 		</div>
-		<!-- 
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<h4 class="panel-title">
-					<a data-toggle="collapse" href="#collapse3">안내데스크</a>
-				</h4>
-			</div>
-			<div id="collapse3" class="panel-collapse collapse">
-				<div class="panel-body">
-					<a  href="/project_ch4_pojo/View/company/info/Info_Main.jsp">안내데스크 메인</a><br> 
-					<a  href="/project_ch4_pojo/View/company/info/Info_Notice.jsp">안내데스크 공지</a><br> 
-					<a  href="/project_ch4_pojo/View/company/info/Info_ManageLog.jsp">방문자 현황 관리</a><br> 
-				</div>
-			</div>
-		</div>
-		-->
 	</div>
 </aside>
 
@@ -161,10 +144,10 @@ function search(){
 	</div>
 	<div class='col-sm-2'><br>
 		<select class="easyui-combobox" id="state" name="state" label="현황" labelPosition="left" style="width:100%;">
-			<option value="all" selected>전체</option>
-			<option value="beforemove">미반입</option>
-			<option value="aftermove">반입완료</option>
-			<option value="return">반려</option>
+			<option value="tryAgain" selected>전체</option>
+			<option value="미반입">미반입</option>
+			<option value="반입완료">반입완료</option>
+			<option value="반려">반려</option>
 		</select>
 	</div>
 	<div  class='col-sm-4'>
@@ -208,7 +191,21 @@ function search(){
 <!-- 부트 테이블 : search_ResultVisitor 참조-->
 	<div class="row">
 		<table class="table table-bordered table-hover" id="tb_logGood" >
-<!--                <thead style=""> -->
+			<thead>
+				<tr>
+					<th data-field="GMNG_NO">반입번호</th>
+					<th data-field="APLG_NAME">신청자명</th>
+					<th data-field="APLG_HP">연락처</th>
+					<th data-field="COM_NAME">방문지</th>
+					<th data-field="APLG_DESTI">목적지</th>
+					<th data-field="APLG_REASON">반입사유</th>
+					<th data-field="APLG_TRANS_DATE">반입일자</th>
+					<th data-field="GMNG_NAME">물품명</th>
+					<th data-field="GMNG_TYPE">물품종류</th>
+					<th data-field="GMNG_QUAN">물품수량</th>
+					<th data-field="GMNG_NOTES">비고</th>
+				</tr>
+			</thead>
 		</table>
 	</div>
 	

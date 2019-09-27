@@ -30,22 +30,14 @@ $.fn.combobox.defaults.editable = false
 /* 테이블 데이터 */
 $(document).ready(function(){
 	$("#tb_searchGood").bootstrapTable({
-	    columns:[
-	         {field:'APLG_NO',title:'신청번호'}
-	         ,{field:'APLG_NAME',title:'신청자명'}
-	         ,{field:'COM_NAME',title:'방문지'}
-	         ,{field:'APLG_DESTI',title:'목적지'}
-	         ,{field:'APLG_REASON',title:'반입사유'}
-	         ,{field:'APLG_HP',title:'신청자연락처'}
-	         ,{field:'APLG_DATE',title:'신청일자'}
-	         ,{field:'GMNG_NAME',title:'반입물품명'}
-	         ,{field:'GMNG_TYPE',title:'물품종류'}
-	         ,{field:'GMNG_QUAN',title:'물품수량'}
-	    ]
+		height:'672'
+		,toolbar:'#toolbar'
+		,pagination:'true'
+		,toolbarAlign : 'right'
+// 		,url: "/project_ch4_pojo/json/searchGoodsJson.json"
 	    ,onLoadError: function(status,jqXHR){
 	    	alert("error");
 	    }
-	    ,pagination:'true'//페이지 네이션
 	    ,paginationPreText:"Previous"
 	    ,paginationNextText:"Next"
 	    ,pageSize:15//기본 페이지 사이즈
@@ -143,12 +135,12 @@ function btn_search(){
 		<input class="easyui-textbox" id="searchText" name="VISITOR_NAME" style="width:230px;height:25px;">
 	</div>
 	<div class='col-sm-2'><br>
-		<select class="easyui-combobox" id="state" name="state" label="승인상태" labelPosition="left" style="width:100%;">
-			<option value="all" selected>전체</option>
-			<option value="commit">승인</option>
-			<option value="return">반려</option>
-			<option value="cancle">취소</option>
-		</select>
+<!-- 		<select class="easyui-combobox" id="state" name="state" label="승인상태" labelPosition="left" style="width:100%;"> -->
+<!-- 			<option value="all" selected>전체</option> -->
+<!-- 			<option value="commit">승인</option> -->
+<!-- 			<option value="return">반려</option> -->
+<!-- 			<option value="cancle">취소</option> -->
+<!-- 		</select> -->
 	</div>
 	<div  class='col-sm-4'>
 <!-- 날짜 검색 -->
@@ -190,6 +182,20 @@ function btn_search(){
 <!-- 부트 테이블 : search_ResultVisitor 참조-->
 	<div class="row">
 		<table class="table table-bordered table-hover" id="tb_searchGood" >
+		 	<thead>
+				<tr>
+					<th data-field="APLG_NO">신청번호</th>
+					<th data-field="APLG_NAME">신청자명</th>
+					<th data-field="APLG_HP">연락처</th>
+					<th data-field="COM_NAME">방문지</th>
+					<th data-field="APLG_DESTI">목적지</th>
+					<th data-field="APLG_REASON">반입사유</th>
+					<th data-field="APLG_TRANS_DATE">반입일자</th>
+					<th data-field="GMNG_NAME">물품명</th>
+					<th data-field="GMNG_TYPE">물품종류</th>
+					<th data-field="GMNG_QUAN">물품수량</th>
+				</tr>
+			</thead>
 		</table>
 	</div>
 
