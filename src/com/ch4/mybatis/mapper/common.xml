@@ -34,11 +34,25 @@
 			and visit_apply_name = #{visit_apply_name}
 			and visit_apply_hp = #{visit_apply_hp}
 		</if>
+		<!-- 검색 : 신청자이름  -->
+		<if test="visit_apply_name != null and visit_apply_hp == null">
+			and visit_apply_name = #{visit_apply_name}
+		</if>
+		<!-- 검색 : 신청자 연락처 -->
+		<if test="visit_apply_name == null and visit_apply_hp != null">
+			and visit_apply_hp = #{visit_apply_hp}
+		</if>
 		<!-- 검색 : 방문자이름 -->
 		<if test="visitor_name != null">
 			and visit_no = (select visit_no
 							  from visitor_mng
 							 where visitor_name like '%'||#{visitor_name}||'%')
+		</if>
+		<!-- 검색 : 방문자연락처 -->
+		<if test="visitor_hp != null">
+			and visit_no = (select visit_no
+							  from visitor_mng
+							 where visitor_hp = #{visitor_hp})
 		</if>
 		<!-- 검색 : 승인상태 -->
 		<if test="visit_permit_st != null">
@@ -145,6 +159,10 @@
 								  from visit_confm
 								 where confm_no = #{confm_no})
 			</if>
+			<!-- 검색 : 신청번호 -->
+			<if test="visit_no != null">
+				and visit_no = #{visit_no}
+			</if>
 			<!-- 검색 : 차량번호 -->
 			<if test="parking_num != null">
 				and parking_num = #{parking_num}
@@ -178,6 +196,14 @@
 	   		<!-- 검색 : 신청자 이름 + 신청자 연락처 -->
 	   		<if test="aplg_name != null and aplg_hp != null">
 	   			and aplg_name = #{aplg_name}
+	   			and aplg_hp = #{aplg_hp}
+	   		</if>
+	   		<!-- 검색 : 신청자 이름 -->
+	   		<if test="aplg_name != null and aplg_hp == null">
+	   			and aplg_name = #{aplg_name}
+	   		</if>
+	   		<!-- 검색 : 신청자 연락처 -->
+	   		<if test="aplg_name == null and aplg_hp != null">
 	   			and aplg_hp = #{aplg_hp}
 	   		</if>
 	   		<!-- 검색 : 물품명 -->

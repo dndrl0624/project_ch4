@@ -3,11 +3,13 @@
 <mapper namespace="com.ch4.mybatis.mapper.VisitorMapper">
    <!-- QR코드 조회(visitor) -->
    <select id="visitorQRcode" parameterType="map" resultType="map">
-		select confm_qrcode
-		  from cmg_confm
-		 where confm_name = #{confm_name}
+		select confm_no, confm_date, confm_qrcode, com_name
+		  from cmg_confm cc, visit_confm vc, visit_apply va, company co
+		 where vc.confm_no = cc. confm_no
+		   and va.visit_no = vc.visit_no
+		   and co.con_no = va.con_no 
+		   and confm_name = #{confm_name}
 		   and confm_hp = #{confm_hp}
-		   and confm_no = #{confm_no}
    </select>
 	<!-- 신청 내용 작성  (기본정보)-->
 	<insert id="visitorApplyAdd" parameterType="map">
@@ -32,7 +34,7 @@
 	<!-- 신청 내용 작성 (반입기기) -->
 	<insert id="deviceAdd" parameterType="map">
 		insert into tkin_mng(tkin_model, tkin_kind, tkin_brand, visit_no)
-			values(#{tkin_model}, #{tkin_kind}, #{tkin_brand}, #{visit_no})	
+			values(#{tkin_model}, #{tkin_kind}, #{tkin_brand}, #{visit_no})
 	</insert>
 	<!-- 신청 내용 작성 (주차) -->
 	<insert id="parkingAdd" parameterType="map">

@@ -5,6 +5,10 @@
 	<update id="vApplyPermitUpd" parameterType="map">
 		update visit_apply
 		   set visit_permit_st = #{visit_permit_st}
+		   	  ,visit_permit_id = #{cmng_id}
+		   	  <if test="visit_notes != null">
+		   	  	,visit_notes = #{visit_notes}
+		   	  </if>
 		 where visit_no = #{visit_no}
 	</update>
 	<!-- 회사승인자 방문신청 승인 -->
@@ -16,6 +20,10 @@
 	<update id="gApplyPermitUpd" parameterType="map">
 		update goods_apply
 		   set aplg_permit_st = #{aplg_permit_st}
+		   	  ,aplg_permit_id = #{cmng_id}
+		   	  <if test="aplg_notes != null">
+		   	  	,aplg_notes = #{aplg_notes}
+		   	  </if>
 		 where aplg_no = #{aplg_no}
 	</update>
 	<!-- 회사승인자 반입신청 승인 -->
