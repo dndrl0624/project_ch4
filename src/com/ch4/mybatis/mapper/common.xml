@@ -19,6 +19,12 @@
 			, visit_permit_id, visit_permit_st, visit_notes, com_no, com_name
 		  from visit_apply vi, company co
 		 where vi.com_no = co.com_no
+		<!-- 검색 : (승인)방문번호 -->
+		<if test="confm_no != null">
+			and visit_no = (select visit_no
+							  from visit_confm
+							 where confm_no = #{confm_no})
+		</if>
 		<!-- 검색 : 신청번호 -->
 		<if test="visit_no != null">
 			and visit_no = #{visit_no}
@@ -81,6 +87,12 @@
 	<select id="visitorSearch" parameterType="map" resultType="map">
 		select visitot_name, visitor_hp from visitor_mng
 		<where>
+			<!-- 검색 : (승인)방문번호 -->
+			<if test="confm_no != null">
+				and visit_no = (select visit_no
+								  from visit_confm
+								 where confm_no = #{confm_no})
+			</if>
 			<!-- 검색 : 신청번호 -->
 			<if test="visit_no != null">
 				and visit_no = #{visit_no}
@@ -99,6 +111,12 @@
 	<select id="deviceSearch" parameterType="map" resultType="map">
 		select tkin_kind, tkin_brand, tkin_model, tkin_posbl_encc from tkin_mng
 		<where>
+			<!-- 검색 : (승인)방문번호 -->
+			<if test="confm_no != null">
+				and visit_no = (select visit_no
+								  from visit_confm
+								 where confm_no = #{confm_no})
+			</if>
 			<!-- 검색 : 신청번호 -->
 			<if test="visit_no != null">
 				and visit_no = #{visit_no}
@@ -121,6 +139,12 @@
 	<select id="parkingSearch" parameterType="map" resultType="map">
 		select parking_kind, parking_model, parking_num from parking_mng
 		<where>
+			<!-- 검색 : (승인)방문번호 -->
+			<if test="confm_no != null">
+				and visit_no = (select visit_no
+								  from visit_confm
+								 where confm_no = #{confm_no})
+			</if>
 			<!-- 검색 : 차량번호 -->
 			<if test="parking_num != null">
 				and parking_num = #{parking_num}
@@ -141,6 +165,12 @@
 			, aplg_permit_st, aplg_notes, aplg_permit_id, com_no, com_name
 	   		from goods_apply app, company co
 	   		where app.com_no = co.com_no
+	   		<!-- 검색 : (승인)반입번호 -->
+			<if test="confm_no != null">
+				and aplg_no = (select aplg_no
+								  from goods_confm
+								 where confm_no = #{confm_no})
+			</if>
 	   		<!-- 검색 : 신청번호 -->
 	   		<if test="aplg_no != null">
 	   			and aplg_no = #{aplg_no}
@@ -199,6 +229,12 @@
 	<select id="goodsSearch">
 		select aplg_no, gmng_name, gmng_type, gmng_quan, gmng_confm, gmng_notes from goods_mng
 		<where>
+			<!-- 검색 : (승인)반입번호 -->
+			<if test="confm_no != null">
+				and aplg_no = (select aplg_no
+								  from goods_confm
+								 where confm_no = #{confm_no})
+			</if>
 			<!-- 검색 : 신청번호 -->
 			<if test="aplg_no != null">
 				and aplg_no = #{aplg_no}
