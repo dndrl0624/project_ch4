@@ -2,7 +2,7 @@
 <!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ch4.mybatis.mapper.GoodsMapper">
 	<!-- QR코드 조회(goods) -->
-	<select id="visitorQRcode" parameterType="map" resultType="map">
+	<select id="goodsQRcode" parameterType="map" resultType="map">
 		select confm_qrcode
 		  from goods_confm
 		 where confm_no = #{confm_no}

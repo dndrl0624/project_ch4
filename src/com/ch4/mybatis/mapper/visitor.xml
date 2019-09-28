@@ -4,19 +4,25 @@
    <!-- QR코드 조회(visitor) -->
    <select id="visitorQRcode" parameterType="map" resultType="map">
 		select confm_qrcode
-			from cmg_confm
-			where confm_name = #{confm_name}
-			and confm_hp = #{confm_hp}
-			and confm_no = #{confm_no}
+		  from cmg_confm
+		 where confm_name = #{confm_name}
+		   and confm_hp = #{confm_hp}
+		   and confm_no = #{confm_no}
    </select>
 	<!-- 신청 내용 작성  (기본정보)-->
 	<insert id="visitorApplyAdd" parameterType="map">
-		insert into visit_apply (com_no, visit_no, visit_apply_name, visit_purps, visit_desti
-								,visit_type, visit_date, visit_apply_hp, visit_vhcle_encc, visit_tkin_encc
-								,visit_permit_id, visit_notes, visit_term, visit_day)
-				values (#{com_no}, #{visit_no}, #{visit_apply_name}, #{visit_purps}, #{visit_desti}
-					   ,#{visit_type}, #{visit_date}, #{visit_apply_hp}, #{visit_vhcle_encc}, #{visit_tkin_encc}
-		               ,#{visit_permit_id}, #{visit_notes}, #{visit_term}, #{visit_day})
+		insert into visit_apply (com_no, visit_no, visit_apply_name, visit_purps, visit_desti, visit_type
+								, visit_date, visit_apply_hp, visit_vhcle_encc, visit_tkin_encc
+								<if test="visit_term != null and visit_day != null">
+									, visit_term, visit_day
+								</if>
+								)
+		values (#{com_no}, #{visit_no}, #{visit_apply_name}, #{visit_purps}, #{visit_desti}, #{visit_type}
+				, #{visit_date}, #{visit_apply_hp}, #{visit_vhcle_encc}, #{visit_tkin_encc}
+				<if test="visit_term != null and visit_day != null">
+		        	, #{visit_term}, #{visit_day}
+				</if>
+				)
 	</insert>
 	<!-- 신청 내용 작성 (방문자) -->
 	<insert id="visitorAdd" parameterType="map">
@@ -25,8 +31,8 @@
 	</insert>
 	<!-- 신청 내용 작성 (반입기기) -->
 	<insert id="deviceAdd" parameterType="map">
-		insert into tkin_mng(tkin_model, tkin_kind, tkin_posbl_encc, tkin_brand, visit_no)
-			values(#{tkin_model}, #{tkin_kind}, #{tkin_posbl_encc}, #{tkin_brand}, #{visit_no})	
+		insert into tkin_mng(tkin_model, tkin_kind, tkin_brand, visit_no)
+			values(#{tkin_model}, #{tkin_kind}, #{tkin_brand}, #{visit_no})	
 	</insert>
 	<!-- 신청 내용 작성 (주차) -->
 	<insert id="parkingAdd" parameterType="map">
@@ -36,6 +42,21 @@
 	<!-- 방문 신청 취소 (결제상태 변경)-->
 	<update id="visitorApplyCancle" parameterType="map" statementType="CALLABLE">
 		{call proc_visitorCancle(#{visit_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String})}
+	</update>
+	<!-- 방문 신청 변경(기본내용 수정) -->
+	<update id="visitorApplyUpdate" parameterType="map">
+		update visit_apply
+		   set visit_purps = #{visit_purps}
+		      ,visit_desti = #{visit_desti}
+		      ,visit_type = #{visit_type}
+		      <if test="visit_term != null and visit_day != null">
+			      ,visit_term = #{visit_term}
+			      ,visit_day = #{visit_day}
+		      </if>
+		      ,visit_date = #{visit_date}
+		      ,visit_tkin_encc = #{visit_tkin_encc}
+		      ,visit_vhcle_encc = #{visit_vhcle_encc}
+		 where visit_no = #{visit_no}
 	</update>
 	<!-- 방문 신청 변경(방문자,반입기기,주차 삭제) -->
 	<update id="visitorSubDelete" parameterType="map" statementType="CALLABLE">
