@@ -96,37 +96,38 @@
 	$(document).ready(function(){
 		$("#tb_search").bootstrapTable({
 			columns:[
-			    {field:'confm_no',title:'방문번호'},
+			    {field:'confm_no',title:'방문번호',formatter: operateFormatterNo},
 			    {field:'com_name',title:'방문지'},
+			    {field:'visit_date',title:'방문일자'},
 			    {field:'confm_date',title:'승인일자'},
 			    {field:'show_qr',title:'QR코드',events: window.operateEvents,
-			          formatter: operateFormatter,width:250},
+			          formatter: operateFormatterQR,width:150},
 			    {field:'confm_qrcode',title:'QRcode',visible:false},
 			    {field:'qrPath',title:'QRpath',visible:false}
-			],
-			onClickCell:function(row,$element,field,value){
-				//누른 cell의 컬럼명
-				var column = row;
-				//방문번호를 눌렀을때는 해당 방문번호의 신청번호로 정보 조회(새창띄우기)
-				if("confm_no"==column){
-					var confm_no = value;
-					$("#confm_no").attr('value',confm_no);
-// 					$("#form_search_info").submit();
-					alert('방문번호로 신청 상세조회');
-				}
-			}
+			]
 		});
 	});
-	function operateFormatter(value, row, index) {
+	function searchApply(confm_no){
+		$("#confm_no").attr('value',confm_no);
+		$("#form_search_info").attr('action','/visitor/searchVisitor.ch4');
+//		$("#form_search_info").submit();
+//		alert('방문번호로 신청 상세조회');
+	}
+	function operateFormatterNo(value, row, index) {
+	    return [
+	      "<a href='#' onClick='searchApply("+value+")' data-toggle='tooltip' data-replace='rigth' title='신청내역조회'>"+value+"</a>"
+	    ].join('')
+	}
+	function operateFormatterQR(value, row, index) {
 		/////////// QR이미지 경로 변수 처리 ///////////
 		
 		/////////// QR이미지 경로 변수 처리 ///////////
 	    return [
-	      "<button class='btn QR' type='button' style='margin-right:10px;'><img src='../../Style/images/crud/QR_icon.png'></button>"
-	      +"<button class='btn download' type='button' style='margin-right:10px;'>"
+	      "<button class='btn QR' type='button' style='margin-right:10px;' data-toggle='tooltip' data-replace='right' title='QR보기'>"
+	      +"<img src='../../Style/images/crud/QR_icon.png'></button>"
+	      +"<button class='btn download' type='button' data-toggle='tooltip' data-replace='right' title='다운로드'>"
 	      +"<a href='../../Style/images/crud/QR.png' download='myQR.png'>"
 	      +"<img src='../../Style/images/crud/download_icon.png'></a></button>"
-	      +"<button class='btn message' type='button'><img src='../../Style/images/crud/msg_icon.png'></button>"
 	    ].join('')
 	}
 	window.operateEvents = {
@@ -189,7 +190,7 @@
 // 		$("#input_search_hp").attr("value",search_hp);
 // 		$.ajax({
 // 			type: "POST",
-// 			url: "/visitor/searchQR.ch4",
+// 			url: "/visitor/qrCodeList.ch4",
 // 			data: $("#form_search").serialize(),
 // 			dataType: "json",
 // 			success: function(result){

@@ -91,37 +91,38 @@
 	$(document).ready(function(){
 		$("#tb_search").bootstrapTable({
 			columns:[
-			    {field:'confm_no',title:'물품번호'},
+			    {field:'confm_no',title:'물품번호',formatter: operateFormatterNo},
 			    {field:'com_name',title:'반입지'},
 			    {field:'aplg_trans_date',title:'반입일자'},
 			    {field:'confm_name',title:'물품명'},
 			    {field:'confm_type',title:'물품종류'},
 			    {field:'confm_quan',title:'EA'},
 			    {field:'show_qr',title:'QR코드',events: window.operateEvents,
-			          formatter: operateFormatter,width:150},
+			          formatter: operateFormatterQR,width:150},
 			    {field:'confm_qrcode',title:'QRcode',visible:false},
 			    {field:'qrPath',title:'QRpath',visible:false}
-			],
-			onClickCell:function(row,$element,field,value){
-				//누른 cell의 컬럼명
-				var column = row;
-				//방문번호를 눌렀을때는 해당 방문번호의 신청번호로 정보 조회(새창띄우기)
-				if("confm_no"==column){
-					var confm_no = value;
-					$("#confm_no").attr('value',confm_no);
-// 					$("#form_search_info").submit();
-					alert('방문번호로 신청 상세조회');
-				}
-			}
+			]
 		});
 	});
-	function operateFormatter(value, row, index) {
+	function searchApply(confm_no){
+		$("#confm_no").attr('value',confm_no);
+		$("#form_search_info").attr('action','/goods/searchGoods.ch4');
+//		$("#form_search_info").submit();
+//		alert('반입번호로 신청 상세조회');
+	}
+	function operateFormatterNo(value, row, index) {
+	    return [
+	      "<a href='#' onClick='searchApply("+value+")' data-toggle='tooltip' data-replace='rigth' title='신청내역조회'>"+value+"</a>"
+	    ].join('')
+	}
+	function operateFormatterQR(value, row, index) {
 		/////////// QR이미지 경로 변수 처리 ///////////
 		
 		/////////// QR이미지 경로 변수 처리 ///////////
 	    return [
-	      "<button class='btn QR' type='button' style='margin-right:10px;'><img src='../../Style/images/crud/QR_icon.png'></button>"
-	      +"<button class='btn download' type='button'>"
+	      "<button class='btn QR' type='button' style='margin-right:10px;' data-toggle='tooltip' data-replace='right' title='QR보기'>"
+	      +"<img src='../../Style/images/crud/QR_icon.png'></button>"
+	      +"<button class='btn download' type='button' data-toggle='tooltip' data-replace='right' title='다운로드'>"
 	      +"<a href='../../Style/images/crud/QR.png' download='myQR.png'>"
 	      +"<img src='../../Style/images/crud/download_icon.png'></a></button>"
 	    ].join('')
@@ -140,7 +141,7 @@
 	function searchQR(){
 		//테스트용
 		$.ajax({
-			url: "../../json/testLog3.json",
+			url: "../../json/testLog9.json",
 			dataType: "json",
 			success: function(result){
 				$("#tb_search").bootstrapTable('load',result);
@@ -153,7 +154,7 @@
 // 		}
 // 		$.ajax({
 // 			type: "POST",
-// 			url: "/goods/searchQR.ch4",
+// 			url: "/goods/qrCodeList.ch4",
 // 			data: $("#form_search").serialize(),
 // 			dataType: "json",
 // 			success: function(result){
