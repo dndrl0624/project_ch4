@@ -10,6 +10,10 @@
 <%@ include file="/Style/common/HeadUI.jsp"%> 
 <title>방문/반입 신청 - CH4 방문자 관리 시스템</title>
 <style>
+	#title {
+		border-left: 5px solid #195A92;
+		padding-left: 10px;
+	}
 	#jumbo_visit {
 		margin-top : 0px;
 		padding-top : 10px;
@@ -50,17 +54,16 @@
 		padding-left : 0px;
 		padding-right : 0px;
 	}
-	#btn_search_visitor,
-	#btn_search_goods {
+	#col_btn .btn {
 		display: inline;
-		width : 35%;
-		height : 110px;
-		font-size : 22px;
+		width : 40%;
+		height : 50px;
+		font-size : 18px;
 		padding-top : 0px;
 		padding-bottom : 0px;
 		padding-left : 0px;
 		padding-right : 0px;
-		margin-right: 30px;
+		margin-right: 10px;
 	}
 	.btn#btn_search {
 		width : 100%;
@@ -157,7 +160,13 @@
 		location.href = "/visitor/searchVisitor.ch4";
 	}
 	function searchGoods(){
-		location.href = "/visitor/searchGoods.ch4";
+		location.href = "/goods/searchGoods.ch4";
+	}
+	function searchVQR(){
+		location.href = "/visitor/searchVQRcode.ch4";
+	}
+	function searchGQR(){
+		location.href = "/goods/searchGQRcode.ch4";
 	}
 </script>
 <div class="container-fluid" style="text-align:center;">
@@ -165,7 +174,7 @@
 		<div class="col-lg-offset-1 col-lg-10 col-lg-offset-1">
 			<div class="row">
 				<div style="text-align:left;">
-					<h2>방문/반입 신청</h2>
+					<h2 id="title"><b>방문/반입 신청</b></h2>
 				</div>
 				<!------------------ 이 구간은 신청시 값이 전송되는 구간 -------------------->
 				<form id="form_apply" method="POST">
@@ -228,10 +237,22 @@
 								<div class="col-lg-2">
 									<img class="img-circle" src="../../Style/images/crud/searchbox.png" style="background-color:#6EAFA8">
 								</div>
-								<div class="col-lg-4" style="padding-left:0px;padding-right:10px;">
+								<div id="col_btn" class="col-lg-4" style="padding-left:0px;padding-right:10px;">
 									<div class="row" style="text-align:center;padding-top:15px;">
-										<button id="btn_search_visitor" class="btn btn-info" type="button" onClick="searchVisitor()">방문조회</button>
-										<button id="btn_search_goods" class="btn btn-warning" type="button" onClick="searchGoods()">반입조회</button>
+										<button class="btn btn-info" type="button" onClick="searchVisitor()">
+											<img src="../../Style/images/crud/visit_icon.png"> 방문조회
+										</button>
+										<button class="btn btn-warning" type="button" onClick="searchGoods()">
+											<img src="../../Style/images/crud/goods_icon.png"> 반입조회
+										</button>
+									</div>
+									<div class="row" style="text-align:center;padding-top:15px;">
+										<button class="btn btn-basic" type="button" onClick="searchVQR()">
+											<img src="../../Style/images/crud/qr_search_icon.png"> 방문QR
+										</button>
+										<button class="btn btn-basic" type="button" onClick="searchGQR()">
+											<img src="../../Style/images/crud/qr_search_icon.png"> 반입QR
+										</button>
 									</div>
 								</div>
 								<div class="col-lg-6" style="padding-left:0px;padding-right:0px;text-align:center;">
