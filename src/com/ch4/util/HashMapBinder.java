@@ -78,14 +78,25 @@ public class HashMapBinder {
 		Enumeration er = req.getParameterNames();
 		while(er.hasMoreElements()) {
 			String name = (String)er.nextElement();//name,address,pet
-			if("pet".equals(name)) {
+			if(
+					////// visit ////////
+					("visitor_name".equals(name))
+					||("visitor_hp".equals(name))
+					||("tkin_model".equals(name))
+					||("tkin_brand".equals(name))
+					||("tkin_kind".equals(name))
+					||("parking_kind".equals(name))
+					||("parking_model".equals(name))
+					||("parking_num".equals(name))
+				    ////// goods ////////
+					||("gmng_name".equals(name))
+					||("gmng_type".equals(name))
+					||("gmng_quan".equals(name))
+				) 
+			{
 				String values[] = req.getParameterValues(name);
-				String myPet = "";
 				if(values!=null) {
-					for(int i=0;i<values.length;i++) {
-						myPet+=values[i]+" ";
-					}
-					target.put("pet",myPet);
+					target.put(name,values);
 				}
 			}
 			//key에는 name, address, pet이 와야함

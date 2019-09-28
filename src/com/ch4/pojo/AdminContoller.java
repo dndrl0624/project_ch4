@@ -10,15 +10,10 @@ import org.apache.log4j.Logger;
 
 import com.ch4.util.HashMapBinder;
 
-public class InfoController implements Controller{
-	Logger logger = Logger.getLogger(InfoController.class);
-	String requestName = null;
-	InfoLogic iLogic = null;
-
-	public InfoController(String requestName) {
-		this.requestName = requestName;
-		iLogic = new InfoLogic();
-	}
+public class AdminContoller implements Controller{
+	Logger logger = Logger.getLogger(AdminContoller.class);
+	final static String adminID = "admin";
+	final static String adminPW = "q1w2e3r4";
 
 	@Override
 	public ModelAndView excute(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -27,18 +22,10 @@ public class InfoController implements Controller{
 		Map<String,Object> pMap = new HashMap<>();
 		HashMapBinder hmb = new HashMapBinder(req);
 		hmb.bind(pMap);
-		if(requestName.equals("QRconfirm")) {
-			int result = 0;
-			result = iLogic.confirmQR(pMap);
-			if(result==1) {
-				mav.addObject("pMap", pMap);
-			}
-			else if(result==0) {
-				
-			}
+		if((pMap.get("").equals(adminID))&&(pMap.get("").equals(adminPW))) {
+			mav.setViewName("");
 		}
 		return mav;
 	}
-
 
 }
