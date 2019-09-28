@@ -27,15 +27,36 @@ public class InfoController implements Controller{
 		Map<String,Object> pMap = new HashMap<>();
 		HashMapBinder hmb = new HashMapBinder(req);
 		hmb.bind(pMap);
-		if(requestName.equals("QRconfirm")) {
+		if(requestName.equals("kioskLogin")) {
 			int result = 0;
-			result = iLogic.confirmQR(pMap);
-			if(result==1) {
+			result = iLogic.kioskLogin(pMap);
+		}			
+		else if(requestName.equals("kioskJoin")) {
+			int result = 0;
+			result = iLogic.kioskJoin(pMap);
+		}
+		else if(requestName.equals("QRconfirm")) {
+			Map<String, Object> resultMap = null;
+			resultMap = iLogic.confirmQR(pMap);
+			mav.isRedirect(false);
+			if("in".equals(resultMap.get("inout"))
+					||"denied".equals(resultMap.get("inout"))
+					||"none".equals(resultMap.get("inout"))
+			  ) 
+			{
 				mav.addObject("pMap", pMap);
+				mav.setViewName("Kiosk_Result.jsp");
 			}
-			else if(result==0) {
-				
+			else if("out".equals(resultMap.get("inout"))) {
+				mav.addObject("pMap", pMap);
+				mav.setViewName("Kiosk_SelectExit.jsp");
 			}
+			
+		}
+		else if(requestName.equals("selectExit")) {
+			Map<String, Object> resultMap = null;
+			resultMap = iLogic.confirmQR(pMap);
+			mav.setViewName("Kiosk_Result.jsp");
 		}
 		return mav;
 	}

@@ -9,10 +9,21 @@ public class InfoLogic {
 		iDao = new InfoDao();
 	}
 
-	public int confirmQR(Map<String, Object> pMap) {
+	public Map<String, Object> confirmQR(Map<String, Object> pMap) {
+		Map<String, Object> resultMap = null;
+		resultMap = iDao.confirmQR(pMap);
+		return resultMap;
+	}
+
+	public int kioskLogin(Map<String, Object> pMap) {
 		int result = 0;
-		result = iDao.confirmQR(pMap);
-		pMap.put("result", result);
+		result = iDao.kioskLogin(pMap);
+		return result;
+	}
+
+	public int kioskJoin(Map<String, Object> pMap) {
+		int result = 0;
+		result = iDao.kioskJoin(pMap);
 		return result;
 	}
 
