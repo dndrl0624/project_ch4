@@ -117,22 +117,6 @@ function search(){
 				</div>
 			</div>
 		</div>
-		<!-- 
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<h4 class="panel-title">
-					<a data-toggle="collapse" href="#collapse3">안내데스크</a>
-				</h4>
-			</div>
-			<div id="collapse3" class="panel-collapse collapse">
-				<div class="panel-body">
-					<a  href="/project_ch4_pojo/View/company/info/Info_Main.jsp">안내데스크 메인</a><br> 
-					<a  href="/project_ch4_pojo/View/company/info/Info_Notice.jsp">안내데스크 공지</a><br> 
-					<a  href="/project_ch4_pojo/View/company/info/Info_ManageLog.jsp">방문자 현황 관리</a><br> 
-				</div>
-			</div>
-		</div>
-		-->
 	</div>
 </aside>
 
@@ -162,9 +146,9 @@ function search(){
 	<div class='col-sm-2'><br>
 		<select class="easyui-combobox" id="state" name="state" label="현황" labelPosition="left" style="width:100%;">
 			<option value="all" selected>전체</option>
-			<option value="insideCom">사내</option>
-			<option value="outsideCom">외출</option>
-			<option value="goHome">퇴근</option>
+			<option value="사내">사내</option>
+			<option value="외출">외출</option>
+			<option value="퇴근">퇴근</option>
 		</select>
 	</div>
 	<div  class='col-sm-4'>
