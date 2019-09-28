@@ -134,18 +134,45 @@
 			onClickRow:function(row,$element,field){
 				var aplg_no = $element.find("td:first").html();
 				$("#input_update").attr('value',aplg_no)
-// 				$.ajax({
-// 					type: 'get',
-// 					dataType: 'json',
-// 					url: '/visitor/detail.ch4?visit_no='+visit_no,
-// 					success: function(result){
-//						//////////////////////  값 뿌려주기  /////////////////////////
-//
-//					
-//						//////////////////////  값 뿌려주기  /////////////////////////
-// 					}
-// 				});
-				//방문이력 조회 Modal 띄우기
+				$.ajax({
+					type: 'get',
+					dataType: 'json',
+					url: '../../json/testLog8.json',
+// 					url: '/goods/detail.ch4?aplg_no='+aplg_no,
+					success: function(result){
+						//값 뿌리기 전에 테이블 자식노드 제거
+						$("#tb_detail1 tbody").empty();
+						$("#tb_detail2 tbody").empty();
+						$("#tb_goods tbody").empty();
+						//////////////////////  값 뿌려주기  /////////////////////////
+						var infoMap;
+						var gmList;
+						$.each(result,function(index,item){
+							infoMap = item.infoMap;
+							gmList = item.gmList;
+						});
+	    				var row = "<tr><td>"+infoMap[0].aplg_no+"</td>"
+	    							+"<td>"+infoMap[0].aplg_date+"</td>"
+	    							+"<td>"+infoMap[0].aplg_permit_st+"</td>"
+	    							+"<td>"+infoMap[0].aplg_name+"</td>"
+	    							+"<td>"+infoMap[0].aplg_hp+"</td></tr>";
+	    				$("#tb_detail1 tbody").append(row);
+	    				row = "<tr><td>"+infoMap[0].com_name+"</td>"
+	    						+"<td>"+infoMap[0].aplg_desti+"</td>"
+	    						+"<td>"+infoMap[0].aplg_trans_date+"</td>"
+	    						+"<td>"+infoMap[0].aplg_reason+"</td></tr>";
+	    				$("#tb_detail2 tbody").append(row);
+	    				for(i=0;i<gmList.length;i++){
+		    				row = "<tr><td>"+gmList[i].gmng_name+"</td>"
+	    							+"<td>"+gmList[i].gmng_type+"</td>"
+	    							+"<td>"+gmList[i].gmng_quan+"</td>"
+		    						+"<td>"+gmList[i].gmng_confm+"</td></tr>";
+	    					$("#tb_goods tbody").append(row);
+	    				}
+						//////////////////////  값 뿌려주기  /////////////////////////
+					}
+				});
+				//반입이력 조회 Modal 띄우기
 				$("#md_detail").modal('show');
 			},
 		});
@@ -314,7 +341,7 @@
 				<div class="container-fluid">
 				    <h4 style="margin-bottom:10px; border-left: 3px solid #31708f; padding-left:4px;"><b>신청자 정보</b></h4>
 			    	<div class="row table basic">
-			    		<table class="table">
+			    		<table id="tb_detail1" class="table">
 			    			<thead>
 				    			<tr>
 				    				<th>신청번호</th>
@@ -330,7 +357,7 @@
 			    	</div>
 			    	<h4 style="margin-bottom:10px; border-left: 3px solid #31708f; padding-left:4px;"><b>반입상세</b></h4>
 			    	<div class="row table basic">
-			    		<table class="table">
+			    		<table id="tb_detail2" class="table">
 			    			<thead>
 			    				<tr>
 				    				<th>반입지</th>

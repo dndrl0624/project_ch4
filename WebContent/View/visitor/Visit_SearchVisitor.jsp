@@ -141,17 +141,65 @@
 			onClickRow:function(row,$element,field){
 				var visit_no = $element.find("td:first").html();
 				$("#input_update").attr('value',visit_no);
-// 				$.ajax({
-// 					type: 'get',
-// 					dataType: 'json',
+				$.ajax({
+					type: 'get',
+					dataType: 'json',
 // 					url: '/visitor/detail.ch4?visit_no='+visit_no,
-// 					success: function(result){
-//						//////////////////////  값 뿌려주기  /////////////////////////
-//
-//					
-//						//////////////////////  값 뿌려주기  /////////////////////////
-// 					}
-// 				});
+					url: '../../json/testLog7.json',
+					success: function(result){
+						//값 뿌리기 전에 테이블 자식노드 제거
+						$("#tb_detail1 tbody").empty();
+						$("#tb_detail2 tbody").empty();
+						$("#tb_detail3 tbody").empty();
+						$("#tb_visitor tbody").empty();
+						$("#tb_device tbody").empty();
+						$("#tb_parking tbody").empty();
+						//////////////////////  값 뿌려주기  /////////////////////////
+						var infoMap;
+						var vtList;
+						var tnList;
+						var pkList;
+						$.each(result,function(index,item){
+							infoMap = item.infoMap;
+							vtList = item.vtList;
+							tnList = item.tnList;
+							pkList = item.pkList;
+						});
+	    				var row = "<tr><td>"+infoMap[0].visit_no+"</td>"
+	    							+"<td>"+infoMap[0].visit_apply_date+"</td>"
+	    							+"<td>"+infoMap[0].visit_permit_st+"</td>"
+	    							+"<td>"+infoMap[0].visit_apply_name+"</td>"
+	    							+"<td>"+infoMap[0].visit_apply_hp+"</td></tr>";
+	    				$("#tb_detail1 tbody").append(row);
+	    				row = "<tr><td>"+infoMap[0].visit_type+"</td>"
+	    						+"<td>"+infoMap[0].visit_term+"</td>"
+	    						+"<td>"+infoMap[0].visit_day+"</td>"
+	    						+"<td>"+infoMap[0].visit_date+"</td></tr>";
+	    				$("#tb_detail2 tbody").append(row);
+	    				row = "<tr><td>"+infoMap[0].com_name+"</td>"
+	    						+"<td>"+infoMap[0].visit_desti+"</td>"
+	    						+"<td>"+infoMap[0].visit_purps+"</td></tr>";
+	    				$("#tb_detail3 tbody").append(row);
+	    				for(i=0;i<vtList.length;i++){
+		    				row = "<tr><td>"+vtList[i].visitor_name+"</td>"
+		    						+"<td>"+vtList[i].visitor_hp+"</td></tr>";
+	    					$("#tb_visitor tbody").append(row);
+	    				}
+	    				for(i=0;i<tnList.length;i++){
+		    				row = "<tr><td>"+tnList[i].tkin_kind+"</td>"
+	    							+"<td>"+tnList[i].tkin_brand+"</td>"
+		    						+"<td>"+tnList[i].tkin_model+"</td></tr>";
+	    					$("#tb_device tbody").append(row);
+	    				}
+	    				for(i=0;i<pkList.length;i++){
+		    				row = "<tr><td>"+pkList[i].parking_num+"</td>"
+	    							+"<td>"+pkList[i].parking_kind+"</td>"
+		    						+"<td>"+pkList[i].parking_model+"</td></tr>";
+	    					$("#tb_parking tbody").append(row);
+	    				}
+						//////////////////////  값 뿌려주기  /////////////////////////
+					}
+				});
 				//방문이력 조회 Modal 띄우기
 				$("#md_detail").modal('show');
 			},
@@ -321,7 +369,7 @@
 				<div class="container-fluid">
 				    <h4 style="margin-bottom:10px; border-left: 3px solid #31708f; padding-left:4px;"><b>신청자 정보</b></h4>
 			    	<div class="row table basic">
-			    		<table class="table">
+			    		<table id="tb_detail1" class="table">
 			    			<thead>
 				    			<tr>
 				    				<th>신청번호</th>
@@ -337,7 +385,7 @@
 			    	</div>
 			    	<h4 style="margin-bottom:10px; border-left: 3px solid #31708f; padding-left:4px;"><b>방문기간</b></h4>
 			    	<div class="row table basic">
-			    		<table class="table">
+			    		<table id="tb_detail2" class="table">
 			    			<thead>
 			    				<tr>
 				    				<th>방문유형</th>
@@ -352,7 +400,7 @@
 			    	</div>
 			    	<h4 style="margin-bottom:10px; border-left: 3px solid #31708f; padding-left:4px;"><b>방문상세</b></h4>
 			    	<div class="row table basic">
-			    		<table class="table">
+			    		<table id="tb_detail3" class="table">
 			    			<thead>
 			    				<tr>
 				    				<th>방문지</th>
