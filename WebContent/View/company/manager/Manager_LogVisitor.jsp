@@ -13,6 +13,9 @@
 </head>
 <body>
 <script type="text/javascript">
+//combobox 직접입력 방지
+$.fn.combobox.defaults.editable = false
+
 /* 검색방법 콤보박스로 textbox name값 변경 */
 $(document).ready(function(){
 	$('#SearchType').combobox({
@@ -23,9 +26,6 @@ $(document).ready(function(){
 		}
 	});
 });
-
-//combobox 직접입력 방지
-$.fn.combobox.defaults.editable = false
 
 /* 테이블 데이터 */
 $(document).ready(function(){
@@ -45,29 +45,45 @@ $(document).ready(function(){
 	    ,onLoadError: function(status,jqXHR){
 	    	alert("error");
 	    }
+		,url: "/project_ch4_pojo/json/logVisitorJson.json" // 실제 사용할 URL 변경하기  : company/@@@@.ch4
 	    ,pagination:'true'//페이지 네이션
 	    ,paginationPreText:"Previous"
 	    ,paginationNextText:"Next"
 	    ,pageSize:10//기본 페이지 사이즈
 	    ,pageList:[10, 15, 20, 30] //칸수
 	    ,onClickRow:function(row,$element,field){
-	       //$element.attr('data-index',10)
 	       $element.toggleClass('single-select');//로우 클릭했을 때 색 변함.
 	       //alert(row.N_NO);
 	     }
 	    ,onDblClickRow:function(row,$element,field){
-	       alert("상세조회 모달");
+	       alert("어떠한 기능을 넣을 것인가요? 모달 조회 OR 아무것도 없이");
+	    	// 실제 사용할 URL 변경하기  : company/@@@@.ch4
 	     }
 	});
 });
 /* 버튼 검색 */
 function search(){
-	$.ajax({
-		url: "/project_ch4_pojo/json/logVisitorJson.json"
-		,dataType: "json"
-		,success: function(result){
-			$("#tb_logVisitor").bootstrapTable('load',result);
+	/* 전화번호 형식 맞춰주기 */
+	//alert($("#SearchType").combobox('getValue'));
+	if($("#SearchType").combobox('getValue')=="VISITOR_HP"||$("#SearchType").combobox('getValue')=="VISIT_APPLY_HP"){
+		var hp = $("#searchText").textbox('getValue');
+		if(-1==hp.indexOf("-")){
+			var telA = hp.substring(0,3);
+			var telB = hp.substring(4,8);
+			var telC = hp.substring(8);
+			//alert(telA);
+			hp =telA+"-"+telB+"-"+telC;
+			$("#searchText").textbox('setValue',hp);
 		}
+	}
+	$.ajax({
+			type:'post'
+			,url:'project_ch4_pojo/json/logVisitorJson.json'/* 실제 사용할 URL 변경하기  : company/applyVisitList.ch4 */
+			,dataType: "json"
+			,data :$("#f_search").serialize()
+			,success: function(data){
+				$("#tb_logVisitor").bootstrapTable('load',data);
+			}
 	});
 }
 </script>

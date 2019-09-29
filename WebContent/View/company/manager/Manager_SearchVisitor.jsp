@@ -1,14 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List, java.util.Map" %>
-<%@ page import="com.ch4.util.PageBar" %>    
 <%
 //데이터 받아오기	
-	int size = 0;
-	List<Map<String,Object>> svList = 
-			(List<Map<String,Object>>)request.getAttribute("svList");
-	if(svList !=null && svList.size()>0){
-		size = svList.size();
+	String login_id = null;
+	String login_name = null;
+	String login_com = null;
+	List<Map<String,Object>> login_info = 
+			(List<Map<String,Object>>)request.getAttribute("login_info");
+	if(login_info !=null && login_info.size()>0){
+		//각각 값 넣어주기
+		login_id =  (String)session.getAttribute("id");
+		login_name =  (String)session.getAttribute("name");
+		login_com =  (String)session.getAttribute("com_no");
 	}
 %>    
 <!DOCTYPE html>
@@ -26,8 +30,7 @@
 <script type="text/javascript">
 //combobox 직접입력 방지
 $.fn.combobox.defaults.editable = false
-//오늘 날짜로 기본 설정
-/* 검색방법 콤보박스로 textbox name값 변경 */
+// 검색방법 콤보박스로 textbox name값 변경
 $(document).ready(function(){
 	$('#SearchType').combobox({
 		onChange: function(newVal){
@@ -41,6 +44,7 @@ $(document).ready(function(){
 	$("#tb_sv").bootstrapTable({
 		 	columns:[
 		         {field:'VISIT_NO',title:'신청번호'}
+		         ,{field:'abc',title:'승인상태'}
 		         ,{field:'VISIT_APPLY_NAME',title:'신청자명'}
 		         ,{field:'COM_NAME',title:'방문지'}/* 처리내용 : 입장 퇴장 */
 		         ,{field:'VISIT_DESTI',title:'목적지'}/* 현재위치 : 내부 외부 사내 .. */
@@ -49,7 +53,7 @@ $(document).ready(function(){
 		         ,{field:'VISIT_TYPE',title:'방문유형'}
 		         ,{field:'VISIT_APPLY_DATE',title:'방문일자'}
 		         ,{field:'VISIT_TERM',title:'방문주기'}
-		         ,{field:'VISIT_DATE',title:'방문일자'}
+		         ,{field:'VISIT_DAYE',title:'방문일자'}
 		   	 ]
 			,url:'/project_ch4_pojo/json/searchVisitorJson.json'// 실제 사용할 URL 변경하기  : company/applyVisitList.ch4
 			,dataType: "json"
@@ -70,7 +74,7 @@ $(document).ready(function(){
 			,onDblClickRow : function(row, $element, field) {
 				//테이블에서 일련번호 칸에 들어간 정보 가져오기
 				var choo = $element.find('td').eq(0).text();
-				alert(choo);
+				//alert(choo);
 				//디테일 페이지로 이동
 				 location.href="/project_ch4_pojo/View/company/manager/Manger_DetailVisitor.jsp?VISIT_NO="+choo
 				 // 실제 사용할 URL 변경하기  :
@@ -103,10 +107,6 @@ function btn_search(){
 			$("#tb_sv").bootstrapTable('load',data);
 		}
 	});	
-}
-/* 디테일 페이지로 이동 */
-function boardDetail(get_VISIT_NO){
-	location.href="/visitDetail.ch4?VISIT_NO="+get_VISIT_NO;
 }
 </script>
 <%@ include file="../../CommonForm/Top.jsp"%>

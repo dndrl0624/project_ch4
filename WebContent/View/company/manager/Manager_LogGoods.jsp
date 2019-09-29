@@ -13,6 +13,9 @@
 </head>
 <body>
 <script type="text/javascript">
+//combobox 직접입력 방지
+$.fn.combobox.defaults.editable = false
+
 /* 검색방법 콤보박스로 textbox name값 변경 */
 $(document).ready(function(){
 	$('#SearchType').combobox({
@@ -24,12 +27,10 @@ $(document).ready(function(){
 	});
 });
 
-//combobox 직접입력 방지
-$.fn.combobox.defaults.editable = false
 
 /* 테이블 데이터 */
 $(document).ready(function(){
-	$("#tb_logGood").bootstrapTable({
+	$("#tb_lg").bootstrapTable({
 		height:'672'
 		,pagination:'true'
 		,toolbarAlign : 'right'
@@ -45,30 +46,36 @@ $(document).ready(function(){
 	       //alert(row.N_NO);
 	     }
 	    ,onDblClickRow:function(row,$element,field){
-	       alert("상세조회 모달");
+	    	 alert("어떠한 기능을 넣을 것인가요? 모달 조회 OR 아무것도 없이");
+		    // 실제 사용할 URL 변경하기  : company/@@@@.ch4
 	     }
 	});
 });
 /* 버튼 검색 */
 function search(){
-	var now = $("#state").val();
-	alert(now);
-	$("#tb_logGood").bootstrapTable('refreshOptions',{
-		filterOptions:{
-			filterAlgorithm : 'or'
+	/* 전화번호 형식 맞춰주기 */
+	//alert($("#SearchType").combobox('getValue'));
+	if($("#SearchType").combobox('getValue')=="VISITOR_HP"||$("#SearchType").combobox('getValue')=="VISIT_APPLY_HP"){
+		var hp = $("#searchText").textbox('getValue');
+		if(-1==hp.indexOf("-")){
+			var telA = hp.substring(0,3);
+			var telB = hp.substring(4,8);
+			var telC = hp.substring(8);
+			//alert(telA);
+			hp =telA+"-"+telB+"-"+telC;
+			$("#searchText").textbox('setValue',hp);
 		}
-	});
-	$("#tb_logGood").bootstrapTable('filterBy',{
-		CMG_NOTES: now
-	});
-// 	//테이블 데이터 넣기 : 그냥 처음 부터 다 보여주자
-// 	$.ajax({
-// 		url: "/project_ch4_pojo/json/logGoodsJson.json"
-// 		,dataType: "json"
-// 		,success: function(result){
-// 			$("#tb_logGood").bootstrapTable('load',result);
-// 		}
-// 	});
+	}
+	/* 검색 조건을 통해 재출력 */
+	$.ajax({
+		type:'post'
+		,url:'/project_ch4_pojo/json/logGoodsJson.json'/* 실제 사용할 URL 변경하기  : company/applyVisitList.ch4 */
+		,dataType: "json"
+		,data :$("#f_search").serialize()
+		,success: function(data){
+			$("#tb_sv").bootstrapTable('load',data);
+		}
+	});	
 }
 </script>
 <%@ include file="../../CommonForm/Top.jsp"%>
@@ -128,12 +135,14 @@ function search(){
 		<%@ include file="../../CommonForm/logout.jsp"%>
 	</div>
 <!-- 검색 조건 설정 -->
+<form id="f_search">
 	<div class='col-sm-2'>
 	<!-- 검색 타입 설정 --><br>
-		<select class="easyui-combobox" id="SearchType" name='SearchType' label="검색방법" labelPosition="left" style="width:100%;">
-			<option value="VISITOR_NAME">방문자명</option>
+		<select class="easyui-combobox" id="SearchType" name='SearchType' label="검색방법" labelPosition="left" style="width:'100%'">
+			<option value="VISITOR_NAME" >방문자명</option>
 			<option value="VISITOR_HP">연락처</option>
-			<option value="COM_NAME">회사명</option>
+			<option value="VISIT_APPLY_NAME">신청자명</option>
+			<option value="VISIT_APPLY_HP">신청자 연락처</option>
 		</select>
 	</div>
 	<div class='col-sm-2'>
@@ -187,10 +196,10 @@ function search(){
 		style="margin-top: 5px;margin-bottom: 15px;float: bottom;">Search</button>
 	</div>
 	</div>
-	
+</form>	
 <!-- 부트 테이블 : search_ResultVisitor 참조-->
 	<div class="row">
-		<table class="table table-bordered table-hover" id="tb_logGood" >
+		<table class="table table-bordered table-hover" id="tb_lg" >
 			<thead>
 				<tr>
 					<th data-field="GMNG_NO">반입번호</th>

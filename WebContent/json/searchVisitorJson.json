@@ -2,65 +2,65 @@
 	{"VISIT_NO":"신청번호01","VISIT_APPLY_NAME":"신청자이름","COM_NAME":"방문지"
 	,"VISIT_DESTI":"목적지","VISIT_PURPS":"방문사유","VISIT_APPLY_HP":"010"
 	,"VISIT_TYPE":"방문유형","VISIT_APPLY_DATE":"방문일자","VISIT_TERM":"방문주기"
-	,"VISIT_DAY":"방문요일"}
+	,"VISIT_DAYE":"방문요일"}
 	,
 	{"VISIT_NO":"신청번호02","VISIT_APPLY_NAME":"신청자이름","COM_NAME":"방문지"
 	,"VISIT_DESTI":"목적지","VISIT_PURPS":"방문사유","VISIT_APPLY_HP":"010"
 	,"VISIT_TYPE":"방문유형","VISIT_APPLY_DATE":"방문일자","VISIT_TERM":"방문주기"
-	,"VISIT_DAY":"방문요일"}
+	,"VISIT_DAYE":"방문요일"}
 	,
 	{"VISIT_NO":"신청번호","VISIT_APPLY_NAME":"신청자이름","COM_NAME":"방문지"
 	,"VISIT_DESTI":"목적지","VISIT_PURPS":"방문사유","VISIT_APPLY_HP":"016"
 	,"VISIT_TYPE":"방문유형","VISIT_APPLY_DATE":"방문일자","VISIT_TERM":"방문주기"
-	,"VISIT_DAY":"방문요일"}
+	,"VISIT_DAYE":"방문요일"}
 	,
 	{"VISIT_NO":"신청번호","VISIT_APPLY_NAME":"신청자이름","COM_NAME":"방문지"
 	,"VISIT_DESTI":"목적지","VISIT_PURPS":"방문사유","VISIT_APPLY_HP":"017"
 	,"VISIT_TYPE":"방문유형","VISIT_APPLY_DATE":"방문일자","VISIT_TERM":"방문주기"
-	,"VISIT_DAY":"방문요일"}
+	,"VISIT_DAYE":"방문요일"}
 	,
 	{"VISIT_NO":"신청번호","VISIT_APPLY_NAME":"신청자이름","COM_NAME":"방문지"
 	,"VISIT_DESTI":"목적지","VISIT_PURPS":"방문사유","VISIT_APPLY_HP":"018"
 	,"VISIT_TYPE":"방문유형","VISIT_APPLY_DATE":"방문일자","VISIT_TERM":"방문주기"
-	,"VISIT_DAY":"방문요일"}
+	,"VISIT_DAYE":"방문요일"}
 	,
 	{"VISIT_NO":"신청번호","VISIT_APPLY_NAME":"신청자이름","COM_NAME":"방문지"
 	,"VISIT_DESTI":"목적지","VISIT_PURPS":"방문사유","VISIT_APPLY_HP":"010"
 	,"VISIT_TYPE":"방문유형","VISIT_APPLY_DATE":"방문일자","VISIT_TERM":"방문주기"
-	,"VISIT_DAY":"방문요일"}
+	,"VISIT_DAYE":"방문요일"}
 	,
 	{"VISIT_NO":"신청번호","VISIT_APPLY_NAME":"신청자이름","COM_NAME":"방문지"
 	,"VISIT_DESTI":"목적지","VISIT_PURPS":"방문사유","VISIT_APPLY_HP":"연락처"
 	,"VISIT_TYPE":"방문유형","VISIT_APPLY_DATE":"방문일자","VISIT_TERM":"방문주기"
-	,"VISIT_DAY":"방문요일"}
+	,"VISIT_DAYE":"방문요일"}
 	,
 	{"VISIT_NO":"신청번호","VISIT_APPLY_NAME":"신청자이름","COM_NAME":"방문지"
 	,"VISIT_DESTI":"목적지","VISIT_PURPS":"방문사유","VISIT_APPLY_HP":"연락처"
 	,"VISIT_TYPE":"방문유형","VISIT_APPLY_DATE":"방문일자","VISIT_TERM":"방문주기"
-	,"VISIT_DAY":"방문요일"}
+	,"VISIT_DAYE":"방문요일"}
 	,
 	{"VISIT_NO":"신청번호","VISIT_APPLY_NAME":"신청자이름","COM_NAME":"방문지"
 	,"VISIT_DESTI":"목적지","VISIT_PURPS":"방문사유","VISIT_APPLY_HP":"연락처"
 	,"VISIT_TYPE":"방문유형","VISIT_APPLY_DATE":"방문일자","VISIT_TERM":"방문주기"
-	,"VISIT_DAY":"방문요일"}
+	,"VISIT_DAYE":"방문요일"}
 	,
 	{"VISIT_NO":"신청번호","VISIT_APPLY_NAME":"신청자이름","COM_NAME":"방문지"
 	,"VISIT_DESTI":"목적지","VISIT_PURPS":"방문사유","VISIT_APPLY_HP":"연락처"
 	,"VISIT_TYPE":"방문유형","VISIT_APPLY_DATE":"방문일자","VISIT_TERM":"방문주기"
-	,"VISIT_DAY":"방문요일"}
+	,"VISIT_DAYE":"방문요일"}
 	,
 	{"VISIT_NO":"신청번호","VISIT_APPLY_NAME":"신청자이름","COM_NAME":"방문지"
 	,"VISIT_DESTI":"목적지","VISIT_PURPS":"방문사유","VISIT_APPLY_HP":"연락처"
 	,"VISIT_TYPE":"방문유형","VISIT_APPLY_DATE":"방문일자","VISIT_TERM":"방문주기"
-	,"VISIT_DAY":"방문요일"}
+	,"VISIT_DAYE":"방문요일"}
 	,
 	{"VISIT_NO":"신청번호","VISIT_APPLY_NAME":"신청자이름","COM_NAME":"방문지"
 	,"VISIT_DESTI":"목적지","VISIT_PURPS":"방문사유","VISIT_APPLY_HP":"연락처"
 	,"VISIT_TYPE":"방문유형","VISIT_APPLY_DATE":"방문일자","VISIT_TERM":"방문주기"
-	,"VISIT_DAY":"방문요일"}
+	,"VISIT_DAYE":"방문요일"}
 	,
 	{"VISIT_NO":"신청번호","VISIT_APPLY_NAME":"신청자이름","COM_NAME":"방문지"
 	,"VISIT_DESTI":"목적지","VISIT_PURPS":"방문사유","VISIT_APPLY_HP":"연락처"
 	,"VISIT_TYPE":"방문유형","VISIT_APPLY_DATE":"방문일자","VISIT_TERM":"방문주기"
-	,"VISIT_DAY":"방문요일"}
+	,"VISIT_DAYE":"방문요일"}
  ]
