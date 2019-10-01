@@ -138,8 +138,8 @@ function search(){
 <form id="f_search">
 	<div class='col-sm-2'>
 	<!-- 검색 타입 설정 --><br>
-		<select class="easyui-combobox" id="SearchType" name='SearchType' label="검색방법" labelPosition="left" style="width:'100%'">
-			<option value="VISITOR_NAME" >방문자명</option>
+		<select class="easyui-combobox" id="SearchType" name='SearchType' label="검색방법" labelPosition="left" style="width:100%;">
+			<option value="VISITOR_NAME" selected>방문자명</option>
 			<option value="VISITOR_HP">연락처</option>
 			<option value="VISIT_APPLY_NAME">신청자명</option>
 			<option value="VISIT_APPLY_HP">신청자 연락처</option>

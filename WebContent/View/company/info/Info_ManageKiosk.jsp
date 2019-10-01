@@ -23,6 +23,10 @@ $(document).ready(function(){
 		,toolbar:'#toolbar'
 		,url:'/project_ch4_pojo/json/kiosk.json'
 		,pagination:'true'
+		,paginationPreText:"Previous"
+		,paginationNextText:"Next"
+		,pageSize:10//기본 페이지 사이즈
+		,pageList:[10, 15, 20, 30] //칸수
 		,toolbarAlign : 'right'
 	    ,onClickRow:function(row,$element,field){
 	       $element.toggleClass('single-select');//로우 클릭했을 때 색 변함.
@@ -161,40 +165,40 @@ function save() {
 
 <!-- 모달 상세정보 -->
 <div id="kioskModal" class="modal fade" role="dialog" style="width: 50%;margin-left: 28%;margin-top: 10%;">
-<div class="modal-dialog">
+	<div class="modal-dialog">
 <!-- Modal content -->
-	<div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">키오스크 상세정보</h4>
-        </div>
-        
-        <div class="modal-body" style="align: center;padding-left: 30%">
-        <form id="f_kio_change">
-        	<table>
-        		<tr><td>일련번호</td>	<td><input class="easyui-textbox" id="kiosk_no" readonly="readonly"></td></tr>
-        		<tr><td>위치</td>		<td><input class="easyui-textbox" id="kiosk_location"></td></tr>
-        		<tr><td>상태</td>		
-        		    <td>
-        				<select class="form-control"  id="kiosk_condtion" name="combo" style="width:100%;">
-							<option value="정상">정상</option>
-							<option value="고장">고장</option>
-							<option value="수리요청">수리요청</option>
-							<option value="수리중">수리중</option>
-						</select>
-        		    </td>
-        		</tr>
-        		<tr><td>비고</td>		<td><input class="easyui-textbox" id="kiosk_notice"></td></tr>
-        	</table>
-        </form>
-        </div>
-        
-        <div class="modal-footer">
-          <button type="button" class="btn btn-info" id="changeSave" onclick='save()'>변경 저장</button>
-          <button type="button" class="btn" id="btn_close" data-dismiss="modal">Close</button>
-        </div>
+		<div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">키오스크 상세정보</h4>
+	        </div>
+	        
+	        <div class="modal-body" style="align: center;padding-left: 30%">
+	        <form id="f_kio_change">
+	        	<table>
+	        		<tr><td>일련번호</td>	<td><input class="easyui-textbox" id="kiosk_no" readonly="readonly"></td></tr>
+	        		<tr><td>위치</td>		<td><input class="easyui-textbox" id="kiosk_location"></td></tr>
+	        		<tr><td>상태</td>		
+	        		    <td>
+	        				<select class="form-control"  id="kiosk_condtion" name="combo" style="width:100%;">
+								<option value="정상">정상</option>
+								<option value="고장">고장</option>
+								<option value="수리요청">수리요청</option>
+								<option value="수리중">수리중</option>
+							</select>
+	        		    </td>
+	        		</tr>
+	        		<tr><td>비고</td>		<td><input class="easyui-textbox" id="kiosk_notice"></td></tr>
+	        	</table>
+	        </form>
+	        </div>
+	        
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-info" id="changeSave" onclick='save()'>변경 저장</button>
+	          <button type="button" class="btn" id="btn_close" data-dismiss="modal">Close</button>
+	        </div>
+		</div>
 	</div>
-</div>
 </div>
 
 <!-- 공통 Footer -->

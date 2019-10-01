@@ -44,7 +44,7 @@ $(document).ready(function(){
 	$("#tb_sv").bootstrapTable({
 		 	columns:[
 		         {field:'VISIT_NO',title:'신청번호'}
-		         ,{field:'abc',title:'승인상태'}
+		         ,{field:'VISIT_PERMIT_ST',title:'승인상태'}
 		         ,{field:'VISIT_APPLY_NAME',title:'신청자명'}
 		         ,{field:'COM_NAME',title:'방문지'}/* 처리내용 : 입장 퇴장 */
 		         ,{field:'VISIT_DESTI',title:'목적지'}/* 현재위치 : 내부 외부 사내 .. */
@@ -184,10 +184,10 @@ function btn_search(){
 	</div>
 	<div class='col-sm-2'><br>
 		<select class="easyui-combobox" id="state" name="state" label="승인상태" labelPosition="left" style="width:100%;">
-			<option value="all" selected>전체</option>
-			<option value="commit">승인</option>
-			<option value="return">반려</option>
-			<option value="cancle">취소</option>
+			<option value="결재중" selected>결재중</option>
+			<option value="승인">승인</option>
+			<option value="반려">반려</option>
+			<option value="취소">취소</option>
 		</select>
 	</div>
 	<div  class='col-sm-4'>

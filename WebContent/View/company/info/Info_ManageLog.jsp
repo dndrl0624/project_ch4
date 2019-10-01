@@ -30,8 +30,7 @@ $.fn.combobox.defaults.editable = false
 /* 테이블 데이터 */
 $(document).ready(function(){
 	$("#tb_logVisitor").bootstrapTable({
-		height:'630'
-		,toolbar:'#toolbar'
+		toolbar:'#toolbar'
 		,url:'/project_ch4_pojo/json/logVisitorJson.json'
 		,pagination : 'true'
 		,onClickRow : function(row, $element, field) {
@@ -46,12 +45,6 @@ $(document).ready(function(){
 		var date1 = $("#datepicker1").val();
 		var date2 = $("#datepicker2").val();
 		
-//		alert(check);
-//		alert(searchT);
-// 		alert(st);
-// 		alert(date1);
-// 		alert(date2);
-
 		$("#tb_logVisitor").bootstrapTable('refreshOptions', {
 			filterOptions : {
 				filterAlgoritdm : 'or'
@@ -107,7 +100,7 @@ $(document).ready(function(){
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<a href="/project_ch4_pojo/View/company/info/Info_ManageLog.jsp" style="text-decoration: underline;">
+					<a href="/project_ch4_pojo/View/company/info/Info_ManageLog.jsp">
 					<i class="fa fa-list-alt" aria-hidden="true"></i>방문자현황관리</a>
 				</h4>
 			</div>
@@ -115,16 +108,8 @@ $(document).ready(function(){
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<a href="/project_ch4_pojo/View/company/info/Info_ManageKiosk.jsp">
-					<i class="fa fa-search-plus" aria-hidden="true"></i>키오스크 관리</a>
-				</h4>
-			</div>
-		</div>
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<h4 class="panel-title">
-					<a href="/project_ch4_pojo/View/company/info/Info_ManageDesti.jsp">
-					<i class="fa fa-list-alt" aria-hidden="true"></i>옥내 목적지 관리</a>
+					<a href="/project_ch4_pojo/View/company/info/Info_ManageCompany.jsp">
+					<i class="fa fa-search-plus" aria-hidden="true"></i>종합 관리</a>
 				</h4>
 			</div>
 		</div>

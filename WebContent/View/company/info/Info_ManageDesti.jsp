@@ -11,7 +11,7 @@
 <%@ include file="../../../Style/common/HeadUI.jsp"%>
 <link rel="stylesheet" type="text/css" href="/project_ch4_pojo/Style/css/maxCss.css">
 </head>
-<body><!-- ID로 이름 받아오는 것 // 상세정보 수정+삭제 함수 만들기 : 폼태그 전송 -->
+<body>
 <script type="text/javascript">
 /* 테이블 데이터 */
 $(document).ready(function(){
