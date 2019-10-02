@@ -40,12 +40,12 @@
 		</if>
 		<!-- 검색 : 신청일자 -->
 		<if test="visit_apply_date != null">
-			and visit_apply_date = #{visit_date}
+			and visit_apply_date = #{visit_apply_date}
 		</if>
 		<!-- 검색 : 신청일자(기간으로) -->
 		<if test="visit_apply_date1 != null and visit_apply_date2 != null">
 			and visit_apply_date >= #{visit_apply_date1}
-			<![CDATA[and visit_date <= #{visit_apply_date2}]]>
+			<![CDATA[and visit_apply_date <= #{visit_apply_date2}]]>
 		</if>
 		<!-- 검색 : 방문일자 -->
 		<if test="visit_date != null">
@@ -79,7 +79,7 @@
 	</select>
 	<!-- 방문자 조회 -->
 	<select id="visitorSearch" parameterType="map" resultType="map">
-		select visitot_name, visitor_hp from visitor_mng
+		select visitor_name, visitor_hp from visitor_mng
 		<where>
 			<!-- 검색 : 신청번호 -->
 			<if test="visit_no != null">
@@ -90,7 +90,7 @@
 				and visitor_name like '%'||#{visitor_name}||'%'
 			</if>
 			<!-- 검색 : 방문자 연락처 -->
-			<if test="visitor_hp">
+			<if test="visitor_hp != null">
 				and visitor_hp = #{visitor_hp}
 			</if>
 		</where>

@@ -8,4 +8,14 @@
 							,#{msg,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
 							)}
 	</select>
+	
+	<!-- 키오스크 로그인 프로시저  -->
+	<select id="">
+	
+	</select>
+	
+	<!-- 키오스크 등록 -->
+	<insert id="">
+	
+	</insert>
 </mapper>  
