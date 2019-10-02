@@ -2,6 +2,32 @@
 <!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ch4.mybatis.mapper.InfoMapper">
 	
+	<!-- 키오스크 로그인 프로시저  "테스트를 어떻게 하는지 몰라서 못했습니다" -->
+	<select id="proc_kioskLogin" parameterType="map" statementType="CALLABLE">
+      {call proc_visitorConfirm(
+         #{p_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{msg, mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{result, mode=OUT, jdbcType=INTEGER, javaType=int}
+      )}   
+	</select>
+	
+	<!-- 키오스크 등록 -->
+	<insert id="kioskJoin" parameterType="map">
+		insert into kiosk(kiosk_no, kiosk_gate, kiosk_st, kiosk_notes, com_no)
+		values ('KN'||to_char(systimestamp + (INTERVAL '9' HOUR),'YYYYMMDDFF3')||dbms_random.string('x',3)
+				, #{kiosk_gate}, #{kiosk_st}, #{kiosk_notes}, #{com_no})
+	</insert>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- ================================================================== -->
 	<!-- QR전송 프로시저 -->
 	<select id="confirmQR" parameterType="map" statementType="CALLABLE">
 		{call proc_confirmQR(#{confm_qrcode,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
@@ -9,13 +35,5 @@
 							)}
 	</select>
 	
-	<!-- 키오스크 로그인 프로시저  -->
-	<select id="">
 	
-	</select>
-	
-	<!-- 키오스크 등록 -->
-	<insert id="">
-	
-	</insert>
 </mapper>  
