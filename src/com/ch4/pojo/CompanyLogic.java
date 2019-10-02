@@ -1,72 +1,82 @@
 package com.ch4.pojo;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.imageio.ImageIO;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.log4j.Logger;
 
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.WriterException;
-import com.google.zxing.client.j2se.MatrixToImageWriter;
-import com.google.zxing.common.BitMatrix;
-import com.google.zxing.qrcode.QRCodeWriter;
 
 public class CompanyLogic {
+	Logger logger = Logger.getLogger(CompanyLogic.class);
 	CompanyDao cDao = null;
 	public CompanyLogic() {
 		cDao = new CompanyDao();
 	}
 
-	public int mngPermit(Map<String, Object> pMap) {
+	public int mngVPermit(Map<String, Object> pMap) {
 		int result = 0;
-		result = cDao.mngUpdate(pMap); // update
-		/*
-		 * 반려일경우, 
-		 * if(){
-		 * 
-		 * }
-		 * else if(){
-		 * 
-		 * }
-		 * 승인일경우
-		 */
-		if(result==0) {
-			return result;
+		cDao.mngVPermit(pMap);
+		result = (int)pMap.get("result");
+		List<Map<String,Object>> confirmList = null;
+		logger.info("test");
+		confirmList = (List<Map<String,Object>>)pMap.get("confirmList");
+		logger.info("result: "+result);
+		for(int i=0;i<confirmList.size();i++) {
+			logger.info(
+					"QR코드:"+confirmList.get(i).get("CONFM_QRCODE")+
+					" 방문일자:"+confirmList.get(i).get("CONFM_VISIT_DATE")+
+					" 방문자:"+confirmList.get(i).get("CONFM_NAME")
+					);
 		}
-		else if(result==1) {
-			result = cDao.mngPermit(pMap); // insert
+		
+		
+//		if(result==0) {
+//			return result;
+//		}
+//		else if(result==1) {
+//			result = cDao.mngPermit(pMap); // insert
+//		}
+//		if(result==1) {
+//			String qrCode = cDao.getQRcode(pMap);
+//			String savedFilePath = CompanyController.QRImagePath;
+//			String path = null;
+//			String url = null;
+//			
+//			if(pMap.get("visit_no")!=null) {
+//				path = savedFilePath + "visit/";
+//				url = "http://localhost:8080/Info/QRconfirm.ch4?confm_qrcode=" + qrCode;
+//			}
+//			else if(pMap.get("aplg_no")!=null) {
+//				path = savedFilePath + "goods/";
+//				url = "http://localhost:8080/Info/QRconfirm.ch4?confm_qrcode=" + qrCode;
+//			}
+//			File file = new File(path);
+//			
+//		}
+//		else if(result==0) {
+//			return result;
+//		}
+		return result;
+	}
+	public int mngGPermit(Map<String, Object> pMap) {
+		int result = 0;
+		cDao.mngGPermit(pMap);
+		result = (int)pMap.get("result");
+		List<Map<String,Object>> confirmList = null;
+		logger.info("test");
+		confirmList = (List<Map<String,Object>>)pMap.get("confirmList");
+		logger.info("result: "+result);
+		for(int i=0;i<confirmList.size();i++) {
+			logger.info(
+					"QR코드:"+confirmList.get(i).get("CONFM_QRCODE")+
+					" 반입일자:"+confirmList.get(i).get("APLG_TRANS_DATE")+
+					" 물품명:"+confirmList.get(i).get("CONFM_NAME")
+					);
 		}
 		if(result==1) {
-			String qrCode = cDao.getQRcode(pMap);
-			String savedFilePath = CompanyController.QRImagePath;
-			String path = null;
-			String url = null;
-			
-			if(pMap.get("visit_no")!=null) {
-				path = savedFilePath + "visit/";
-				url = "http://localhost:8080/Info/QRconfirm.ch4?confm_qrcode=" + qrCode;
-			}
-			else if(pMap.get("aplg_no")!=null) {
-				path = savedFilePath + "goods/";
-				url = "http://localhost:8080/Info/QRconfirm.ch4?confm_qrcode=" + qrCode;
-			}
-			File file = new File(path);
-			QRCodeWriter writer = new QRCodeWriter();
-		    try {
-				BitMatrix qr = writer.encode(url, BarcodeFormat.QR_CODE, 200, 200);
-				BufferedImage qrImage = MatrixToImageWriter.toBufferedImage(qr);
-				ImageIO.write(qrImage, "PNG", new File(file,qrCode +".png"));
-			} catch (WriterException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}  
-		}
-		else if(result==0) {
-			return result;
+			result = cDao.goodsQRAdd(pMap);
 		}
 		return result;
 	}

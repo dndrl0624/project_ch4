@@ -27,13 +27,31 @@ public class CompanyController implements Controller{
 		logger.info("execute 호출 성공");
 		QRImagePath = req.getRealPath("/QR/");
 		ModelAndView mav = new ModelAndView(req, res);
-		Map<String,Object> pMap = new HashMap<>();
-		HashMapBinder hmb = new HashMapBinder(req);
-		hmb.multiBind(pMap);
-		if(requestName.equals("mngPermit")) {
+//		Map<String,Object> pMap = new HashMap<>();
+//		HashMapBinder hmb = new HashMapBinder(req);
+//		hmb.multiBind(pMap);
+		Map<String,Object> pMap = new HashMap<String, Object>();
+//		pMap.put("visit_no", "VA191002123ER3");
+//		pMap.put("visit_permit_id", "TEST");
+//		pMap.put("visit_permit_st", "승인");
+		pMap.put("aplg_no", "GA1910028405CV");
+		pMap.put("aplg_permit_id", "TEST");
+		pMap.put("aplg_permit_st", "승인");
+		if(requestName.equals("mngVPermit")) {
 			int result = 0;
 			logger.info("pMap : " + pMap);
-			result = cLogic.mngPermit(pMap);
+			result = cLogic.mngVPermit(pMap);
+			if(result == 1) {
+				mav.setViewName(".jsp");
+			}
+			else if(result ==0) {
+				mav.setViewName(".jsp");
+			}
+		}
+		if(requestName.equals("mngGPermit")) {
+			int result = 0;
+			logger.info("pMap : " + pMap);
+			result = cLogic.mngGPermit(pMap);
 			if(result == 1) {
 				mav.setViewName(".jsp");
 			}

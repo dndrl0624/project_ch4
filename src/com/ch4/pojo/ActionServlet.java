@@ -21,7 +21,7 @@ public class ActionServlet extends HttpServlet {
 		 * contextPath : 해당 요청에 해당하는 폴더 이름(View아래)       *
 		 * command     : 사용자가 요청한 실제 내용(컨트롤러/요청내용)     *
 		 *****************************************************/
-		
+		logger.info("doService호출");
 		String requestURI = req.getRequestURI();// (=/컨트롤러/요청내용.ch4)
 		String contextPath = requestURI.substring(0,requestURI.indexOf("/",2)) + "/"; // (=/컨트롤러)
 		String command = requestURI.substring(1); //(=컨트롤러/요청내용.ch4)

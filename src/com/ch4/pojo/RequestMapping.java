@@ -10,8 +10,8 @@ public class RequestMapping {
 		
 		Controller controller = null;
 		String commands[] = command.split("/");
-		String work = commands[0];
-		String requestName = commands[1];
+		String work = commands[1];
+		String requestName = commands[2];
 		RequestMapping.requestName = requestName.substring(0,requestName.indexOf(".ch4"));
 		if((RequestMapping.requestName.indexOf("list")>-1)
 				||(RequestMapping.requestName.indexOf("List")>-1)

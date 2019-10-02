@@ -19,6 +19,21 @@
 									, visit_term, visit_day
 								</if>
 								)
+		values (#{com_no}, 'VA'||to_char(systimestamp + (INTERVAL '9' HOUR),'YYYYMMDDFF3')||dbms_random.string('x',3), #{visit_apply_name}, #{visit_purps}, #{visit_desti}, #{visit_type}
+				, #{visit_date}, #{visit_apply_hp}, #{visit_vhcle_encc}, #{visit_tkin_encc}
+				<if test="visit_term != null and visit_day != null">
+		        	, #{visit_term}, #{visit_day}
+				</if>
+				)
+	</insert>
+	<!-- 신청 내용 작성  (기본정보)-->
+	<insert id="visitorApplyAdd2" parameterType="map">
+		insert into visit_apply (com_no, visit_no, visit_apply_name, visit_purps, visit_desti, visit_type
+								, visit_date, visit_apply_hp, visit_vhcle_encc, visit_tkin_encc
+								<if test="visit_term != null and visit_day != null">
+									, visit_term, visit_day
+								</if>
+								)
 		values (#{com_no}, #{visit_no}, #{visit_apply_name}, #{visit_purps}, #{visit_desti}, #{visit_type}
 				, #{visit_date}, #{visit_apply_hp}, #{visit_vhcle_encc}, #{visit_tkin_encc}
 				<if test="visit_term != null and visit_day != null">

@@ -1,6 +1,5 @@
 package com.ch4.pojo;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,133 +13,62 @@ public class CompanyDao {
 	Logger logger = Logger.getLogger(CompanyDao.class);
 	SqlSessionFactory sqlSessionFactory = null;
 	SqlSession sqlSession = null;
-	
 	public CompanyDao() {
 		sqlSessionFactory = MyBatisCommonFactory.getSqlSessionFactory();
-		sqlSession = sqlSessionFactory.openSession();
-	}
-	
-
-	public String getQRcode(Map<String, Object> pMap) {
-		String qrCode = null;
-		if(pMap.get("visit_no")!=null) {
-			qrCode = sqlSession.selectOne("visitorQR",pMap);
-		}
-		else if(pMap.get("aplg_no")!=null) {
-			qrCode = sqlSession.selectOne("goodsQR",pMap);
-		}
-		return qrCode;
-	}
-/////////////////////////////////////////////////////////////////////////
-	public int mngPermit(Map<String, Object> pMap) {
-		int result = 0;
-		if(pMap.get("visit_no")!=null) {
-			String confm_no = "VA" + RuleOfGeneratingPK.getPK(100);
-			pMap.put("confm_no", confm_no);
-			result = sqlSession.insert("mngVPermit",pMap);// VISIT_CONFM테이블에 insert
-			if(result==0) {
-				return result;
-			}
-			else if(result==1) {
-				String[] vNames = (String[])pMap.get("visitor_name");
-				String[] phones = (String[])pMap.get("visitor_hp");
-				int amount = vNames.length;
-				for(int i=0;i<amount;i++) {
-					Map<String,Object> insInfo = new HashMap<String, Object>();					
-					String qrCode = "QR" + RuleOfGeneratingPK.getPK(i);
-					insInfo.put("visit_no", pMap.get("visit_no"));
-					insInfo.put("visitor_name",vNames[i]);
-					insInfo.put("visitor_hp", phones[i]);
-					insInfo.put("confm_no", confm_no);
-					insInfo.put("qrCode", qrCode);
-					result = sqlSession.insert("visitorQR",insInfo);
-					if(result==0) {
-						return result;
-					}
-				}
-			}
-		}
-		else if(pMap.get("aplg_no")!=null) {
-			String[] gNames = (String[])pMap.get("gmng_name");
-			String[] gTypes = (String[])pMap.get("gmng_type");
-			String[] gAmount = (String[])pMap.get("gmng_quan");
-			int count = gNames.length;
-			for(int i=0;i<count;i++) {
-				Map<String,Object> insInfo = new HashMap<String, Object>();
-				String confm_no = "GC" + RuleOfGeneratingPK.getPK(i);
-				String qrCode = "QR" + RuleOfGeneratingPK.getPK(i);
-				insInfo.put("aplg_no", pMap.get("aplg_no"));
-				insInfo.put("gmng_name", gNames[i]);
-				insInfo.put("gmng_type", gTypes[i]);
-				insInfo.put("gmng_quan", gAmount[i]);
-				insInfo.put("confm_no", confm_no);
-				insInfo.put("qrCode", qrCode);
-				result = sqlSession.insert("mngGPermit",insInfo); // GOODS_COMFM테이블에 insert
-				if(result==0) {
-					return result;
-				}
-			}
-		}
-		
-		if(result==0) {
-			return result;
-		}
-		sqlSession.commit();
-		return result;
 	}
 	public int mngUpdate(Map<String, Object> pMap) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	public Map<String,Object> mngVPermit(Map<String, Object> pMap) {
+		logger.info("dao permit 호출");
+		logger.info(pMap);
+		sqlSession = sqlSessionFactory.openSession();
+		sqlSession.update("vApplyPermit",pMap);
+		return pMap;
+	}
+	public Map<String,Object> mngGPermit(Map<String, Object> pMap) {
+		logger.info("dao permit 호출");
+		logger.info(pMap);
+		sqlSession = sqlSessionFactory.openSession();
+		sqlSession.update("gApplyPermit",pMap);
+		return pMap;
+	}
+	public int goodsQRAdd(Map<String, Object> pMap) {
 		int result = 0;
-		if(pMap.get("visit_no")!=null) {
-			result = sqlSession.update("mngPermitVpd",pMap);
-		}
-		else if(pMap.get("aplg_no")!=null) {
-			result = sqlSession.update("mngPermitGpd",pMap);
-		}
-		sqlSession.commit();
+		logger.info("dao goodsQRAdd 호출");
+		logger.info(pMap);
+		sqlSession = sqlSessionFactory.openSession();
+		result = sqlSession.insert("goodsQRAdd",pMap);
 		return result;
 	}
-
-	public List<Map<String, Object>> applyVisitList(Map<String, Object> pMap) {
-		List<Map<String, Object>> applyVisitList = sqlSession.selectList("applyVisitList", pMap);
-		return applyVisitList;
+	public String getQRcode(Map<String, Object> pMap) {
+		// TODO Auto-generated method stub
+		return null;
 	}
-
-	public List<Map<String, Object>> inOutList(Map<String, Object> pMap) {
-		List<Map<String, Object>> inOutList = sqlSession.selectList("inOutList", pMap);
-		return inOutList;
-	}
-
-
 	public int companyLogin(Map<String, Object> pMap) {
-		int result = 0;
-		result = sqlSession.selectOne("companyLogin", pMap);
-		return result;
+		// TODO Auto-generated method stub
+		return 0;
 	}
-
-
 	public int companyJoin(Map<String, Object> pMap) {
-		int result = 0;
-		result = sqlSession.insert("companyJoin",pMap);
-		sqlSession.commit();
-		return result;
+		// TODO Auto-generated method stub
+		return 0;
 	}
-
-
 	public int isExistID(Map<String, Object> pMap) {
-		int result = 0;
-		result = sqlSession.selectOne("isExistID", pMap);
-		return result;
+		// TODO Auto-generated method stub
+		return 0;
 	}
-
-
 	public List<Map<String, Object>> applyGoodsList(Map<String, Object> pMap) {
-		List<Map<String, Object>> applyGoodsList = sqlSession.selectList("applyGoodsList", pMap);
-		return applyGoodsList;
+		// TODO Auto-generated method stub
+		return null;
 	}
-
-
-
-
-
-
+	public List<Map<String, Object>> applyVisitList(Map<String, Object> pMap) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public List<Map<String, Object>> inOutList(Map<String, Object> pMap) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }
