@@ -48,14 +48,14 @@
 var grade;
 	$(document).ready(function(){
 		$("#tb_notice").bootstrapTable({
-			columns:[[
+			columns:[
 		        {field:'n_no',title:'no'}
 		        ,{field:'n_title',title:'title'}
 		        ,{field:'n_date',title:'date'}
 		        ,{field:'n_file',title:'file'}
 		        ,{field:'n_writer',title:'writer'}
 		        ,{field:'n_hit',title:'hit'}
-		   ]]
+		   ]
 			,url:'/project_ch4_pojo/View/Test/jsonNoticeList.json'
 			//,url:'/index/notice.ch4'
 			,pagination:'true'//페이지 네이션
@@ -162,6 +162,7 @@ var grade;
 							<td id="n_writer" data-field="n_writer" width="20%">WRITER</td>
 							<td id="n_hit" data-field="n_hit" width="10%">HIT</td>
 						</tr>
+					</thead>
 				</table>
 			</div>
 		</div>

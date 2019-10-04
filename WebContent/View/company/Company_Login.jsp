@@ -10,6 +10,11 @@
 			}
 		}
 	}
+	String msg = null;
+ 	if(request.getAttribute("msg")!=null){
+		msg = (String)request.getAttribute("msg");
+	} 
+ 	//msg = "PW";
 %>
 <!DOCTYPE html>
 <html>
@@ -75,11 +80,22 @@ h2 {
     		$('#fsignin').attr("action","company/login.ch4?"); //전송을 하는 곳.
     		$('#fsignin').submit(); 
         }
-	
 	}
 </script>
 </head>
 <body>
+<script type="text/javascript">
+	$(document).ready(function(){
+	
+		var msg = "<%= msg%>" ;
+		if(msg=="ID"){
+			alert("아이디가 틀렸습니다.");
+		}
+		else if(msg=="PW"){
+			alert("비밀번호가 틀렸습니다.");
+		}
+	});
+</script>
 <%@ include file="/View/CommonForm/Top.jsp"%>
 <div class="container-fluid" style="text-align: center;">
 	<div id="jumbo_companylogin" class="jumbotron">

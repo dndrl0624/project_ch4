@@ -57,7 +57,7 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	//답변 보내기 
-	function sendAnswer(q_no){
+	function sendAnswer(){
 		var content = $("#a_content").val();
 		$('#sendAnswer').attr("method","post");
 		$('#sendAnswer').attr("action","admin/sendAnswer.ch4?"); //전송을 하는 곳.
@@ -130,6 +130,7 @@
 				<!-- 댓글내용 -->
 				<div class="collapse" id="writeAnswer<%=i%>">
 				<form id="sendAnswer">
+					<input type="hidden" id="qno" name="qno" value="<%= qnaList.get(i).get("Q_NO") %>">
 					<div class="panel-body">
 						<h5>댓글 내용</h5>
 						<textarea class="easyui-textbox" placeholder="답변을 입력해주세요." 
