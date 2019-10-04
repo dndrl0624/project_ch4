@@ -19,24 +19,26 @@
     </insert>
     <!-- 반입 물품정보 등록 -->
     <insert id="goodsAdd" parameterType="map">
-		insert into goods_mng(aplg_no, gmng_name, gmng_type, gmng_quan)
-		values(#{aplg_no}, #{gmng_name}, #{gmng_type}, #{gmng_quan})
+    	<foreach collection="gmAddList" item="it" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+    		insert into goods_mng(aplg_no, gmng_name, gmng_type, gmng_quan)
+				values(#{it.aplg_no}, #{it.gmng_name}, #{it.gmng_type}, #{it.gmng_quan})
+    	</foreach>		
     </insert>
 	<!-- 반입 신청 변경 -->
-	<update id="goodsApplyUpdate" parameterType="map">
-		update goods_apply
-           set aplg_reason = #{aplg_reason}
-              ,aplg_desti = #{aplg_desti}
-              ,aplg_trans_date = #{aplg_trans_date}
-         where aplg_no = #{aplg_no}
-	</update>
-	<!-- 반입 신청 변경(물품관리 삭제) -->
-	<update id="goodsSubDelete" parameterType="map">
-		delete from goods_mng
-		 where aplg_no = #{aplg_no}
+	<update id="goodsApplyUpdate" parameterType="map" statementType="CALLABLE">
+		{call proc_gApplyUpd(
+			#{aplg_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+			,#{aplg_reason, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+			,#{aplg_desti, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+			,#{aplg_trans_date, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+			,#{result,mode=OUT, jdbcType=INTEGER, javaType=int}
+		)}
 	</update>
 	<!-- 반입 신청 취소 (결제상태 변경)-->
 	<update id="goodsApplyCancle" parameterType="map" statementType="CALLABLE">
-		{call proc_goodsCancle(#{aplg_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String})}
+		{call proc_goodsCancle(
+			#{aplg_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+			,#{result,mode=OUT, jdbcType=INTEGER, javaType=int}
+		)}
 	</update>
 </mapper>

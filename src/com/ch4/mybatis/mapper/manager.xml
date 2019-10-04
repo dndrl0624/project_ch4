@@ -3,6 +3,24 @@
 <mapper namespace="com.ch4.mybatis.mapper.ManagerMapper">
 	<resultMap type="hashmap" id="vMap"/>
 	<resultMap type="hashmap" id="dMap"/>
+	
+	<!-- visitorQR코드 DB에 저장 -->
+	<insert id="vApplyConfirm" parameterType="map">
+		<foreach collection="confirmList" item="item" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+		into cmg_confm(confm_qrcode, confm_visit_date, confm_name, confm_hp, confm_no)
+		values(#{item.confm_qrcode},#{item.confm_visit_date},#{item.confm_name},#{item.confm_hp},#{confm_no})
+		</foreach>
+	</insert>
+	<!-- goodsQR코드 DB에 저장 -->
+	<insert id="gApplyConfirm" parameterType="map">
+		<foreach collection="confirmList" item="item" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+		into goods_confm(confm_qrcode, confm_type, confm_name, confm_quan, aplg_no)
+		values(#{item.confm_qrcode},#{item.confm_type},#{item.confm_name},#{item.confm_quan},#{aplg_no})
+		</foreach>
+	</insert>
+	
+	
+	
 	<!-- 회사승인자 방문신청 결제 완료 -->
 	<update id="vApplyPermitUpd" parameterType="map">
 		update visit_apply
@@ -14,7 +32,7 @@
 		 where visit_no = #{visit_no}
 	</update>
 	
-	<!-- 방문결재 -->
+	<!-- 회사승인자 방문결재 -->
 	<update id="vApplyPermit" parameterType="map" statementType="CALLABLE">
 		{call proc_visitorConfirm(
 			#{visit_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
@@ -26,7 +44,7 @@
 		)}	
 	</update>
 
-	<!-- 회사승인자 반입신청 승인 -->
+	<!-- 회사승인자 반입결재-->
 	<update id="gApplyPermit" parameterType="map" statementType="CALLABLE">
 		{call proc_goodsConfirm(
 			#{aplg_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},

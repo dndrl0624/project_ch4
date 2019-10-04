@@ -51,7 +51,11 @@ public class CompanyDao {
 		return 0;
 	}
 	public int companyJoin(Map<String, Object> pMap) {
-		// TODO Auto-generated method stub
+		int result = 0;
+		logger.info("dao companyJoin 호출");
+		logger.info(pMap);
+		sqlSession = sqlSessionFactory.openSession();
+		result = sqlSession.insert("companyJoin",pMap);
 		return 0;
 	}
 	public int isExistID(Map<String, Object> pMap) {

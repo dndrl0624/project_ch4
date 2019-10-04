@@ -32,6 +32,8 @@ public class CompanyLogic {
 		}
 		
 		
+		
+		
 //		if(result==0) {
 //			return result;
 //		}
@@ -99,6 +101,12 @@ public class CompanyLogic {
 
 	public int companyJoin(Map<String, Object> pMap) {
 		int result = 0;
+		pMap.put("dept_no", "DP190501123QWZ");
+		pMap.put("cmng_id", "test2");
+		pMap.put("cmng_pw", "1234");
+		pMap.put("cmng_name", "선인장");
+		pMap.put("cmng_hp", "010-1111-1111");
+		pMap.put("cmng_grade", "안내데스크");
 		result = cDao.companyJoin(pMap);
 		return result;
 	}

@@ -34,6 +34,15 @@ public class VisitorLogic {
 
 	public int visitorUpdate(Map<String, Object> pMap) {
 		int result = 0;
+		pMap.put("visit_no","VA191002490MOD");
+		pMap.put("visit_purps","바뀜4");
+		pMap.put("visit_desti","바뀌었다4");
+		pMap.put("visit_type","일일방문");
+//		pMap.put("visit_term","");
+//		pMap.put("visit_day","");
+		pMap.put("visit_date","2019-12-31");
+		pMap.put("visit_tkin_encc","X");
+		pMap.put("visit_vhcle_encc","X");
 		result = vDao.visitorUpdate(pMap);
 		return result;
 	}

@@ -79,7 +79,10 @@ public class VisitorDao {
 
 	public int visitorUpdate(Map<String, Object> pMap) {
 		int result = 0;
-		result = sqlSession.update("visitorUpdate", pMap);
+		logger.info("dao visitorUpdate");
+		logger.info("pMap : "+pMap);
+		result = sqlSession.update("visitorApplyUpdate", pMap);
+		logger.info(result);
 		return result;
 	}
 

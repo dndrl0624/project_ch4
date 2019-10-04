@@ -29,17 +29,12 @@
 		<if test="visit_no != null">
 			and visit_no = #{visit_no}
 		</if>
-		<!-- 검색 : 신청자이름 + 신청자 연락처 -->
-		<if test="visit_apply_name != null and visit_apply_hp != null">
-			and visit_apply_name = #{visit_apply_name}
-			and visit_apply_hp = #{visit_apply_hp}
-		</if>
 		<!-- 검색 : 신청자이름  -->
-		<if test="visit_apply_name != null and visit_apply_hp == null">
-			and visit_apply_name = #{visit_apply_name}
+		<if test="visit_apply_name != null">
+			and visit_apply_name like '%'||#{visit_apply_name}||'%'
 		</if>
 		<!-- 검색 : 신청자 연락처 -->
-		<if test="visit_apply_name == null and visit_apply_hp != null">
+		<if test="visit_apply_hp != null">
 			and visit_apply_hp = #{visit_apply_hp}
 		</if>
 		<!-- 검색 : 방문자이름 -->
@@ -63,18 +58,22 @@
 			and visit_apply_date = #{visit_date}
 		</if>
 		<!-- 검색 : 신청일자(기간으로) -->
-		<if test="visit_apply_date1 != null and visit_apply_date2 != null">
+		<if test="visit_apply_date1 != null">
 			and visit_apply_date >= #{visit_apply_date1}
+			<if test="visit_apply_date2 != null">
 			<![CDATA[and visit_date <= #{visit_apply_date2}]]>
+			</if>
 		</if>
 		<!-- 검색 : 방문일자 -->
 		<if test="visit_date != null">
 			and visit_date = #{visit_date}
 		</if>
 		<!-- 검색 : 방문일자(기간으로) -->
-		<if test="viist_date1 != null and visit_date2 != null">
+		<if test="viist_date1 != null">
 			and visit_date >= #{visit_date1}
+			<if test="visit_date2 != null">
 			<![CDATA[and visit_date <= #{visit_date2}]]>
+			</if>
 		</if>
 		<!-- 검색 : 방문유형 -->
 		<if test="visit_type != null">
@@ -193,11 +192,6 @@
 	   		<if test="aplg_no != null">
 	   			and aplg_no = #{aplg_no}
 	   		</if>
-	   		<!-- 검색 : 신청자 이름 + 신청자 연락처 -->
-	   		<if test="aplg_name != null and aplg_hp != null">
-	   			and aplg_name = #{aplg_name}
-	   			and aplg_hp = #{aplg_hp}
-	   		</if>
 	   		<!-- 검색 : 신청자 이름 -->
 	   		<if test="aplg_name != null and aplg_hp == null">
 	   			and aplg_name = #{aplg_name}
@@ -221,18 +215,22 @@
 	   			and aplg_date = #{aplg_date}
 	   		</if>
 	   		<!-- 검색 : 신청일자(기간) -->
-	   		<if test="aplg_date1 != null and aplg_date2 != null">
+	   		<if test="aplg_date1 != null">
 	   			and aplg_date >= #{aplg_date1}
-	   		<![CDATA[and aplg_date <= #{aplg_date2}]]>
+	   			<if test="aplg_date2 != null">
+	   			<![CDATA[and aplg_date <= #{aplg_date2}]]>
+	   			</if>
 	   		</if>
 	   		<!-- 검색 : 반입일자 -->
 	   		<if test="aplg_trans_date != null">
 	   			and aplg_trans_date = #{aplg_trans_date}
 	   		</if>
 	   		<!-- 검색 : 반입일자 (기간)-->
-	   		<if test="aplg_trans_date1 != null and aplg_trans_date2 != null">
+	   		<if test="aplg_trans_date1 != null">
 	   			and aplg_trans_date >= #{aplg_trans_date1}
+	   			<if test="aplg_trans_date2 != null">
 	   			<![CDATA[and aplg_trans_date <= #{aplg_trans_date2}]]>
+	   			</if>
 	   		</if>
 	   		<!-- 검색 : 신청연별 -->
 			<if test="aplg_year != null">
