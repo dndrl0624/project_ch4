@@ -82,7 +82,7 @@ h2 {
         }
 	}
 	function moveKiosk(){
-		alert("키오슼크");
+		alert("키오스크");
 	}
 	function moveJoin(){
 		alert("회원가입");
