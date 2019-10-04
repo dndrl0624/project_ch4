@@ -27,7 +27,8 @@ public class RequestMappingR {
 						||("detail".equals(RequestMapping.requestName))
 						||("search".equals(RequestMapping.requestName))
 				)
-			) {
+			) 
+		{
 			rController = new RestController(work,RequestMappingR.requestName);
 		}
 		return rController;

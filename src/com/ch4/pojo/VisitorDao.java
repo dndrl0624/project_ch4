@@ -26,53 +26,36 @@ public class VisitorDao {
 	 * 
 	 * 
 	 *******************/
-	public String visitApplyAdd(Map<String,Object> applyAdd) {
-		String visit_no = null;
-		
-		visit_no = "VA" + RuleOfGeneratingPK.getPK(100);
-
+	public int visitApplyAdd(Map<String,Object> applyAdd) {
 		int result = 0;
-		applyAdd.put("visit_no", visit_no);
-		result = sqlSession.insert("visitApplyAdd", applyAdd);
-		
-		if(result==0) {
-			return null;
-		}
-		else if(result==1) {			
+		result = sqlSession.insert("visitorApplyAdd", applyAdd);
+		if(result==1) {			
 			sqlSession.commit();
 		}
-		return visit_no;
+		return result;
 	}
 	
-	public int visitSubAdd(List<Map<String,Object>> vtAddList
-			               , List<Map<String,Object>> tnAddList
-			               , List<Map<String,Object>> pkAddList
-			               , String visit_no) {
+	public int visitSubAdd(Map<String, Object> vtMap
+			               , Map<String, Object> tnMap
+			               , Map<String, Object> pkMap
+			               ) 
+	{
 		int result = 0;
-		for(int i=0;i<vtAddList.size();i++) {
-			Map<String, Object> addMap = vtAddList.get(i);
-			addMap.put("visit_no", visit_no);
-			result = sqlSession.insert("visitorAdd", addMap);
-			if(result==0) {
+		
+		result = sqlSession.insert("visitorAdd", vtMap);
+		if(result==1) {
+			result = sqlSession.insert("deviceAdd", tnMap);
+			if(result==1) {
+				result = sqlSession.insert("parkingAdd", pkMap);
+			}
+			else if(result==0) {
 				return result;
 			}
 		}
-		for(int i=0;i<tnAddList.size();i++) {
-			Map<String, Object> addMap = tnAddList.get(i);
-			addMap.put("visit_no", visit_no);
-			result = sqlSession.insert("equipAdd", addMap);
-			if(result==0) {
-				return result;
-			}
+		else if(result==0) {
+			return result;
 		}
-		for(int i=0;i<vtAddList.size();i++) {
-			Map<String, Object> addMap = pkAddList.get(i);
-			addMap.put("visit_no", visit_no);
-			result = sqlSession.insert("carAdd", addMap);
-			if(result==0) {
-				return result;
-			}
-		}
+		
 		sqlSession.commit();
 		return result;
 	}
@@ -85,35 +68,35 @@ public class VisitorDao {
 
 	public int visitorCancle(Map<String, Object> pMap) {
 		int result = 0;
-		result = sqlSession.update("visitorCancle", pMap);
+		result = sqlSession.update("visitorApplyCancle", pMap);
 		sqlSession.commit();
 		return result;
 	}
 
 
 	public List<Map<String, Object>> companyList() {
-		List<Map<String, Object>> companyList = sqlSession.selectList("companyList");
+		List<Map<String, Object>> companyList = sqlSession.selectList("companyCombo");
 		return companyList;
 	}
 	public List<Map<String, Object>> deptList(Map<String, Object> pMap) {
-		List<Map<String, Object>> deptList = sqlSession.selectList("deptList", pMap);
+		List<Map<String, Object>> deptList = sqlSession.selectList("deptCombo", pMap);
 		return deptList;
 	}
 
 	public Map<String, Object> applySearch(Map<String, Object> pMap) {
-		Map<String, Object> applySearch = sqlSession.selectOne("applySearch", pMap);
+		Map<String, Object> applySearch = sqlSession.selectOne("visitorApplySearch", pMap);
 		return applySearch;
 	}
 	public List<Map<String, Object>> applyList(Map<String, Object> pMap) {
-		List<Map<String, Object>> applyList = sqlSession.selectList("applyList", pMap);
+		List<Map<String, Object>> applyList = sqlSession.selectList("visitorApplySearch", pMap);
 		return applyList;
 	}
 
 	public List<Map<String, Object>> preVisitList(Map<String, Object> pMap) {
-		List<Map<String, Object>> preVisitList = sqlSession.selectList("applyList", pMap);
+		List<Map<String, Object>> preVisitList = sqlSession.selectList("visitorApplySearch", pMap);
 		for(int i=0;i<preVisitList.size();i++) {
 			Map<String,Object> indexMap = preVisitList.get(i);
-			List<Map<String, Object>> visitorList = sqlSession.selectList("visitorList", indexMap);
+			List<Map<String, Object>> visitorList = sqlSession.selectList("visitorSearch", indexMap);
 			indexMap.put("visitorList", visitorList);
 		}
 		
@@ -123,9 +106,9 @@ public class VisitorDao {
 	public Map<String, Object> previsitDetail(Map<String, Object> pMap) {
 		Map<String,Object> preDetailList = new HashMap<String, Object>();
 		
-		List<Map<String, Object>> visitorList = sqlSession.selectList("visitorList", pMap);
-		List<Map<String, Object>> equipList = sqlSession.selectList("equipList", pMap);
-		List<Map<String, Object>> carList = sqlSession.selectList("carList", pMap);
+		List<Map<String, Object>> visitorList = sqlSession.selectList("visitorSearch", pMap);
+		List<Map<String, Object>> equipList = sqlSession.selectList("deviceSeaech", pMap);
+		List<Map<String, Object>> carList = sqlSession.selectList("parkingSearch", pMap);
 		
 		preDetailList.put("visitorList", visitorList);
 		preDetailList.put("equipList", equipList);
@@ -137,15 +120,15 @@ public class VisitorDao {
 	public Map<String, Object> applyDetail(Map<String, Object> pMap) {
 		Map<String,Object> rMap = new HashMap<String, Object>();
 		
-		Map<String, Object> infoMap = sqlSession.selectOne("infoMap", pMap);
-		List<Map<String, Object>> visitorList = sqlSession.selectList("visitorList", pMap);
-		List<Map<String, Object>> equipList = sqlSession.selectList("equipList", pMap);
-		List<Map<String, Object>> carList = sqlSession.selectList("carList", pMap);
+		Map<String, Object> infoMap = sqlSession.selectOne("visitorApplySearch", pMap);
+		List<Map<String, Object>> vtList = sqlSession.selectList("visitorSearch", pMap);
+		List<Map<String, Object>> tnList = sqlSession.selectList("deviceSeaech", pMap);
+		List<Map<String, Object>> pkList = sqlSession.selectList("parkingSearch", pMap);
 		
 		rMap.put("infoMap", infoMap);
-		rMap.put("visitorList", visitorList);
-		rMap.put("equipList", equipList);
-		rMap.put("carList", carList);
+		rMap.put("vtList", vtList);
+		rMap.put("tnList", tnList);
+		rMap.put("pkList", pkList);
 		
 		return rMap;
 	}

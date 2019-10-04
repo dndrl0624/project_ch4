@@ -3,6 +3,8 @@ package com.ch4.pojo;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,36 +25,47 @@ public class CompanyLogic {
 	public int mngPermit(Map<String, Object> pMap) {
 		int result = 0;
 		result = cDao.mngUpdate(pMap); // update
-		/*
-		 * 반려일경우, 
-		 * if(){
-		 * 
-		 * }
-		 * else if(){
-		 * 
-		 * }
-		 * 승인일경우
-		 */
+		
+		
 		if(result==0) {
 			return result;
 		}
 		else if(result==1) {
-			result = cDao.mngPermit(pMap); // insert
+			if(pMap.get("visit_permit_st")!=null){// 방문일 경우
+				cDao.mngPermitV(pMap);
+				result = (int)pMap.get("result");
+				if(result==0) {
+					return result;
+				}
+			}
+			else if(pMap.get("aplg_permit_id")!=null){// 반입일 경우
+				cDao.mngPermitG(pMap);
+				result = (int)pMap.get("result");
+				if(result==0) {
+					return result;
+				}		
+			}
 		}
-		if(result==1) {
-			String qrCode = cDao.getQRcode(pMap);
+		
+	
+		List<Map<String,Object>> confirmList = (List<Map<String,Object>>)pMap.get("confirmList");
+		///////////////////////////////////qr이미지 생성//////////////////////////////////
+		for(int i=0; i<confirmList.size();i++) {
+			Map<String,Object> cMap = confirmList.get(i);
+			String qrCode = (String)cMap.get("CONFM_QRCODE");
 			String savedFilePath = CompanyController.QRImagePath;
 			String path = null;
 			String url = null;
 			
 			if(pMap.get("visit_no")!=null) {
 				path = savedFilePath + "visit/";
-				url = "http://localhost:8080/Info/QRconfirm.ch4?confm_qrcode=" + qrCode;
+				url = "http://localhost:8080/Info/QRconfirm.ch4?confm_qrcode=" + qrCode + "&type=visitor";
 			}
 			else if(pMap.get("aplg_no")!=null) {
 				path = savedFilePath + "goods/";
-				url = "http://localhost:8080/Info/QRconfirm.ch4?confm_qrcode=" + qrCode;
+				url = "http://localhost:8080/Info/QRconfirm.ch4?confm_qrcode=" + qrCode+ "&type=goods";
 			}
+			
 			File file = new File(path);
 			QRCodeWriter writer = new QRCodeWriter();
 		    try {
@@ -64,9 +77,7 @@ public class CompanyLogic {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}  
-		}
-		else if(result==0) {
-			return result;
+			///////////////////////////////////qr이미지 생성 끝//////////////////////////////////
 		}
 		return result;
 	}

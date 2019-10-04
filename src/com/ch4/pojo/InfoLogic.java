@@ -11,7 +11,7 @@ public class InfoLogic {
 
 	public Map<String, Object> confirmQR(Map<String, Object> pMap) {
 		Map<String, Object> resultMap = null;
-		resultMap = iDao.confirmQR(pMap);
+		resultMap = iDao.confirmVQR(pMap);
 		return resultMap;
 	}
 
@@ -25,6 +25,12 @@ public class InfoLogic {
 		int result = 0;
 		result = iDao.kioskJoin(pMap);
 		return result;
+	}
+
+	public Map<String, Object> selectExit(Map<String, Object> pMap) {
+		Map<String, Object> resultMap = null;
+		resultMap = iDao.selectExit(pMap);
+		return resultMap;
 	}
 
 }

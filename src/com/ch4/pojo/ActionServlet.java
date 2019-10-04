@@ -43,6 +43,7 @@ public class ActionServlet extends HttpServlet {
 		
 		if((controller==null) && (rController != null)) { // RestController인 경우
 			logger.info("RestController 호출 성공");
+			
 		}
 		else if(controller!=null) { // 그외인 경우
 			try {

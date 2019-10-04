@@ -1,5 +1,6 @@
 package com.ch4.pojo;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ public class VisitorLogic {
 
 	public int visitApplyAdd(Map<String, Object> pMap) {
 		int result = 0;
+		String visit_no = null;
 
 		Map<String, Object> addInfo = SortAndBind.visitApplySort(pMap);
 		
@@ -20,14 +22,32 @@ public class VisitorLogic {
 		List<Map<String,Object>> pkAddList = (List<Map<String,Object>>) addInfo.get("pkAddList");
 		Map<String,Object> applyAdd = (Map<String,Object>) addInfo.get("applyAdd");
 		
-		String visit_no = vDao.visitApplyAdd(applyAdd);
-		if(visit_no==null) {
+		result = vDao.visitApplyAdd(applyAdd);
+		if(result==0) {
 			return result;
 		}
-		else {
-			result = vDao.visitSubAdd(vtAddList,tnAddList,pkAddList,visit_no);
+		else if(result==1){
+			visit_no = applyAdd.get("visit_no").toString();
+			
+			Map<String, Object> vtMap = new HashMap<String, Object>();
+			vtMap.put("vtAddList", vtAddList);
+			vtMap.put("visit_no", visit_no);
+			Map<String, Object> tnMap = new HashMap<String, Object>();
+			tnMap.put("tnAddList", tnAddList);
+			tnMap.put("visit_no", visit_no);
+			Map<String, Object> pkMap = new HashMap<String, Object>();
+			pkMap.put("pkAddList", pkAddList);
+			pkMap.put("visit_no", visit_no);
+			
+			result = vDao.visitSubAdd(vtMap,tnMap,pkMap);
+			if(result==0) {
+				return result;
+			}
+			else if(result==1) {
+				pMap.put("visit_no", visit_no);
+				return result;
+			}
 		}
-		pMap.put("visit_no", visit_no);
 		
 		return result;
 	}
@@ -35,6 +55,9 @@ public class VisitorLogic {
 	public int visitorUpdate(Map<String, Object> pMap) {
 		int result = 0;
 		result = vDao.visitorUpdate(pMap);
+		/*
+		 * 여기에 방문자,차량,기기 add 코드
+		 */
 		return result;
 	}
 

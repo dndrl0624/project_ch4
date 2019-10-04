@@ -19,14 +19,12 @@ public class InfoDao {
 		sqlSession = sqlSessionFactory.openSession();
 	}
 
-	public Map<String, Object> confirmQR(Map<String, Object> pMap) {
+	public Map<String, Object> confirmVQR(Map<String, Object> pMap) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-		int result = 0;
-		result = sqlSession.selectOne("confirmQR",pMap);
-		/*
-		 * 여기서 프로시져의 결과값 받는법 ..? 
-		 */
-		resultMap.put("result", result);
+		sqlSession.selectOne("confirmVQR",pMap); // confirmVQR vs confirmGQR
+		resultMap.put("result", pMap.get("result"));
+		resultMap.put("inout", pMap.get("inout"));
+		resultMap.put("msg", pMap.get("msg"));
 		return resultMap;
 	}
 
@@ -40,6 +38,15 @@ public class InfoDao {
 		int result = 0;
 		result = sqlSession.selectOne("kioskJoin",pMap);
 		return result;
+	}
+
+	public Map<String, Object> selectExit(Map<String, Object> pMap) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		sqlSession.update("selectExit", pMap);
+		resultMap.put("result", pMap.get("result"));
+		resultMap.put("inout", pMap.get("inout"));
+		resultMap.put("msg", pMap.get("msg"));
+		return resultMap;
 	}
 
 }

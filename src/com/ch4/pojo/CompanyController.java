@@ -35,10 +35,10 @@ public class CompanyController implements Controller{
 			logger.info("pMap : " + pMap);
 			result = cLogic.mngPermit(pMap);
 			if(result == 1) {
-				mav.setViewName(".jsp");
+				mav.setViewName("Manager_Main.jsp");
 			}
 			else if(result ==0) {
-				mav.setViewName(".jsp");
+				mav.setViewName("Fail.jsp");
 			}
 		}
 		else if(requestName.equals("login")) {
@@ -50,6 +50,9 @@ public class CompanyController implements Controller{
 			else if(result ==0) {
 				mav.setViewName("Fail.jsp");
 			}
+		}
+		else if(requestName.equals("register")) {
+			mav.setViewName("Company_Join.jsp");
 		}
 		else if(requestName.equals("join")) {
 			int result = 0;

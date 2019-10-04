@@ -1,6 +1,7 @@
 package com.ch4.pojo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,17 +13,27 @@ public class GoodsLogic {
 
 	public int goodsApplyAdd(Map<String, Object> pMap) {
 		int result = 0;
+		String aplg_no = null;
 		Map<String, Object> addInfo = SortAndBind.goodsApplySort(pMap);
 		
 		List<Map<String,Object>> gmAddList = (List<Map<String,Object>>)addInfo.get("gmAddList");
 		Map<String,Object> applyAdd = (Map<String,Object>) addInfo.get("applyAdd");
-		String aplg_no = gDao.goodsApplyAdd(applyAdd);
+		result = gDao.goodsApplyAdd(applyAdd);
 		
-		if(aplg_no==null) {
+		if(result==0) {
 			return result;
 		}
-		else {
-			result = gDao.goodsSubAdd(gmAddList,aplg_no);
+		else if(result==1) {
+			aplg_no = applyAdd.get("aplg_no").toString();
+			
+			Map<String, Object> gmMap = new HashMap<String, Object>();
+			gmMap.put("aplg_no", aplg_no);
+			gmMap.put("gmAddList", gmAddList);
+			
+			result = gDao.goodsSubAdd(gmMap);
+			if(result==0) {
+				return result;
+			}
 		}
 		
 		pMap.put("aplg_no", aplg_no);
