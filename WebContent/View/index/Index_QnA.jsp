@@ -78,12 +78,6 @@
 </head>
 <body>
 <%@ include file="/View/CommonForm/Top.jsp"%>
-<script type="text/javascript">
-	$(document).ready(function(){
-
-	});
-
-</script>
 <!-- Banner -->
 <section class="banner_Content">
 	<div class="jumbotron_Content">
@@ -149,7 +143,9 @@
 						</div>
 					</div> 
 			 		<div class="row" style="margin-top: 10px;">
-			 			<button role="button" class="btn btn-success btn-m text-light" onClick="q_write()" id="btn_write" name="btn_write">글쓰기</button>
+			 			<button class="btn btn-success btn-m text-light" id="btn_write" name="btn_write"
+			 					onClick="q_write()" type="button">글쓰기
+			 			</button>
 					</div>
 				</form>
 			</div>

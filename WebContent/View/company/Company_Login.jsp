@@ -76,10 +76,17 @@ h2 {
         }
         else{
         	//전송
-        	$('#fsignin').attr("method","get");
-    		$('#fsignin').attr("action","company/login.ch4?"); //전송을 하는 곳.
+        	$('#fsignin').attr("method","post");
+    		$('#fsignin').attr("action","company/login.ch4"); //전송을 하는 곳.
     		$('#fsignin').submit(); 
         }
+	}
+	function moveKiosk(){
+		alert("키오슼크");
+	}
+	function moveJoin(){
+		alert("회원가입");
+		
 	}
 </script>
 </head>
@@ -103,8 +110,10 @@ h2 {
 			<div class="row">
 			<!-- 로그인//kiosk 버튼 -->
 				<div class="col-lg-offset-8 col-lg-4">
-					<button class="btn btn-light" id="com_join" style="width: 80px;" onClick="location.href='Company_Join.jsp'">JOIN</button>
-					<button class="btn btn-danger" id="kiosk" style="width: 80px;">KIOSK</button>
+					<button class="btn btn-light" id="com_join" style="width: 80px;" type="button"
+							onClick="moveJoin()">JOIN</button>
+					<button class="btn btn-danger" id="kiosk" type="button"
+							onClick="moveKiosk()" style="width: 80px;">KIOSK</button>
 				</div>
 			</div>
 			<div class="row" align="left">

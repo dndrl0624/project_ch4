@@ -46,7 +46,8 @@
 		        ,{field:'com_bizno',title:'사업자번호',width:'150', widthunit:'px'}
 		   ]
 			,search:'true'
-			,url:'/project_ch4_pojo/View/Test/jsonAdminInfoList.json'
+			//,url:'/project_ch4_pojo/View/Test/jsonAdminInfoList.json'
+			,url:'admin/adminInfo.ch4'
 			,pagination:'true'//페이지 네이션
 			,paginationPreText:"Previous"
 			,paginationNextText:"Next"

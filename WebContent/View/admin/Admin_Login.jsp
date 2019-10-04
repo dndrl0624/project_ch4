@@ -11,9 +11,9 @@
 <title>시스템 관리- CH4 방문자 관리 시스템</title>
 <style type="text/css">
 	#jumbo_adminlogin {
-		margin-top : 0px;
+		margin-top : 30px;
 		padding-top : 10px;
-		height : 600px;
+		height : 700px;
 		background-image: url('../../Style/images/banner/banner_admin.jpg');
 	}
 	#login_background{
@@ -52,38 +52,37 @@
         }
         else{
 			//전송
-        	$('#f_adminlogin').attr("method","get");
-    		$('#f_adminlogin').attr("action","company/login.ch4?"); //전송을 하는 곳.
+        	$('#f_adminlogin').attr("method","post");
+    		$('#f_adminlogin').attr("action","company/login.ch4"); //전송을 하는 곳.
     		$('#f_adminlogin').submit(); 
         }
 	} 
-	
 </script>
 </head>
 <body>
 <%@ include file="/View/CommonForm/Top.jsp"%>
-<div class="container-fluid" style="text-align: center;">
+<div class="container" style="text-align: center;">
 	<div id="jumbo_adminlogin" class="jumbotron">
 		<div class="col-lg-offset-1 col-lg-10 col-lg-offset-1">
 			<div class="row" align="left" style="margin-top:80px;">
-				<h2>ADMIN </h2>
-			<div>
+				<h2>ADMIN</h2>
+			</div>
 			<div class="col-lg-offset-1 col-lg-10 col-lg-offset-1">
 				<div id="login_background" class="row" align="center" >
 					<h1 style="font-size: 50px;">Please sign in</h1>
 					<div class="row">
 						<div class="col-lg-offset-3 col-lg-6 col-lg-offset-3">
-						<form class="f_adminlogin">
-							<div class="row">
-								<input id="admin_id" class="easyui-textbox"  prompt="id" data-options="iconCls:'icon-man'" style="width:300px; height: 40px;">
-							</div>
-							<div class="row"> 
-								<input id="admin_pw" class="easyui-passwordbox" prompt="Password" iconWidth="28" style="width:300px; height: 40px;margin-top: -10px;">
-							</div>
-							<div class="row">
-								<button id="btn_login" class="btn btn-lg btn-primary btn-block" style="margin-top: 50px;" onClick="javascript:login()">Sign in</button>
-							</div>
-						</form>
+							<form class="f_adminlogin">
+								<div class="row">
+									<input id="admin_id" class="easyui-textbox"  prompt="id" data-options="iconCls:'icon-man'" style="width:300px; height: 40px;">
+								</div>
+								<div class="row"> 
+									<input id="admin_pw" class="easyui-passwordbox" prompt="Password" iconWidth="28" style="width:300px; height: 40px;margin-top: -10px;">
+								</div>
+								<div class="row">
+									<button id="btn_login" type="button" class="btn btn-lg btn-primary btn-block" style="margin-top: 50px;" onClick="javascript:login()">Sign in</button>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -91,6 +90,7 @@
 		</div>
 	</div>
 </div>
+
 <%@ include file="/View/CommonForm/Footer.jsp"%>
 </body>
 </html>

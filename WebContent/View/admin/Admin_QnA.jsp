@@ -4,7 +4,7 @@
     pageEncoding="UTF-8"%>
     
 <%
-	List<Map<String,Object>> qnaList = new ArrayList<>();
+/*  	List<Map<String,Object>> qnaList = new ArrayList<>();
 	Map<String, Object> pMap = new HashMap<>();
 	pMap.put("Q_NO","1");
 	pMap.put("Q_TITLE","q_title1");
@@ -44,7 +44,9 @@
 	pMap.put("Q_DATE","q_date5");
 	pMap.put("Q_EMAIL","q_email5");
 	pMap.put("Q_WRITER","q_writer5");
-	qnaList.add(pMap);
+	qnaList.add(pMap);  */
+	List<Map<String,Object>> qnaList = null;
+	qnaList = (List<Map<String,Object>>)request.getAttribute("qnaList");
  %>
 <!DOCTYPE html>
 <html>
@@ -59,9 +61,14 @@
 	//답변 보내기 
 	function sendAnswer(){
 		var content = $("#a_content").val();
-		$('#sendAnswer').attr("method","post");
-		$('#sendAnswer').attr("action","admin/sendAnswer.ch4?"); //전송을 하는 곳.
-		$('#sendAnswer').submit(); 
+		if(content==""){//답변 작성이 없을때
+			alert("답변을 작성해 주세요.");
+		}else{//답변을 작성했을때
+			$('#sendAnswer').attr("method","post");
+			$('#sendAnswer').attr("action","admin/sendAnswer.ch4"); //전송을 하는 곳.
+			$('#sendAnswer').submit(); 
+		}
+		
 	}
 	//더보기 눌렀을 때 새로운 리스트 호출
 	function moreView(){
@@ -138,7 +145,7 @@
 							 		  style="height:100px; width: 900px;"></textarea>
 					</div>
 					<div class="panel-footer">
-						<button class="btn btn-danger" onClick="sendAnswer()">답변 보내기</button>
+						<button class="btn btn-danger" type="button" onClick="sendAnswer()">답변 보내기</button>
 					</div>
 				</form>
 				</div>
@@ -152,7 +159,7 @@
 		<!-- 내용 부분  끝-->
 		<!-- 더보기 -->
 		<div align="center">
-			<button class="btn btn-default" onclick="moreView(<%=qnaList.size()%>)">더 보 기</button>
+			<button class="btn btn-default" type="button" onclick="moreView()">더 보 기</button>
 		</div>
     	</div>
 	</div>
