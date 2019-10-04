@@ -153,6 +153,7 @@ table.table {
 
 <div class="mainContent">
 	<div class="col-lg-12" style="padding-bottom:3%">
+	<div style="padding-left:200px">
 		<div class="row">
 			<div style="margin:30px 0px 0px 16%">
 			<b style="font-size:35px;width: 50%;float: left;">방문 신청 상세 조회 (승인자용)</b>
@@ -160,6 +161,9 @@ table.table {
 			</div>
 		</div>
 	</div>
+	</div>
+	<div class="col-lg-12">
+	<div style="padding-left:200px">
 	<div class="col-lg-9" style="padding-left:16%">
 			<div id="section1" class="panel panel-info">
 				<div class="panel-heading">기본 방문정보</div>
@@ -337,12 +341,16 @@ table.table {
 				<button type="button" id="return" class="btn btn-danger" onClick="location.href='javascript:vreturn()'">방문 신청 반려</button>
 				<button type="button" class="btn btn-default" onClick="location.href='javascript:history.back()'">이전 페이지</button>
 			</div>
-		</div>
+	</div>
+	</div>
+	</div>
 </div>
 <form id="f_vper">
+	<input type="hidden" id="com_permission" name="COM_NO" value="(String)session.getAttribute('COM_NO')>">
 	<input type="hidden" id="hidden_permission" name="VISIT_PERMIT_ST" value="승인">
 </form>
 <form id="f_vret">
+	<input type="hidden" id="com_return" name="COM_NO" value=company_name>
 	<input type="hidden" id="hidden_return" name="VISIT_PERMIT_ST" value="반려">
 </form>
 	<!-- 공통 Footer -->

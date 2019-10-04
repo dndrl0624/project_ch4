@@ -368,9 +368,11 @@ table.table {
 		</div>
 </div>
 <form id="f_gper">
+	<input type="hidden" id="com_permission" name="COM_NO" value="(String)session.getAttribute('COM_NO')>">
 	<input type="hidden" id="hidden_permission" name="APLG_PERMIT_ST" value="승인">
 </form>
 <form id="f_gret">
+	<input type="hidden" id="com_return" name="COM_NO" value=company_name>
 	<input type="hidden" id="hidden_return" name="APLG_PERMIT_ST" value="반려">
 </form>
 	<!-- 공통 Footer -->

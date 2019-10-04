@@ -37,49 +37,68 @@ $.fn.combobox.defaults.editable = false
 /* 테이블 데이터 */
 $(document).ready(function(){
 	$("#tb_searchGood").bootstrapTable({
-		height:'672'
-		,toolbar:'#toolbar'
-		,pagination:'true'
+		toolbar:'#toolbar'
 		,toolbarAlign : 'right'
+		,pagination:'true'
+		,paginationPreText:"Previous"
+		,paginationNextText:"Next"
 		,url: "/project_ch4_pojo/json/searchGoodsJson.json"
 	    ,onLoadError: function(status,jqXHR){
 	    	alert("error");
 	    }
 	    ,paginationPreText:"Previous"
 	    ,paginationNextText:"Next"
-	    ,pageSize:15//기본 페이지 사이즈
+	    ,pageSize:10//기본 페이지 사이즈
 	    ,pageList:[10, 15, 20, 30] //칸수
-	    ,onClickRow:function(row,$element,field){
-	       //$element.attr('data-index',10)
-	       $element.toggleClass('single-select');//로우 클릭했을 때 색 변함.
-	       //alert(row.N_NO);
-	     }
-	    ,onDblClickRow:function(row,$element,field){
-	    	//테이블에서 일련번호 칸에 들어간 정보 가져오기
-			var choo = $element.find('td').eq(0).text();
-			//alert(choo);
-			//디테일 페이지로 이동
-			 location.href="/project_ch4_pojo/View/company/manager/Manger_DetailGoods.jsp?VISIT_NO="+choo
-	    	// 실제 사용할 URL 변경하기  : company/@@@@.ch4;
-	     }
 	});
+
+//방문현황 콤보
+	$("#state").combobox({
+		onChange: function(newVal){
+			//alert("work");
+			$.ajax({
+				type:'post'
+				,url:'/project_ch4_pojo/json/searchVisitorJson.json'/* 실제 사용할 URL 변경하기  : company/???.ch4 */
+				,dataType: "json"
+				,data :$("#f_search").serialize()
+				,success: function(data){
+					$("#tb_sv").bootstrapTable('data',data);
+				}
+			});
+		}
+	});
+//날짜 콤보
+	$("#startdate").datebox({
+		onSelect: function(date){
+				$.ajax({
+					type:'post'
+					,url:'/project_ch4_pojo/json/searchVisitorJson.json'/* 실제 사용할 URL 변경하기  : company/???.ch4 */
+					,dataType: "json"
+					,data :$("#f_search").serialize()
+					,success: function(data){
+						$("#tb_sv").bootstrapTable('data',data);
+					}
+				});
+			}
+	});
+	$("#closedate").datebox({
+		onSelect: function(date){
+				$.ajax({
+					type:'post'
+					,url:'/project_ch4_pojo/json/searchVisitorJson.json'/* 실제 사용할 URL 변경하기  : company/???.ch4 */
+					,dataType: "json"
+					,data :$("#f_search").serialize()
+					,success: function(data){
+						$("#tb_sv").bootstrapTable('data',data);
+					}
+				});
+			}
+	});
+	
 });
 
 /* 검색버튼 기능 */
 function btn_search(){
-	/* 전화번호 형식 맞춰주기 */
-	//alert($("#SearchType").combobox('getValue'));
-	if($("#SearchType").combobox('getValue')=="VISITOR_HP"||$("#SearchType").combobox('getValue')=="VISIT_APPLY_HP"){
-		var hp = $("#searchText").textbox('getValue');
-		if(-1==hp.indexOf("-")){
-			var telA = hp.substring(0,3);
-			var telB = hp.substring(4,8);
-			var telC = hp.substring(8);
-			//alert(telA);
-			hp =telA+"-"+telB+"-"+telC;
-			$("#searchText").textbox('setValue',hp);
-		}
-	}
 	$.ajax({
 			type:'post'
 			,url:'project_ch4_pojo/json/searchGoodsJson.json'/* 실제 사용할 URL 변경하기  : company/applyVisitList.ch4 */
@@ -144,59 +163,52 @@ function btn_search(){
 <div class="mainContent">
 <!-- 페이지 이름 / 환영+ 로그아웃 버튼 -->
 	<div class="col-lg-12">
-		<div style="margin:30px 20px 10px 0px;font-size:35px;width: 50%;float: left;">물품 반입 신청 조회</div>
+	<div style="padding-left:200px">
+		<div style="margin:30px 20px 10px 0px;font-size:35px;width: 50%;float: left;">반입 신청 조회</div>
 		<%@ include file="../../CommonForm/logout.jsp"%>
 	</div>
+	</div>
 <!-- 검색 조건 설정 -->
-	<div style="width: 86%;">
+	<div class="col-lg-12">
+	<div style="padding-left:200px;margin-top: 120px;">
 	<form id="f_search">
-		<div class='col-sm-2'><br>
-			<select class="easyui-combobox" id="SearchType" name='SearchType' label="검색방법" labelPosition="left" style="width:100%;">
-				<option value="VISITOR_NAME" selected>방문자명</option>
-				<option value="VISITOR_HP">연락처</option>
-				<option value="VISIT_APPLY_NAME">신청자명</option>
-				<option value="VISIT_APPLY_HP">신청자 연락처</option>
+		<div class='col-sm-2'>
+			<select class="easyui-combobox" id="SearchType" name='SearchType' label="검색방법" labelPosition="left" style="width:180px;">
+				<option value="" selected>신청번호</option>
+				<option value="">신청자</option>
+				<option value="">목적지<option>
 			</select>
 		</div>
 		<div class='col-sm-2'>
-			<!-- 검색창 : 콤보박스에 의한 분기 --><br>
+			<!-- 검색창 : 콤보박스에 의한 분기 -->
 			<!-- 텍스트 박스에 대해 name값 변경 : 처음 값은 방문자명 // onChange 이벤트로 Name속성을 바꾸어 주기 -->
-			<input class="easyui-textbox" id="searchText" name="VISITOR_NAME" style="width:230px;height:25px;">
+			<input class="easyui-textbox" id="searchText" name="VISITOR_NAME" style="width:150px;">
+			<a href="???" class="easyui-linkbutton" data-options="iconCls:'icon-search'"></a>
 		</div>
-		<div class='col-sm-1'></div>
-		<div class='col-sm-2'><br>
-			<select class="easyui-combobox" id="state" name="APLG_PERMIT_ST" label="결재상태" labelPosition="left" style="width:100%;">
+		<div class='col-sm-2'>
+			<select class="easyui-combobox" id="state" name="APLG_PERMIT_ST" label="결재상태" labelPosition="left" style="width:180px;">
 				<option value="결제중" selected>결제중</option>
 				<option value="승인">승인</option>
 				<option value="반려">반려</option>
 				<option value="취소">취소</option>
 			</select>
 		</div>
-		<div  class='col-sm-4' style="padding: 0px;">
 <!-- 날짜 검색 -->
-			<div class="form-group">
-				<div class='col-sm-1'></div>
-				<div class='col-sm-5'>
-					<span style="font-weight: bold;">시작일</span><br>
-					<input class="easyui-datebox" id="date1" style="width:120px;">
-				</div>
-				<div class='col-sm-1' style="padding: 0px;">
-					<h4 align="left"><br>
-						<b>~</b>
-					</h4>
-				</div>
-				<div class='col-sm-4' style="padding: 0px;">
-					<span style="font-weight: bold;">종료일</span><br>
-					<input class="easyui-datebox" id="date2" style="width:120px;">
-				</div>
+		<div  class='col-sm-4' style="padding: 0px;">
+			<div class='col-sm-6'>
+				<span style="font-weight: bold;">신청일</span>
+				<input class="easyui-datebox" id="startdate" name="goods_apply_date1"style="width:120px;">
+			</div>
+			<div class='col-sm-1'>
+				<h4 align="center">
+					<b>~</b>
+				</h4>
+			</div>
+			<div class='col-sm-4' style="padding: 0px;">
+				<input class="easyui-datebox" id=closedate name="goods_apply_date2" style="width:120px;">
 			</div>
 		</div>
-		<div class='col-sm-1' style="padding-left: 40px; float:right;">
-			<button type="button" class="btn btn-success" onclick="javascript:btn_search()"
-			style="margin-top: 5px;margin-bottom: 15px;float: bottom;">Search</button>
-		</div>
 	</form>
-	</div>
 	
 <!-- 부트 테이블 : search_ResultVisitor 참조-->
 	<div style="width: 86%;">
@@ -207,16 +219,14 @@ function btn_search(){
 					<th data-field="GMNG_CONFM">승인여부</th>
 					<th data-field="APLG_NAME">신청자명</th>
 					<th data-field="APLG_HP">연락처</th>
-					<th data-field="COM_NAME">방문지</th>
+					<th data-field="APLG_DATE">신청일</th>
 					<th data-field="APLG_DESTI">목적지</th>
-					<th data-field="APLG_REASON">반입사유</th>
-					<th data-field="APLG_TRANS_DATE">반입일자</th>
-					<th data-field="GMNG_NAME">물품명</th>
-					<th data-field="GMNG_TYPE">물품종류</th>
-					<th data-field="GMNG_QUAN">물품수량</th>
 				</tr>
 			</thead>
 		</table>
+	</div>
+	
+	</div>
 	</div>
 </div>
 <!-- 공통 Footer -->

@@ -14,9 +14,6 @@
 // 		response.sendRedirect("loginform.jsp");
 // 	}
 %>
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -195,21 +192,22 @@ figure.snip1200.hover p {
 <div class="mainContent">
 <!-- 페이지 이름 / 환영+ 로그아웃 버튼 -->
 	<div class="col-lg-12">
-		<div style="margin:30px 20px 10px 0px;font-size:35px;width:55%;float:left;">
-			<h1 style="text-align: right">CH4 방문/반입 관리 시스템</h1>
+		<div style="padding-left:200px">
+		
+		<div style="font-size:35px;width: 78%;float: left;">
+			<h1>회사명 
+<%-- 			<% company_name %> --%>
+<%-- 			<% (String)session.getAttribute("COM_NAME"); %> --%>
+			</h1>
 		</div>
-<%-- 		<%@ include file="../../CommonForm/logout.jsp"%> --%>
-	</div>
-	<div style="text-align: center; width: 80%;height: 50%;">
-		<img alt="abc" src="/project_ch4_pojo/Style/images/banner/gate.gif" >
-	</div>
-</div>
-	<!-- 하단 : 분할 : 소개 -->
+		<%@ include file="../../CommonForm/logout.jsp"%>
+<!-- 메인페이지 이미지 -->
+<!-- 	<div style="text-align: center; width: 80%;height: 50%;"> -->
+<!-- 		<img alt="abc" src="/project_ch4_pojo/Style/images/banner/gate.gif" > -->
+<!-- 	</div> -->
 
-  <!-- Portfolio Section -->
-  <section style="margin-left: 5%;margin-top: 1%;">
-    <div class="container">
-
+<!-- 하단 : 분할 : 소개 -->
+	<div class="col-lg-12" style="margin-top: 10%">
         <!-- Portfolio Item 1 -->
         <div class="col-md-6 col-lg-3">
 			<figure class="snip1200">
@@ -264,12 +262,12 @@ figure.snip1200.hover p {
 				</figcaption>
 				<a href="/project_ch4_pojo/View/company/manager/Manager_LogGoods.jsp"></a>
 			</figure>
-          </div>
+        </div>
+	</div>
           
         </div>
-      
-  </section>
- 
+      </div>
+</div> 
 <!-- 공통 Footer -->
 <%@ include file="/View/CommonForm/Footer.jsp"%>
 <!-- java script -->

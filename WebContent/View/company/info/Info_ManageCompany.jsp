@@ -269,11 +269,15 @@ $(document).ready(function(){
 <div class="mainContent">
 <!-- 페이지 이름 / 환영+ 로그아웃 버튼 -->
 	<div class="col-lg-12">
+	<div style="padding-left:200px">
 		<div style="margin:30px 20px 10px 0px;font-size:35px;width: 50%;float: left;">종합 관리 페이지</div>
 		<%@ include file="../../CommonForm/logout.jsp"%>
 	</div>
+	</div>
 
 <!-- Nav tabs 구현 -->
+<div class="col-lg-12">
+<div style="padding-left:200px">
 <div role="tabpanel">
 	<ul class="nav nav-tabs" role="tablist">
     	<li role="presentation" class="active">
@@ -356,6 +360,8 @@ $(document).ready(function(){
 		</div>
 		
 	</div>	
+</div>
+</div>
 </div>
 </div>
 

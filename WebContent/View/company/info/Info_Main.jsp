@@ -178,21 +178,23 @@ figure.snip1200.hover p {
 <!-- Content -->
 <div class="mainContent">
 <!-- 페이지 이름 / 환영+ 로그아웃 버튼 -->
-	<div class="col-lg-12">
+<div class="col-lg-12">
+	<div style="padding-left:200px">
 		<div style="margin:30px 20px 10px 0px;font-size:35px;width:55%;float:left;">
 			<h1 style="text-align: right">CH4 방문자 관리 시스템</h1>
 		</div>
 		<%@ include file="../../CommonForm/logout.jsp"%>
-	</div>
 	<div style="text-align: center;">
 		<img alt="abc" src="/project_ch4_pojo/Style/images/banner/speedGate (1).jpg">
+	</div>
 	</div>
 </div>
 
 	<!-- 하단 : 3개로 분할 : 신청 / 방문/물류/ 인포 소개 -->
 
   <!-- Portfolio Section -->
-  <section style="margin-left:5%">
+<div class="col-lg-12">
+	<div style="padding-left:200px">
     <div class="container">
 
         <!-- Portfolio Item 1 -->
@@ -252,7 +254,8 @@ figure.snip1200.hover p {
           </div>
           
         </div>
-  </section>
+</div>
+</div>
   
  
 <!-- 공통 Footer -->

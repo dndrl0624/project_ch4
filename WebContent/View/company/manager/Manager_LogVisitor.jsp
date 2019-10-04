@@ -37,14 +37,10 @@ $(document).ready(function(){
 	    columns:[
 	         {field:'CONFM_NO',title:'방문번호'}
 	         ,{field:'CMG_INOUT',title:'처리시간'}
-	         ,{field:'CMG_ENTRC',title:'출입위치'}/* 출입위치 : 사용게이트 */
-	         ,{field:'CMG_NOTES',title:'현재위치'}/* 현재위치 : 방문중,외출,방문종료 .. */
 	         ,{field:'CONFM_NAME',title:'방문자명'}
-	         ,{field:'CONFM_HP',title:'연락처'}
-	         ,{field:'COM_NAME',title:'방문지'}
+	         ,{field:'CMG_ENTRC',title:'출입위치'}/* 출입위치 : 사용게이트 */
+	         ,{field:'CMG_NOTES',title:'처리상태'}
 	         ,{field:'VISIT_DESTI',title:'목적지'}
-	         ,{field:'VISIT_TYPE',title:'방문유형'}
-	         ,{field:'VISIT_DATE',title:'방문일자'}
 	    ]
 	    ,onLoadError: function(status,jqXHR){
 	    	alert("error");
@@ -55,31 +51,54 @@ $(document).ready(function(){
 	    ,paginationNextText:"Next"
 	    ,pageSize:10//기본 페이지 사이즈
 	    ,pageList:[10, 15, 20, 30] //칸수
-	    ,onClickRow:function(row,$element,field){
-	       $element.toggleClass('single-select');//로우 클릭했을 때 색 변함.
-	       //alert(row.N_NO);
-	     }
-	    ,onDblClickRow:function(row,$element,field){
-	       alert("어떠한 기능을 넣을 것인가요? 모달 조회 OR 아무것도 없이");
-	    	// 실제 사용할 URL 변경하기  : company/@@@@.ch4
-	     }
 	});
+	
+// 캘린더 검색 기능
+	$('#calender').calendar({
+		onSelect: function(date){
+			$.ajax({
+				type:'post'
+				,url:'project_ch4_pojo/json/logVisitorJson.json'/* 실제 사용할 URL 변경하기  : company/applyVisitList.ch4 */
+				,dataType: "json"
+				,data :$("#f_search").serialize()
+				,success: function(data){
+					$("#tb_logVisitor").bootstrapTable('data',data);
+				}
+			});
+		}
+	});
+//방문현황 콤보 박스
+	$("#state").combobox({
+		onChange: function(newVal){
+			$.ajax({
+				type:'post'
+				,url:'/project_ch4_pojo/json/logVisitorJson.json'/* 실제 사용할 URL 변경하기  : company/???.ch4 */
+				,dataType: "json"
+				,data :$("#f_search").serialize()
+				,success: function(data){
+					$("#tb_logVisitor").bootstrapTable('data',data);
+				}
+			});
+		}
+	});
+//출입시간 콤보박스
+	$("#time").combobox({
+		onChange: function(newVal){
+			$.ajax({
+				type:'post'
+				,url:'/project_ch4_pojo/json/logVisitorJson.json'/* 실제 사용할 URL 변경하기  : company/???.ch4 */
+				,dataType: "json"
+				,data :$("#f_search").serialize()
+				,success: function(data){
+					$("#tb_logVisitor").bootstrapTable('data',data);
+				}
+			});
+		}
+	});
+	
 });
 /* 버튼 검색 */
 function search(){
-	/* 전화번호 형식 맞춰주기 */
-	//alert($("#SearchType").combobox('getValue'));
-	if($("#SearchType").combobox('getValue')=="VISITOR_HP"||$("#SearchType").combobox('getValue')=="VISIT_APPLY_HP"){
-		var hp = $("#searchText").textbox('getValue');
-		if(-1==hp.indexOf("-")){
-			var telA = hp.substring(0,3);
-			var telB = hp.substring(4,8);
-			var telC = hp.substring(8);
-			//alert(telA);
-			hp =telA+"-"+telB+"-"+telC;
-			$("#searchText").textbox('setValue',hp);
-		}
-	}
 	$.ajax({
 			type:'post'
 			,url:'project_ch4_pojo/json/logVisitorJson.json'/* 실제 사용할 URL 변경하기  : company/applyVisitList.ch4 */
@@ -144,61 +163,83 @@ function search(){
 <div class="mainContent">
 <!-- 페이지 이름 / 환영+ 로그아웃 버튼 -->
 	<div class="col-lg-12">
+	<div style="padding-left:200px">
 		<div style="margin:30px 20px 10px 0px;font-size:35px;width: 50%;float: left;"> 방문 현황 조회 페이지 </div>
 		<%@ include file="../../CommonForm/logout.jsp"%>
 	</div>
+	</div>
+<div class="col-lg-12">
+<div style="padding-left:200px">
 <form id="f_search">
-	<div class='col-sm-2'>
-	<!-- 검색 타입 설정 --><br>
-		<select class="easyui-combobox" id="SearchType" name='SearchType' label="검색방법" labelPosition="left" style="width:100%;">
-			<option value="VISITOR_NAME" selected>방문자명</option>
-			<option value="VISITOR_HP">연락처</option>
-			<option value="VISIT_APPLY_NAME">신청자명</option>
-			<option value="VISIT_APPLY_HP">신청자 연락처</option>
-		</select>
+<!-- 캘린더 -->
+	<div class="col-lg-1"></div>
+	<div class="col-lg-3">
+		<div class="easyui-calendar" id="calender" style="margin-bottom: 10px; width: 150px; height: 150px;"></div>
 	</div>
-	<div class='col-sm-2'>
-	<!-- 검색창 : 콤보박스에 의한 분기 --><br>
-		<!-- 텍스트 박스에 대해 name값 변경 : 처음 값은 방문자명 // onChange 이벤트로 Name속성을 바꾸어 주기 -->
-		<input class="easyui-textbox" id="searchText" name="VISITOR_NAME" style="width:230px;height:25px;">
-	</div>
-	<!-- 콤보 박스 : 처리결과 대해 -->
-	<div class='col-sm-2'><br>
-		<select class="easyui-combobox" id="state" name="CMG_NOTES" label="방문현황" labelPosition="left" style="width:100%;">
-			<option value="방문중">방문중</option>
-			<option value="외출">외출</option>
-			<option value="퇴근">퇴근</option>
-		</select>
-	</div>
-	<div  class='col-sm-4' style="padding: 0;">
-<!-- 날짜 검색 -->
-	<div class="form-group">
-			<div class='col-sm-4'>
-				<span style="font-weight: bold;">시작일</span><br>
-				<input class="easyui-datebox" id="date1" style="width:120px;">
-			</div>
-			<div class='col-sm-1' style="padding: 0px;">
-				<h4 align="left"><br>
-					<b>~</b>
-				</h4>
-			</div>
-			<div class='col-sm-5' style="padding: 0px;">
-				<span style="font-weight: bold;">종료일</span><br>
-				<input class="easyui-datebox" id="date2" style="width:120px;">
-			</div>
+<!-- 검색 툴바 -->
+	<div class="col-lg-7">
+		<div class="col-lg-12"><br>
+			<!-- 검색 타입 설정 -->
+			<select class="easyui-combobox" id="SearchType" name='SearchType' label="검색방법" labelPosition="left" style="width:230px;">
+				<option value="VISITOR_NAME" selected>방문자명</option>
+				<option value="VISITOR_HP">연락처</option>
+				<option value="VISIT_APPLY_NAME">신청자명</option>
+				<option value="VISIT_APPLY_HP">신청자 연락처</option>
+			</select>
+		<!-- 검색창 : 콤보박스에 의한 분기<br> -->
+			<!-- 텍스트 박스에 대해 name값 변경 : 처음 값은 방문자명 // onChange 이벤트로 Name속성을 바꾸어 주기 -->
+			<input class="easyui-textbox" id="searchText" name="VISITOR_NAME" style="width:150px;">
+			<a href="???" class="easyui-linkbutton" data-options="iconCls:'icon-search'" id="search()"></a>
+		</div><br>
+		<!-- 콤보 박스 : 처리결과 대해 -->
+		<div class="col-lg-12" style="margin-top: 10px;">
+			<select class="easyui-combobox" id="state" name="CMG_NOTES" label="방문현황" labelPosition="left" style="width:230px;">
+				<option value="전체" selected>전체</option>
+				<option value="방문중">방문중</option>
+				<option value="외출">외출</option>
+				<option value="방문종료">방문종료</option>
+			</select>
+		</div><br>
+		<!-- 콤보 박스 : 처리결과 대해 -->
+		<div class="col-lg-12" style="margin-top: 10px;">
+			<select class="easyui-combobox" id="time" name="CMG_INOUT" label="출입시간" labelPosition="left" style="width:230px;">
+				<option value="00시" >00시</option>
+				<option value="01">01시</option>
+				<option value="02">02시</option>
+				<option value="03">03시</option>
+				<option value="04">04시</option>
+				<option value="05">05시</option>
+				<option value="06">06시</option>
+				<option value="07">07시</option>
+				<option value="08">08시</option>
+				<option value="09" selected>09시</option>
+				<option value="10">10시</option>
+				<option value="11">11시</option>
+				<option value="12">12시</option>
+				<option value="13">13시</option>
+				<option value="14">14시</option>
+				<option value="15">15시</option>
+				<option value="16">16시</option>
+				<option value="17">17시</option>
+				<option value="18">18시</option>
+				<option value="19">19시</option>
+				<option value="20">20시</option>
+				<option value="21">21시</option>
+				<option value="22">22시</option>
+				<option value="23">23시</option>
+			</select>
 		</div>
-	<!-- 검색 버튼 -->
-		<div class='col-sm-1' style="padding-left: 50px;">
-			<button type="button" class="btn btn-success" onclick="javascript:search()"
-				style="margin-top: 5px;margin-bottom: 15px;float: bottom;">Search</button>
-		</div>
 	</div>
-</form>		
+</form>
+
 <!-- 부트 테이블 : search_ResultVisitor 참조-->
 	<div style="width: 86%;">
 		<table class="table table-bordered table-hover" id="tb_logVisitor" >
 		</table>
 	</div>
+	
+</div>
+</div>
 
 </div>
 
