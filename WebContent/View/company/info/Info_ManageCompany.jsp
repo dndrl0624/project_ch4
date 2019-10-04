@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8"><!-- Web icon 설정 --> 
 <%@ include file="../../CommonForm/TapLogo.jsp"%>
-<title>Insert title here</title>
+<title>종합 정보 관리</title>
 <!-- 공통코드 -->
 <%@ include file="../../../Style/common/HeadUI.jsp"%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.15.4/extensions/toolbar/bootstrap-table-toolbar.min.js"></script>
@@ -24,7 +24,7 @@ $(document).ready(function(){
 		columns:[
 	         {field:'DESTI_NO',title:'일련번호'}
 	         ,{field:'DESTI_NAME',title:'목적지명'}
-	         ,{field:'DESTI_LOC',title:'위치정보'}
+	         ,{field:'DESTI_LCINFO',title:'위치정보'}
 	         ,{field:'DESTI_NOTES',title:'비고'}
 	         ]
 		,url:'/project_ch4_pojo/json/desti.json'
@@ -85,8 +85,8 @@ $(document).ready(function(){
 
 			$("#kiosk_no").textbox('setValue',ki_no);
  			$("#kiosk_location").textbox('setValue',ki_gate);
- 			$("#kiosk_condtion").val(ki_st);
- 			$("#kiosk_notice").textbox('setValue',ki_note);
+ 			$("#KIOSK_ST").val(ki_st);
+ 			$("#KIOSK_NOTES").textbox('setValue',ki_note);
 			
 			$("#kioskModal").modal('show');
 	     }
@@ -95,13 +95,15 @@ $(document).ready(function(){
 	$("#search_kio").click(function(){
 		var combo_k = $("#combo-kio").val();
 		//alert(combo_k);
-		$("#bt_kio").bootstrapTable('refreshOptions',{
-			filterOptions:{
-				filterAlgorithm : 'or'
+		$.ajax({
+			type:'post'
+			,url:'/project_ch4_pojo/json/kiosk.json'/* 실제 사용할 URL 변경하기  : company/???.ch4 */
+			,dataType: "json"
+			,data :$("#f_kio").serialize()
+			,success: function(data){
+				//alert(combo_k);
+				$("#bt_kio").bootstrapTable('data',data);
 			}
-		});
-		$("#bt_kio").bootstrapTable('filterBy',{
-			KIOSK_ST: combo_k
 		});
 	});
 	
@@ -120,6 +122,15 @@ $(document).ready(function(){
 		,pageList:[10, 15, 20, 30] //칸수
 		,onDblClickRow:function(row,$element,field){
 			alert("휴무일은 삭제 후, 복구 할 수 없습니다.");
+			
+			var date = $element.find("td").eq(0).html();
+			var day = $element.find("td").eq(1).html();
+			var note = $element.find("td").eq(2).html();
+			
+			$("#DATE_DEL").textbox('setValue',date);
+ 			$("#DAYWEEK_DEL").textbox('setValue',day);
+ 			$("#NOTES_DEL").textbox('setValue',note);
+			
 			$("#delRedModal").modal('show');
      	}
 	});
@@ -133,12 +144,13 @@ $(document).ready(function(){
 				alert("검색할 기간의 시작일이 종료일보다 빨라야 합니다");
 			} else {
 				$.ajax({
-					type:'get'
+					type:'post'
 					,url:'/project_ch4_pojo/json/redday.json'/* 실제 사용할 URL 변경하기  : company/???.ch4 */
 					,dataType: "json"
 					,data :$("#f_redday").serialize()
 					,success: function(data){
-						$("#bt_red").bootstrapTable('load',data);
+						//alert(sdate+'..'+cdate);
+						$("#bt_red").bootstrapTable('data',data);
 					}
 				});	
 			}
@@ -148,7 +160,7 @@ $(document).ready(function(){
 		}
 	});
 
-});
+});//	end of dom
 
 // 목적지 추가 버튼 기능 구현
 	function addDesti() {
@@ -197,7 +209,7 @@ $(document).ready(function(){
 		$("#f_redday_add").attr("action","/reddayadd.ch4");
 		$("#f_redday_add").submit();
 	}
-//휴무일 삭제 버튼
+//휴무일 삭제 추가 : 모달 > 삭제
 	function DELRed() {
 		//폼태그 전송
 		$("#f_redday_del").attr("method","get");
@@ -218,19 +230,27 @@ $(document).ready(function(){
 				</h4>
 			</div>
 		</div>
+<!-- 		<div class="panel panel-info"> -->
+<!-- 			<div class="panel-heading"> -->
+<!-- 				<h4 class="panel-title"> -->
+<!-- 					<a href="/project_ch4_pojo/View/company/info/Info_Notice.jsp"> -->
+<!-- 					<i class="fa fa-search-plus" aria-hidden="true"></i>안내 공지</a> -->
+<!-- 				</h4> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<a href="/project_ch4_pojo/View/company/info/Info_Notice.jsp">
-					<i class="fa fa-search-plus" aria-hidden="true"></i>안내 공지</a>
+					<a href="/project_ch4_pojo/View/company/info/Info_ManageLog.jsp">
+					<i class="fa fa-list-alt" aria-hidden="true"></i>방문자현황관리</a>
 				</h4>
 			</div>
 		</div>
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<a href="/project_ch4_pojo/View/company/info/Info_ManageLog.jsp">
-					<i class="fa fa-list-alt" aria-hidden="true"></i>방문자현황관리</a>
+					<a href="/project_ch4_pojo/View/company/info/Info_ManageGLog.jsp">
+					<i class="fa fa-truck" aria-hidden="true"></i>반입현황관리</a>
 				</h4>
 			</div>
 		</div>
@@ -256,9 +276,12 @@ $(document).ready(function(){
 <!-- Nav tabs 구현 -->
 <div role="tabpanel">
 	<ul class="nav nav-tabs" role="tablist">
-    	<li role="presentation" class="active"><a href="#desti" aria-controls="desti" role="tab" data-toggle="tab">목적지 관리</a></li>
-    	<li role="presentation"><a href="#kio" aria-controls="kio" role="tab" data-toggle="tab">키오스크 관리</a></li>
-    	<li role="presentation"><a href="#redday" aria-controls="redday" role="tab" data-toggle="tab">휴무일 관리</a></li>
+    	<li role="presentation" class="active">
+    				<a href="#desti" aria-controls="desti" role="tab" data-toggle="tab">목적지 관리</a></li>
+    	<li role="presentation">
+    				<a href="#kio" aria-controls="kio" role="tab" data-toggle="tab">키오스크 관리</a></li>
+    	<li role="presentation">
+    				<a href="#redday" aria-controls="redday" role="tab" data-toggle="tab">휴무일 관리</a></li>
   	</ul>
 
 <!-- Tab panes 구현 -->
@@ -271,8 +294,9 @@ $(document).ready(function(){
 					<div class='col-lg-12'>
 						<span style="font-size:30px;">목적지 관리</span>
 					</div>
-						<button type="button" class="btn btn-info" style="float:left; margin-top: 10px;margin-left: 1%;"
-					 	data-toggle="modal" data-target="#addDestiModal">목적지 추가</button>
+						<button type="button" class="btn btn-info" 
+								style="float:left; margin-top: 10px;margin-left: 1%;"
+					 			data-toggle="modal" data-target="#addDestiModal">목적지 추가</button>
 						<table class="table table-bordered table-hover" id="tb_desti"></table>
 				</div>
 			</div>
@@ -288,8 +312,8 @@ $(document).ready(function(){
 					
 					<div class='col-lg-12' style="margin-bottom: 1%;padding: 0px;">
 						<form id="f_kio">
-	 						<button class="btn btn-primary" id="search_kio" style="float: right; margin-left: 1%;">search</button>
-							<select class="form-control" id="combo-kio" name="combo-kio" style="width: 120px; float: right;">
+	 						<button class="btn btn-primary" id="search_kio" type="button" style="float: right; margin-left: 1%;">search</button>
+							<select class="form-control" id="combo-kio" name="KIOSK_ST" style="width: 120px; float: right;">
 								<option value="정상">정상</option>
 								<option value="고장">고장</option>
 								<option value="수리요청">수리요청</option>
@@ -316,11 +340,12 @@ $(document).ready(function(){
 					 				data-toggle="modal" data-target="#addRedModal">휴무일 추가</button>
 					 			<div align="right" style="padding: 0px;">
 									<span style="font-weight: bold;">시작일</span>
-									<input class="easyui-datebox" id="startdate" style="width:120px;" required>
+									<input class="easyui-datebox" id="startdate" name="date1" style="width:120px;" required>
 									<b>&nbsp;~&nbsp;</b>
 									<span style="font-weight: bold;">종료일</span>
-									<input class="easyui-datebox" id="closedate" data-options="validType:'md[\'2015/11/05\']'" style="width:120px;" required>
-									<button id="search_reddate" class="btn btn-primary">search</button>
+									<input class="easyui-datebox" id="closedate" name="date2" 
+													data-options="validType:'md[\'2015/11/05\']'" style="width:120px;" required>
+									<button id="search_reddate" type="button" class="btn btn-primary">search</button>
 								</div>
 							</form>	
 						</div>
@@ -409,7 +434,7 @@ $(document).ready(function(){
 		        		<tr><td>위치</td>		<td><input class="easyui-textbox" id="kiosk_location" name="KIOSK_GATE"></td></tr>
 		        		<tr><td>상태</td>		
 						        		    <td>
-						        				<select class="form-control"  id="kiosk_condtion" name="kiosk_condtion" style="width:100%;">
+						        				<select class="form-control"  id="KIOSK_ST" name="KIOSK_ST" style="width:100%;">
 													<option value="정상">정상</option>
 													<option value="고장">고장</option>
 													<option value="수리요청">수리요청</option>
@@ -417,7 +442,7 @@ $(document).ready(function(){
 												</select>
 						        		    </td>
 		        		</tr>
-		        		<tr><td>비고</td>		<td><input class="easyui-textbox" id="kiosk_notice" name="kiosk_notice"></td></tr>
+		        		<tr><td>비고</td>		<td><input class="easyui-textbox" id="KIOSK_NOTES" name="KIOSK_NOTES"></td></tr>
 		        	</table>
 		        </form>
 	        </div>
@@ -468,12 +493,12 @@ $(document).ready(function(){
 	        
 	        <div class="modal-body" style="align: center;padding-left: 30%">
 	        	<form id="f_redday_del">
-	        	<table>
-	        		<tr><td width=70 style="word-break:break-all">목적지명</td>	
-	        							<td><input class="easyui-textbox" id="DATE_DEL" name="COMCL_DATE"></td></tr>
-	        		<tr><td>위치</td>		<td><input class="easyui-textbox" id="DAYWEEK_DEL" name="COMCL_DAYWEEK"></td></tr>
-	        		<tr><td>비고</td>		<td><input class="easyui-textbox" id="NOTES_DEL" name="COMCL_NOTES"></td></tr>
-	        	</table>
+		        	<table>
+		        		<tr><td width=70 style="word-break:break-all">목적지명</td>	
+		        							<td><input class="easyui-textbox" id="DATE_DEL" name="COMCL_DATE" readonly="readonly"></td></tr>
+		        		<tr><td>위치</td>		<td><input class="easyui-textbox" id="DAYWEEK_DEL" name="COMCL_DAYWEEK" readonly="readonly"></td></tr>
+		        		<tr><td>비고</td>		<td><input class="easyui-textbox" id="NOTES_DEL" name="COMCL_NOTES" readonly="readonly"></td></tr>
+		        	</table>
 	        	</form>
 	        </div>
 	        

@@ -1,5 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+// 	String user_id = "";
+// 	String user_name = "";
+// 	String company_no = "";
+// 	String company_name = "";
+// 	user_id = (String)session.getAttribute("CMNG_ID");
+// 	user_name = (String)session.getAttribute("CMNG_NAME");
+// 	company_no = (String)session.getAttribute("COM_NO");
+// 	company_name = (String)session.getAttribute("COM_NAME");
+// 	if(user_id==null||user_id.equals("")){
+// 		//로그인 페이지로 돌아가기
+// 		response.sendRedirect("loginform.jsp");
+// 	}
+%>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -181,7 +198,7 @@ figure.snip1200.hover p {
 		<div style="margin:30px 20px 10px 0px;font-size:35px;width:55%;float:left;">
 			<h1 style="text-align: right">CH4 방문/반입 관리 시스템</h1>
 		</div>
-		<%@ include file="../../CommonForm/logout.jsp"%>
+<%-- 		<%@ include file="../../CommonForm/logout.jsp"%> --%>
 	</div>
 	<div style="text-align: center; width: 80%;height: 50%;">
 		<img alt="abc" src="/project_ch4_pojo/Style/images/banner/gate.gif" >

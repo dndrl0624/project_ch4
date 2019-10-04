@@ -81,6 +81,19 @@ table.table {
 </style>
 <script type="text/javascript">
 	var now = new Date();
+	
+//신청 승인 처리
+	function vpermission(){
+		$("#f_vper").attr("method","post");
+		$("#f_vper").attr("action","company/mngPermit.ch4?visit_no="+방문신청번호 );
+		$("#f_vper").submit();
+	}
+//신청 반려 처리
+	function vreturn(){
+		$("#f_vret").attr("method","post");
+		$("#f_vret").attr("action","company/mngPermit.ch4?visit_no="+방문신청번호 );
+		$("#f_vret").submit();
+	}
 </script>
 </head>
 <link rel="stylesheet" type="text/css" href="/project_ch4_pojo/Style/css/maxCss.css">
@@ -320,12 +333,18 @@ table.table {
 				</div>
 			</div>
 			<div style="float: right; margin-bottom:20%;">
-				<button type="button" id="permission" class="btn btn-primary">방문 신청 승인</button>
-				<button type="button" id="return" class="btn btn-danger">방문 신청 반려</button>
+				<button type="button" id="permission" class="btn btn-primary" onClick="location.href='javascript:vpermission()'">방문 신청 승인</button>
+				<button type="button" id="return" class="btn btn-danger" onClick="location.href='javascript:vreturn()'">방문 신청 반려</button>
 				<button type="button" class="btn btn-default" onClick="location.href='javascript:history.back()'">이전 페이지</button>
 			</div>
 		</div>
 </div>
+<form id="f_vper">
+	<input type="hidden" id="hidden_permission" name="VISIT_PERMIT_ST" value="승인">
+</form>
+<form id="f_vret">
+	<input type="hidden" id="hidden_return" name="VISIT_PERMIT_ST" value="반려">
+</form>
 	<!-- 공통 Footer -->
 <%@ include file="/View/CommonForm/Footer.jsp"%>
 </body>

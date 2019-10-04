@@ -1,20 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List, java.util.Map" %>
-<%
-//데이터 받아오기	
-	String login_id = null;
-	String login_name = null;
-	String login_com = null;
-	List<Map<String,Object>> login_info = 
-			(List<Map<String,Object>>)request.getAttribute("login_info");
-	if(login_info !=null && login_info.size()>0){
-		//각각 값 넣어주기
-		login_id =  (String)session.getAttribute("id");
-		login_name =  (String)session.getAttribute("name");
-		login_com =  (String)session.getAttribute("com_no");
-	}
-%>    
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,13 +17,18 @@
 <script type="text/javascript">
 //combobox 직접입력 방지
 $.fn.combobox.defaults.editable = false
+//datebox 직접입력 방지
+$.fn.datebox.defaults.editable = false
+
 // 검색방법 콤보박스로 textbox name값 변경
 $(document).ready(function(){
 	$('#SearchType').combobox({
 		onChange: function(newVal){
 			$("#searchText").textbox('textbox').attr('name',newVal);
 			$("#searchText").attr('textboxname',newVal);
-			$("span.textbox > .textbox-value").attr('name',newVal);
+			var inputHidden = $("#searchText").textbox('textbox').parent().find('input:last');
+			inputHidden.attr('name',newVal);
+// 			$("span.textbox > .textbox-value").attr('name',newVal);
 		}
 	});
 	
@@ -104,7 +96,7 @@ function btn_search(){
 		,dataType: "json"
 		,data :$("#f_search").serialize()
 		,success: function(data){
-			$("#tb_sv").bootstrapTable('load',data);
+			$("#tb_sv").bootstrapTable('data',data);
 		}
 	});	
 }
@@ -183,7 +175,7 @@ function btn_search(){
 		<input class="easyui-textbox" id="searchText" name="VISITOR_NAME" style="width:230px;height:25px;">
 	</div>
 	<div class='col-sm-2'><br>
-		<select class="easyui-combobox" id="state" name="state" label="승인상태" labelPosition="left" style="width:100%;">
+		<select class="easyui-combobox" id="state" name="GMNG_CONFM" label="승인상태" labelPosition="left" style="width:100%;">
 			<option value="결재중" selected>결재중</option>
 			<option value="승인">승인</option>
 			<option value="반려">반려</option>
@@ -221,7 +213,7 @@ function btn_search(){
 			</div>
 		</div>
 	</div>
-	<div  class='col-sm-1'>
+	<div  class='col-sm-1' style="padding-left:23px;">
 		<button type="button" class="btn btn-success" onclick="javascript:btn_search()"
 		style="margin-top: 5px;margin-bottom: 15px; align-self:flex-end; float: bottom;">Search</button>
 	</div>
@@ -231,7 +223,7 @@ function btn_search(){
 	
 
 <!-- 부트 테이블 : search_ResultVisitor 참조 -->
-	<div class="col-lg-11">
+	<div style="width: 86%;">
 		<table class="table table-bordered table-hover" id="tb_sv" >
 		</table>
 	</div>

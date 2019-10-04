@@ -15,6 +15,8 @@
 <script type="text/javascript">
 //combobox 직접입력 방지
 $.fn.combobox.defaults.editable = false
+//datebox 직접입력 방지
+$.fn.datebox.defaults.editable = false
 
 /* 검색방법 콤보박스로 textbox name값 변경 */
 $(document).ready(function(){
@@ -22,7 +24,9 @@ $(document).ready(function(){
 		onChange: function(newVal){
 			$("#searchText").textbox('textbox').attr('name',newVal);
 			$("#searchText").attr('textboxname',newVal);
-			$("span.textbox > .textbox-value").attr('name',newVal);
+			var inputHidden = $("#searchText").textbox('textbox').parent().find('input:last');
+			inputHidden.attr('name',newVal);
+// 			$("span.textbox > .textbox-value").attr('name',newVal);
 		}
 	});
 });
@@ -31,8 +35,7 @@ $(document).ready(function(){
 /* 테이블 데이터 */
 $(document).ready(function(){
 	$("#tb_lg").bootstrapTable({
-		height:'672'
-		,pagination:'true'
+		pagination:'true'
 		,toolbarAlign : 'right'
 		,url: "/project_ch4_pojo/json/logGoodsJson.json"
 		,onLoadError: function(status,jqXHR){
@@ -40,13 +43,8 @@ $(document).ready(function(){
 	    }
 	    ,pageSize:11//기본 페이지 사이즈
 	    ,pageList:[2, 4, 6, 8] //칸수
-	    ,onClickRow:function(row,$element,field){
-	       //$element.attr('data-index',10)
-	       $element.toggleClass('single-select');//로우 클릭했을 때 색 변함.
-	       //alert(row.N_NO);
-	     }
 	    ,onDblClickRow:function(row,$element,field){
-	    	 alert("어떠한 기능을 넣을 것인가요? 모달 조회 OR 아무것도 없이");
+// 	    	alert("어떠한 기능을 넣을 것인가요? 모달 조회 OR 아무것도 없이");
 		    // 실제 사용할 URL 변경하기  : company/@@@@.ch4
 	     }
 	});
@@ -73,7 +71,7 @@ function search(){
 		,dataType: "json"
 		,data :$("#f_search").serialize()
 		,success: function(data){
-			$("#tb_sv").bootstrapTable('load',data);
+			$("#tb_sv").bootstrapTable('data',data);
 		}
 	});	
 }
@@ -95,15 +93,15 @@ function search(){
 			<div class="panel-heading">
 				<h4 class="panel-title">
 					<a data-toggle="collapse" href="#collapse1">
-					<i class="fa fa-users" aria-hidden="true"></i>방문 신청 조회</a>
+						<i class="fa fa-users" aria-hidden="true"></i>방문 신청 조회</a>
 				</h4>
 			</div>
 			<div id="collapse1" class="panel-collapse collapse">
 				<div class="panel-body">
 					<a  href="/project_ch4_pojo/View/company/manager/Manager_SearchVisitor.jsp">
-					<i class="fa fa-search-plus" aria-hidden="true"></i>방문 신청 조회</a><br> 
+						<i class="fa fa-search-plus" aria-hidden="true"></i>방문 신청 조회</a><br> 
 					<a  href="/project_ch4_pojo/View/company/manager/Manager_LogVisitor.jsp">
-					<i class="fa fa-list-alt" aria-hidden="true"></i>방문현황 조회</a><br> 
+						<i class="fa fa-list-alt" aria-hidden="true"></i>방문현황 조회</a><br> 
 				</div>
 			</div>
 		</div>
@@ -112,15 +110,15 @@ function search(){
 			<div class="panel-heading">
 				<h4 class="panel-title">
 					<a data-toggle="collapse" href="#collapse2">
-					<i class="fa fa-truck" aria-hidden="true"></i>물품 반입 신청 조회</a>
+						<i class="fa fa-truck" aria-hidden="true"></i>물품 반입 신청 조회</a>
 				</h4>
 			</div>
 			<div id="collapse2" class="panel-collapse collapse in">
 				<div class="panel-body">
 					<a  href="/project_ch4_pojo/View/company/manager/Manager_SearchGoods.jsp">
-					<i class="fa fa-search-plus" aria-hidden="true"></i>반입 신청 조회</a><br> 
+						<i class="fa fa-search-plus" aria-hidden="true"></i>반입 신청 조회</a><br> 
 					<a  href="/project_ch4_pojo/View/company/manager/Manager_LogGoods.jsp">
-					<i class="fa fa-list-alt" aria-hidden="true"></i>반입 현황 조회</a><br> 
+						<i class="fa fa-list-alt" aria-hidden="true"></i>반입 현황 조회</a><br> 
 				</div>
 			</div>
 		</div>
@@ -149,56 +147,36 @@ function search(){
 		<!-- 검색창 : 콤보박스에 의한 분기 --><br>
 		<!-- 텍스트 박스에 대해 name값 변경 : 처음 값은 방문자명 // onChange 이벤트로 Name속성을 바꾸어 주기 -->
 		<input class="easyui-textbox" id="searchText" name="VISITOR_NAME" style="width:230px;height:25px;" data-options="prompt:'필요한 정보를 입력하세요'">
-	
 	</div>
-	<div class='col-sm-2'><br>
-		<select class="easyui-combobox" id="state" name="state" label="현황" labelPosition="left" style="width:100%;">
-			<option value="tryAgain" selected>전체</option>
-			<option value="미반입">미반입</option>
-			<option value="반입완료">반입완료</option>
-			<option value="반려">반려</option>
-		</select>
-	</div>
-	<div  class='col-sm-4'>
+<!-- 	<div class='col-sm-1'></div> -->
+	<div  class='col-sm-5'>
 <!-- 날짜 검색 -->
-	<div class="form-group">
-		<div class='col-sm-5'>
-			<span style="font-weight: bold;">시작일</span>
-			<div class="form-group">
-				<div class='easyui-datebox' id="datepicker1" >
-					<input type='text' class="form-control" name="openDate" required="required" /> 
-					<span class="input-group-addon"> 
-						<span class="glyphicon glyphicon-calendar"></span>
-					</span>
-				</div>
+		<div class="form-group">
+			<div class='col-sm-2'></div>
+			<div class='col-sm-4'>
+				<span style="font-weight: bold;">시작일</span><br>
+				<input class="easyui-datebox" id="date1" style="width:120px;">
 			</div>
-		</div>
-		<div class='col-sm-1'>
-			<h4 align="center"><br>
-				<b>~</b>
-			</h4>
-		</div>
-		<div class='col-sm-5'>
-			<span style="font-weight: bold;">종료일</span>
-			<div class="form-group">
-				<div class='easyui-datebox' id="datepicker2">
-					<input type='text' class="form-control" name="closeDate" required="required" /> 
-					<span class="input-group-addon"> 
-						<span class="glyphicon glyphicon-calendar"></span>
-					</span>
-				</div>
+			<div class='col-sm-1' style="padding: 0px;">
+				<h4 align="left"><br>
+					<b>~</b>
+				</h4>
+			</div>
+			<div class='col-sm-5' style="padding: 0px;">
+				<span style="font-weight: bold;">종료일</span><br>
+				<input class="easyui-datebox" id="date2" style="width:120px;">
 			</div>
 		</div>
 	</div>
 <!-- 검색 버튼 -->
-	<div  class='col-sm-1'>
+	<div class='col-sm-1' style="padding-left: 100px;">
 		<button type="button" class="btn btn-success" onclick="search()"
-		style="margin-top: 5px;margin-bottom: 15px;float: bottom;">Search</button>
+		style="margin-top: 20px;margin-bottom: 15px;float: bottom;">Search</button>
 	</div>
-	</div>
-</form>	
+</form>
+
 <!-- 부트 테이블 : search_ResultVisitor 참조-->
-	<div class="row">
+	<div style="width: 86%;">
 		<table class="table table-bordered table-hover" id="tb_lg" >
 			<thead>
 				<tr>

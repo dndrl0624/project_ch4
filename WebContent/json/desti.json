@@ -1,118 +1,118 @@
 [
 
 	{"DESTI_NO":"일련번호1","DESTI_NAME":"위치"
-	,"DESTI_LOC":"위치정보","DESTI_NOTES":"정상"
+	,"DESTI_LCINFO":"위치정보","DESTI_NOTES":"정상"
 	,"CON_NO":"회사코드"}
 	,
 	{"DESTI_NO":"일련번호2","DESTI_NAME":"위치"
-	,"DESTI_LOC":"위치정보","DESTI_NOTES":"창고 사용"
+	,"DESTI_LCINFO":"위치정보","DESTI_NOTES":"창고 사용"
 	,"CON_NO":"회사코드"}
 	,
 	{"DESTI_NO":"일련번호3","DESTI_NAME":"인사과"
-	,"DESTI_LOC":"위치정보","DESTI_NOTES":"창고 사용"
+	,"DESTI_LCINFO":"위치정보","DESTI_NOTES":"창고 사용"
 	,"CON_NO":"회사코드"}
 	,
 	{"DESTI_NO":"일련번호4","DESTI_NAME":"휴게실"
-	,"DESTI_LOC":"위치정보","DESTI_NOTES":"놀이방"
+	,"DESTI_LCINFO":"위치정보","DESTI_NOTES":"놀이방"
 	,"CON_NO":"회사코드"}
 	,
 	{"DESTI_NO":"일련번호6","DESTI_NAME":"회의실"
-	,"DESTI_LOC":"위치정보","DESTI_NOTES":"땡땡이용으로 사용"
+	,"DESTI_LCINFO":"위치정보","DESTI_NOTES":"땡땡이용으로 사용"
 	,"CON_NO":"회사코드"}
 	,
 	{"DESTI_NO":"일련번호27","DESTI_NAME":"식당"
-	,"DESTI_LOC":"위치정보","DESTI_NOTES":"식사용 사용"
+	,"DESTI_LCINFO":"위치정보","DESTI_NOTES":"식사용 사용"
 	,"CON_NO":"회사코드"}
 	,
 	{"DESTI_NO":"일련번호8","DESTI_NAME":"위치"
-	,"DESTI_LOC":"위치정보","DESTI_NOTES":"창고 사용"
+	,"DESTI_LCINFO":"위치정보","DESTI_NOTES":"창고 사용"
 	,"CON_NO":"회사코드"}
 	,
 	{"DESTI_NO":"일련번호8","DESTI_NAME":"위치"
-	,"DESTI_LOC":"위치정보","DESTI_NOTES":"창고 사용"
+	,"DESTI_LCINFO":"위치정보","DESTI_NOTES":"창고 사용"
 	,"CON_NO":"회사코드"}
 	,
 	{"DESTI_NO":"일련번호8","DESTI_NAME":"위치"
-	,"DESTI_LOC":"위치정보","DESTI_NOTES":"창고 사용"
+	,"DESTI_LCINFO":"위치정보","DESTI_NOTES":"창고 사용"
 	,"CON_NO":"회사코드"}
 	,
 	{"DESTI_NO":"일련번호8","DESTI_NAME":"위치"
-	,"DESTI_LOC":"위치정보","DESTI_NOTES":"창고 사용"
+	,"DESTI_LCINFO":"위치정보","DESTI_NOTES":"창고 사용"
 	,"CON_NO":"회사코드"}
 	,
 	{"DESTI_NO":"일련번호8","DESTI_NAME":"위치"
-	,"DESTI_LOC":"위치정보","DESTI_NOTES":"창고 사용"
+	,"DESTI_LCINFO":"위치정보","DESTI_NOTES":"창고 사용"
 	,"CON_NO":"회사코드"}
 	,
 	{"DESTI_NO":"일련번호8","DESTI_NAME":"위치"
-	,"DESTI_LOC":"위치정보","DESTI_NOTES":"창고 사용"
+	,"DESTI_LCINFO":"위치정보","DESTI_NOTES":"창고 사용"
 	,"CON_NO":"회사코드"}
 	,
 	{"DESTI_NO":"일련번호8","DESTI_NAME":"위치"
-	,"DESTI_LOC":"위치정보","DESTI_NOTES":"창고 사용"
+	,"DESTI_LCINFO":"위치정보","DESTI_NOTES":"창고 사용"
 	,"CON_NO":"회사코드"}
 	,
 	{"DESTI_NO":"일련번호8","DESTI_NAME":"위치"
-	,"DESTI_LOC":"위치정보","DESTI_NOTES":"창고 사용"
+	,"DESTI_LCINFO":"위치정보","DESTI_NOTES":"창고 사용"
 	,"CON_NO":"회사코드"}
 	,
 	{"DESTI_NO":"일련번호8","DESTI_NAME":"위치"
-	,"DESTI_LOC":"위치정보","DESTI_NOTES":"창고 사용"
+	,"DESTI_LCINFO":"위치정보","DESTI_NOTES":"창고 사용"
 	,"CON_NO":"회사코드"}
 	,
 	{"DESTI_NO":"일련번호8","DESTI_NAME":"위치"
-	,"DESTI_LOC":"위치정보","DESTI_NOTES":"창고 사용"
+	,"DESTI_LCINFO":"위치정보","DESTI_NOTES":"창고 사용"
 	,"CON_NO":"회사코드"}
 	,
 	{"DESTI_NO":"일련번호8","DESTI_NAME":"위치"
-	,"DESTI_LOC":"위치정보","DESTI_NOTES":"창고 사용"
+	,"DESTI_LCINFO":"위치정보","DESTI_NOTES":"창고 사용"
 	,"CON_NO":"회사코드"}
 	,
 	{"DESTI_NO":"일련번호8","DESTI_NAME":"위치"
-	,"DESTI_LOC":"위치정보","DESTI_NOTES":"창고 사용"
+	,"DESTI_LCINFO":"위치정보","DESTI_NOTES":"창고 사용"
 	,"CON_NO":"회사코드"}
 	,
 	{"DESTI_NO":"일련번호8","DESTI_NAME":"위치"
-	,"DESTI_LOC":"위치정보","DESTI_NOTES":"창고 사용"
+	,"DESTI_LCINFO":"위치정보","DESTI_NOTES":"창고 사용"
 	,"CON_NO":"회사코드"}
 	,
 	{"DESTI_NO":"일련번호8","DESTI_NAME":"위치"
-	,"DESTI_LOC":"위치정보","DESTI_NOTES":"창고 사용"
+	,"DESTI_LCINFO":"위치정보","DESTI_NOTES":"창고 사용"
 	,"CON_NO":"회사코드"}
 	,
 	{"DESTI_NO":"일련번호8","DESTI_NAME":"위치"
-	,"DESTI_LOC":"위치정보","DESTI_NOTES":"창고 사용"
+	,"DESTI_LCINFO":"위치정보","DESTI_NOTES":"창고 사용"
 	,"CON_NO":"회사코드"}
 	,
 	{"DESTI_NO":"일련번호8","DESTI_NAME":"위치"
-	,"DESTI_LOC":"위치정보","DESTI_NOTES":"창고 사용"
+	,"DESTI_LCINFO":"위치정보","DESTI_NOTES":"창고 사용"
 	,"CON_NO":"회사코드"}
 	,
 	{"DESTI_NO":"일련번호8","DESTI_NAME":"위치"
-	,"DESTI_LOC":"위치정보","DESTI_NOTES":"창고 사용"
+	,"DESTI_LCINFO":"위치정보","DESTI_NOTES":"창고 사용"
 	,"CON_NO":"회사코드"}
 	,
 	{"DESTI_NO":"일련번호8","DESTI_NAME":"위치"
-	,"DESTI_LOC":"위치정보","DESTI_NOTES":"창고 사용"
+	,"DESTI_LCINFO":"위치정보","DESTI_NOTES":"창고 사용"
 	,"CON_NO":"회사코드"}
 	,
 	{"DESTI_NO":"일련번호8","DESTI_NAME":"위치"
-	,"DESTI_LOC":"위치정보","DESTI_NOTES":"창고 사용"
+	,"DESTI_LCINFO":"위치정보","DESTI_NOTES":"창고 사용"
 	,"CON_NO":"회사코드"}
 	,
 	{"DESTI_NO":"일련번호8","DESTI_NAME":"위치"
-	,"DESTI_LOC":"위치정보","DESTI_NOTES":"창고 사용"
+	,"DESTI_LCINFO":"위치정보","DESTI_NOTES":"창고 사용"
 	,"CON_NO":"회사코드"}
 	,
 	{"DESTI_NO":"일련번호8","DESTI_NAME":"위치"
-	,"DESTI_LOC":"위치정보","DESTI_NOTES":"창고 사용"
+	,"DESTI_LCINFO":"위치정보","DESTI_NOTES":"창고 사용"
 	,"CON_NO":"회사코드"}
 	,
 	{"DESTI_NO":"일련번호8","DESTI_NAME":"위치"
-	,"DESTI_LOC":"위치정보","DESTI_NOTES":"창고 사용"
+	,"DESTI_LCINFO":"위치정보","DESTI_NOTES":"창고 사용"
 	,"CON_NO":"회사코드"}
 	,
 	{"DESTI_NO":"일련번호8","DESTI_NAME":"위치"
-	,"DESTI_LOC":"위치정보","DESTI_NOTES":"창고 사용"
+	,"DESTI_LCINFO":"위치정보","DESTI_NOTES":"창고 사용"
 	,"CON_NO":"회사코드"}
  ]

@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <!-- Web icon 설정 --> 
 <%@ include file="../../CommonForm/TapLogo.jsp"%>
-<title>방문현황 관리</title>
+<title>반입 현황 관리 미 작성</title>
 <!-- 공통코드 -->
 <%@ include file="../../../Style/common/HeadUI.jsp"%>
 <link rel="stylesheet" type="text/css" href="/project_ch4_pojo/Style/css/maxCss.css">
@@ -33,19 +33,22 @@ $(document).ready(function(){
 
 /* 테이블 데이터 */
 $(document).ready(function(){
-	$("#tb_logVisitor").bootstrapTable({
+	$("#tb_logGoods").bootstrapTable({
 		toolbar:'#toolbar'
-		,url:'/project_ch4_pojo/json/logVisitorJson.json'
+		,url:'/project_ch4_pojo/json/logGoodsJson.json'
 		,pagination : 'true'
+		,onClickRow : function(row, $element, field) {
+					$element.toggleClass('single-select');//로우 클릭했을 때 색 변함.
+		}
 	});
 	$("#search").click(function() {
 		$.ajax({
-			type:'post'
-			,url:'/project_ch4_pojo/json/logVisitorJson.json'/* 실제 사용할 URL 변경하기  : company/???.ch4 */
+			type:'get'
+			,url:'/project_ch4_pojo/json/logGoodsJson.json'/* 실제 사용할 URL 변경하기  : company/???.ch4 */
 			,dataType: "json"
 			,data :$("#f_log").serialize()
 			,success: function(data){
-				$("#tb_logVisitor").bootstrapTable('data',data);
+				$("#tb_logGoods").bootstrapTable('load',data);
 			}
 		});
 	});
@@ -117,6 +120,7 @@ $(document).ready(function(){
 			<option value="">선택하세요</option>
 			<option value="VISITOR_NAME">방문자명</option>
 			<option value="VISITOR_HP">연락처</option>
+			<option value="CONFM_NAME">반입물품명</option>
 		</select>
 	</div>
 	<div class="col-lg-2" style="padding: 0px;">
@@ -126,19 +130,18 @@ $(document).ready(function(){
 	
 	</div>
 	<div class="col-lg-2" style="padding: 0px;"><br>
-		<select class="easyui-combobox" id="state" name="CMG_NOTES" label="현황" labelPosition="left" style="width:80%;">
-			<option value="전체" selected>전체</option>
-			<option value="방문중">방문중</option>
-			<option value="외출">외출</option>
-			<option value="방문종료">방문종료</option>
+		<select class="easyui-combobox" id="state" name="CONFM_STATE" label="반입현황" labelPosition="left" style="width:80%;">
+			<option value="미반입" selected>미반입</option>
+			<option value="반입완료">반입완료</option>
+			<option value="취소">취소</option>
+			<option value="오류">오류</option>
 		</select>
 	</div>
-	<div class="col-lg-4" style="padding: 0px;">
+	<div class="col-lg-3" style="padding: 0px;">
 <!-- 날짜 검색 -->
-			<div class='col-sm-2'></div>
 			<div class='col-sm-4'>
 				<span style="font-weight: bold;">시작일</span><br>
-				<input class="easyui-datebox" id="date1" style="width:120px;">
+				<input class="easyui-datebox" id="date2" style="width:120px;">
 			</div>
 			<div class='col-sm-1' style="padding: 0px;">
 				<h4 align="left"><br>
@@ -152,27 +155,26 @@ $(document).ready(function(){
 	</div>
 	</form>
 <!-- 검색 버튼 -->
-	<div class="col-lg-1" style="padding: 0px;margin-top: 15px;">
+	<div class='col-sm-1' style="padding-left: 40px;">
 		<button id="search" class="btn btn-primary" >search</button>
 	</div>
 	
 </div>
 
 <!-- 부트 테이블 : search_ResultVisitor 참조-->	<!-- 처리내용 : 입장 퇴장 --><!-- 현재위치 : 내부 외부 사내 .. -->
-<div class="col-lg-11">
-	<table class="table table-bordered table-hover" id="tb_logVisitor" >
+<div style="width: 84%;">
+	<table class="table table-bordered table-hover" id="tb_logGoods" >
 		<thead>
 			<tr>
-				<th data-field="CONFM_NO">방문번호</th>
-				<th data-field="CMG_INOUT">처리시간</th>
-				<th data-field="CMG_ENTRC">출입위치</th>
-				<th data-field="CMG_NOTES">현재위치</th>
-				<th data-field="CONFM_NAME">방문자명</th>
-				<th data-field="CONFM_HP">연락처</th>
-				<th data-field="COM_NAME">방문지</th>
-				<th data-field="VISIT_DESTI">목적지</th>
-				<th data-field="VISIT_TYPE">방문유형</th>
-				<th data-field="VISIT_DATE">방문일자</th>
+				<th data-field="CONFM_NO">물품번호</th>
+				<th data-field="CONFM_STATE">반입현황</th>
+				<th data-field="CONFM_TRANS_DATE">반입일자</th>
+				<th data-field="CONFM_TRANS_TIME">반입시간</th>
+				<th data-field="CONFM_NAME">물품명</th>
+				<th data-field="CONFM_TYPE">물품종류</th>
+				<th data-field="CONFM_QUAN">신청갯수</th>
+				<th data-field="CONFM_TRANS_QUAN">반입개수</th>
+				<th data-field="ERR_LOG">오류내역</th>
 			</tr>
 		</thead>
 	</table>

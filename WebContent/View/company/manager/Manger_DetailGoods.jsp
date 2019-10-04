@@ -82,6 +82,19 @@ table.table {
 </style>
 <script type="text/javascript">
 	var now = new Date();
+	
+//신청 승인 처리
+	function gpermission(){
+		$("#f_gper").attr("method","post");
+		$("#f_gper").attr("action","company/mngPermit.ch4?aplg_no="+(반출) );
+		$("#f_gper").submit();
+	}
+//신청 반려 처리
+	function greturn(){
+		$("#f_gret").attr("method","post");
+		$("#f_gret").attr("action","company/mngPermit.ch4?aplg_no="+(반출) );
+		$("#f_gret").submit();
+	}
 </script>
 </head>
 <link rel="stylesheet" type="text/css" href="/project_ch4_pojo/Style/css/maxCss.css">
@@ -348,12 +361,18 @@ table.table {
 				</div>
 			</div>
 			<div style="float: right; margin-bottom:20%;">
-				<button type="button" id="permission" class="btn btn-primary">반입 신청 승인</button>
-				<button type="button" id="return" class="btn btn-danger">반입 신청 반려</button>
+				<button type="button" id="btn_permission" class="btn btn-primary" onClick="location.href='javascript:gpermission()'">반입 신청 승인</button>
+				<button type="button" id="btn_return" class="btn btn-danger" onClick="location.href='javascript:greturn()'">반입 신청 반려</button>
 				<button type="button" class="btn btn-default" onClick="location.href='javascript:history.back()'">이전 페이지</button>
 			</div>
 		</div>
 </div>
+<form id="f_gper">
+	<input type="hidden" id="hidden_permission" name="APLG_PERMIT_ST" value="승인">
+</form>
+<form id="f_gret">
+	<input type="hidden" id="hidden_return" name="APLG_PERMIT_ST" value="반려">
+</form>
 	<!-- 공통 Footer -->
 <%@ include file="/View/CommonForm/Footer.jsp"%>
 </body>

@@ -140,14 +140,14 @@ figure.snip1200.hover p {
 				</h4>
 			</div>
 		</div>
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<h4 class="panel-title">
-					<a href="/project_ch4_pojo/View/company/info/Info_Notice.jsp">
-					<i class="fa fa-search-plus" aria-hidden="true"></i>안내 공지</a>
-				</h4>
-			</div>
-		</div>
+<!-- 		<div class="panel panel-info"> -->
+<!-- 			<div class="panel-heading"> -->
+<!-- 				<h4 class="panel-title"> -->
+<!-- 					<a href="/project_ch4_pojo/View/company/info/Info_Notice.jsp"> -->
+<!-- 					<i class="fa fa-search-plus" aria-hidden="true"></i>안내 공지</a> -->
+<!-- 				</h4> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h4 class="panel-title">
@@ -159,16 +159,16 @@ figure.snip1200.hover p {
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<a href="/project_ch4_pojo/View/company/info/Info_ManageKiosk.jsp">
-					<i class="fa fa-search-plus" aria-hidden="true"></i>키오스크 관리</a>
+					<a href="/project_ch4_pojo/View/company/info/Info_ManageGLog.jsp">
+					<i class="fa fa-truck" aria-hidden="true"></i>반입현황관리</a>
 				</h4>
 			</div>
 		</div>
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<a href="/project_ch4_pojo/View/company/info/Info_ManageDesti.jsp">
-					<i class="fa fa-list-alt" aria-hidden="true"></i>옥내 목적지 관리</a>
+					<a href="/project_ch4_pojo/View/company/info/Info_ManageCompany.jsp">
+					<i class="fa fa-search-plus" aria-hidden="true"></i>종합 관리</a>
 				</h4>
 			</div>
 		</div>

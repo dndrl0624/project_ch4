@@ -15,6 +15,8 @@
 <script type="text/javascript">
 //combobox 직접입력 방지
 $.fn.combobox.defaults.editable = false
+//datebox 직접입력 방지
+$.fn.datebox.defaults.editable = false
 
 /* 검색방법 콤보박스로 textbox name값 변경 */
 $(document).ready(function(){
@@ -22,7 +24,9 @@ $(document).ready(function(){
 		onChange: function(newVal){
 			$("#searchText").textbox('textbox').attr('name',newVal);
 			$("#searchText").attr('textboxname',newVal);
-			$("span.textbox > .textbox-value").attr('name',newVal);
+			var inputHidden = $("#searchText").textbox('textbox').parent().find('input:last');
+			inputHidden.attr('name',newVal);
+// 			$("span.textbox > .textbox-value").attr('name',newVal);
 		}
 	});
 });
@@ -33,8 +37,8 @@ $(document).ready(function(){
 	    columns:[
 	         {field:'CONFM_NO',title:'방문번호'}
 	         ,{field:'CMG_INOUT',title:'처리시간'}
-	         ,{field:'CMG_NOTESz',title:'처리내용'}/* 처리내용 : 입장 퇴장 */
-	         ,{field:'CMG_NOTES',title:'현재위치'}/* 현재위치 : 내부 외부 사내 .. */
+	         ,{field:'CMG_ENTRC',title:'출입위치'}/* 출입위치 : 사용게이트 */
+	         ,{field:'CMG_NOTES',title:'현재위치'}/* 현재위치 : 방문중,외출,방문종료 .. */
 	         ,{field:'CONFM_NAME',title:'방문자명'}
 	         ,{field:'CONFM_HP',title:'연락처'}
 	         ,{field:'COM_NAME',title:'방문지'}
@@ -82,7 +86,7 @@ function search(){
 			,dataType: "json"
 			,data :$("#f_search").serialize()
 			,success: function(data){
-				$("#tb_logVisitor").bootstrapTable('load',data);
+				$("#tb_logVisitor").bootstrapTable('data',data);
 			}
 	});
 }
@@ -143,7 +147,7 @@ function search(){
 		<div style="margin:30px 20px 10px 0px;font-size:35px;width: 50%;float: left;"> 방문 현황 조회 페이지 </div>
 		<%@ include file="../../CommonForm/logout.jsp"%>
 	</div>
-	
+<form id="f_search">
 	<div class='col-sm-2'>
 	<!-- 검색 타입 설정 --><br>
 		<select class="easyui-combobox" id="SearchType" name='SearchType' label="검색방법" labelPosition="left" style="width:100%;">
@@ -157,57 +161,41 @@ function search(){
 	<!-- 검색창 : 콤보박스에 의한 분기 --><br>
 		<!-- 텍스트 박스에 대해 name값 변경 : 처음 값은 방문자명 // onChange 이벤트로 Name속성을 바꾸어 주기 -->
 		<input class="easyui-textbox" id="searchText" name="VISITOR_NAME" style="width:230px;height:25px;">
-	
 	</div>
 	<!-- 콤보 박스 : 처리결과 대해 -->
 	<div class='col-sm-2'><br>
-		<select class="easyui-combobox" id="state" name="state" label="현황" labelPosition="left" style="width:100%;">
-			<option value="all" selected>전체</option>
-			<option value="사내">사내</option>
+		<select class="easyui-combobox" id="state" name="CMG_NOTES" label="방문현황" labelPosition="left" style="width:100%;">
+			<option value="방문중">방문중</option>
 			<option value="외출">외출</option>
 			<option value="퇴근">퇴근</option>
 		</select>
 	</div>
-	<div  class='col-sm-4'>
+	<div  class='col-sm-4' style="padding: 0;">
 <!-- 날짜 검색 -->
-			<div class="form-group">
-				<div class='col-sm-5'>
-					<span style="font-weight: bold;">시작일</span>
-					<div class="form-group">
-						<div class='easyui-datebox' id="datepicker1">
-							<input type='text' class="form-control" name="openDate" required="required" /> 
-							<span class="input-group-addon">
-								<span class="glyphicon glyphicon-calendar"></span>
-							</span>
-						</div>
-					</div>
-				</div>
-				<div class='col-sm-1'>
-					<h4 align="center">
-						<br> <b>~</b>
-					</h4>
-				</div>
-				<div class='col-sm-5'>
-					<span style="font-weight: bold;">종료일</span>
-					<div class="form-group">
-						<div class='easyui-datebox' id="datepicker2">
-							<input type='text' class="form-control" name="closeDate" required="required" /> 
-							<span class="input-group-addon">
-								<span class="glyphicon glyphicon-calendar"></span>
-							</span>
-						</div>
-					</div>
-				</div>
+	<div class="form-group">
+			<div class='col-sm-4'>
+				<span style="font-weight: bold;">시작일</span><br>
+				<input class="easyui-datebox" id="date1" style="width:120px;">
 			</div>
+			<div class='col-sm-1' style="padding: 0px;">
+				<h4 align="left"><br>
+					<b>~</b>
+				</h4>
+			</div>
+			<div class='col-sm-5' style="padding: 0px;">
+				<span style="font-weight: bold;">종료일</span><br>
+				<input class="easyui-datebox" id="date2" style="width:120px;">
+			</div>
+		</div>
 	<!-- 검색 버튼 -->
-		<div  class='col-sm-1'>
+		<div class='col-sm-1' style="padding-left: 50px;">
 			<button type="button" class="btn btn-success" onclick="javascript:search()"
 				style="margin-top: 5px;margin-bottom: 15px;float: bottom;">Search</button>
 		</div>
 	</div>
-	
+</form>		
 <!-- 부트 테이블 : search_ResultVisitor 참조-->
-	<div class="row">
+	<div style="width: 86%;">
 		<table class="table table-bordered table-hover" id="tb_logVisitor" >
 		</table>
 	</div>

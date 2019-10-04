@@ -1,58 +1,58 @@
 [
 	{"CONFM_NO":"방문번호","CMG_INOUT":"처리시간","CMG_NOTES":"위치"
-	,"CMG_NOTESz":"처리내용","CONFM_NAME":"방문자명","CONFM_HP":"010"
+	,"CMG_ENTRC":"출입구","CONFM_NAME":"방문자명","CONFM_HP":"010"
 	,"COM_NAME":"방문지","VISIT_DESTI":"목적지","VISIT_TYPE":"방문유형"
 	,"VISIT_DATE":"2019-09-23"},
-	{"CONFM_NO":"방문번호","CMG_INOUT":"처리시간","CMG_NOTES":"사내"
-	,"CMG_NOTESz":"처리내용","CONFM_NAME":"방문자명","CONFM_HP":"010"
+	{"CONFM_NO":"방문번호","CMG_INOUT":"처리시간","CMG_NOTES":"방문중"
+	,"CMG_ENTRC":"출입구","CONFM_NAME":"방문자명","CONFM_HP":"010"
 	,"COM_NAME":"방문지","VISIT_DESTI":"목적지","VISIT_TYPE":"방문유형"
 	,"VISIT_DATE":"2019-09-23"},
 	{"CONFM_NO":"방문번호","CMG_INOUT":"처리시간","CMG_NOTES":"외출"
-	,"CMG_NOTESz":"처리내용","CONFM_NAME":"방문자명","CONFM_HP":"010"
+	,"CMG_ENTRC":"출입구","CONFM_NAME":"방문자명","CONFM_HP":"010"
 	,"COM_NAME":"방문지","VISIT_DESTI":"목적지","VISIT_TYPE":"방문유형"
 	,"VISIT_DATE":"2019-09-23"},
 	{"CONFM_NO":"방문번호","CMG_INOUT":"처리시간","CMG_NOTES":"방문종료"
-	,"CMG_NOTESz":"처리내용","CONFM_NAME":"방문자명","CONFM_HP":"010"
+	,"CMG_ENTRC":"출입구","CONFM_NAME":"방문자명","CONFM_HP":"010"
 	,"COM_NAME":"방문지","VISIT_DESTI":"목적지","VISIT_TYPE":"방문유형"
 	,"VISIT_DATE":"2019-09-23"},
 	{"CONFM_NO":"방문번호","CMG_INOUT":"처리시간","CMG_NOTES":"방문종료"
-	,"CMG_NOTESz":"처리내용","CONFM_NAME":"방문자명","CONFM_HP":"016"
+	,"CMG_ENTRC":"출입구","CONFM_NAME":"방문자명","CONFM_HP":"016"
 	,"COM_NAME":"방문지","VISIT_DESTI":"목적지","VISIT_TYPE":"방문유형"
 	,"VISIT_DATE":"2019-09-23"},
-	{"CONFM_NO":"방문번호","CMG_INOUT":"처리시간","CMG_NOTES":"사내"
-	,"CMG_NOTESz":"처리내용","CONFM_NAME":"방문자명","CONFM_HP":"016"
+	{"CONFM_NO":"방문번호","CMG_INOUT":"처리시간","CMG_NOTES":"방문중"
+	,"CMG_ENTRC":"출입구","CONFM_NAME":"방문자명","CONFM_HP":"016"
 	,"COM_NAME":"방문지","VISIT_DESTI":"목적지","VISIT_TYPE":"방문유형"
 	,"VISIT_DATE":"2019-09-23"},
-	{"CONFM_NO":"방문번호","CMG_INOUT":"처리시간","CMG_NOTES":"사내"
-	,"CMG_NOTESz":"처리내용","CONFM_NAME":"방문자명","CONFM_HP":"016"
+	{"CONFM_NO":"방문번호","CMG_INOUT":"처리시간","CMG_NOTES":"방문중"
+	,"CMG_ENTRC":"출입구","CONFM_NAME":"방문자명","CONFM_HP":"016"
 	,"COM_NAME":"방문지","VISIT_DESTI":"목적지","VISIT_TYPE":"방문유형"
 	,"VISIT_DATE":"2019-09-23"},
-	{"CONFM_NO":"방문번호","CMG_INOUT":"처리시간","CMG_NOTES":"사내"
-	,"CMG_NOTESz":"처리내용","CONFM_NAME":"방문자명","CONFM_HP":"016"
+	{"CONFM_NO":"방문번호","CMG_INOUT":"처리시간","CMG_NOTES":"방문중"
+	,"CMG_ENTRC":"출입구","CONFM_NAME":"방문자명","CONFM_HP":"016"
 	,"COM_NAME":"방문지","VISIT_DESTI":"목적지","VISIT_TYPE":"방문유형"
 	,"VISIT_DATE":"2019-09-23"},
-	{"CONFM_NO":"방문번호","CMG_INOUT":"처리시간","CMG_NOTES":"사내"
-	,"CMG_NOTESz":"처리내용","CONFM_NAME":"방문자명","CONFM_HP":"017"
-	,"COM_NAME":"방문지","VISIT_DESTI":"목적지","VISIT_TYPE":"방문유형"
-	,"VISIT_DATE":"2019-09-23"},
-	{"CONFM_NO":"방문번호","CMG_INOUT":"처리시간","CMG_NOTES":"방문종료"
-	,"CMG_NOTESz":"처리내용","CONFM_NAME":"방문자명","CONFM_HP":"017"
+	{"CONFM_NO":"방문번호","CMG_INOUT":"처리시간","CMG_NOTES":"방문중"
+	,"CMG_ENTRC":"출입구","CONFM_NAME":"방문자명","CONFM_HP":"017"
 	,"COM_NAME":"방문지","VISIT_DESTI":"목적지","VISIT_TYPE":"방문유형"
 	,"VISIT_DATE":"2019-09-23"},
 	{"CONFM_NO":"방문번호","CMG_INOUT":"처리시간","CMG_NOTES":"방문종료"
-	,"CMG_NOTESz":"처리내용","CONFM_NAME":"방문자명","CONFM_HP":"017"
-	,"COM_NAME":"방문지","VISIT_DESTI":"목적지","VISIT_TYPE":"방문유형"
-	,"VISIT_DATE":"2019-09-23"},
-	{"CONFM_NO":"방문번호","CMG_INOUT":"처리시간","CMG_NOTES":"사내"
-	,"CMG_NOTESz":"처리내용","CONFM_NAME":"방문자명","CONFM_HP":"방문종료"
+	,"CMG_ENTRC":"출입구","CONFM_NAME":"방문자명","CONFM_HP":"017"
 	,"COM_NAME":"방문지","VISIT_DESTI":"목적지","VISIT_TYPE":"방문유형"
 	,"VISIT_DATE":"2019-09-23"},
 	{"CONFM_NO":"방문번호","CMG_INOUT":"처리시간","CMG_NOTES":"방문종료"
-	,"CMG_NOTESz":"처리내용","CONFM_NAME":"방문자명","CONFM_HP":"017"
+	,"CMG_ENTRC":"출입구","CONFM_NAME":"방문자명","CONFM_HP":"017"
 	,"COM_NAME":"방문지","VISIT_DESTI":"목적지","VISIT_TYPE":"방문유형"
 	,"VISIT_DATE":"2019-09-23"},
-	{"CONFM_NO":"방문번호","CMG_INOUT":"처리시간","CMG_NOTES":"사내"
-	,"CMG_NOTESz":"처리내용","CONFM_NAME":"방문자명","CONFM_HP":"017"
+	{"CONFM_NO":"방문번호","CMG_INOUT":"처리시간","CMG_NOTES":"방문중"
+	,"CMG_ENTRC":"출입구","CONFM_NAME":"방문자명","CONFM_HP":"방문종료"
+	,"COM_NAME":"방문지","VISIT_DESTI":"목적지","VISIT_TYPE":"방문유형"
+	,"VISIT_DATE":"2019-09-23"},
+	{"CONFM_NO":"방문번호","CMG_INOUT":"처리시간","CMG_NOTES":"방문종료"
+	,"CMG_ENTRC":"출입구","CONFM_NAME":"방문자명","CONFM_HP":"017"
+	,"COM_NAME":"방문지","VISIT_DESTI":"목적지","VISIT_TYPE":"방문유형"
+	,"VISIT_DATE":"2019-09-23"},
+	{"CONFM_NO":"방문번호","CMG_INOUT":"처리시간","CMG_NOTES":"방문중"
+	,"CMG_ENTRC":"출입구","CONFM_NAME":"방문자명","CONFM_HP":"017"
 	,"COM_NAME":"방문지","VISIT_DESTI":"목적지","VISIT_TYPE":"방문유형"
 	,"VISIT_DATE":"2019-09-23"}
  ]

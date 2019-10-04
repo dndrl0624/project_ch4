@@ -1,14 +1,166 @@
 [
-
-	{"GMNG_NO":"반입번호","APLG_NAME":"tester","APLG_HP":"01012123200"
-	,"COM_NAME":"코스모","APLG_DESTI":"413호","APLG_REASON":"택배배달"
-	,"APLG_TRANS_DATE":"0123년45월78일","GMNG_NAME":"컴퓨터"
-	,"GMNG_TYPE":"Computer","GMNG_QUAN":"500"
-	,"GMNG_NOTES":"450대 반입 승인 / 50대 반품"}
+	{	"CONFM_NO":"물품번호","CONFM_STATE":"미반입"
+		,"CONFM_TRANS_DATE":"2019-10-01","CONFM_TRANS_TIME":"반입시간"
+		,"CONFM_NAME":"물품명","CONFM_TYPE":"물품종류","CONFM_QUAN":"신청갯수"
+		,"CONFM_TRANS_QUAN":"반입개수","ERR_LOG":"오류내역"					}
 	,
-	{"GMNG_NO":"반입번호","APLG_NAME":"tester","APLG_HP":"01012123200"
-	,"COM_NAME":"코스모","APLG_DESTI":"413호","APLG_REASON":"택배배달"
-	,"APLG_TRANS_DATE":"0123년45월78일","GMNG_NAME":"컴퓨터"
-	,"GMNG_TYPE":"Computer","GMNG_QUAN":"500"
-	,"GMNG_NOTES":"450대 반입 승인 / 50대 반품"}
- ]
+	{	"CONFM_NO":"물품번호","CONFM_STATE":"미반입"
+		,"CONFM_TRANS_DATE":"2019-10-01","CONFM_TRANS_TIME":"반입시간"
+		,"CONFM_NAME":"코카콜라","CONFM_TYPE":"물품종류","CONFM_QUAN":"신청갯수"
+		,"CONFM_TRANS_QUAN":"반입개수","ERR_LOG":"오류내역"					}
+	,
+	{	"CONFM_NO":"물품번호","CONFM_STATE":"미반입"
+		,"CONFM_TRANS_DATE":"2019-10-01","CONFM_TRANS_TIME":"반입시간"
+		,"CONFM_NAME":"coke","CONFM_TYPE":"물품종류","CONFM_QUAN":"신청갯수"
+		,"CONFM_TRANS_QUAN":"반입개수","ERR_LOG":"오류내역"					}
+	,
+	{	"CONFM_NO":"물품번호","CONFM_STATE":"미반입"
+		,"CONFM_TRANS_DATE":"2019-10-01","CONFM_TRANS_TIME":"반입시간"
+		,"CONFM_NAME":"약초","CONFM_TYPE":"물품종류","CONFM_QUAN":"신청갯수"
+		,"CONFM_TRANS_QUAN":"반입개수","ERR_LOG":"오류내역"					}
+	,
+	{	"CONFM_NO":"물품번호","CONFM_STATE":"미반입"
+		,"CONFM_TRANS_DATE":"2019-10-01","CONFM_TRANS_TIME":"반입시간"
+		,"CONFM_NAME":"구론산","CONFM_TYPE":"물품종류","CONFM_QUAN":"신청갯수"
+		,"CONFM_TRANS_QUAN":"반입개수","ERR_LOG":"오류내역"					}
+	,
+	{	"CONFM_NO":"물품번호","CONFM_STATE":"미반입"
+		,"CONFM_TRANS_DATE":"2019-10-01","CONFM_TRANS_TIME":"반입시간"
+		,"CONFM_NAME":"핫식스","CONFM_TYPE":"물품종류","CONFM_QUAN":"신청갯수"
+		,"CONFM_TRANS_QUAN":"반입개수","ERR_LOG":"오류내역"					}
+	,
+	{	"CONFM_NO":"물품번호","CONFM_STATE":"미반입"
+		,"CONFM_TRANS_DATE":"2019-10-01","CONFM_TRANS_TIME":"반입시간"
+		,"CONFM_NAME":"레드불","CONFM_TYPE":"물품종류","CONFM_QUAN":"신청갯수"
+		,"CONFM_TRANS_QUAN":"반입개수","ERR_LOG":"오류내역"					}
+	,
+	{	"CONFM_NO":"물품번호","CONFM_STATE":"미반입"
+		,"CONFM_TRANS_DATE":"2019-10-01","CONFM_TRANS_TIME":"반입시간"
+		,"CONFM_NAME":"물품명","CONFM_TYPE":"물품종류","CONFM_QUAN":"신청갯수"
+		,"CONFM_TRANS_QUAN":"반입개수","ERR_LOG":"오류내역"					}
+	,
+	{	"CONFM_NO":"물품번호","CONFM_STATE":"미반입"
+		,"CONFM_TRANS_DATE":"2019-10-01","CONFM_TRANS_TIME":"반입시간"
+		,"CONFM_NAME":"물품명","CONFM_TYPE":"물품종류","CONFM_QUAN":"신청갯수"
+		,"CONFM_TRANS_QUAN":"반입개수","ERR_LOG":"오류내역"					}
+	,
+	{	"CONFM_NO":"물품번호","CONFM_STATE":"미반입"
+		,"CONFM_TRANS_DATE":"2019-10-01","CONFM_TRANS_TIME":"반입시간"
+		,"CONFM_NAME":"물품명","CONFM_TYPE":"물품종류","CONFM_QUAN":"신청갯수"
+		,"CONFM_TRANS_QUAN":"반입개수","ERR_LOG":"오류내역"					}
+	,
+	{	"CONFM_NO":"물품번호","CONFM_STATE":"반입완료"
+		,"CONFM_TRANS_DATE":"2019-10-02","CONFM_TRANS_TIME":"반입시간"
+		,"CONFM_NAME":"물품명","CONFM_TYPE":"물품종류","CONFM_QUAN":"신청갯수"
+		,"CONFM_TRANS_QUAN":"반입개수","ERR_LOG":"오류내역"					}
+	,
+	{	"CONFM_NO":"물품번호","CONFM_STATE":"반입완료"
+		,"CONFM_TRANS_DATE":"2019-10-02","CONFM_TRANS_TIME":"반입시간"
+		,"CONFM_NAME":"물품명","CONFM_TYPE":"물품종류","CONFM_QUAN":"신청갯수"
+		,"CONFM_TRANS_QUAN":"반입개수","ERR_LOG":"오류내역"					}
+	,
+	{	"CONFM_NO":"물품번호","CONFM_STATE":"반입완료"
+		,"CONFM_TRANS_DATE":"2019-10-02","CONFM_TRANS_TIME":"반입시간"
+		,"CONFM_NAME":"물품명","CONFM_TYPE":"물품종류","CONFM_QUAN":"신청갯수"
+		,"CONFM_TRANS_QUAN":"반입개수","ERR_LOG":"오류내역"					}
+	,
+	{	"CONFM_NO":"물품번호","CONFM_STATE":"반입완료"
+		,"CONFM_TRANS_DATE":"2019-10-02","CONFM_TRANS_TIME":"반입시간"
+		,"CONFM_NAME":"물품명","CONFM_TYPE":"물품종류","CONFM_QUAN":"신청갯수"
+		,"CONFM_TRANS_QUAN":"반입개수","ERR_LOG":"오류내역"					}
+	,
+	{	"CONFM_NO":"물품번호","CONFM_STATE":"반입완료"
+		,"CONFM_TRANS_DATE":"2019-10-02","CONFM_TRANS_TIME":"반입시간"
+		,"CONFM_NAME":"물품명","CONFM_TYPE":"물품종류","CONFM_QUAN":"신청갯수"
+		,"CONFM_TRANS_QUAN":"반입개수","ERR_LOG":"오류내역"					}
+	,
+	{	"CONFM_NO":"물품번호","CONFM_STATE":"반입완료"
+		,"CONFM_TRANS_DATE":"2019-10-02","CONFM_TRANS_TIME":"반입시간"
+		,"CONFM_NAME":"물품명","CONFM_TYPE":"물품종류","CONFM_QUAN":"신청갯수"
+		,"CONFM_TRANS_QUAN":"반입개수","ERR_LOG":"오류내역"					}
+	,
+	{	"CONFM_NO":"물품번호","CONFM_STATE":"반입완료"
+		,"CONFM_TRANS_DATE":"2019-10-02","CONFM_TRANS_TIME":"반입시간"
+		,"CONFM_NAME":"물품명","CONFM_TYPE":"물품종류","CONFM_QUAN":"신청갯수"
+		,"CONFM_TRANS_QUAN":"반입개수","ERR_LOG":"오류내역"					}
+	,
+	{	"CONFM_NO":"물품번호","CONFM_STATE":"취소"
+		,"CONFM_TRANS_DATE":"2019-10-02","CONFM_TRANS_TIME":"반입시간"
+		,"CONFM_NAME":"물품명","CONFM_TYPE":"물품종류","CONFM_QUAN":"신청갯수"
+		,"CONFM_TRANS_QUAN":"반입개수","ERR_LOG":"오류내역"					}
+	,
+	{	"CONFM_NO":"물품번호","CONFM_STATE":"취소"
+		,"CONFM_TRANS_DATE":"2019-10-02","CONFM_TRANS_TIME":"반입시간"
+		,"CONFM_NAME":"물품명","CONFM_TYPE":"물품종류","CONFM_QUAN":"신청갯수"
+		,"CONFM_TRANS_QUAN":"반입개수","ERR_LOG":"오류내역"					}
+	,
+	{	"CONFM_NO":"물품번호","CONFM_STATE":"취소"
+		,"CONFM_TRANS_DATE":"2019-10-02","CONFM_TRANS_TIME":"반입시간"
+		,"CONFM_NAME":"물품명","CONFM_TYPE":"물품종류","CONFM_QUAN":"신청갯수"
+		,"CONFM_TRANS_QUAN":"반입개수","ERR_LOG":"오류내역"					}
+	,
+	{	"CONFM_NO":"물품번호","CONFM_STATE":"취소"
+		,"CONFM_TRANS_DATE":"2019-10-02","CONFM_TRANS_TIME":"반입시간"
+		,"CONFM_NAME":"물품명","CONFM_TYPE":"물품종류","CONFM_QUAN":"신청갯수"
+		,"CONFM_TRANS_QUAN":"반입개수","ERR_LOG":"오류내역"					}
+	,
+	{	"CONFM_NO":"물품번호","CONFM_STATE":"취소"
+		,"CONFM_TRANS_DATE":"2019-10-03","CONFM_TRANS_TIME":"반입시간"
+		,"CONFM_NAME":"물품명","CONFM_TYPE":"물품종류","CONFM_QUAN":"신청갯수"
+		,"CONFM_TRANS_QUAN":"반입개수","ERR_LOG":"오류내역"					}
+	,
+	{	"CONFM_NO":"물품번호","CONFM_STATE":"취소"
+		,"CONFM_TRANS_DATE":"2019-10-03","CONFM_TRANS_TIME":"반입시간"
+		,"CONFM_NAME":"물품명","CONFM_TYPE":"물품종류","CONFM_QUAN":"신청갯수"
+		,"CONFM_TRANS_QUAN":"반입개수","ERR_LOG":"오류내역"					}
+	,
+	{	"CONFM_NO":"물품번호","CONFM_STATE":"취소"
+		,"CONFM_TRANS_DATE":"2019-10-03","CONFM_TRANS_TIME":"반입시간"
+		,"CONFM_NAME":"물품명","CONFM_TYPE":"물품종류","CONFM_QUAN":"신청갯수"
+		,"CONFM_TRANS_QUAN":"반입개수","ERR_LOG":"오류내역"					}
+	,
+	{	"CONFM_NO":"물품번호","CONFM_STATE":"오류"
+		,"CONFM_TRANS_DATE":"2019-10-03","CONFM_TRANS_TIME":"반입시간"
+		,"CONFM_NAME":"물품명","CONFM_TYPE":"물품종류","CONFM_QUAN":"신청갯수"
+		,"CONFM_TRANS_QUAN":"반입개수","ERR_LOG":"오류내역"					}
+	,
+	{	"CONFM_NO":"물품번호","CONFM_STATE":"오류"
+		,"CONFM_TRANS_DATE":"2019-10-03","CONFM_TRANS_TIME":"반입시간"
+		,"CONFM_NAME":"물품명","CONFM_TYPE":"물품종류","CONFM_QUAN":"신청갯수"
+		,"CONFM_TRANS_QUAN":"반입개수","ERR_LOG":"오류내역"					}
+	,
+	{	"CONFM_NO":"물품번호","CONFM_STATE":"오류"
+		,"CONFM_TRANS_DATE":"2019-10-03","CONFM_TRANS_TIME":"반입시간"
+		,"CONFM_NAME":"물품명","CONFM_TYPE":"물품종류","CONFM_QUAN":"신청갯수"
+		,"CONFM_TRANS_QUAN":"반입개수","ERR_LOG":"오류내역"					}
+	,
+	{	"CONFM_NO":"물품번호","CONFM_STATE":"오류"
+		,"CONFM_TRANS_DATE":"2019-10-03","CONFM_TRANS_TIME":"반입시간"
+		,"CONFM_NAME":"물품명","CONFM_TYPE":"물품종류","CONFM_QUAN":"신청갯수"
+		,"CONFM_TRANS_QUAN":"반입개수","ERR_LOG":"오류내역"					}
+	,
+	{	"CONFM_NO":"물품번호","CONFM_STATE":"오류"
+		,"CONFM_TRANS_DATE":"2019-10-04","CONFM_TRANS_TIME":"반입시간"
+		,"CONFM_NAME":"물품명","CONFM_TYPE":"물품종류","CONFM_QUAN":"신청갯수"
+		,"CONFM_TRANS_QUAN":"반입개수","ERR_LOG":"오류내역"					}
+	,
+	{	"CONFM_NO":"물품번호","CONFM_STATE":"반입완료"
+		,"CONFM_TRANS_DATE":"2019-10-04","CONFM_TRANS_TIME":"반입시간"
+		,"CONFM_NAME":"물품명","CONFM_TYPE":"물품종류","CONFM_QUAN":"신청갯수"
+		,"CONFM_TRANS_QUAN":"반입개수","ERR_LOG":"오류내역"					}
+	,
+	{	"CONFM_NO":"물품번호","CONFM_STATE":"반입완료"
+		,"CONFM_TRANS_DATE":"2019-10-04","CONFM_TRANS_TIME":"반입시간"
+		,"CONFM_NAME":"물품명","CONFM_TYPE":"물품종류","CONFM_QUAN":"신청갯수"
+		,"CONFM_TRANS_QUAN":"반입개수","ERR_LOG":"오류내역"					}
+	,
+	{	"CONFM_NO":"물품번호","CONFM_STATE":"반입완료"
+		,"CONFM_TRANS_DATE":"2019-10-04","CONFM_TRANS_TIME":"반입시간"
+		,"CONFM_NAME":"물품명","CONFM_TYPE":"물품종류","CONFM_QUAN":"신청갯수"
+		,"CONFM_TRANS_QUAN":"반입개수","ERR_LOG":"오류내역"					}
+	,
+	{	"CONFM_NO":"물품번호","CONFM_STATE":"반입완료"
+		,"CONFM_TRANS_DATE":"2019-10-04","CONFM_TRANS_TIME":"반입시간"
+		,"CONFM_NAME":"물품명","CONFM_TYPE":"물품종류","CONFM_QUAN":"신청갯수"
+		,"CONFM_TRANS_QUAN":"반입개수","ERR_LOG":"오류내역"					}
+]
