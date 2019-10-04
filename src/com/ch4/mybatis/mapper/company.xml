@@ -1,64 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ch4.mybatis.mapper.CompanyMapper">
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<!-- ============================= 아직 확인 안됨 ====================================== -->
-	
 	<!-- 로그인 프로시저-->
-	<select id="companyLogin" parameterType="map" statementType="CALLABLE">
+	<update id="companyLogin" parameterType="map" statementType="CALLABLE">
 		{call proc_companyLogin(#{cmng_id,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
 								,#{cmng_pw,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
 								,#{msg,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+								,#{result,mode=OUT, jdbcType=INTEGER, javaType=int}
 								)}
-	</select>
+	</update>
 	
 	<!-- 회원가입 아이디 중복검사 프로시저  -->
-	<insert id="isExistID" parameterType="map" statementType="CALLABLE">
+	<update id="isExistID" parameterType="map" statementType="CALLABLE">
 		{call proc_isExistID(#{cmng_id,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
 							,#{msg,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+							,#{result,mode=OUT, jdbcType=INTEGER, javaType=int}
 							)}	
-	</insert>
+	</update>
 	
 	<!-- 회원가입  -->
 	<insert id="companyJoin" parameterType="map">
-		insert into company_manage(cmng_id, cmng_pw, cmng_name, cmng_grade, cmng_hp, dept_no)
-		values (#{cmng_id},#{cmng_pw},#{cmng_name},#{cmng_grade},#{cmng_hp},#{dept_no})
+		insert into company_manage(cmng_no, cmng_id, cmng_pw, cmng_name, cmng_grade, cmng_hp, dept_no)
+		values ('CM'||to_char(systimestamp + (INTERVAL '9' HOUR),'YYMMDDFF3')||dbms_random.string('x',3)
+		,#{cmng_id},#{cmng_pw},#{cmng_name},#{cmng_grade},#{cmng_hp},#{dept_no})
 	</insert>
 
 	<!-- 출입로그 조회  -->
 	<select id="inOutList" parameterType="map" resultType="map">
-		select cmg_inout, cmg_entrc, cmg_notes
-		  from cmg_log
-		 where confm_qrcode = #{confm_qrcode}
+		select cmg_inout, cmg_entrc, cmg_notes, confm_no, confm_name, confm_hp, visit_desti
+		  from cmg_log cl, visit_confm vc, cmg_confm cc, visit_apply va
+		 where cl.confm_qrcode = vc.confm_qrcode
+		   and vc.confm_no = cc.confm_no
+		   and cc.visit_no = va.visit_no
+		<!-- 검색조건 : 방문일자 -->
+		<if test="confm_visit_date != null">
+			and confm_visit_date = #{confm_visit_date}
+		</if>
+		<!-- 검색조건 : 방문일자(기간) -->
+		<if test="confm_visit_date1 != null">
+			and confm_visit_date >= #{confm_visit_date1}
+			<if test="confm_visit_date2 != null">
+			<![CDATA[and confm_visit_date <= #{confm_visit_date2}]]>
+			</if>
+		</if>
+		<!-- 검색조건 : 신청자명 -->
+		<if test="visit_apply_name != null">
+			and visit_apply_name = #{visit_apply_name}
+		</if>
+		<!-- 검색조건 : 신청자연락처 -->
+		<if test="visit_apply_hp != null">
+			and visit_apply_hp = #{visit_apply_hp}
+		</if>
+		<!-- 검색조건 : 방문자명 -->
+		<if test="confm_name != null">
+			and confm_name like '%'||#{confm_name}||'%'
+		</if>
+		<!-- 검색조건 : 방문자연락처 -->
+		<if test="confm_hp != null">
+			and confm_hp = #{confm_hp}
+		</if>
+		<!-- 검색조건 : 처리상태-->
+		<if test="cmg_notes != null">
+			and cmg_notes = #{cmg_notes}
+		</if>
 	</select>
-	
 </mapper>

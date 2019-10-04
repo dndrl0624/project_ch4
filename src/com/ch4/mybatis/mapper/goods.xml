@@ -11,9 +11,12 @@
     </insert>
 	
 	<!-- 반입 신청 취소 (결제상태 변경)-->
-   <update id="goodsApplyCancle" parameterType="map" statementType="CALLABLE">
-      {call proc_goodsCancle(#{aplg_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String})}
-   </update>
+	<update id="goodsApplyCancle" parameterType="map" statementType="CALLABLE">
+		{call proc_goodsCancle(
+			#{aplg_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+			,#{result,mode=OUT, jdbcType=INTEGER, javaType=int}
+		)}
+	</update>
 	
 	<!-- QR코드 조회(goods) -->
    <select id="goodsQRcode" parameterType="map" resultType="map">
@@ -33,7 +36,16 @@
 				,#{aplg_desti}, #{aplg_trans_date}, #{aplg_hp}, #{com_no})
     </insert>
 
-	
+	<!-- 반입 신청 변경 -->
+	<update id="goodsApplyUpdate" parameterType="map" statementType="CALLABLE">
+		{call proc_gApplyUpd(
+			#{aplg_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+			,#{aplg_reason, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+			,#{aplg_desti, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+			,#{aplg_trans_date, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+			,#{result,mode=OUT, jdbcType=INTEGER, javaType=int}
+		)}
+	</update>
 	
 	
 	
@@ -43,14 +55,6 @@
 
 <!-- ================================================================ -->
 
-	<!-- 반입 신청 변경 -->
-	<update id="goodsApplyUpdate" parameterType="map">
-		update goods_apply
-           set aplg_reason = #{aplg_reason}
-              ,aplg_desti = #{aplg_desti}
-              ,aplg_trans_date = #{aplg_trans_date}
-         where aplg_no = #{aplg_no}
-	</update>
 	<!-- 반입 신청 변경(물품관리 삭제) -->
 	<update id="goodsSubDelete" parameterType="map">
 		delete from goods_mng
