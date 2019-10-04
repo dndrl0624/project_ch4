@@ -17,23 +17,15 @@
 		values ('KN'||to_char(systimestamp + (INTERVAL '9' HOUR),'YYYYMMDDFF3')||dbms_random.string('x',3)
 				, #{kiosk_gate}, #{kiosk_st}, #{kiosk_notes}, #{com_no})
 	</insert>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<!-- ================================================================== -->
-	<!-- QR전송 프로시저 -->
-	<select id="confirmQR" parameterType="map" statementType="CALLABLE">
-		{call proc_confirmQR(#{confm_qrcode,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+
+	<!-- 방문 QR전송 프로시저 -->
+	<select id="confirmVQR" parameterType="map" statementType="CALLABLE">
+		{call proc_confirmQR(#{p_qrcode,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+							,#{p_kno,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
 							,#{msg,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+							,#{inout,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+							,#{result, mode=OUT, jdbcType=INTEGER, javaType=int}
 							)}
 	</select>
-	
 	
 </mapper>  

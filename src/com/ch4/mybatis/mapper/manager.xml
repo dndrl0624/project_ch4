@@ -26,6 +26,15 @@
       )}
 	</update>
 	
+	<!-- 방문 출입 QR코드 조회 -->
+   <select id="visitorQRcode" parameterType="map" resultType="map">
+		select confm_qrcode
+			from cmg_confm
+			where confm_name = #{confm_name}
+			and confm_hp = #{confm_hp}
+			and confm_no = #{confm_no}
+   </select>
+   
 	<!-- 방문 출입 QR코드 등록 -->
 	<insert id = "visitorQRAdd" parameterType="map">
 		insert into cmg_confm (confm_qrcode, confm_name, confm_hp, confm_no)
@@ -93,16 +102,4 @@
 		   set aplg_permit_st = #{aplg_permit_st}
 		 where aplg_no = #{aplg_no}
 	</update>
-
-	<!-- 방문 출입 QR코드 조회 -->
-	<select id="visitorQR" parameterType="map" resultType="map">
-		select confm_qrcode
-		  from cmg_confm
-		 where confm_name = #{confm_name}
-		   and confm_hp = #{confm_hp}
-		   and confm_no = #{confm_no}
-	</select>
-	
-	
-
 </mapper>  

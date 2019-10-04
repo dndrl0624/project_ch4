@@ -62,23 +62,4 @@
          #{result, mode=OUT, jdbcType=INTEGER, javaType=int}
       )}
    </update>
-   
-   
-   
-   
-   
-   
-   
-   
-<!-- ========================================================================== -->   
-   
-   <!-- QR코드 조회(visitor) -->
-   <select id="visitorQRcode" parameterType="map" resultType="map">
-		select confm_qrcode
-			from cmg_confm
-			where confm_name = #{confm_name}
-			and confm_hp = #{confm_hp}
-			and confm_no = #{confm_no}
-   </select>
-
 </mapper>
