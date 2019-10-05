@@ -49,7 +49,10 @@
             return;
         }
         else{
-           // $('#fsignin').submit();
+        	//전송
+        	$('#fkiosk_signin').attr("method","get");
+    		$('#fkiosk_signin').attr("action","kiosk/kioskLogin.ch4?"); //전송을 하는 곳.
+    		$('#fkiosk_signin').submit(); 
         }
 	}
 </script>
@@ -94,7 +97,7 @@
 			<!-- 키오스크 로그인화면 -->
 			<h1 style="font-size: 50px;">Please sign in</h1>
 			&nbsp;
-			<form class="fsignin">
+			<form class="fkiosk_signin">
 				<div class="row">
 					<div class="row">
 						<input id="kiosk_id" class="easyui-textbox" prompt="  id" 
