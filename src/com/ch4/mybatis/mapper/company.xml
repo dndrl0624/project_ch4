@@ -64,5 +64,73 @@
 			and cmg_notes = #{cmg_notes}
 		</if>
 	</select>
-	
+	<!-- 방문현황조회 -->
+	<select id="vLogSearch">
+		select confm_no,confm_name,confm_hp,confm_desti,cmg_inout,cmg_entrc,cmg_notes
+		  from cmg_log cl, cmg_confm cc
+		 where cl.confm_qrcode = cc.confm_qrcode
+		<!-- 검색조건  : 방문일자-->
+		<if test="confm_visit_date != null">
+			and confm_visit_date = #{confm_visit_date}
+		</if>
+		<!-- 검색조건 : 방문번호 -->
+		<if test="confm_no != null">
+			and confm_no = #{confm_no}
+		</if>
+		<!-- 검색조건 : 방문자명 -->
+		<if test="confm_name != null">
+			and confm_name like '%'||#{confm_name}||'%'
+		</if>
+		<!-- 검색조건 : 방문장소 -->
+		<if test="confm_desti != null">
+			and confm_desti like '%'||#{confm_desti}||'%'
+		</if>
+		<!-- 검색조건 : 방문상태 -->
+		<if test="cmg_notes != null">
+			and cmg_notes = #{cmg_notes}
+		</if>
+		<!-- 검색조건 : 출입시간 -->
+		<if test="cmg_inout != null">
+			and substr(cmg_inout,4,2) = #{cmg_inout}
+		</if>
+	</select>
+	<!-- 반입현황조회 -->
+	<select id="gLogSearch">
+		select confm_no,confm_desti,confm_state,confm_name,confm_type,confm_quan
+				,confm_trans_quan,confm_trans_time
+		  from goods_confm gc, goods_apply ga
+		   and gc.aplg_no = ga.aplg_no
+		<!-- 검색조건 : 반입일자 -->
+		<if test="aplg_date != null">
+			and aplg_date = #{aplg_date}
+		</if>
+		<!-- 검색조건 : 실반입일자 -->
+		<if test="confm_trans_date != null">
+			and aplg_date = #{aplg_date}
+		</if>
+		<!-- 검색조건 : 물품번호 -->
+		<if test="confm_no != null">
+			and confm_no = #{confm_no}
+		</if>
+		<!-- 검색조건 : 신청번호 -->
+		<if test="aplg_no != null">
+			and gc.aplg_no = #{aplg_no}
+		</if>
+		<!-- 검색조건 : 물품명 -->
+		<if test="confm_name != null">
+			and confm_name = #{confm_name}
+		</if>
+		<!-- 검색조건 : 반입장소 -->
+		<if test="confm_desti != null">
+			and confm_desti = #{confm_desti}
+		</if>
+		<!-- 검색조건 : 반입상태 -->
+		<if test="confm_state != null">
+			confm_state = #{confm_state}
+		</if>
+		<!-- 검색조건 : 반입시간 -->
+		<if test="confm_trans_time != null">
+			and substr(confm_trans_time,4,2) = #{confm_trans_time}
+		</if>
+	</select>
 </mapper>

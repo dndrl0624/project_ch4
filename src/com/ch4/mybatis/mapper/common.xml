@@ -66,9 +66,9 @@
 		<!-- 검색 : 신청일자(기간으로) -->
 		<if test="visit_apply_date1 != null">
 			and visit_apply_date >= #{visit_apply_date1}
-			<if test="visit_apply_date2 != null">
-			<![CDATA[and visit_date <= #{visit_apply_date2}]]>
-			</if>
+		</if>
+		<if test="visit_apply_date2 != null">
+		<![CDATA[and visit_date <= #{visit_apply_date2}]]>
 		</if>
 		<!-- 검색 : 방문일자 -->
 		<if test="visit_date != null">
@@ -77,9 +77,9 @@
 		<!-- 검색 : 방문일자(기간으로) -->
 		<if test="viist_date1 != null">
 			and visit_date >= #{visit_date1}
-			<if test="visit_date2 != null">
-			<![CDATA[and visit_date <= #{visit_date2}]]>
-			</if>
+		</if>
+		<if test="visit_date2 != null">
+		<![CDATA[and visit_date <= #{visit_date2}]]>
 		</if>
 		<!-- 검색 : 방문유형 -->
 		<if test="visit_type != null">
@@ -223,9 +223,9 @@
 	   		<!-- 검색 : 신청일자(기간) -->
 	   		<if test="aplg_date1 != null">
 	   			and aplg_date >= #{aplg_date1}
-	   			<if test="aplg_date2 != null">
-	   			<![CDATA[and aplg_date <= #{aplg_date2}]]>
-	   			</if>
+	   		</if>
+	   		<if test="aplg_date2 != null">
+	   		<![CDATA[and aplg_date <= #{aplg_date2}]]>
 	   		</if>
 	   		<!-- 검색 : 반입일자 -->
 	   		<if test="aplg_trans_date != null">
@@ -234,9 +234,9 @@
 	   		<!-- 검색 : 반입일자 (기간)-->
 	   		<if test="aplg_trans_date1 != null">
 	   			and aplg_trans_date >= #{aplg_trans_date1}
-	   			<if test="aplg_trans_date2 != null">
-	   			<![CDATA[and aplg_trans_date <= #{aplg_trans_date2}]]>
-	   			</if>
+	   		</if>
+	   		<if test="aplg_trans_date2 != null">
+	   		<![CDATA[and aplg_trans_date <= #{aplg_trans_date2}]]>
 	   		</if>
 	   		<!-- 검색 : 신청연별 -->
 			<if test="aplg_year != null">
@@ -283,4 +283,5 @@
 			</if>
 		</where>
 	</select>
+	
 </mapper>
