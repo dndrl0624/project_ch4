@@ -12,6 +12,12 @@
 		  from dept
 		 where com_no = #{com_no}
 	</select>	
+	<!-- 목적지명단 콤보박스 -->
+	<select id="destiCombo">
+		select desti_no, desti_name
+		  from destination
+		 where com_no = #{com_no}
+	</select>
 	<!-- 방문신청테이블 + 회사이름 조회  -->
 	<select id="visitorApplySearch" parameterType="map" resultType="map">
 		select visit_no, visit_apply_name, visit_apply_date, visit_apply_hp, visit_purps, visit_desti

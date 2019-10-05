@@ -7,15 +7,15 @@
 	<!-- visitorQR코드 DB에 저장 -->
 	<insert id="vApplyConfirm" parameterType="map">
 		<foreach collection="confirmList" item="item" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
-		into cmg_confm(confm_qrcode, confm_visit_date, confm_name, confm_hp, confm_no)
-		values(#{item.confm_qrcode},#{item.confm_visit_date},#{item.confm_name},#{item.confm_hp},#{confm_no})
+		into cmg_confm(confm_qrcode, confm_visit_date, confm_name, confm_hp, confm_desti, confm_no)
+		values(#{item.confm_qrcode},#{item.confm_visit_date},#{item.confm_name},#{item.confm_hp},#{item.confm_desti},#{confm_no})
 		</foreach>
 	</insert>
 	<!-- goodsQR코드 DB에 저장 -->
 	<insert id="gApplyConfirm" parameterType="map">
 		<foreach collection="confirmList" item="item" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
-		into goods_confm(confm_qrcode, confm_type, confm_name, confm_quan, aplg_no)
-		values(#{item.confm_qrcode},#{item.confm_type},#{item.confm_name},#{item.confm_quan},#{aplg_no})
+		into goods_confm(confm_qrcode, confm_type, confm_name, confm_quan, comfn_desti, aplg_no)
+		values(#{item.confm_qrcode},#{item.confm_type},#{item.confm_name},#{item.confm_quan},#{item.confm_desti},#{aplg_no})
 		</foreach>
 	</insert>
 	

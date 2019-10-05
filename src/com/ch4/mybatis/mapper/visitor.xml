@@ -12,20 +12,23 @@
 		   and confm_hp = #{confm_hp}
    </select>
 	<!-- 신청 내용 작성  (기본정보)-->
-	<insert id="visitorApplyAdd" parameterType="map">
-		insert into visit_apply (com_no, visit_no, visit_apply_name, visit_purps, visit_desti, visit_type
-								, visit_date, visit_apply_hp, visit_vhcle_encc, visit_tkin_encc
-								<if test="visit_term != null and visit_day != null">
-									, visit_term, visit_day
-								</if>
-								)
-		values (#{com_no}, 'VA'||to_char(systimestamp + (INTERVAL '9' HOUR),'YYYYMMDDFF3')||dbms_random.string('x',3), #{visit_apply_name}, #{visit_purps}, #{visit_desti}, #{visit_type}
-				, #{visit_date}, #{visit_apply_hp}, #{visit_vhcle_encc}, #{visit_tkin_encc}
-				<if test="visit_term != null and visit_day != null">
-		        	, #{visit_term}, #{visit_day}
-				</if>
-				)
-	</insert>
+	<update id="visitorApplyAdd" parameterType="map" statementType="CALLABLE">
+		{call proc_vApplyAdd(
+			#{visit_apply_name, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_apply_hp, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_purps, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_desti, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_type, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_term, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_day, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_date, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_tkin_encc, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_vhcle_encc, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{com_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_no, mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{result, mode=OUT, jdbcType=INTEGER, javaType=int},
+		)}
+	</update>
 	 <!-- 신청 내용 작성 (방문자) -->
 	<insert id="visitorAdd" parameterType="map">
 		<foreach collection="vtAddList" item="it" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
