@@ -95,24 +95,6 @@
 <body>
 <%@ include file="/View/CommonForm/Top.jsp"%>
 <script>
-	$(document).ready(function(){
-		//방문지 초기화
-		$("#combo_company").combobox({
-			valueField: 'com_no',
-			textField: 'com_name',
-			url: "/visitor/companyList.ch4",
-			onChange:function(newValue){
-				//alert("방문지: "+$("#combo_company").combobox('getValue'));
-				var com_name = $(this).textbox('getText');
-				$("#com_name").attr("value",com_name);
-				$("#combo_desti").combobox({
-					valueField: 'dept_name',
-					textField: 'dept_name',
-					url: "/visitor/deptList.ch4?cmpCode="+newValue
-				});
-			}
-		});
-	});
 	//입력값을 약관동의 페이지로 가져가는 함수
 	function applyNext(){
 		//url정해지면 삭제 예정
@@ -267,6 +249,25 @@
 		</div>
 	</div>
 </div>
-
 </body>
+<script type="text/javascript">
+$(document).ready(function(){
+	//방문지 초기화
+	$("#combo_company").combobox({
+		valueField: 'com_no',
+		textField: 'com_name',
+		url: "/visitor/companyList.ch4",
+		onChange:function(newValue){
+			//alert("방문지: "+$("#combo_company").combobox('getValue'));
+			var com_name = $(this).textbox('getText');
+			$("#com_name").attr("value",com_name);
+			$("#combo_desti").combobox({
+				valueField: 'dept_name',
+				textField: 'dept_name',
+				url: "/visitor/deptList.ch4?com_no="+newValue
+			});
+		}
+	});
+});
+</script>
 </html>

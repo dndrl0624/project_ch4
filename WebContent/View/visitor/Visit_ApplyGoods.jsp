@@ -1,26 +1,32 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	//Main -> Agreement -> Select -> ApplyGoods (세션값 꺼내기)
 	String com_no = "null";
-	if(null!=request.getSession().getAttribute("com_no")){
-		com_no = (String)request.getSession().getAttribute("com_no");
+	Map<String,Object> pMap = new HashMap<>();
+	if(null!=request.getSession().getAttribute("pMap")){
+		pMap = (Map<String,Object>)request.getSession().getAttribute("pMap");
+	}
+	if(null!=pMap.get("COM_NO")){
+		com_no = (String)pMap.get("COM_NO");
 	}
 	String com_name = "null";
-	if(null!=request.getSession().getAttribute("com_name")){
-		com_name = (String)request.getSession().getAttribute("com_name");
+	if(null!=pMap.get("COM_NAME")){
+		com_name = (String)pMap.get("COM_NAME");
 	}
 	String aplg_desti = "null";
-	if(null!=request.getSession().getAttribute("aplg_desti")){
-		aplg_desti = (String)request.getSession().getAttribute("aplg_desti");
+	if(null!=pMap.get("APLG_DESTI")){
+		aplg_desti = (String)pMap.get("APLG_DESTI");
 	}
 	String aplg_name = "null";
-	if(null!=request.getSession().getAttribute("aplg_name")){
-		aplg_name = (String)request.getSession().getAttribute("aplg_name");
+	if(null!=pMap.get("APLG_NAME")){
+		aplg_name = (String)pMap.get("APLG_NAME");
 	}
 	String aplg_hp = "null";
-	if(null!=request.getSession().getAttribute("aplg_hp")){
-		aplg_hp = (String)request.getSession().getAttribute("aplg_hp");
+	if(null!=pMap.get("APLG_HP")){
+		aplg_hp = (String)pMap.get("APLG_HP");
 	}
 %>
 <!DOCTYPE html>
@@ -130,7 +136,7 @@
 		$("#aplg_desti").combobox({
 			valueField: 'dept_name',
 			textField: 'dept_name',
-			url: "/visitor/deptList.ch4?cmpCode="+<%=com_no %>
+			url: "/visitor/deptList.ch4?com_no="+'<%=com_no %>'
 		});
 		$("#aplg_desti").combobox('select','<%=aplg_desti%>');
 		//반입일자 선택 범위 (당일~내년 당일) 제한

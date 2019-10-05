@@ -1,26 +1,32 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	//Main -> Agreement -> Select -> ApplyVisitor (세션값 꺼내기)
 	String com_no = "null";
-	if(null!=request.getSession().getAttribute("com_no")){
-		com_no = (String)request.getSession().getAttribute("com_no");
+	Map<String,Object> pMap = new HashMap<>();
+	if(null!=request.getSession().getAttribute("pMap")){
+		pMap = (Map<String,Object>)request.getSession().getAttribute("pMap");
+	}
+	if(null!=pMap.get("COM_NO")){
+		com_no = (String)pMap.get("COM_NO");
 	}
 	String com_name = "null";
-	if(null!=request.getSession().getAttribute("com_name")){
-		com_name = (String)request.getSession().getAttribute("com_name");
+	if(null!=pMap.get("COM_NAME")){
+		com_name = (String)pMap.get("COM_NAME");
 	}
 	String visit_desti = "null";
-	if(null!=request.getSession().getAttribute("visit_desti")){
-		visit_desti = (String)request.getSession().getAttribute("visit_desti");
+	if(null!=pMap.get("VISIT_DESTI")){
+		visit_desti = (String)pMap.get("VISIT_DESTI");
 	}
 	String visit_apply_name = "null";
-	if(null!=request.getSession().getAttribute("visit_apply_name")){
-		visit_apply_name = (String)request.getSession().getAttribute("visit_apply_name");
+	if(null!=pMap.get("VISIT_APPLY_NAME")){
+		visit_apply_name = (String)pMap.get("VISIT_APPLY_NAME");
 	}
 	String visit_apply_hp = "null";
-	if(null!=request.getSession().getAttribute("visit_apply_hp")){
-		visit_apply_hp = (String)request.getSession().getAttribute("visit_apply_hp");
+	if(null!=pMap.get("VISIT_APPLY_HP")){
+		visit_apply_hp = (String)pMap.get("VISIT_APPLY_HP");
 	}
 %>
 <!DOCTYPE html>
@@ -156,7 +162,7 @@
 		$("#visit_desti").combobox({
 			valueField: 'dept_name',
 			textField: 'dept_name',
-			url: "/visitor/deptList.ch4?cmpCode="+<%=com_no %>
+			url: "/visitor/deptList.ch4?com_no="+'<%=com_no %>'
 		});
 		$("#visit_desti").combobox('select','<%=visit_desti%>');
 		///////////////////////// 방문이력 이벤트  //////////////////////////
