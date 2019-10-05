@@ -1,6 +1,7 @@
 package com.ch4.pojo;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,6 +16,9 @@ public class ActionServlet extends HttpServlet {
 	String viewPath = "../View";
 	public void doService(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException,IOException{
+		
+		req.setCharacterEncoding("UTF-8");
+	    res.setCharacterEncoding("UTF-8");
 		
 		/******************************************************s
 		 * requestURI  : 요청주소에서 호스트부분을 제외한 주소                   *
@@ -43,6 +47,13 @@ public class ActionServlet extends HttpServlet {
 		
 		if((controller==null) && (rController != null)) { // RestController인 경우
 			logger.info("RestController 호출 성공");
+			try {
+				String json = rController.execute(req, res);
+				PrintWriter out = res.getWriter();
+				out.write(json);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			
 		}
 		else if(controller!=null) { // 그외인 경우

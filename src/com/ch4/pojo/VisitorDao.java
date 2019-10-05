@@ -26,13 +26,17 @@ public class VisitorDao {
 	 * 
 	 * 
 	 *******************/
-	public int visitApplyAdd(Map<String,Object> applyAdd) {
-		int result = 0;
-		result = sqlSession.insert("visitorApplyAdd", applyAdd);
-		if(result==1) {			
+
+	
+	public void visitApplyAdd(Map<String,Object> applyAdd) {
+		sqlSession.update("visitorApplyAdd", applyAdd);
+		int result = (int)applyAdd.get("result");
+		if(result==0) {	
+			return;
+		}
+		else if(result==1) {
 			sqlSession.commit();
 		}
-		return result;
 	}
 	
 	public int visitSubAdd(Map<String, Object> vtMap
@@ -42,21 +46,34 @@ public class VisitorDao {
 	{
 		int result = 0;
 		
-		result = sqlSession.insert("visitorAdd", vtMap);
-		if(result==1) {
-			result = sqlSession.insert("deviceAdd", tnMap);
-			if(result==1) {
-				result = sqlSession.insert("parkingAdd", pkMap);
+		int visitorNum = ((List<Map<String,Object>>)vtMap.get("vtAddList")).size();
+		int deviceNum = ((List<Map<String,Object>>)tnMap.get("tnAddList")).size();
+		int parkNum = ((List<Map<String,Object>>)pkMap.get("pkAddList")).size();
+		int rowNum = 0;
+		logger.info("visitorNum : " + visitorNum);
+		logger.info("deviceNum : " + deviceNum);
+		logger.info("parkNum : " + parkNum);
+		
+		rowNum = sqlSession.insert("visitorAdd", vtMap);
+		if(visitorNum==rowNum) {
+			result = 1;
+			rowNum = sqlSession.insert("deviceAdd", tnMap);
+			if(deviceNum==rowNum) {
+				result = 1;
+				rowNum = sqlSession.insert("parkingAdd", pkMap);
 			}
-			else if(result==0) {
+			else {
+				result = 0;
 				return result;
 			}
 		}
-		else if(result==0) {
+		else {
+			result = 0;
 			return result;
 		}
-		
-		sqlSession.commit();
+		if(result==1) {
+			sqlSession.commit();
+		}
 		return result;
 	}
 

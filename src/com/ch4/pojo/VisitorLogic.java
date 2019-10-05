@@ -4,12 +4,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 public class VisitorLogic {
+	Logger logger = Logger.getLogger(VisitorLogic.class);
 	VisitorDao vDao = null;
 	
 	public VisitorLogic() {
 		vDao = new VisitorDao();
 	}
+
 
 	public int visitApplyAdd(Map<String, Object> pMap) {
 		int result = 0;
@@ -21,13 +25,14 @@ public class VisitorLogic {
 		List<Map<String,Object>> tnAddList = (List<Map<String,Object>>) addInfo.get("tnAddList");
 		List<Map<String,Object>> pkAddList = (List<Map<String,Object>>) addInfo.get("pkAddList");
 		Map<String,Object> applyAdd = (Map<String,Object>) addInfo.get("applyAdd");
-		
-		result = vDao.visitApplyAdd(applyAdd);
+		vDao.visitApplyAdd(applyAdd);
+		result = (int)applyAdd.get("result");
 		if(result==0) {
 			return result;
 		}
 		else if(result==1){
 			visit_no = applyAdd.get("visit_no").toString();
+			pMap.put("visit_no", visit_no);
 			
 			Map<String, Object> vtMap = new HashMap<String, Object>();
 			vtMap.put("vtAddList", vtAddList);
@@ -40,13 +45,6 @@ public class VisitorLogic {
 			pkMap.put("visit_no", visit_no);
 			
 			result = vDao.visitSubAdd(vtMap,tnMap,pkMap);
-			if(result==0) {
-				return result;
-			}
-			else if(result==1) {
-				pMap.put("visit_no", visit_no);
-				return result;
-			}
 		}
 		
 		return result;
