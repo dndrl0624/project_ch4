@@ -295,10 +295,6 @@ figure.snip1200.hover p {
 		</div>
 	</div>
 </div>
-
-
-
-  
  
 <!-- 공통 Footer -->
 <%@ include file="/View/CommonForm/Footer.jsp"%>
