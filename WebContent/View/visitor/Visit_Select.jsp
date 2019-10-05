@@ -8,12 +8,6 @@
 <%@ include file="../CommonForm/TapLogo.jsp"%>
 <!-- Link Import --> 
 <%@ include file="/Style/common/HeadUI.jsp"%> 
-<style>
-	button {
-		border: 0px;
-		background-color: white;
-	}
-</style>
 <title>방문/반입 - CH4 방문자 관리 시스템</title>
 </head>
 <body>

@@ -5,7 +5,7 @@
 		<!-- URL 처리하기! -->
 <footer class="w-100" style="width:100%; position:fixed; bottom:0; background-color: #3e3e3e;">
 		<div class="container">
-			<div style="margin-top:10px">
+			<div style="margin-top:20px">
 				<div class="col-lg-3  col-md-6">
 					<div class="footer-widget">
 						<h4 style="size:3px; color:white;">방문자 관리 시스템</h4>

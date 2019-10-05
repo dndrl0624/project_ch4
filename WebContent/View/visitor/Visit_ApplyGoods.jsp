@@ -79,53 +79,20 @@
 		border-top: 2px solid #3c763d;
 		margin-bottom:50px;
 	}
-	.table th,
-	.table td {
+	th,td {
 		text-align:center;
 		border: 1px solid #EDEDED;
 	}
-	.table th {
+	th {
 		background-color: #DDDDDD;
-	}
-	.modal-table {
-		width: 100%;
-		max-width: 100%;
-		margin-bottom: 1rem;
-		background-color: transparent;
-	}
-	.modal-table th,
-	.modal-table td {
-		text-align: center;
-		padding: 0.75rem;
-		vertical-align: middle;
-	}
-	.modal-content {
-		border: 0px;
 	}
 	.modal-header.goods {
 		background-color: #dff0d8;
 	}
-	.modal-header.log {
-		border-top-left-radius: 6px;
-		border-top-right-radius: 6px;
-		background-color: #337ab7;
-	}
-	.modal-body {
-		padding-left: 100px;
-		padding-right: 100px;
-	}
-	.modal-body.log {
-		padding-left: 50px;
-		padding-right: 50px;
-	}
-	.modal-body p {
-		margin: 0 0 0 0px;
-	}
 </style>
 <title>반입 신청 - CH4 방문자 관리 시스템</title>
 <script type="text/javascript">
-	var gIndex = 1;
-	var now = new Date();
+	var vIndex = 1;
 </script>
 </head>
 <body data-spy="scroll" data-target="#myScrollspy" data-offset="300">
@@ -297,7 +264,7 @@
 			$("#v_goodsinfo").textbox('setValue',null);
 			$("#v_ea").textbox('setValue',null);
 			$("#md_goods").modal("hide");
-			gIndex++;
+			vIndex++;
 		});
 		//입력값 테이블에 row추가하기  끝.
 		//전체선택
@@ -313,41 +280,10 @@
 		//전체선택 끝.
 		//선택된 row 제거하기
 		$("#btn_delRowGoods").on('click',function(){
-			var doRemove = false; //체크박스가 선택이되어 삭제가 된경우만 true
 			$("#tb_goods #chkGoods:checked").each(function(){
+				alert($(this).val());
 				$(this).parent().parent().remove();
-				doRemove = true;
 			});
-			//삭제된 건이 있으면...
-			if(doRemove){
-				//삭제되지 않은 row의 index초기화를 위한 변수
-				var reset = 1;
-				//row 전체조회
-				for(var i=1;i<gIndex;i++){
-					var gRow = $("#gRow"+i);
-					//해당row가 존재하니?
-					//스크립트의 if문에서 undefined는 false로 인식
-					//.html()을 본래 해당 태그의 자식노드 전체의 html구문을 반환함
-					//만약 자식노드가 없다면 undefined
-					//지워진 row는 자식노드가 없으므로 조건에서 제외
-					//그런데 해당row가 지워졌다면 값이 null이거나 undefined일텐데 굳이 .html()을 쓴이유는?
-					//dom에 해당하는 노드가 없다면 해당 노드를 '생성'해버림 => 즉 선언한 순간 존재하는 노드
-					//그렇기 때문에 .html()없이 vRow를 쓰면 정의가 되어있으므로 true로 인식
-					if(gRow.html()){
-						if(i!=reset){
-							$("#gRow"+i+" #chkGoods").attr('value',reset);
-							$("#gRow"+i).attr('id',"gRow"+reset);
-						}
-						reset++;
-					}
-				}
-				gIndex = reset;
-				$("#tb_goods input:checkbox").prop("checked", false);
-			}
-			//없으면 == checked가 없음
-			else {
-				alert("삭제할 정보를 선택하시기 바랍니다.");
-			}
 		});
 	});
 	function apply(){
@@ -399,10 +335,10 @@
 	    <div class="col-lg-7 col-lg-offset-1">
 		    <div class="row">
 		    	<div class="col-lg-10">
-					<h2 id="apply_title" style="margin-bottom:20px; border-left: 4px solid #17405D; padding-left:8px;"><b>반입 신청</b> (<%=com_name %>)</h2>
+					<h2 id="apply_title" style="margin-bottom:20px; border-left: 4px solid #17405D; padding-left:8px;"><b>반입 신청</b> (방문지)</h2>
 		    	</div>
 		    	<div class="col-lg-2" style="text-align:right; padding-top:30px;">
-					<button id="btn_log" class="btn btn-primary">반입이력</button>
+					<button class="btn btn-primary">반입이력</button>
 		    	</div>
 			</div>
 			<!------------------------------------- 신청 폼 시작 -------------------------------------->
@@ -521,63 +457,6 @@
 			</div>
 			<div class="modal-footer">
         		<button type="button" class="btn btn-primary" id="addGoods">추가</button>
-        		<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-        	</div>
-		</div>
-	</div>
-</div>
-<!-- 반입이력 조회 Modal -->
-<div id="md_log" class="modal fade" role="dialog">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header log">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title" style="color:white;">반입이력 (<%=com_name %>)</h4>
-			</div>
-			<div class="modal-body log" >
-				<div class="container-fluid">
-					<div class="row table basic">
-						<table class="table">
-				    		<tr>
-				    			<th>
-				    				<form id="form_search_log" action="" method="POST">
-				    					<input type="hidden" name="com_no" value="<%=com_no %>">
-				    					<input type="hidden" name="aplg_name" value="<%=aplg_name %>">
-				    					<input type="hidden" name="aplg_hp" value="<%=aplg_hp %>">
-										<input id="aplg_date1" class="easyui-datebox" name="aplg_date1" label="신청일자" style="width:230px;height:30px">
-								    	&emsp;<span>~</span>&emsp;
-								    	<input id="aplg_date2" class="easyui-datebox" name="aplg_date2" style="width:150px;height:30px">
-								    	&emsp;&emsp;
-								    	<button id="btn_search_log" type="button" class="btn btn-primary">조회</button>
-							    	</form>
-				    			</th>
-				    		</tr>
-				    	</table>
-					</div>
-					<h6 style="margin-bottom:10px;">※이전 신청/반입이력을 재사용 신청할 수 있습니다.</h6>
-				    <div class="row table basic">
-				    	<table id="tb_log" class="table">
-				    		<thead>
-					    		<tr>
-					    			<th style="width:60px;">선택</th>
-					    			<th>신청일자</th>
-					    			<th>목적지</th>
-					    			<th>반입사유</th>
-					    			<th>반입일자</th>
-					    			<th>반입물품</th>
-					    		</tr>
-				    		</thead>
-				    		<tbody>
-				    		</tbody>
-				    	</table>
-				    </div>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<form id="form_reflect" method="POST">
-					<input id="input_reflect" type="hidden" name="aplg_no" value="">
-				</form>
-        		<button id="btn_reflect" type="button" class="btn btn-primary">재사용</button>
         		<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
         	</div>
 		</div>

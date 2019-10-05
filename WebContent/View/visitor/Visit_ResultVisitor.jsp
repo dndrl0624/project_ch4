@@ -95,6 +95,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<<<<<<< HEAD
 <!-- Web icon 설정 --> 
 <%@ include file="../CommonForm/TapLogo.jsp"%>
 <!-- Link Import --> 
@@ -163,8 +164,12 @@
 		background-color: #DDDDDD;
 	}
 </style>
+=======
+<title>Insert title here</title>
+>>>>>>> refs/heads/ht_view
 </head>
 <body>
+<<<<<<< HEAD
 <%@ include file="/View/CommonForm/Top.jsp"%>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -424,5 +429,8 @@
 <form id="form_next" method="POST">
 	<input type="hidden" name="visit_no" value="<%=visit_no %>">
 </form>
+=======
+
+>>>>>>> refs/heads/ht_view
 </body>
 </html>
