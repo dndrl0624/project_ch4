@@ -29,13 +29,8 @@ $(document).ready(function(){
 // 			$("span.textbox > .textbox-value").attr('name',newVal);
 		}
 	});
-});
-
-//combobox 직접입력 방지
-$.fn.combobox.defaults.editable = false
 
 /* 테이블 데이터 */
-$(document).ready(function(){
 	$("#tb_searchGood").bootstrapTable({
 		toolbar:'#toolbar'
 		,toolbarAlign : 'right'
@@ -62,7 +57,7 @@ $(document).ready(function(){
 				,dataType: "json"
 				,data :$("#f_search").serialize()
 				,success: function(data){
-					$("#tb_sv").bootstrapTable('data',data);
+					$("#tb_sv").bootstrapTable('load',data);
 				}
 			});
 		}
@@ -76,7 +71,7 @@ $(document).ready(function(){
 					,dataType: "json"
 					,data :$("#f_search").serialize()
 					,success: function(data){
-						$("#tb_sv").bootstrapTable('data',data);
+						$("#tb_sv").bootstrapTable('load',data);
 					}
 				});
 			}
@@ -89,7 +84,7 @@ $(document).ready(function(){
 					,dataType: "json"
 					,data :$("#f_search").serialize()
 					,success: function(data){
-						$("#tb_sv").bootstrapTable('data',data);
+						$("#tb_sv").bootstrapTable('load',data);
 					}
 				});
 			}
@@ -174,19 +169,20 @@ function btn_search(){
 	<form id="f_search">
 		<div class='col-sm-2'>
 			<select class="easyui-combobox" id="SearchType" name='SearchType' label="검색방법" labelPosition="left" style="width:180px;">
-				<option value="" selected>신청번호</option>
-				<option value="">신청자</option>
-				<option value="">목적지<option>
+				<option value="APLG_NO" selected>신청번호</option>
+				<option value="APLG_NAME">신청자</option>
+				<option value="APLG_DESTI">목적지<option>
 			</select>
 		</div>
 		<div class='col-sm-2'>
 			<!-- 검색창 : 콤보박스에 의한 분기 -->
 			<!-- 텍스트 박스에 대해 name값 변경 : 처음 값은 방문자명 // onChange 이벤트로 Name속성을 바꾸어 주기 -->
 			<input class="easyui-textbox" id="searchText" name="VISITOR_NAME" style="width:150px;">
-			<a href="???" class="easyui-linkbutton" data-options="iconCls:'icon-search'"></a>
+			<a class="easyui-linkbutton" type="button" data-options="iconCls:'icon-search'" onclick="btn_search()"></a>
 		</div>
 		<div class='col-sm-2'>
 			<select class="easyui-combobox" id="state" name="APLG_PERMIT_ST" label="결재상태" labelPosition="left" style="width:180px;">
+				<option value="" selected>전체</option>
 				<option value="결제중" selected>결제중</option>
 				<option value="승인">승인</option>
 				<option value="반려">반려</option>
@@ -197,7 +193,7 @@ function btn_search(){
 		<div  class='col-sm-4' style="padding: 0px;">
 			<div class='col-sm-6'>
 				<span style="font-weight: bold;">신청일</span>
-				<input class="easyui-datebox" id="startdate" name="goods_apply_date1"style="width:120px;">
+				<input class="easyui-datebox" id="startdate" name="aplg_date1"style="width:120px;">
 			</div>
 			<div class='col-sm-1'>
 				<h4 align="center">
@@ -205,7 +201,7 @@ function btn_search(){
 				</h4>
 			</div>
 			<div class='col-sm-4' style="padding: 0px;">
-				<input class="easyui-datebox" id=closedate name="goods_apply_date2" style="width:120px;">
+				<input class="easyui-datebox" id=closedate name="aplg_date2" style="width:120px;">
 			</div>
 		</div>
 	</form>

@@ -60,7 +60,7 @@ $(document).ready(function(){
 			,dataType: "json"
 			,data :$("#f_text").serialize()
 			,success: function(data){
-				$("#tb_logVisitor").bootstrapTable('data',data);
+				$("#tb_logVisitor").bootstrapTable('load',data);
 			}
 		});
 	});
@@ -73,7 +73,7 @@ $(document).ready(function(){
 				,dataType: "json"
 				,data :$("#f_search").serialize()
 				,success: function(data){
-					$("#tb_logVisitor").bootstrapTable('data',data);
+					$("#tb_logVisitor").bootstrapTable('load',data);
 				}
 			});
 		}
@@ -87,7 +87,7 @@ $(document).ready(function(){
 				,dataType: "json"
 				,data :$("#f_search").serialize()
 				,success: function(data){
-					$("#tb_logVisitor").bootstrapTable('data',data);
+					$("#tb_logVisitor").bootstrapTable('load',data);
 				}
 			});
 		}
@@ -101,7 +101,7 @@ $(document).ready(function(){
 				,dataType: "json"
 				,data :$("#f_search").serialize()
 				,success: function(data){
-					$("#tb_logVisitor").bootstrapTable('data',data);
+					$("#tb_logVisitor").bootstrapTable('load',data);
 				}
 			});
 		}
@@ -203,7 +203,8 @@ $(document).ready(function(){
 		<!-- 콤보 박스 : 처리결과 대해 -->
 		<div class="col-lg-12" style="margin-top: 10px;">
 			<select class="easyui-combobox" id="time" name="CMG_INOUT" label="출입시간" labelPosition="left" style="width:230px;">
-				<option value="00" >00시</option>
+				<option value="" selected>전체</option>
+				<option value="00">00시</option>
 				<option value="01">01시</option>
 				<option value="02">02시</option>
 				<option value="03">03시</option>
@@ -212,7 +213,7 @@ $(document).ready(function(){
 				<option value="06">06시</option>
 				<option value="07">07시</option>
 				<option value="08">08시</option>
-				<option value="09" selected>09시</option>
+				<option value="09">09시</option>
 				<option value="10">10시</option>
 				<option value="11">11시</option>
 				<option value="12">12시</option>

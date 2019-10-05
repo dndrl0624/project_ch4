@@ -59,7 +59,7 @@ $(document).ready(function(){
 				,dataType: "json"
 				,data :$("#f_search").serialize()
 				,success: function(data){
-					$("#tb_logGoods").bootstrapTable('data',data);
+					$("#tb_logGoods").bootstrapTable('load',data);
 				}
 			});
 		}
@@ -73,7 +73,7 @@ $(document).ready(function(){
 				,dataType: "json"
 				,data :$("#f_search").serialize()
 				,success: function(data){
-					$("#tb_logGoods").bootstrapTable('data',data);
+					$("#tb_logGoods").bootstrapTable('load',data);
 				}
 			});
 		}
@@ -87,7 +87,7 @@ $(document).ready(function(){
 				,dataType: "json"
 				,data :$("#f_search").serialize()
 				,success: function(data){
-					$("#tb_logGoods").bootstrapTable('data',data);
+					$("#tb_logGoods").bootstrapTable('load',data);
 				}
 			});
 		}
@@ -176,12 +176,12 @@ $(document).ready(function(){
 		<!-- 검색창 : 콤보박스에 의한 분기<br> -->
 			<!-- 텍스트 박스에 대해 name값 변경 : 처음 값은 방문자명 // onChange 이벤트로 Name속성을 바꾸어 주기 -->
 			<input class="easyui-textbox" id="searchText" name="VISITOR_NAME" style="width:150px;">
-			<a class="easyui-linkbutton" data-options="iconCls:'icon-search'" id="search"></a>
+			<a class="easyui-linkbutton" type="button" data-options="iconCls:'icon-search'" id="search()"></a>
 		</div><br>
 		<!-- 콤보 박스 : 처리결과 대해 -->
 		<div class="col-lg-12" style="margin-top: 10px;">
 			<select class="easyui-combobox" id="state" name="CMG_NOTES" label="방문현황" labelPosition="left" style="width:230px;">
-				<option value="전체" selected>전체</option>
+				<option value="" selected>전체</option>
 				<option value="방문중">방문중</option>
 				<option value="외출">외출</option>
 				<option value="방문종료">방문종료</option>
@@ -190,7 +190,8 @@ $(document).ready(function(){
 		<!-- 콤보 박스 : 처리결과 대해 -->
 		<div class="col-lg-12" style="margin-top: 10px;">
 			<select class="easyui-combobox" id="state" name="출입시간" label="출입시간" labelPosition="left" style="width:230px;">
-				<option value="00" >00시</option>
+				<option value="" selected>전체</option>
+				<option value="00">00시</option>
 				<option value="01">01시</option>
 				<option value="02">02시</option>
 				<option value="03">03시</option>
@@ -199,7 +200,7 @@ $(document).ready(function(){
 				<option value="06">06시</option>
 				<option value="07">07시</option>
 				<option value="08">08시</option>
-				<option value="09" selected>09시</option>
+				<option value="09">09시</option>
 				<option value="10">10시</option>
 				<option value="11">11시</option>
 				<option value="12">12시</option>
@@ -226,12 +227,13 @@ $(document).ready(function(){
 		<thead>
 			<tr>
 				<th data-field="CONFM_NO">물품번호</th>
-				<th data-field="CONFM_STATE">반입현황</th>
-				<th data-field="CONFM_NAME">물품명</th>
-				<th data-field="CONFM_TYPE">물품종류</th>
-				<th data-field="CONFM_TRANS_QUAN">반입개수</th>
-				<th data-field="CONFM_TRANS_DATE">반입일자</th>
-				<th data-field="CONFM_TRANS_TIME">반입시간</th>
+					<th data-field="CONFM_DESTI">방문장소</th>
+					<th data-field="CONFM_STATE">반입현황</th>
+					<th data-field="CONFM_NAME">물품명</th>
+					<th data-field="CONFM_TYPE">물품종류</th>
+					<th data-field="CONFM_QUAN">물품개수</th>
+					<th data-field="CONFM_TRANS_QUAN">반입개수</th>
+					<th data-field="CONFM_TRANS_TIME">반입시간</th>
 			</tr>
 		</thead>
 	</table>

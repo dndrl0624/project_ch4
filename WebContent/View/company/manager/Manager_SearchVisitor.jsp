@@ -55,9 +55,6 @@ $(document).ready(function(){
 		    ,paginationNextText:"Next"
 		    ,pageSize:10//기본 페이지 사이즈
 		    ,pageList:[10, 15, 20, 30] //칸수
-			,onClickRow : function(row, $element, field) {
-					$element.toggleClass('single-select');//로우 클릭했을 때 색 변함.
-				}
 			,onDblClickRow : function(row, $element, field) {
 				//테이블에서 일련번호 칸에 들어간 정보 가져오기
 				var choo = $element.find('td').eq(0).text();
@@ -77,7 +74,7 @@ $(document).ready(function(){
 				,dataType: "json"
 				,data :$("#f_search").serialize()
 				,success: function(data){
-					$("#tb_sv").bootstrapTable('data',data);
+					$("#tb_sv").bootstrapTable('load',data);
 				}
 			});
 		}
@@ -92,7 +89,7 @@ $(document).ready(function(){
 					,dataType: "json"
 					,data :$("#f_search").serialize()
 					,success: function(data){
-						$("#tb_sv").bootstrapTable('data',data);
+						$("#tb_sv").bootstrapTable('load',data);
 					}
 				});
 			}
@@ -105,7 +102,7 @@ $(document).ready(function(){
 					,dataType: "json"
 					,data :$("#f_search").serialize()
 					,success: function(data){
-						$("#tb_sv").bootstrapTable('data',data);
+						$("#tb_sv").bootstrapTable('load',data);
 					}
 				});
 			}
@@ -135,7 +132,7 @@ function btn_search(){
 		,dataType: "json"
 		,data :$("#f_search").serialize()
 		,success: function(data){
-			$("#tb_sv").bootstrapTable('data',data);
+			$("#tb_sv").bootstrapTable('load',data);
 		}
 	});	
 }
@@ -207,10 +204,10 @@ function btn_search(){
 	<!-- 검색 타입 설정 -->
 		<div class='col-sm-2' style="margin-left:20px;">
 			<select class="easyui-combobox" id="SearchType" name='SearchType' label="검색방법" labelPosition="left" style="width:100%;">
-				<option value="VISITOR_NAME" selected>신청자명</option>
+				<option value="VISI_APPLY_NAME" selected>신청자명</option>
 				<option value="VISITOR_NAME">방문자명</option>
-				<option value="">목적지</option>
-				<option value="">신청번호</option>
+				<option value="VISIT_DESTI">목적지</option>
+				<option value="VISIT_NO">신청번호</option>
 			</select>
 		</div>
 		
@@ -218,12 +215,12 @@ function btn_search(){
 			<!-- 텍스트 박스에 대해 name값 변경 : 처음 값은 방문자명 // onChange 이벤트로 Name속성을 바꾸어 주기 -->
 		<div class='col-sm-2'>
 			<input class="easyui-textbox" id="searchText" name="VISITOR_NAME" style="width:150px;">
-			<a class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="btn_search()s"></a>
+			<a class="easyui-linkbutton" type="button" data-options="iconCls:'icon-search'" onclick="btn_search()"></a>
 		</div>
 		
 		<div class='col-sm-2' style="margin-left:30px; margin-right: 30px; padding: 0;">
 			<select class="easyui-combobox" id="state" name="GMNG_CONFM" label="승인상태" labelPosition="left" style="width:100%;">
-				<option value="전체" selected>전체</option>
+				<option value="" selected>전체</option>
 				<option value="결재중">결재중</option>
 				<option value="승인">승인</option>
 				<option value="반려">반려</option>
@@ -235,7 +232,7 @@ function btn_search(){
 		<div  class='col-sm-4' style="padding: 0px;">
 			<div class='col-sm-6'>
 				<span style="font-weight: bold;">신청일</span>
-				<input class="easyui-datebox" id="startdate" name="goods_apply_date1"style="width:120px;">
+				<input class="easyui-datebox" id="startdate" name="visit_apply_date1"style="width:120px;">
 			</div>
 			<div class='col-sm-1'>
 				<h4 align="center">
@@ -243,7 +240,7 @@ function btn_search(){
 				</h4>
 			</div>
 			<div class='col-sm-4' style="padding: 0px;">
-				<input class="easyui-datebox" id=closedate name="goods_apply_date2" style="width:120px;">
+				<input class="easyui-datebox" id=closedate name="visit_apply_date2" style="width:120px;">
 			</div>
 		</div>
 </form>

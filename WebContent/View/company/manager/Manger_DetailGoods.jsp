@@ -243,7 +243,7 @@ table.table {
 							<thead>
 								<tr>
 									<th>목적지</th>
-									<th>담당자</th>
+									<th>실반입장소</th>
 									<th>방문목적</th>
 								</tr>
 							</thead>
@@ -251,7 +251,8 @@ table.table {
 								<tr>
 									<td><input class="easyui-combobox" style="width: 80%;"
 										data-options="panelHeight:'auto'"></td>
-									<td><input class="easyui-textbox" style="width: 80%;"></td>
+									<td><input class="easyui-combobox" style="width: 80%;"
+										data-options="panelHeight:'auto'"></td>
 									<td><input class="easyui-textbox" style="width: 80%;"></td>
 								</tr>
 							</tbody>

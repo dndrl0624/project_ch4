@@ -17,7 +17,7 @@
 $.fn.combobox.defaults.editable = false
 //datebox 직접입력 방지
 $.fn.datebox.defaults.editable = false
-//테이블 구성
+
 $(document).ready(function(){
 //목적지 관리 테이블 데이터 
 	$("#tb_desti").bootstrapTable({
@@ -102,7 +102,7 @@ $(document).ready(function(){
 			,data :$("#f_kio").serialize()
 			,success: function(data){
 				//alert(combo_k);
-				$("#bt_kio").bootstrapTable('data',data);
+				$("#bt_kio").bootstrapTable('load',data);
 			}
 		});
 	});
@@ -150,7 +150,7 @@ $(document).ready(function(){
 					,data :$("#f_redday").serialize()
 					,success: function(data){
 						//alert(sdate+'..'+cdate);
-						$("#bt_red").bootstrapTable('data',data);
+						$("#bt_red").bootstrapTable('load',data);
 					}
 				});	
 			}
@@ -182,14 +182,14 @@ $(document).ready(function(){
 		var notiC = $('#DESTI_NOTES_INFO').val();
 		//alert(nonoC);
 		//수정 정보 전송
-		$("#f_desti_chage").attr("method","get");
+		$("#f_desti_chage").attr("method","post");
 		$("#f_desti_chage").attr("action","/destiUPD.ch4");
 		$("#f_desti_chage").submit();
 	}
 // 목적지 삭제 버튼 기능 구현
 	function deletDesti() {
 		//삭제할 정보의 일련번호 전달
-		$("#f_desti_chage").attr("method","get");
+		$("#f_desti_chage").attr("method","post");
 		$("#f_desti_chage").attr("action","/destiDEL.ch4");
 		$("#f_desti_chage").submit();
 	}
@@ -197,7 +197,7 @@ $(document).ready(function(){
 //키오스크 상태 변경 : 버튼 > 함수 > 내용변경
 	function kio_save() {
 		//폼태그 : 화면 전송 시, 새창에서 목적지 관리로 탭이뜨는 것 해결해야함
-		$("#f_kio_change").attr("method","get");
+		$("#f_kio_change").attr("method","post");
 		$("#f_kio_change").attr("action","/kiosk.ch4");
 		$("#f_kio_change").submit();
 	}
@@ -205,14 +205,14 @@ $(document).ready(function(){
 //휴무일 관리 추가 : 버튼 > 모달 > 삭제
 	function addRed() {
 		//폼태그 : 화면 전송 시, 새창에서 목적지 관리로 탭이뜨는 것 해결해야함
-		$("#f_redday_add").attr("method","get");
+		$("#f_redday_add").attr("method","post");
 		$("#f_redday_add").attr("action","/reddayadd.ch4");
 		$("#f_redday_add").submit();
 	}
 //휴무일 삭제 추가 : 모달 > 삭제
 	function DELRed() {
 		//폼태그 전송
-		$("#f_redday_del").attr("method","get");
+		$("#f_redday_del").attr("method","post");
 		$("#f_redday_del").attr("action","/reddaydel.ch4");
 		$("#f_redday_del").submit();
 	}

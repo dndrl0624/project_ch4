@@ -29,14 +29,12 @@ $(document).ready(function(){
 // 			$("span.textbox > .textbox-value").attr('name',newVal);
 		}
 	});
-});
 
 /* 테이블 데이터 */
-$(document).ready(function(){
 	$("#tb_logVisitor").bootstrapTable({
 	    columns:[
 	         {field:'CONFM_NO',title:'방문번호'}
-	         ,{field:'CMG_INOUT',title:'처리시간'}
+	         ,{field:'CMG_INOUT',title:'출입시간'}
 	         ,{field:'CONFM_NAME',title:'방문자명'}
 	         ,{field:'CMG_ENTRC',title:'출입위치'}/* 출입위치 : 사용게이트 */
 	         ,{field:'CMG_NOTES',title:'처리상태'}
@@ -62,7 +60,7 @@ $(document).ready(function(){
 				,dataType: "json"
 				,data :$("#f_search").serialize()
 				,success: function(data){
-					$("#tb_logVisitor").bootstrapTable('data',data);
+					$("#tb_logVisitor").bootstrapTable('load',data);
 				}
 			});
 		}
@@ -76,7 +74,7 @@ $(document).ready(function(){
 				,dataType: "json"
 				,data :$("#f_search").serialize()
 				,success: function(data){
-					$("#tb_logVisitor").bootstrapTable('data',data);
+					$("#tb_logVisitor").bootstrapTable('load',data);
 				}
 			});
 		}
@@ -90,13 +88,14 @@ $(document).ready(function(){
 				,dataType: "json"
 				,data :$("#f_search").serialize()
 				,success: function(data){
-					$("#tb_logVisitor").bootstrapTable('data',data);
+					$("#tb_logVisitor").bootstrapTable('load',data);
 				}
 			});
 		}
 	});
 	
 });
+
 /* 버튼 검색 */
 function search(){
 	$.ajax({
@@ -105,7 +104,7 @@ function search(){
 			,dataType: "json"
 			,data :$("#f_search").serialize()
 			,success: function(data){
-				$("#tb_logVisitor").bootstrapTable('data',data);
+				$("#tb_logVisitor").bootstrapTable('load',data);
 			}
 	});
 }
@@ -194,7 +193,7 @@ function search(){
 		<!-- 콤보 박스 : 처리결과 대해 -->
 		<div class="col-lg-12" style="margin-top: 10px;">
 			<select class="easyui-combobox" id="state" name="CMG_NOTES" label="방문현황" labelPosition="left" style="width:230px;">
-				<option value="전체" selected>전체</option>
+				<option value="" selected>전체</option>
 				<option value="방문중">방문중</option>
 				<option value="외출">외출</option>
 				<option value="방문종료">방문종료</option>
@@ -203,7 +202,8 @@ function search(){
 		<!-- 콤보 박스 : 처리결과 대해 -->
 		<div class="col-lg-12" style="margin-top: 10px;">
 			<select class="easyui-combobox" id="time" name="CMG_INOUT" label="출입시간" labelPosition="left" style="width:230px;">
-				<option value="00시" >00시</option>
+				<option value="" selected>전체</option>
+				<option value="00" >00시</option>
 				<option value="01">01시</option>
 				<option value="02">02시</option>
 				<option value="03">03시</option>
@@ -212,7 +212,7 @@ function search(){
 				<option value="06">06시</option>
 				<option value="07">07시</option>
 				<option value="08">08시</option>
-				<option value="09" selected>09시</option>
+				<option value="09">09시</option>
 				<option value="10">10시</option>
 				<option value="11">11시</option>
 				<option value="12">12시</option>

@@ -85,13 +85,13 @@ table.table {
 //신청 승인 처리
 	function vpermission(){
 		$("#f_vper").attr("method","post");
-		$("#f_vper").attr("action","company/mngPermit.ch4?visit_no="+방문신청번호 );
+		$("#f_vper").attr("action","company/mngPermit.ch4");
 		$("#f_vper").submit();
 	}
 //신청 반려 처리
 	function vreturn(){
 		$("#f_vret").attr("method","post");
-		$("#f_vret").attr("action","company/mngPermit.ch4?visit_no="+방문신청번호 );
+		$("#f_vret").attr("action","company/mngPermit.ch4" );
 		$("#f_vret").submit();
 	}
 </script>
@@ -245,7 +245,7 @@ table.table {
 							<thead>
 								<tr>
 									<th>목적지</th>
-									<th>담당자</th>
+									<th>실목적지</th>
 									<th>방문목적</th>
 								</tr>
 							</thead>
@@ -253,7 +253,8 @@ table.table {
 								<tr>
 									<td><input class="easyui-combobox" style="width: 80%;"
 										data-options="panelHeight:'auto'"></td>
-									<td><input class="easyui-textbox" style="width: 80%;"></td>
+									<td><input class="easyui-combobox" style="width: 80%;"
+										data-options="panelHeight:'auto'"></td>
 									<td><input class="easyui-textbox" style="width: 80%;"></td>
 								</tr>
 							</tbody>
@@ -346,11 +347,13 @@ table.table {
 	</div>
 </div>
 <form id="f_vper">
-	<input type="hidden" id="com_permission" name="COM_NO" value="(String)session.getAttribute('COM_NO')>">
+	<input type="hidden" id="com_permission" name="COM_NO" value="<%session.getAttribute("COM_NO"); %>">
+	<input type="hidden" id="permissioner" name="CMNG_ID" value="<%session.getAttribute("CMNG_ID"); %>"><!-- 승인 담당자 정보 : 세션값을 그대로 사용 OR 다시 넘겨주기 -->
 	<input type="hidden" id="hidden_permission" name="VISIT_PERMIT_ST" value="승인">
 </form>
 <form id="f_vret">
 	<input type="hidden" id="com_return" name="COM_NO" value=company_name>
+	<input type="hidden" id="permissioner" name="CMNG_ID" value=user_id><!-- 승인 담당자 정보 -->
 	<input type="hidden" id="hidden_return" name="VISIT_PERMIT_ST" value="반려">
 </form>
 	<!-- 공통 Footer -->
