@@ -46,4 +46,11 @@
 		   	  </if>
 		 where desti_no = #{desti_no}
 	</update>
+	
+	<!-- 목적지 삭제 -->
+	<delete id="">
+		delete desti_no, desti_name, desti_lcinfo, desti_notes
+			from destination
+		where desti_no = #{desti_no}
+	</delete>
 </mapper>  
