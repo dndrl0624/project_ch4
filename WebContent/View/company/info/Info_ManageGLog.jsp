@@ -114,7 +114,7 @@ $(document).ready(function(){
 <!-- Side Bar -->
 <aside>
 	<div style="margin-top:30px">
-	<h3 style="color: white;">회@사@이@름@</h3> <!-- session.getAttribute("COM_NAME"); -->
+	<h3 style="color: white;">회@사@이@름@</h3> <!-- session.getAttribute("COM_NAME"); "${company_name}" --%>
 	</div>
 	<div class="panel-group" style="margin-top:90px">
 		<div class="panel panel-info">
@@ -175,7 +175,7 @@ $(document).ready(function(){
 <div style="padding-left:200px">
 
 <form id="f_search">
-<input type="hidden" name="COM_NO" value="<% session.getAttribute("COM_NO"); %>">
+<input type="hidden" name="COM_NO" value="${company_no}" >
 	<!-- 캘린더 -->
 	<div class="col-lg-1"></div>
 	<div class="col-lg-3">

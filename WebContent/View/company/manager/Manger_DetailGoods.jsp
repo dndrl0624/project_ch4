@@ -5,14 +5,14 @@
 	String user_name = "";
 	String company_no = "";
 	String company_name = "";
-	user_id = (String)session.getAttribute("CMNG_ID");
-	user_name = (String)session.getAttribute("CMNG_NAME");
-	company_no = (String)session.getAttribute("COM_NO");
-	company_name = (String)session.getAttribute("COM_NAME");
-	if(user_id==null||user_id.equals("")){
-		//로그인 페이지로 돌아가기
-		response.sendRedirect("loginform.jsp");
-	}
+// 	user_id = (String)session.getAttribute("CMNG_ID");
+// 	user_name = (String)session.getAttribute("CMNG_NAME");
+// 	company_no = (String)session.getAttribute("COM_NO");
+// 	company_name = (String)session.getAttribute("COM_NAME");
+// 	if(user_id==null||user_id.equals("")){
+// 		//로그인 페이지로 돌아가기
+// 		response.sendRedirect("loginform.jsp");
+// 	}
 %>
 <!DOCTYPE html>
 <html>
@@ -99,15 +99,33 @@ table.table {
 	
 //신청 승인 처리
 	function gpermission(){
-		$("#f_gper").attr("method","post");
-		$("#f_gper").attr("action","company/mngPermit.ch4?aplg_no="+(반출) );
-		$("#f_gper").submit();
+		$("APLG_PERMIT_ST").val("승인");
+		
+		if($("APLG_PERMIT_ST").val()==null){
+			$("#f_decide").attr("method","post");
+			$("#f_decide").attr("action","company/mngPermit.ch4");
+			$("#f_decide").submit();
+		}
+		else{
+			alert("오류1 입니다");
+		}
 	}
 //신청 반려 처리
 	function greturn(){
-		$("#f_gret").attr("method","post");
-		$("#f_gret").attr("action","company/mngPermit.ch4?aplg_no="+(반출) );
-		$("#f_gret").submit();
+		$("APLG_PERMIT_ST").val("반려");
+		if($("#reason").val() !=null){
+			var note = $("#reason").val();
+			$("#hidden_reson").val(note);
+		}
+		
+		if($("APLG_PERMIT_ST").val()==null){
+			$("#f_decide").attr("method","post");
+			$("#f_decide").attr("action","company/mngPermit.ch4");
+			$("#f_decide").submit();
+		}
+		else{
+			alert("오류2 입니다");
+		}
 	}
 </script>
 </head>
@@ -116,11 +134,28 @@ table.table {
 <!-- java script -->
 <script type="text/javascript">
 <%@ include file="../../CommonForm/maxJavascript.jsp"%>
+
+//검색방법 콤보박스로 textbox name값 변경
+$(document).ready(function(){
+	$('#select_desti').combobox({
+		onChange: function(newVal){
+			$("#hidden_desti").attr('value',newVal);
+		}
+	});
+
+//반려 사유 등록
+	$("#return").click(function(){
+		$("#returnModal").modal();
+	});
+});
 </script>
 <%@ include file="../../CommonForm/Top.jsp"%> 
 
 <!-- Side Bar -->
 <aside>
+	<div style="margin-top:30px">
+	<h3 style="color: white;">회@사@이@름@</h3><%-- 	<% session.getAttribute("COM_NAME"); %> "${company_name}"--%>
+	</div>
 	<div class="panel-group" style="margin-top:90px">
 		<div class="panel panel-info">
 			<div class="panel-heading">
@@ -265,7 +300,7 @@ table.table {
 								<tr>
 									<td><input class="easyui-combobox" style="width: 80%;"
 										data-options="panelHeight:'auto'"></td>
-									<td><input class="easyui-combobox" style="width: 80%;"
+									<td><input class="easyui-combobox" id="select_desti" style="width: 80%;"
 										data-options="panelHeight:'auto'"></td>
 									<td><input class="easyui-textbox" style="width: 80%;"></td>
 								</tr>
@@ -377,24 +412,41 @@ table.table {
 			</div>
 			<div style="float: right; margin-bottom:20%;">
 				<button type="button" id="btn_permission" class="btn btn-primary" onClick="location.href='javascript:gpermission()'">반입 신청 승인</button>
-				<button type="button" id="btn_return" class="btn btn-danger" onClick="location.href='javascript:greturn()'">반입 신청 반려</button>
+				<button type="button" id="return" class="btn btn-danger" >반입 신청 반려</button>
 				<button type="button" class="btn btn-default" onClick="location.href='javascript:history.back()'">이전 페이지</button>
 			</div>
 		</div>
 </div>
-<form id="f_gper">
-	<input type="hidden" id="com_permission" name="COM_NO" value="(String)session.getAttribute('COM_NO')>">
-	<input type="hidden" id="permissioner" name="CMNG_ID" value="<%session.getAttribute("CMNG_ID"); %>"><!-- 승인 담당자 정보 : 세션값을 그대로 사용 OR 다시 넘겨주기 -->
+
+<!-- 반려 사유 모달 -->
+  <div class="modal fade" id="returnModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">×</button>
+          <h4 class="modal-title">방문 반려 사유 등록하기</h4>
+        </div>
+        <div class="modal-body">
+          <h4>반려사유</h4>
+          <textarea id="reason" rows="5" cols="60%" style="margin-left:10%;"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default"onClick="location.href='javascript:greturn()'">반려 제출</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
+<form id="f_decide">
+	<input type="hidden" id="com_permission" name="COM_NO" value="${company_no}">
+	<input type="hidden" id="permissioner" name="CMNG_ID" value="${user_id}"><!-- 승인 담당자 정보 : 세션값을 그대로 사용 OR 다시 넘겨주기 -->
 	<!-- 승인 목적지 값 넣어주기 -->
-	<input type="hidden" id="hidden_desti" name="?desti" value="콤보박스 value">
-	<input type="hidden" id="hidden_permission" name="APLG_PERMIT_ST" value="승인">
-</form>
-<form id="f_gret">
-	<input type="hidden" id="com_return" name="COM_NO" value=company_name>
-	<input type="hidden" id="permissioner" name="CMNG_ID" value="<%session.getAttribute("CMNG_ID"); %>"><!-- 승인 담당자 정보 : 세션값을 그대로 사용 OR 다시 넘겨주기 -->
-	<!-- 승인 목적지 값 넣어주기 -->
-	<input type="hidden" id="hidden_desti" name="?desti" value="콤보박스 value">
-	<input type="hidden" id="hidden_return" name="APLG_PERMIT_ST" value="반려">
+	<input type="hidden" id="hidden_desti" name="CONFM_DESTI" value="">
+	<input type="hidden" id="hidden_reson" name="APLG_NOTES" value="">
+	<input type="hidden" id="hidden_permission" name="APLG_PERMIT_ST" value="">
 </form>
 	<!-- 공통 Footer -->
 <%@ include file="/View/CommonForm/Footer.jsp"%>

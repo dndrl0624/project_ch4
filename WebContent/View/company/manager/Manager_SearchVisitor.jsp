@@ -156,8 +156,7 @@ function btn_search(){
 <!-- Side Bar -->
 <aside>
 	<div style="margin-top:30px">
-	<h3 style="color: white;">회@사@이@름@</h3>
-<%-- 	<% session.getAttribute("COM_NAME"); %> --%>
+	<h3 style="color: white;">회@사@이@름@</h3><%-- 	<% session.getAttribute("COM_NAME"); %> "${company_name}"--%>
 	</div>
 	<div class="panel-group" style="margin-top:90px">
 		<div class="panel panel-info">
@@ -217,7 +216,7 @@ function btn_search(){
 	<div class="col-lg-12">
 	<div style="padding-left:200px;  margin-top: 120px;">
 <form id="f_search">
-<%-- <input type="hidden" name="COM_NO" value="<% session.getAttribute("COM_NO"); %>"> --%>
+<%-- <input type="hidden" name="COM_NO" value="${company_no}"> --%>
 	<!-- 검색 타입 설정 -->
 		<div class='col-sm-2' style="margin-left:20px;">
 			<select class="easyui-combobox" id="SearchType" name='SearchType' label="검색방법" labelPosition="left" style="width:100%;">
