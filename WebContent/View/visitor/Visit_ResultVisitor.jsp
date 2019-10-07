@@ -78,24 +78,11 @@
 	if(null!=request.getAttribute("pkAddList")){
 		pkAddList = (List<Map<String,Object>>)request.getAttribute("pkAddList");
 	}
-	
-	//버릴거
-	String[] visitor_name = {"김용현","김현태","이하나","현태호"};
-	String[] visitor_hp = {"010-1111-1111","010-2222-2222","010-3333-3333","010-4444-4444"};
-	//버릴거
-	String[] tkin_kind = {"노트북","휴대전화"};
-	String[] tkin_brand = {"LG전자","삼성전자",};
-	String[] tkin_model = {"lg그램","갤럭시노트10+"};
-	//버릴거
-	String[] parking_num = {"123가4567"};
-	String[] parking_kind = {"승용차"};
-	String[] parking_model = {"BMW"};
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<<<<<<< HEAD
 <!-- Web icon 설정 --> 
 <%@ include file="../CommonForm/TapLogo.jsp"%>
 <!-- Link Import --> 
@@ -164,72 +151,31 @@
 		background-color: #DDDDDD;
 	}
 </style>
-=======
-<title>Insert title here</title>
->>>>>>> refs/heads/ht_view
 </head>
 <body>
-<<<<<<< HEAD
 <%@ include file="/View/CommonForm/Top.jsp"%>
 <script type="text/javascript">
 	$(document).ready(function(){
-		////////// 버릴거  //////////
-		var visitor_name = new Array();
-		<% for(String name : visitor_name){%>visitor_name.push('<%=name%>');<%}%>
-		var visitor_hp = new Array();
-		<% for(String hp : visitor_hp){%>visitor_hp.push('<%=hp%>');<%}%>
-		for(var i=0;i<visitor_name.length;i++){
-			var vRow = "<tr><td>"+visitor_name[i]+"</td><td>"+visitor_hp[i]+"</td></tr>";
-			$("#tb_visitor tbody").append(vRow);
-		}
-		////////// 버릴거  //////////
-		
 		//쓸거
 		<% for(int i=0;i<vtAddList.size();i++){ %>
-		var vRow = "<tr><td>"+<%=vtAddList.get(i).get("visitor_name") %>
-					+"</td><td>"+<%=vtAddList.get(i).get("visitor_hp") %>+"</td></tr>";
+		var vRow = "<tr><td>"+<%=vtAddList.get(i).get("VISITOR_NAME") %>
+					+"</td><td>"+<%=vtAddList.get(i).get("VISITOR_HP") %>+"</td></tr>";
 		$("#tb_visitor tbody").append(vRow);
 		<% } %>
 		
-		////////// 버릴거  //////////
-		var tkin_kind = new Array();
-		<% for(String kind : tkin_kind){%>tkin_kind.push('<%=kind%>');<%}%>
-		var tkin_brand = new Array();
-		<% for(String brand : tkin_brand){%>tkin_brand.push('<%=brand%>');<%}%>
-		var tkin_model = new Array();
-		<% for(String model : tkin_model){%>tkin_model.push('<%=model%>');<%}%>
-		for(var i=0;i<tkin_kind.length;i++){
-			var dRow = "<tr><td>"+tkin_kind[i]+"</td><td>"+tkin_brand[i]+"</td><td>"+tkin_model[i]+"</td></tr>";
-			$("#tb_device tbody").append(dRow);
-		}
-		////////// 버릴거  //////////
-		
 		//쓸거
 		<% for(int i=0;i<tnAddList.size();i++){ %>
-		var dRow = "<tr><td>"+<%=tnAddList.get(i).get("tkin_kind") %>
-					+"</td><td>"+<%=tnAddList.get(i).get("tkin_brand") %>+"</td>"
-					+"</td><td>"+<%=tnAddList.get(i).get("tkin_model") %>+"</td></tr>";
+		var dRow = "<tr><td>"+<%=tnAddList.get(i).get("TKIN_KIND") %>
+					+"</td><td>"+<%=tnAddList.get(i).get("TKIN_BRAND") %>+"</td>"
+					+"</td><td>"+<%=tnAddList.get(i).get("TKIN_MODEL") %>+"</td></tr>";
 		$("#tb_device tbody").append(dRow);
 		<% } %>
 		
-		////////// 버릴거  //////////
-		var parking_num = new Array();
-		<% for(String num : parking_num){%>parking_num.push('<%=num%>');<%}%>
-		var parking_kind = new Array();
-		<% for(String kind : parking_kind){%>parking_kind.push('<%=kind%>');<%}%>
-		var parking_model = new Array();
-		<% for(String model : parking_model){%>parking_model.push('<%=model%>');<%}%>
-		for(var i=0;i<parking_num.length;i++){
-			var pRow = "<tr><td>"+parking_num[i]+"</td><td>"+parking_kind[i]+"</td><td>"+parking_model[i]+"</td></tr>";
-			$("#tb_parking tbody").append(pRow);
-		}
-		////////// 버릴거  //////////
-		
 		//쓸거
 		<% for(int i=0;i<pkAddList.size();i++){ %>
-		var pRow = "<tr><td>"+<%=pkAddList.get(i).get("parking_num") %>
-					+"</td><td>"+<%=pkAddList.get(i).get("parking_kind") %>+"</td>"
-					+"</td><td>"+<%=pkAddList.get(i).get("parking_model") %>+"</td></tr>";
+		var pRow = "<tr><td>"+<%=pkAddList.get(i).get("PARKING_NUM") %>
+					+"</td><td>"+<%=pkAddList.get(i).get("PARKING_KIND") %>+"</td>"
+					+"</td><td>"+<%=pkAddList.get(i).get("PARKING_MODEL") %>+"</td></tr>";
 		$("#tb_parking tbody").append(pRow);
 		<% } %>
 	});
@@ -429,8 +375,5 @@
 <form id="form_next" method="POST">
 	<input type="hidden" name="visit_no" value="<%=visit_no %>">
 </form>
-=======
-
->>>>>>> refs/heads/ht_view
 </body>
 </html>

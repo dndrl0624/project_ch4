@@ -8,50 +8,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+	//방문지(회사) 코드
+	String com_no = "null";
+	//신청번호
+	String aplg_no = "null";
+	//신청일자
+	String aplg_date = "null";
+	//신청자 이름
+	String aplg_name = "null";
+	//신청자 연락처
+	String aplg_hp = "null";
+	//방문날짜
+	String aplg_trans_date = "2019-10-31";
+	//방문지
+	String com_name = "null";
+	//목적지
+	String aplg_desti = "null";
+	//방문목적
+	String aplg_reason = "null";
+	
+	Map<String,Object> rMap = null;
+	if(null!=request.getAttribute("rMap")){
+		rMap = (Map<String,Object>)request.getAttribute("rMap");
+	}
 	//기본정보
 	Map<String,Object> infoMap = new HashMap<>();
-	if(null!=request.getAttribute("infoMap")){
-		infoMap = (Map<String,Object>)request.getAttribute("infoMap");
+	if(null!=rMap){
+		infoMap = (Map<String,Object>)rMap.get("infoMap");
+		com_no = (String)infoMap.get("COM_NO");
+		aplg_no = (String)infoMap.get("APLG_NO");
+		aplg_date = (String)infoMap.get("APLG_DATE");
+		aplg_name = (String)infoMap.get("APLG_NAME");
+		aplg_hp = (String)infoMap.get("APLG_HP");
+		aplg_trans_date = (String)infoMap.get("APLG_TRANS_DATE");
+		com_name = (String)infoMap.get("COM_NAME");
+		aplg_desti = (String)infoMap.get("APLG_DESTI");
+		aplg_reason = (String)infoMap.get("APLG_REASON");
 	}
 	//방문자 리스트
 	List<Map<String,Object>> gmList = new ArrayList<>();
-	if(null!=request.getAttribute("gmList")){
-		gmList = (List<Map<String,Object>>)request.getAttribute("gmList");
+	if(null!=rMap){
+		gmList = (List<Map<String,Object>>)rMap.get("gmList");
 	}
-	//방문지(회사) 코드
-	String com_no = "null";
-	//com_no = (String)infoMap.get("com_no");
-	//신청번호
-	String aplg_no = "null";
-	//aplg_no = (String)infoMap.get("aplg_no");
-	//신청일자
-	String aplg_date = "null";
-	//aplg_date = (String)infoMap.get("aplg_date");
-	//신청자 이름
-	String aplg_name = "null";
-	//aplg_name = (String)infoMap.get("aplg_name");
-	//신청자 연락처
-	String aplg_hp = "null";
-	//aplg_hp = (String)infoMap.get("aplg_hp");
-	//방문날짜
-	String aplg_trans_date = "2019-10-31";
-	//aplg_trans_date = (String)infoMap.get("aplg_trans_date");
-	//방문지
-	String com_name = "null";
-	//com_name = (String)infoMap.get("com_name");
-	//목적지
-	String aplg_desti = "null";
-	//aplg_desti = (String)infoMap.get("aplg_desti");
-	//방문목적
-	String aplg_reason = "null";
-	//aplg_reason = (String)infoMap.get("aplg_reason");
-	
-	/////////// 나중에 버릴 애들  /////////////
-	//물품명 & 종류 & 갯수
-	String[] gmng_name = {"LG그램","갤럭시 노트10+","에어팟2"};
-	String[] gmng_type = {"노트북","휴대전화","음향기기"};
-	String[] gmng_quan = {"3","10","30"};
-	/////////// 나중에 버릴 애들  /////////////
 %>
 <!DOCTYPE html>
 <html>
@@ -157,17 +155,21 @@
 <body data-spy="scroll" data-target="#myScrollspy" data-offset="300">
 <%@ include file="/View/CommonForm/Top.jsp"%>
 <script type="text/javascript">
+	<% if(rMap==null){ %>
+		alert("잘못된 페이지 요청입니다. 이전 페이지로 돌아갑니다.");
+		history.back();
+	<% } %>
 	$(document).ready(function(){
 		//////////////////////////////  방문자 정보 세팅  //////////////////////////////
 		//실제로 쓸 for문
 		<% for(int i=0;i<gmList.size();i++){ %>
 		var gRow = "<tr id='gRow'><td><input id='chkGoods' type='checkbox'></td>"
 					+"<td><input id='gmng_name' type='hidden' name='gmng_name' value='"
-					+<%=gmList.get(i).get("gmng_name") %>+"'>"+<%=gmList.get(i).get("gmng_name") %>+"</td>"
+					+<%=gmList.get(i).get("GMNG_NAME") %>+"'>"+<%=gmList.get(i).get("GMNG_NAME") %>+"</td>"
 					+"<td><input id='gmng_type' type='hidden' name='gmng_type' value='"
-					+<%=gmList.get(i).get("gmng_type") %>+"'>"+<%=gmList.get(i).get("gmng_type") %>+"</td>"
+					+<%=gmList.get(i).get("GMNG_TYPE") %>+"'>"+<%=gmList.get(i).get("GMNG_TYPE") %>+"</td>"
 					+"<td><input id='gmng_quan' type='hidden' name='gmng_quan' value='"
-					+<%=gmList.get(i).get("gmng_quan") %>+"'>"+<%=gmList.get(i).get("gmng_quan") %>+"</td></tr>";
+					+<%=gmList.get(i).get("GMNG_QUAN") %>+"'>"+<%=gmList.get(i).get("GMNG_QUAN") %>+"</td></tr>";
 		$("#tb_goods tbody").append(gRow);
 		gIndex++;
 		<% } %>

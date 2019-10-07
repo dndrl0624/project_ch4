@@ -8,90 +8,85 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+	//방문지(회사) 코드
+	String com_no = "null";
+	//신청번호
+	String visit_no = "null";
+	//신청일자
+	String visit_apply_date = "null";
+	//신청자 이름
+	String visit_apply_name = "null";
+	//신청자 연락처
+	String visit_apply_hp = "null";
+	//방문유형
+	String visit_type = "null";
+	//방문주기
+	String visit_term = "해당없음";
+	//방문요일
+	String visit_day = "해당없음";
+	//방문날짜
+	String visit_date = "null";
+	String visit_date1 = "null";
+	String visit_date2 = "null";
+	//방문지
+	String com_name = "null";
+	//목적지
+	String visit_desti = "null";
+	//방문목적
+	String visit_purps = "null";
+	//반입기기유무
+	String visit_tkin_encc = "null";
+	//주차유무
+	String visit_vhcle_encc = "null";
+	
+	Map<String,Object> rMap = null;
+	if(null!=request.getAttribute("rMap")){
+		rMap = (Map<String,Object>)request.getAttribute("rMap");
+	}
 	//기본정보
 	Map<String,Object> infoMap = new HashMap<>();
-	if(null!=request.getAttribute("infoMap")){
-		infoMap = (Map<String,Object>)request.getAttribute("infoMap");
+	if(null!=rMap){
+		infoMap = (Map<String,Object>)rMap.get("infoMap");
+		com_no = (String)infoMap.get("COM_NO");
+		visit_no = (String)infoMap.get("VISIT_NO");
+		visit_apply_date = (String)infoMap.get("VISIT_APPLY_DATE");
+		visit_apply_name = (String)infoMap.get("VISIT_APPLY_NAME");
+		visit_apply_hp = (String)infoMap.get("VISIT_APPLY_HP");
+		visit_type = (String)infoMap.get("VISIT_TYPE");
+		if("정기방문".equals(visit_type)){
+			visit_term = (String)infoMap.get("VISIT_TERM");
+			visit_day = (String)infoMap.get("VISIT_DAY");
+		}
+		visit_date = (String)infoMap.get("VISIT_DATE");
+		StringTokenizer st = new StringTokenizer(visit_date,"~");
+		visit_date1 = st.nextToken();
+		visit_date2 = new String();
+		if(st.hasMoreTokens()){
+			visit_date2 = st.nextToken();
+			
+		}
+		com_name = (String)infoMap.get("COM_NAME");
+		visit_desti = (String)infoMap.get("VISIT_DESTI");
+		visit_purps = (String)infoMap.get("VISIT_PURPS");
+		visit_tkin_encc = (String)infoMap.get("VISIT_TKIN_ENCC");
+		visit_vhcle_encc = (String)infoMap.get("VISIT_VHCLE_ENCC");
 	}
 	//방문자 리스트
 	List<Map<String,Object>> vtList = new ArrayList<>();
-	if(null!=request.getAttribute("vtList")){
-		vtList = (List<Map<String,Object>>)request.getAttribute("vtList");
+	if(null!=rMap){
+		vtList = (List<Map<String,Object>>)rMap.get("vtList");
 	}
 	//반입기기 리스트
 	List<Map<String,Object>> tnList = new ArrayList<>();
-	if(null!=request.getAttribute("tnList")){
-		tnList = (List<Map<String,Object>>)request.getAttribute("tnList");
+	if(null!=rMap){
+		tnList = (List<Map<String,Object>>)rMap.get("tnList");
 	}
 	//주차 리스트
 	List<Map<String,Object>> pkList = new ArrayList<>();
-	if(null!=request.getAttribute("pkList")){
-		pkList = (List<Map<String,Object>>)request.getAttribute("pkList");
+	if(null!=rMap){
+		pkList = (List<Map<String,Object>>)rMap.get("pkList");
 	}
 	
-	//방문지(회사) 코드
-	String com_no = "null";
-	//com_no = (String)infoMap.get("com_no");
-	//신청번호
-	String visit_no = "null";
-	//visit_no = (String)infoMap.get("visit_no");
-	//신청일자
-	String visit_apply_date = "null";
-	//visit_apply_date = (String)infoMap.get("visit_apply_date");
-	//신청자 이름
-	String visit_apply_name = "null";
-	//visit_apply_name = (String)infoMap.get("visit_apply_name");
-	//신청자 연락처
-	String visit_apply_hp = "null";
-	//visit_apply_hp = (String)infoMap.get("visit_apply_hp");
-	//방문유형
-	String visit_type = "정기방문";
-	//visit_type = (String)infoMap.get("visit_type");
-	String visit_term = "해당없음";
-	String visit_day = "해당없음";
-	if("정기방문".equals(visit_type)){
-		//방문주기
-		visit_term = "격주";
-		//visit_term = (String)infoMap.get("visit_term");
-		//방문요일
-		visit_day = "수요일";
-		//visit_day = (String)infoMap.get("visit_day");
-	}
-	//방문날짜
-	String visit_date = "2019-10-31~2019-11-04";
-	//visit_date = (String)infoMap.get("visit_date");
-	StringTokenizer st = new StringTokenizer(visit_date,"~");
-	String visit_date1 = st.nextToken();
-	String visit_date2 = new String();
-	if(st.hasMoreTokens()){
-		visit_date2 = st.nextToken();
-		
-	}
-	//방문지
-	String com_name = "null";
-	//com_name = (String)infoMap.get("com_name");
-	//목적지
-	String visit_desti = "null";
-	//visit_desti = (String)infoMap.get("visit_desti");
-	//방문목적
-	String visit_purps = "null";
-	//visit_purps = (String)infoMap.get("visit_purps");
-	
-	/////////// 나중에 버릴 애들  /////////////
-	//방문자 이름 & 연락처
-	String[] visitor_name = {"김용현","김현태","이하나","현태호"};
-	String[] visitor_hp = {"010-1111-1111","010-2222-2222","010-3333-3333","010-4444-4444"};
-	//반입기기
-	String[] tkin_kind = {"노트북","휴대전화"};
-	String[] tkin_brand = {"LG전자","삼성전자",};
-	String[] tkin_model = {"lg그램","갤럭시노트10+"};
-	String visit_tkin_encc = "X";
-	//주차
-	String[] parking_num = {"123가4567"};
-	String[] parking_kind = {"승용차"};
-	String[] parking_model = {"BMW"};
-	String visit_vhcle_encc = "X";
-	/////////// 나중에 버릴 애들  /////////////
 %>
 <!DOCTYPE html>
 <html>
@@ -219,88 +214,47 @@
 <body data-spy="scroll" data-target="#myScrollspy" data-offset="300">
 <%@ include file="/View/CommonForm/Top.jsp"%>
 <script type="text/javascript">
+	<% if(rMap==null){ %>
+		alert("잘못된 페이지 요청입니다. 이전 페이지로 돌아갑니다.");
+		history.back();
+	<% } %>
 	$(document).ready(function(){
 		//////////////////////////////  방문자 정보 세팅  //////////////////////////////
-		//////////  버릴 애들  ////////////
-		var visitor_name = new Array();
-		<% for(String name : visitor_name){%>visitor_name.push('<%=name%>');<%}%>
-		var visitor_hp = new Array();
-		<% for(String hp : visitor_hp){%>visitor_hp.push('<%=hp%>');<%}%>
-		for(var i=0;i<visitor_name.length;i++){
-			var vRow = "<tr id='vRow'><td><input id='chkVisitor' type='checkbox'></td>"
-						+"<td><input id='visitor_name' type='hidden' name='visitor_name' value='"+visitor_name[i]+"'>"+visitor_name[i]+"</td>"
-						+"<td><input id='visitor_hp' type='hidden' name='visitor_hp' value='"+visitor_hp[i]+"'>"+visitor_hp[i]+"</td></tr>";
-			$("#tb_visitor tbody").append(vRow);
-			vIndex++;
-		}
-		//////////  버릴 애들  ////////////
 		//실제로 쓸 for문
 		<% for(int i=0;i<vtList.size();i++){ %>
 		var vRow = "<tr id='vRow'><td><input id='chkVisitor' type='checkbox'></td>"
 					+"<td><input id='visitor_name' type='hidden' name='visitor_name' value='"
-					+<%=vtList.get(i).get("visitor_name") %>+"'>"+<%=vtList.get(i).get("visitor_name") %>+"</td>"
+					+<%=vtList.get(i).get("VISITOR_NAME") %>+"'>"+<%=vtList.get(i).get("VISITOR_NAME") %>+"</td>"
 					+"<td><input id='visitor_hp' type='hidden' name='visitor_hp' value='"
-					+<%=vtList.get(i).get("visitor_hp") %>+"'>"+<%=vtList.get(i).get("visitor_hp") %>+"</td></tr>";
+					+<%=vtList.get(i).get("VISITOR_HP") %>+"'>"+<%=vtList.get(i).get("VISITOR_HP") %>+"</td></tr>";
 		$("#tb_visitor tbody").append(vRow);
 		vIndex++;
 		<% } %>
 		//////////////////////////////  방문자 정보 세팅  끝 //////////////////////////////
 		//////////////////////////////  반입기기정보 세팅  //////////////////////////////
-		//////////  버릴 애들  ////////////
-		var tkin_kind = new Array();
-		<% for(String kind : tkin_kind){%>tkin_kind.push('<%=kind%>');<%}%>
-		var tkin_brand = new Array();
-		<% for(String brand : tkin_brand){%>tkin_brand.push('<%=brand%>');<%}%>
-		var tkin_model = new Array();
-		<% for(String model : tkin_model){%>tkin_model.push('<%=model%>');<%}%>
-		for(var i=0;i<tkin_kind.length;i++){
-			var dRow = "<tr id='dRow'><td><input id='chkDevice' type='checkbox'></td>"
-						+"<td><input id='tkin_kind' type='hidden' name='tkin_kind' value='"+tkin_kind[i]+"'>"+tkin_kind[i]+"</td>"
-						+"<td><input id='tkin_brand' type='hidden' name='tkin_brand' value='"+tkin_brand[i]+"'>"+tkin_brand[i]+"</td>"
-						+"<td><input id='tkin_model' type='hidden' name='tkin_model' value='"+tkin_model[i]+"'>"+tkin_model[i]+"</td></tr>";
-			$("#tb_device tbody").append(dRow);
-			dIndex++;
-		}
-		//////////  버릴 애들  ////////////
 		//실제로 쓸 for문
 		<% for(int i=0;i<tnList.size();i++){ %>
 		var dRow = "<tr id='dRow'><td><input id='chkDevice' type='checkbox'></td>"
 					+"<td><input id='tkin_kind' type='hidden' name='tkin_kind' value='"
-					+<%=tnList.get(i).get("tkin_kind") %>+"'>"+<%=tnList.get(i).get("tkin_kind") %>+"</td>"
+					+<%=tnList.get(i).get("TKIN_KIND") %>+"'>"+<%=tnList.get(i).get("TKIN_KIND") %>+"</td>"
 					+"<td><input id='tkin_brand' type='hidden' name='tkin_brand' value='"
-					+<%=tnList.get(i).get("tkin_brand") %>+"'>"+<%=tnList.get(i).get("tkin_brand") %>+"</td>"
+					+<%=tnList.get(i).get("TKIN_BRAND") %>+"'>"+<%=tnList.get(i).get("TKIN_BRAND") %>+"</td>"
 					+"<td><input id='tkin_model' type='hidden' name='tkin_model' value='"
-					+<%=tnList.get(i).get("tkin_model") %>+"'>"+<%=tnList.get(i).get("tkin_model") %>+"</td></tr>";
+					+<%=tnList.get(i).get("TKIN_MODEL") %>+"'>"+<%=tnList.get(i).get("TKIN_MODEL") %>+"</td></tr>";
 		$("#tb_device tbody").append(dRow);
 		dIndex++;
 		<% } %>
 		//////////////////////////////  반입기기정보 세팅 끝 //////////////////////////////
 		//////////////////////////////  주차정보 세팅  //////////////////////////////
-		//////////  버릴 애들  ////////////
-		var parking_num = new Array();
-		<% for(String num : parking_num){%>parking_num.push('<%=num%>');<%}%>
-		var parking_kind = new Array();
-		<% for(String kind : parking_kind){%>parking_kind.push('<%=kind%>');<%}%>
-		var parking_model = new Array();
-		<% for(String model : parking_model){%>parking_model.push('<%=model%>');<%}%>
-		for(var i=0;i<parking_num.length;i++){
-			var pRow = "<tr id='pRow'><td><input id='chkParking' type='checkbox'></td>"
-					+"<td><input id='parking_num' type='hidden' name='parking_num' value='"+parking_num[i]+"'>"+parking_num[i]+"</td>"
-					+"<td><input id='parking_kind' type='hidden' name='parking_kind' value='"+parking_kind[i]+"'>"+parking_kind[i]+"</td>"
-					+"<td><input id='parking_model' type='hidden' name='parking_model' value='"+parking_model[i]+"'>"+parking_model[i]+"</td>"+"</tr>";
-			$("#tb_parking tbody").append(pRow);
-			pIndex++;
-		}
-		//////////  버릴 애들  ////////////
 		//실제로 쓸 for문
 		<% for(int i=0;i<pkList.size();i++){ %>
 		var pRow = "<tr id='pRow'><td><input id='chkParking' type='checkbox'></td>"
 					+"<td><input id='parking_num' type='hidden' name='parking_num' value='"
-					+<%=pkList.get(i).get("parking_num") %>+"'>"+<%=pkList.get(i).get("parking_num") %>+"</td>"
+					+<%=pkList.get(i).get("PARKING_NUM") %>+"'>"+<%=pkList.get(i).get("PARKING_NUM") %>+"</td>"
 					+"<td><input id='parking_kind' type='hidden' name='parking_kind' value='"
-					+<%=pkList.get(i).get("parking_kind") %>+"'>"+<%=pkList.get(i).get("parking_kind") %>+"</td>"
+					+<%=pkList.get(i).get("PARKING_KIND") %>+"'>"+<%=pkList.get(i).get("PARKING_KIND") %>+"</td>"
 					+"<td><input id='parking_model' type='hidden' name='parking_model' value='"
-					+<%=pkList.get(i).get("parking_model") %>+"'>"+<%=pkList.get(i).get("parking_model") %>+"</td>"+"</tr>";
+					+<%=pkList.get(i).get("PARKING_MODEL") %>+"'>"+<%=pkList.get(i).get("PARKING_MODEL") %>+"</td>"+"</tr>";
 		$("#tb_parking tbody").append(pRow);
 		pIndex++;
 		<% } %>
