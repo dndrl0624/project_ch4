@@ -9,7 +9,6 @@
 <title>방문 현황 조회 페이지</title>
 <!-- 공통코드 -->
 <%@ include file="../../../Style/common/HeadUI.jsp"%>
-<link rel="stylesheet" type="text/css" href="/project_ch4_pojo/Style/css/maxCss.css">
 </head>
 <body>
 <script type="text/javascript">
@@ -111,60 +110,12 @@ function search(){
 </script>
 <%@ include file="../../CommonForm/Top.jsp"%>
 
-<!-- Side Bar -->
-<aside>
-	<div class="panel-group" style="margin-top:90px">
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<h4 class="panel-title">
-					<a href="/project_ch4_pojo/View/company/manager/Manager_Main.jsp">
-					<i class="fa fa-home" aria-hidden="true"></i>메인페이지</a>
-				</h4>
-			</div>
-		</div>
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<h4 class="panel-title">
-					<a data-toggle="collapse" href="#collapse1">
-					<i class="fa fa-users" aria-hidden="true"></i>방문 신청 조회</a>
-				</h4>
-			</div>
-			<div id="collapse1" class="panel-collapse collapse in">
-				<div class="panel-body">
-					<a  href="/project_ch4_pojo/View/company/manager/Manager_SearchVisitor.jsp">
-					<i class="fa fa-search-plus" aria-hidden="true"></i>방문 신청 조회</a><br> 
-					<a  href="/project_ch4_pojo/View/company/manager/Manager_LogVisitor.jsp">
-					<i class="fa fa-list-alt" aria-hidden="true"></i>방문현황 조회</a><br> 
-				</div>
-			</div>
-		</div>
-		
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<h4 class="panel-title">
-					<a data-toggle="collapse" href="#collapse2">
-					<i class="fa fa-truck" aria-hidden="true"></i>물품 반입 신청 조회</a>
-				</h4>
-			</div>
-			<div id="collapse2" class="panel-collapse collapse">
-				<div class="panel-body">
-					<a  href="/project_ch4_pojo/View/company/manager/Manager_SearchGoods.jsp">
-					<i class="fa fa-search-plus" aria-hidden="true"></i>반입 신청 조회</a><br> 
-					<a  href="/project_ch4_pojo/View/company/manager/Manager_LogGoods.jsp">
-					<i class="fa fa-list-alt" aria-hidden="true"></i>반입 현황 조회</a><br> 
-				</div>
-			</div>
-		</div>
-	</div>
-</aside>
-
 <!-- Content -->
 <div class="mainContent">
 <!-- 페이지 이름 / 환영+ 로그아웃 버튼 -->
 	<div class="col-lg-12">
 	<div style="padding-left:200px">
 		<div style="margin:30px 20px 10px 0px;font-size:35px;width: 50%;float: left;"> 방문 현황 조회 페이지 </div>
-		<%@ include file="../../CommonForm/logout.jsp"%>
 	</div>
 	</div>
 <div class="col-lg-12">

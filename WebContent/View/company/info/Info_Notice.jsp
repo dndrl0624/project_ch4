@@ -9,7 +9,6 @@
 <title>안내 공지</title>
 <!-- 공통코드 -->
 <%@ include file="../../../Style/common/HeadUI.jsp"%>
-<link rel="stylesheet" type="text/css" href="/project_ch4_pojo/Style/css/maxCss.css">
 </head>
 <body>
 <%@ include file="../../CommonForm/Top.jsp"%>

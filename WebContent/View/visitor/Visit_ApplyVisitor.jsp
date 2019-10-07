@@ -45,12 +45,12 @@
 		padding-top: 70px;
 		position: fixed;
 	}
-	div.col-lg-7 #section1 {
+	#section1 {
 		height: 500px;
 		margin-bottom: 10px;
 		font-size: 28px;
 	}
-	div.col-lg-7 #section2,#section3,#section4 {
+	#section2,#section3,#section4 {
 		height: 300px;
 		margin-bottom: 10px;
 		font-size: 28px;
@@ -107,69 +107,56 @@
 		padding: 0.75rem;
 		vertical-align: middle;
 	}
+	.modal-content {
+		border: 0px;
+	}
 	.modal-header.visitor {
+		border-top-left-radius: 6px;
+		border-top-right-radius: 6px;
 		background-color: #dff0d8;
 	}
 	.modal-header.device {
+		border-top-left-radius: 6px;
+		border-top-right-radius: 6px;
 		background-color: #fcf8e3;
 	}
 	.modal-header.parking {
+		border-top-left-radius: 6px;
+		border-top-right-radius: 6px;
 		background-color: #f5f5f5;
+	}
+	.modal-header.log {
+		border-top-left-radius: 6px;
+		border-top-right-radius: 6px;
+		background-color: #337ab7;
 	}
 	.modal-body {
 		padding-left: 100px;
 		padding-right: 100px;
 	}
+	.modal-body.log {
+		padding-left: 50px;
+		padding-right: 50px;
+	}
 	.modal-body p {
 		margin: 0 0 0 0px;
-	}
-	.calendar-saturday {
-		color: #CC2222;
-	}
-	.calendar-today {
-		font-weight: bold;
-		color: #0000ff;
-	}
-	.calendar-disabled {
-		opacity: 0.3;
-		filter: alpha(opacity=60);
-		cursor: default;
 	}
 </style>
 <title>방문 신청 - CH4 방문자 관리 시스템</title>
 <script type="text/javascript">
+	//등록한 방문자 수,반입기기 수,차량 수
 	var vIndex = 1;
 	var dIndex = 1;
 	var pIndex = 1;
-	var dKind;
-	var dBrand;
-	var pKind;
-	var pModel;
+	//datebox 선택날짜값 변수
 	var firstDate;
+	//오늘날짜 변수
+	var now = new Date();
 </script>
 </head>
 <body data-spy="scroll" data-target="#myScrollspy" data-offset="300">
 <%@ include file="/View/CommonForm/Top.jsp"%>
 <script type="text/javascript">
-	$.fn.combobox.defaults.editable = false
-	$.fn.datebox.defaults.formatter = function(date){
-	    var y = date.getFullYear();
-	    var m = date.getMonth()+1;
-	    var d = date.getDate();
-	    return y+'-'+(m<10 ? "0"+m:m)+'-'+(d<10 ? "0"+d:d);
-	}   
-	$.fn.datebox.defaults.parser = function(s){
-	    var t = Date.parse(s);
-	    if (!isNaN(t)){
-	    	return new Date(t);
-	    } else {
-	    	return new Date();
-	    }
-	}
-	$.fn.datebox.defaults.currentText = '오늘'
-	$.fn.datebox.defaults.closeText = '닫기'
-	$.fn.calendar.defaults.weeks = ['일','월','화','수','목','금','토']
-	$.fn.calendar.defaults.months = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
 	$(document).ready(function(){
 		//목적지 combobox 초기화 + 이전페이지 정보 반영
 		$("#visit_desti").combobox({
@@ -231,18 +218,16 @@
 					$("#tb_log #tr_log").remove();
 					//이력을 테이블에 뿌리기
 					$.each(result,function(index,item){
-						var visitor = item.visitor[0].visitor_name +" 외"+ (item.visitor.length-1) + "명";
-						//alert(index + ")\n"+ item.visit_apply_date+"\n"+visitor+"\n"+item.visit_desti+"\n"+item.visit_type+"\n"+item.visit_date+"\n"+item.visit_purps);
 						var row = "<tr id='tr_log'>"
-								+"<td><input id='visit_no' type='radio' name='visit_no' value='"+item.visit_no+"'>"
-								+"<input id='log_term' type='hidden' name='log_term' value='"+item.visit_term+"'>"
-								+"<input id='log_day' type='hidden' name='log_day' value='"+item.visit_day+"'></td>"
-								+"<td>"+item.visit_apply_date+"</td>"
-								+"<td>"+visitor+"</td>"
-								+"<td>"+item.visit_desti+"</td>"
-								+"<td>"+item.visit_type+"</td>"
-								+"<td>"+item.visit_date+"</td>"
-								+"<td>"+item.visit_purps+"</td></tr>";
+								+"<td><input id='visit_no' type='radio' name='visit_no' value='"+item.VISIT_NO+"'>"
+								+"<input id='log_term' type='hidden' name='log_term' value='"+item.VISIT_TERM+"'>"
+								+"<input id='log_day' type='hidden' name='log_day' value='"+item.VISIT_DAY+"'></td>"
+								+"<td>"+item.VISIT_APPLY_DATE+"</td>"
+								+"<td>"+item.VISITOR+"</td>"
+								+"<td>"+item.VISIT_DESTI+"</td>"
+								+"<td>"+item.VISIT_TYPE+"</td>"
+								+"<td>"+item.VISIT_DATE+"</td>"
+								+"<td>"+item.VISIT_PURPS+"</td></tr>";
 						$("#tb_log tbody").append(row);
 					});
 				}
@@ -300,8 +285,8 @@
 					});
 					//받은정보 뿌리기
 					for(i=0;i<vtList.length;i++){
-						var name = vtList[i].visitor_name;
-						var hp = vtList[i].visitor_hp;
+						var name = vtList[i].VISITOR_NAME;
+						var hp = vtList[i].VISITOR_HP;
 						var row = "<tr id='vRow"+vIndex+"'><td><input id='chkVisitor' type='checkbox'></td>"
 								+"<td><input id='visitor_name' type='hidden' name='visitor_name' value='"+name+"'>"+name+"</td>"
 								+"<td><input id='visitor_hp' type='hidden' name='visitor_hp' value='"+hp+"'>"+hp+"</td></tr>";
@@ -309,9 +294,9 @@
 						vIndex++;
 					}
 					for(i=0;i<tnList.length;i++){
-						var kind = tnList[i].tkin_kind;
-						var brand = tnList[i].tkin_brand;
-						var model = tnList[i].tkin_model;
+						var kind = tnList[i].TKIN_KIND;
+						var brand = tnList[i].TKIN_BRAND;
+						var model = tnList[i].TKIN_MODEL;
 						var row = "<tr id='dRow"+dIndex+"'><td><input id='chkDevice' type='checkbox'></td>"
 								+"<td><input id='tkin_kind' type='hidden' name='tkin_kind' value='"+kind+"'>"+kind+"</td>"
 								+"<td><input id='tkin_brand' type='hidden' name='tkin_brand' value='"+brand+"'>"+brand+"</td>"
@@ -320,9 +305,9 @@
 						dIndex++;
 					}
 					for(i=0;i<pkList.length;i++){
-						var num = pkList[i].parking_num;
-						var kind = pkList[i].parking_kind;
-						var model = pkList[i].parking_model;
+						var num = pkList[i].PARKING_NUM;
+						var kind = pkList[i].PARKING_KIND;
+						var model = pkList[i].PARKING_MODEL;
 						var row = "<tr id='pRow"+pIndex+"'><td><input id='chkParking' type='checkbox'></td>"
 								+"<td><input id='parking_num' type='hidden' name='parking_num' value='"+num+"'>"+num+"</td>"
 								+"<td><input id='parking_kind' type='hidden' name='parking_kind' value='"+kind+"'>"+kind+"</td>"
@@ -335,29 +320,31 @@
 				}
 			});
 		});
+		
 		///////////////////////// 방문날짜 이벤트  //////////////////////////
 		$("#visit_term").combobox("disable");
 		$("#visit_day").combobox("disable");
-		$("#visit_date2").datebox("disable");
+		//방문유형 선택시 입력폼 Enable,Disable
 		$("#visit_type").combobox({
 			onChange: function(newValue){
-				if("일일방문"==newValue){
+				if("일일방문"==newValue){	//datebox 1개만 Enable
 					$("#visit_term").combobox("disable");
 					$("#visit_day").combobox("disable");
 					$("#visit_date2").datebox("disable");
 				}
-				else if("기간방문"==newValue){
+				else if("기간방문"==newValue){	//datebox 2개만 Enable
 					$("#visit_term").combobox("disable");
 					$("#visit_day").combobox("disable");
 					$("#visit_date2").datebox("enable");
 				}
-				else {
+				else {	//정기방문 : 전부 Enable
 					$("#visit_term").combobox("enable");
 					$("#visit_day").combobox("enable");
 					$("#visit_date2").datebox("enable");
 				}
 			}
 		});
+		//방문시작일 선택시 마지막일 선택범위 (시작일+1~내년 당일) 제한
 		$('#visit_date1').datebox({
 			onSelect: function(date){
 				firstDate = date;
@@ -370,11 +357,13 @@
 		            }
 		        });
 				//최소기간을 정해버리면 disable이 풀림.....
+				//그래서 '일일방문'에선 다시 사용못하게 막아야함
 				if("일일방문"==$("#visit_type").val()){
 					$("#visit_date2").datebox("disable");
 				}
 			}
 		});
+		//방문일자 선택범위 (당일~내년 당일) 제한
 		$('#visit_date1').datebox().datebox('calendar').calendar({
             validator: function(date){
                 var now = new Date();
@@ -383,10 +372,22 @@
                 return d1<=date && date<=d2;
             }
         });
+		//방문일자 마지막일 범위 초기세팅
+		$('#visit_date2').datebox().datebox('calendar').calendar({
+            validator: function(date){
+                var now = new Date();
+                var d1 = new Date(now.getFullYear(), now.getMonth(), now.getDate()+1);
+                var d2 = new Date(now.getFullYear()+1, now.getMonth(), now.getDate());
+                return d1<=date && date<=d2;
+            }
+        });
+		$("#visit_date2").datebox("disable");
+		//방문일자  초기세팅 당일로
+		$('#visit_date1').datebox('setValue',now.getFullYear()+'-'+now.getMonth()+'-'+(now.getDate()+1));
 		///////////////////////// 방문자 추가 이벤트 /////////////////////////
 		//방문자 추가 modal 띄우기
 		$("#btn_addRowVisitor").on('click',function(){
-			if(vIndex>=10){
+			if(vIndex>10){
 				alert("방문인원은 최대 10명입니다.");
 				return;
 			}
@@ -394,11 +395,31 @@
 		});
 		//입력값 테이블에 row 추가하기
 		$("#addVisitor").on('click',function(){
+			if(!($("#v_name").val())){
+				alert("방문자 성명을 입력해 주세요.");
+				$("#v_name").textbox('textbox').focus();
+				return;
+			}
+			if(!($("#v_hp1").val())){
+				alert("연락처를 입력해 주세요.");
+				$("#v_hp1").textbox('textbox').focus();
+				return;
+			}
+			if(!($("#v_hp2").val())){
+				alert("연락처를 입력해 주세요.");
+				$("#v_hp2").textbox('textbox').focus();
+				return;
+			}
+			if(!($("#v_hp3").val())){
+				alert("연락처를 입력해 주세요.");
+				$("#v_hp3").textbox('textbox').focus();
+				return;
+			}
 			var name = $("#v_name").val();
-			var hp = $("#v_hp").val();
+			var hp = $("#v_hp1").val()+'-'+$("#v_hp2").val()+'-'+$("#v_hp3").val();
 			var row = "<tr id='vRow"+vIndex+"'><td><input id='chkVisitor' type='checkbox'></td>"
-					+"<td>"+name+"</td>"
-					+"<td>"+hp+"</td></tr>";
+					+"<td><input id='visitor_name' type='hidden' name='visitor_name' value='"+name+"'>"+name+"</td>"
+					+"<td><input id='visitor_hp' type='hidden' name='visitor_hp' value='"+hp+"'>"+hp+"</td></tr>";
 			$("#tb_visitor tbody").append(row);
 			$("#v_name").textbox('setValue',null);
 			$("#v_hp").textbox('setValue',null);
@@ -439,6 +460,7 @@
 					//그렇기 때문에 .html()없이 vRow를 쓰면 정의가 되어있으므로 true로 인식
 					if(vRow.html()){
 						if(i!=reset){
+							$("#vRow"+i+" #chkVisitor").attr('value',reset);
 							$("#vRow"+i).attr('id',"vRow"+reset);
 						}
 						reset++;
@@ -455,28 +477,50 @@
 		////////////////////////////////////////////////////////////////
 		///////////////////////// 반입기기 추가 이벤트 /////////////////////////
 		$("#btn_addRowDevice").on('click',function(){
+			$("#d_kind").combobox('clear');
+			$("#d_brand").combobox('clear');
+			$("#d_brand").combobox({
+				editable: false
+			});
 			$("#md_device").modal("show");
 		});
 		$("#d_kind").combobox({
 			onChange:function(newValue){
-				dKind = newValue;
-				alert(dKind);
-			}
-		});
-		$("#d_brand").combobox({
-			onChange:function(newValue){
-				dBrand = newValue;
-				alert(dBrand);
+				$("#d_brand").combobox({
+					valueField: 'value',
+					textField: 'brand',
+					url: "../../json/"+newValue+".json"
+				});
+				if("etc"==newValue){
+					$("#d_brand").combobox({
+						editable: true
+					});
+				}
 			}
 		});
 		$("#addDevice").on('click',function(){
-			var kind = dKind;
-			var brand = dBrand;
+			if(!($("#d_kind").combobox('getValue'))){
+				alert("기종을 선택해 주세요.");
+				$("#d_kind").combobox('textbox').focus();
+				return;
+			}
+			if(!($("#d_brand").combobox('getValue'))){
+				alert("제조사를 선택해 주세요.");
+				$("#d_brand").combobox('textbox').focus();
+				return;
+			}
+			if(!($("#d_model").val())){
+				alert("모델명을 입력해 주세요.");
+				$("#d_model").textbox('textbox').focus();
+				return;
+			}
+			var kind = $("#d_kind").combobox('getText');
+			var brand = $("#d_brand").combobox('getText');
 			var model = $("#d_model").val();
 			var row = "<tr id='dRow"+dIndex+"'><td><input id='chkDevice' type='checkbox'></td>"
-					+"<td>"+kind+"</td>"
-					+"<td>"+brand+"</td>"
-					+"<td>"+model+"</td></tr>";
+					+"<td><input id='tkin_kind' type='hidden' name='tkin_kind' value='"+kind+"'>"+kind+"</td>"
+					+"<td><input id='tkin_brand' type='hidden' name='tkin_brand' value='"+brand+"'>"+brand+"</td>"
+					+"<td><input id='tkin_model' type='hidden' name='tkin_model' value='"+model+"'>"+model+"</td></tr>";
 			$("#tb_device tbody").append(row);
 			$("#d_name").textbox('setValue',null);
 			$("#d_model").textbox('setValue',null);
@@ -504,6 +548,7 @@
 					var dRow = $("#dRow"+i);
 					if(dRow.html()){
 						if(i!=reset){
+							$("#dRow"+i+" #chkDevice").attr('value',reset);
 							$("#dRow"+i).attr('id',"dRow"+reset);
 						}
 						reset++;
@@ -518,29 +563,44 @@
 		});
 		////////////////////////////////////////////////////////////////
 		///////////////////////// 차량 추가 이벤트 ///////////////////////////
+		$("#p_num").textbox('textbox').attr('maxlength', '8');
 		$("#btn_addRowParking").on('click',function(){
+			$("#p_kind").combobox('clear');
+			$("#p_model").combobox('clear');
 			$("#md_parking").modal("show");
 		});
 		$("#p_kind").combobox({
 			onChange:function(newValue){
-				pKind = newValue;
-				alert(pKind);
-			}
-		});
-		$("#p_model").combobox({
-			onChange:function(newValue){
-				pModel = newValue;
-				alert(pModel);
+				$("#p_model").combobox({
+					valueField: 'value',
+					textField: 'model',
+					url: "../../json/"+newValue+".json"
+				});
 			}
 		});
 		$("#addParking").on('click',function(){
+			if(!($("#p_num").val())){
+				alert("차량번호를 입력해 주세요.");
+				$("#p_num").textbox('textbox').focus();
+				return;
+			}
+			if(!($("#p_kind").combobox('getValue'))){
+				alert("차종을 선택해 주세요.");
+				$("#p_kind").combobox('textbox').focus();
+				return;
+			}
+			if(!($("#p_model").combobox('getValue'))){
+				alert("차량 모델을 선택해 주세요.");
+				$("#p_model").combobox('textbox').focus();
+				return;
+			}
 			var num = $("#p_num").val();
-			var kind = pKind;
-			var model = pModel;
+			var kind = $("#p_kind").combobox('getText');
+			var model = $("#p_model").combobox('getText');
 			var row = "<tr id='pRow"+pIndex+"'><td><input id='chkParking' type='checkbox'></td>"
-					+"<td>"+num+"</td>"
-					+"<td>"+kind+"</td>"
-					+"<td>"+model+"</td></tr>";
+					+"<td><input id='parking_num' type='hidden' name='parking_num' value='"+num+"'>"+num+"</td>"
+					+"<td><input id='parking_kind' type='hidden' name='parking_kind' value='"+kind+"'>"+kind+"</td>"
+					+"<td><input id='parking_model' type='hidden' name='parking_model' value='"+model+"'>"+model+"</td></tr>";
 			$("#tb_parking tbody").append(row);
 			$("#p_num").textbox('setValue',null);
 			$("#p_kind").combobox('select','차종');
@@ -569,6 +629,7 @@
 					var pRow = $("#pRow"+i);
 					if(pRow.html()){
 						if(i!=reset){
+							$("#pRow"+i+" #chkParking").attr('value',reset);
 							$("#pRow"+i).attr('id',"pRow"+reset);
 						}
 						reset++;
@@ -682,12 +743,17 @@
 	    <div class="col-lg-7 col-lg-offset-1"> 
 			<div class="row">
 		    	<div class="col-lg-10">
-					<h2 style="margin-bottom:20px; border-left: 4px solid #17405D; padding-left:8px;"><b>방문 신청</b> (방문지)</h2>
+					<h2 style="margin-bottom:20px; border-left: 4px solid #17405D; padding-left:8px;"><b>방문 신청</b> (<%=com_name %>)</h2>
 		    	</div>
 		    	<div class="col-lg-2" style="text-align:right; padding-top:30px;">
-					<button class="btn btn-primary">방문이력</button>
+					<button id="btn_log" class="btn btn-primary">방문이력</button>
 		    	</div>
 			</div>
+	    <!------------------------------------- 신청 폼 시작 -------------------------------------->
+	    <form id="form_apply" action="/visitor/add.ch4" method="POST">
+	    	<input id="com_no" type="hidden" name="com_no" value="<%=com_no %>">
+	    	<input id="visit_tkin_encc" type="hidden" name="visit_tkin_encc" value="">
+	    	<input id="visit_vhcle_encc" type="hidden" name="visit_vhcle_encc" value="">
 		    <div id="section1" class="panel panel-info">    
 			    <div class="panel-heading">기본 방문정보</div>
 			    <div class="panel-body">
@@ -696,9 +762,9 @@
 			    		<table class="table">
 			    			<tr>
 			    				<th>성명</th>
-			    				<td>(성명)</td>
-			    				<th>전화번호</th>
-			    				<td>010-0000-1234</td>
+			    				<td><input id="visit_apply_name" type="hidden" name="visit_apply_name" value="<%=visit_apply_name %>"><%=visit_apply_name %></td>
+			    				<th>연락처</th>
+			    				<td><input id="visit_apply_hp" type="hidden" name="visit_apply_hp" value="<%=visit_apply_hp %>"><%=visit_apply_hp %></td>
 			    			</tr>
 			    		</table>
 			    	</div>
@@ -716,14 +782,15 @@
 			    			<tbody>
 			    				<tr>
 			    					<td>
-			    						<select id="visit_type" class="easyui-combobox" style="width:80%;" data-options="panelHeight:'auto'">
+			    						<select id="visit_type" class="easyui-combobox" name="visit_type" style="width:80%;" data-options="panelHeight:'auto'">
 			    							<option value="일일방문">일일방문</option>
 			    							<option value="기간방문">기간방문</option>
 			    							<option value="정기방문">정기방문</option>
 			    						</select>
 			    					</td>
 			    					<td>
-			    						<select id="visit_term" class="easyui-combobox" style="width:80%;" data-options="panelHeight:'auto'">
+			    						<select id="visit_term" class="easyui-combobox" name="visit_term" style="width:80%;" data-options="panelHeight:'auto'">
+			    							<option value="">방문주기</option>
 			    							<option value="매주">매주</option>
 			    							<option value="격주">격주</option>
 			    							<option value="첫째주">첫째주</option>
@@ -734,7 +801,8 @@
 			    						</select>
 			    					</td>
 			    					<td>
-			    						<select id="visit_day" class="easyui-combobox" style="width:80%;" data-options="panelHeight:'auto'">
+			    						<select id="visit_day" class="easyui-combobox" name="visit_day" style="width:80%;" data-options="panelHeight:'auto'">
+			    							<option value="">방문요일</option>
 			    							<option value="월요일">월요일</option>
 			    							<option value="화요일">화요일</option>
 			    							<option value="수요일">수요일</option>
@@ -751,6 +819,7 @@
 			    			<tr>
 			    				<th>방문날짜</th>
 			    				<td>
+			    					<input id="visit_date" type="hidden" name="visit_date" value="">
 			    					<input id="visit_date1" class="easyui-datebox" style="width:30%;height:100%">
 			    					&emsp;&emsp;<span>~</span>&emsp;&emsp;
 			    					<input id="visit_date2" class="easyui-datebox" style="width:30%;height:100%">
@@ -764,15 +833,18 @@
 			    			<thead>
 			    				<tr>
 				    				<th>목적지</th>
-				    				<th>담당자</th>
 				    				<th>방문목적</th>
 			    				</tr>
 			    			</thead>
 			    			<tbody>
 			    				<tr>
-			    					<td><input class="easyui-combobox" style="width:80%;" data-options="panelHeight:'auto'"></td>
-			    					<td><input class="easyui-textbox" style="width:80%;"></td>
-			    					<td><input class="easyui-textbox" style="width:80%;"></td>
+			    					<td>
+			    						<select id="visit_desti" class="easyui-combobox" name="visit_desti" style="width:80%;" data-options="panelHeight:'300px'">
+			    							<option value="">목적지</option>
+			    							<option value="test">테스트</option>
+			    						</select>
+			    					</td>
+			    					<td><input id="visit_purps" class="easyui-textbox" name="visit_purps" data-options="prompt:'예시)업무협의'" style="width:80%;"></td>
 			    				</tr>
 			    			</tbody>
 			    		</table>
@@ -788,8 +860,8 @@
 					    	<h6 style="margin-bottom:10px;">방문자는 최대 10명으로 제한합니다.</h6>
 					    </div>
 					    <div class="col-lg-4" style="text-align:right;padding-top:20px;">
-							<button id="btn_addRowVisitor" class="btn btn-default">방문자 추가</button>
-							<button id="btn_delRowVisitor" class="btn btn-danger">선택삭제</button>
+							<button id="btn_addRowVisitor" class="btn btn-default" type="button">방문자 추가</button>
+							<button id="btn_delRowVisitor" class="btn btn-danger" type="button">선택삭제</button>
 		    			</div>
 				    </div>
 			    	<div class="row table visitor">
@@ -816,8 +888,8 @@
 					    	<h6 style="margin-bottom:10px;">소지하실 상용정보 통신기기를 모두 등록 해주시기 바랍니다.</h6>
 				    	</div>
 				    	<div class="col-lg-4" style="text-align:right;padding-top:20px;">
-							<button id="btn_addRowDevice" class="btn btn-default">기기 추가</button>
-							<button id="btn_delRowDevice" class="btn btn-danger">선택삭제</button>
+							<button id="btn_addRowDevice" class="btn btn-default" type="button">기기 추가</button>
+							<button id="btn_delRowDevice" class="btn btn-danger" type="button">선택삭제</button>
 		    			</div>
 				    </div>
 				    <div class="row table device">
@@ -889,7 +961,11 @@
 					</tr>
 					<tr>
 						<th><p>전화번호</p></th>
-						<td><input id="v_hp" class="easyui-textbox"></td>
+						<td>
+							<input id="v_hp1" class="easyui-textbox" type="number" style="width:60px;"> -
+							<input id="v_hp2" class="easyui-textbox" type="number" style="width:60px;"> -
+							<input id="v_hp3" class="easyui-textbox" type="number" style="width:60px;">
+						</td>
 					</tr>
 				</table>
 			</div>
@@ -915,13 +991,11 @@
 						<td>
 							<select id="d_kind" class="easyui-combobox" data-options="panelHeight:'auto'">
 								<option value="">기종</option>
-								<option value="노트북">노트북</option>
-								<option value="휴대전화">휴대전화</option>
-								<option value="태블릿">태블릿</option>
-								<option value="MP3">MP3</option>
-								<option value="PMP">PMP</option>
-								<option value="디지털카메라">디지털카메라</option>
-								<option value="디지털캠코더">디지털캠코더</option>
+								<option value="laptop">노트북</option>
+								<option value="phone">휴대전화</option>
+								<option value="tablet">태블릿</option>
+								<option value="mp3">MP3</option>
+								<option value="device_etc">기타(PMP,디지털카메라)</option>
 							</select>
 						</td>
 					</tr>
@@ -929,7 +1003,7 @@
 						<th><p>제조사</p></th>
 						<td>
 							<select id="d_brand" class="easyui-combobox" data-options="panelHeight:'auto'">
-								<option value="test">제조사</option>
+								<option value="">제조사</option>
 							</select>
 							
 						</td>
@@ -970,19 +1044,19 @@
 						<td>
 							<select id="p_kind" class="easyui-combobox" data-options="panelHeight:'auto'">
 								<option value=''>차종</option> 
-								<option value='승용차'>승용차</option> 
-								<option value='승합차'>승합차</option> 
-								<option value='작업차'>작업차</option> 
-								<option value='특수차'>특수차</option> 
-								<option value='오토바이'>오토바이</option> 
+								<option value='car'>승용차</option> 
+								<option value='van'>승합차</option> 
+								<option value='working_vehicle'>작업차</option> 
+								<option value='specialty_vehicle'>특수차</option> 
+								<option value='motorcycle'>오토바이</option> 
 							</select>
 						</td>
 					</tr>
 					<tr>
 						<th><p>모델명</p></th>
 						<td>
-							<select id="p_model" class="easyui-combobox" data-options="panelHeight:'auto'">
-								<option value="test">차량모델명</option>
+							<select id="p_model" class="easyui-combobox" data-options="panelHeight:'200px'">
+								<option value="">차량모델명</option>
 							</select>
 						</td>
 					</tr>
@@ -990,6 +1064,64 @@
 			</div>
 			<div class="modal-footer">
         		<button type="button" class="btn btn-primary" id="addParking">추가</button>
+        		<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+        	</div>
+		</div>
+	</div>
+</div>
+<!-- 방문이력 조회 Modal -->
+<div id="md_log" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header log">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" style="color:white;">방문이력 (<%=com_name %>)</h4>
+			</div>
+			<div class="modal-body log" >
+				<div class="container-fluid">
+					<div class="row table basic">
+						<table class="table">
+				    		<tr>
+				    			<th>
+				    				<form id="form_search_log" method="POST">
+				    					<input type="hidden" name="com_no" value="<%=com_no %>">
+				    					<input type="hidden" name="visit_apply_name" value="<%=visit_apply_name %>">
+				    					<input type="hidden" name="visit_apply_hp" value="<%=visit_apply_hp %>">
+										<input id="visit_apply_date1" class="easyui-datebox" name="visit_apply_date1" label="신청일자" style="width:230px;height:30px">
+								    	&emsp;<span>~</span>&emsp;
+								    	<input id="visit_apply_date2" class="easyui-datebox" name="visit_apply_date2" style="width:150px;height:30px">
+								    	&emsp;&emsp;
+								    	<button id="btn_search_log" type="button" class="btn btn-primary">조회</button>
+							    	</form>
+				    			</th>
+				    		</tr>
+				    	</table>
+					</div>
+					<h6 style="margin-bottom:10px;">※이전 신청/방문이력을 재사용 신청할 수 있습니다.</h6>
+				    <div class="row table basic">
+				    	<table id="tb_log" class="table">
+				    		<thead>
+					    		<tr>
+					    			<th style="width:60px;">선택</th>
+					    			<th>신청일자</th>
+					    			<th>방문자</th>
+					    			<th>목적지</th>
+					    			<th>방문유형</th>
+					    			<th>방문일자</th>
+					    			<th>방문목적</th>
+					    		</tr>
+				    		</thead>
+					    	<tbody>
+					    	</tbody>
+				    	</table>
+				    </div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<form id="form_reflect" method="POST">
+					<input id="input_reflect" type="hidden" name="visit_no" value="">
+				</form>
+        		<button id="btn_reflect" type="button" class="btn btn-primary">재사용</button>
         		<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
         	</div>
 		</div>

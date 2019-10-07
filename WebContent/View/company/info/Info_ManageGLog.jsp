@@ -9,7 +9,6 @@
 <title>반입 현황 관리 작성</title>
 <!-- 공통코드 -->
 <%@ include file="../../../Style/common/HeadUI.jsp"%>
-<link rel="stylesheet" type="text/css" href="/project_ch4_pojo/Style/css/maxCss.css">
 </head>
 <body>
 <script type="text/javascript">
@@ -97,59 +96,12 @@ $(document).ready(function(){
 </script>
 <%@ include file="../../CommonForm/Top.jsp"%>
 
-<!-- Side Bar -->
-<aside>
-	<div class="panel-group" style="margin-top:90px">
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<h4 class="panel-title">
-					<a href="/project_ch4_pojo/View/company/info/Info_Main.jsp">
-					<i class="fa fa-home" aria-hidden="true"></i>메인페이지</a>
-				</h4>
-			</div>
-		</div>
-<!-- 		<div class="panel panel-info"> -->
-<!-- 			<div class="panel-heading"> -->
-<!-- 				<h4 class="panel-title"> -->
-<!-- 					<a href="/project_ch4_pojo/View/company/info/Info_Notice.jsp"> -->
-<!-- 					<i class="fa fa-search-plus" aria-hidden="true"></i>안내 공지</a> -->
-<!-- 				</h4> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<h4 class="panel-title">
-					<a href="/project_ch4_pojo/View/company/info/Info_ManageLog.jsp">
-					<i class="fa fa-list-alt" aria-hidden="true"></i>방문자현황관리</a>
-				</h4>
-			</div>
-		</div>
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<h4 class="panel-title">
-					<a href="/project_ch4_pojo/View/company/info/Info_ManageGLog.jsp">
-					<i class="fa fa-truck" aria-hidden="true"></i>반입현황관리</a>
-				</h4>
-			</div>
-		</div>
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<h4 class="panel-title">
-					<a href="/project_ch4_pojo/View/company/info/Info_ManageCompany.jsp">
-					<i class="fa fa-search-plus" aria-hidden="true"></i>종합 관리</a>
-				</h4>
-			</div>
-		</div>
-	</div>
-</aside>
-
 <!-- content -->
 <div class="mainContent">
 <!-- 페이지 이름 / 환영+ 로그아웃 버튼 -->
 	<div class="col-lg-12">
 	<div style="padding-left:200px">
 		<div style="margin:30px 20px 10px 0px;font-size:35px;widtd: 50%;float: left;"> 반입 현황 조회 </div>
-		<%@ include file="../../CommonForm/logout.jsp"%>
 	</div>
 	</div>
 	

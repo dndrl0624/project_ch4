@@ -129,52 +129,6 @@ figure.snip1200.hover p {
 
 <%@ include file="../../CommonForm/Top.jsp"%>
 
-<!-- Side Bar -->
-<aside>
-	<div class="panel-group" style="margin-top:90px">
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<h4 class="panel-title">
-					<a href="/project_ch4_pojo/View/company/info/Info_Main.jsp">
-					<i class="fa fa-home" aria-hidden="true"></i>메인페이지</a>
-				</h4>
-			</div>
-		</div>
-<!-- 		<div class="panel panel-info"> -->
-<!-- 			<div class="panel-heading"> -->
-<!-- 				<h4 class="panel-title"> -->
-<!-- 					<a href="/project_ch4_pojo/View/company/info/Info_Notice.jsp"> -->
-<!-- 					<i class="fa fa-search-plus" aria-hidden="true"></i>안내 공지</a> -->
-<!-- 				</h4> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<h4 class="panel-title">
-					<a href="/project_ch4_pojo/View/company/info/Info_ManageLog.jsp">
-					<i class="fa fa-list-alt" aria-hidden="true"></i>방문자현황관리</a>
-				</h4>
-			</div>
-		</div>
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<h4 class="panel-title">
-					<a href="/project_ch4_pojo/View/company/info/Info_ManageGLog.jsp">
-					<i class="fa fa-truck" aria-hidden="true"></i>반입현황관리</a>
-				</h4>
-			</div>
-		</div>
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<h4 class="panel-title">
-					<a href="/project_ch4_pojo/View/company/info/Info_ManageCompany.jsp">
-					<i class="fa fa-search-plus" aria-hidden="true"></i>종합 관리</a>
-				</h4>
-			</div>
-		</div>
-	</div>
-</aside>
-
 <!-- Content -->
 <div class="mainContent">
 <!-- 페이지 이름 / 환영+ 로그아웃 버튼 -->
@@ -183,7 +137,6 @@ figure.snip1200.hover p {
 		<div style="margin:30px 20px 10px 0px;font-size:35px;width:55%;float:left;">
 			<h1 style="text-align: right">CH4 방문자 관리 시스템</h1>
 		</div>
-		<%@ include file="../../CommonForm/logout.jsp"%>
 	<div style="text-align: center;">
 		<img alt="abc" src="/project_ch4_pojo/Style/images/banner/speedGate (1).jpg">
 	</div>
