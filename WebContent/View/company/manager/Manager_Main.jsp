@@ -144,7 +144,7 @@ figure.snip1200.hover p {
 <!-- Side Bar -->
 <aside>
 	<div style="margin-top:30px">
-	<h1 style="color: white;">회@사@이@름@</h1>
+	<h3 style="color: white;">회@사@이@름@</h3>
 <%-- 	<% session.getAttribute("COM_NAME"); %> --%>
 	</div>
 	<div class="panel-group" style="margin-top:90px">
@@ -199,10 +199,7 @@ figure.snip1200.hover p {
 		<div style="padding-left:200px">
 		
 		<div style="font-size:35px;width: 78%;float: left;">
-			<h1>회사명 
-<%-- 			<% company_name %> --%>
-<%-- 			<% (String)session.getAttribute("COM_NAME"); %> --%>
-			</h1>
+			<h1>승인 관리자 페이지</h1>
 		</div>
 		<%@ include file="../../CommonForm/logout.jsp"%>
 <!-- 메인페이지 이미지 -->

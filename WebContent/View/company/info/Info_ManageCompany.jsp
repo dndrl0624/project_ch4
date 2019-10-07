@@ -235,6 +235,9 @@ $(document).ready(function(){
 
 <!-- Side Bar -->
 <aside>
+	<div style="margin-top:30px">
+	<h3 style="color: white;">회@사@이@름@</h3> <!-- session.getAttribute("COM_NAME"); -->
+	</div>
 	<div class="panel-group" style="margin-top:90px">
 		<div class="panel panel-info">
 			<div class="panel-heading">
@@ -391,7 +394,7 @@ $(document).ready(function(){
 	        <div class="modal-body" style="align: center;padding-left: 30%">
 	        	<p>일련번호는 자동으로 추가됩니다.</p>
 	        	<form id="f_desti_add">
-				<input type="hidden" name="COM_NO" value="<% session.getAttribute("COM_NO"); %>">
+<%-- 				<input type="hidden" name="COM_NO" value="<% session.getAttribute("COM_NO"); %>"> --%>
 		        	<table>
 		        		<tr><td width=70 style="word-break:break-all">목적지명</td>	
 		        							<td><input class="easyui-textbox" id="DESTI_NAME_ADD" name="DESTI_NAME"></td></tr>
@@ -420,7 +423,7 @@ $(document).ready(function(){
 	        
 	        <div class="modal-body" style="align: center;padding-left: 30%">
 	        	<form id="f_desti_chage">
-				<input type="hidden" name="COM_NO" value="<% session.getAttribute("COM_NO"); %>">
+<%-- 				<input type="hidden" name="COM_NO" value="<% session.getAttribute("COM_NO"); %>"> --%>
 		        	<table>
 		        		<tr><td width=70 style="word-break:break-all">일련번호</td>		
 		        								<td><input class="easyui-textbox" id="DESTI_NO_INFO" name="DESTI_NO" readonly="readonly"></td></tr>
@@ -450,7 +453,7 @@ $(document).ready(function(){
 	        </div>
 	        <div class="modal-body" style="align: center;padding-left: 30%">
 		        <form id="f_kio_change">
-				<input type="hidden" name="COM_NO" value="<% session.getAttribute("COM_NO"); %>">
+<%-- 				<input type="hidden" name="COM_NO" value="<% session.getAttribute("COM_NO"); %>"> --%>
 		        	<table>
 		        		<tr><td width=120 style="word-break:break-all">일련번호</td>	
 		        							<td><input class="easyui-textbox" id="kiosk_no" name="kiosk_no" readonly="readonly"></td></tr>
@@ -488,7 +491,7 @@ $(document).ready(function(){
 	        
 	        <div class="modal-body" style="align: center;padding-left: 30%">
 	        	<form id="f_redday_add">
-				<input type="hidden" name="COM_NO" value="<% session.getAttribute("COM_NO"); %>">
+<%-- 				<input type="hidden" name="COM_NO" value="<% session.getAttribute("COM_NO"); %>"> --%>
 	        	<table>
 	        		<tr><td width=70 style="word-break:break-all">목적지명</td>	
 	        							<td><input class="easyui-textbox" id="DATE_ADD" name="COMCL_DATE"></td></tr>
@@ -517,7 +520,7 @@ $(document).ready(function(){
 	        
 	        <div class="modal-body" style="align: center;padding-left: 30%">
 	        	<form id="f_redday_del">
-	        	<input type="hidden" name="COM_NO" value="<% session.getAttribute("COM_NO"); %>">
+<%-- 	        	<input type="hidden" name="COM_NO" value="<% session.getAttribute("COM_NO"); %>"> --%>
 		        	<table>
 		        		<tr><td width=70 style="word-break:break-all">목적지명</td>	
 		        							<td><input class="easyui-textbox" id="DATE_DEL" name="COMCL_DATE" readonly="readonly"></td></tr>
