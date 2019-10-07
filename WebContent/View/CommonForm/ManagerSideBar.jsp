@@ -6,16 +6,16 @@
 <%
 	String cmng_id = "null";
 	String cmng_name = "null";
-	String com_no_s = "null";
-	String com_name_s = "null";
+	String com_no = "null";
+	String com_name = "null";
 	String dept_name  = "null";
 	Map<String,Object> sMap = null;
 	if(null!=request.getSession().getAttribute("rMap")){
 		sMap = (Map<String,Object>)request.getSession().getAttribute("rMap");
 		cmng_id = (String)sMap.get("cmng_id");
 		cmng_name = (String)sMap.get("cmng_name");
-		com_no_s = (String)sMap.get("com_no");
-		com_name_s = (String)sMap.get("com_name");
+		com_no = (String)sMap.get("com_no");
+		com_name = (String)sMap.get("com_name");
 		dept_name= (String)sMap.get("dept_name");
 	}
 %>
@@ -76,7 +76,7 @@
 <!-- Side Bar -->
 <aside>
 	<div id="info">
-		<h4><b><%=com_name_s %></b></h4>
+		<h4><b><%=com_name %></b></h4>
 		<h5><b><%=dept_name %></b></h5>
 		<h4><b><%=cmng_name %></b>(님)</h4>
 		<button id="btn_logout" type="button" onClick="logout()">로그아웃</button>
