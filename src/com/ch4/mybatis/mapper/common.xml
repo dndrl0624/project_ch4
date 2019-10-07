@@ -22,7 +22,7 @@
 	<select id="visitorApplySearch" parameterType="map" resultType="map">
 		select visit_no, visit_apply_name, visit_apply_date, visit_apply_hp, visit_purps, visit_desti
 			, visit_type, visit_term, visit_day, visit_date, visit_tkin_encc, visit_vhcle_encc
-			, visit_permit_id, visit_permit_st, visit_notes, com_no, com_name
+			, visit_permit_id, visit_permit_st, visit_notes, vi.com_no, com_name
 		  from visit_apply vi, company co
 		 where vi.com_no = co.com_no
 		<!-- 검색 : (승인)방문번호 -->
@@ -185,7 +185,7 @@
 	<!-- 반입신청테이블 + 회사이름 조회 -->
 	<select id="goodsApplySearch" parameterType="map" resultType="map">
 		select aplg_no, aplg_name, aplg_date, aplg_reason, aplg_desti, aplg_trans_date, aplg_hp
-			, aplg_permit_st, aplg_notes, aplg_permit_id, com_no, com_name
+			, aplg_permit_st, aplg_notes, aplg_permit_id, app.com_no, com_name
 	   		from goods_apply app, company co
 	   		where app.com_no = co.com_no
 	   		<!-- 검색 : (승인)반입번호 -->
