@@ -78,7 +78,7 @@ public class ActionServlet extends HttpServlet {
 				viewName = mav.viewName;
 				boolean isRedirect = mav.isRedirect;
 				if(viewName.equals("Fail.jsp")) {
-					contextPath = "";
+					contextPath = "/";
 				}
 				if(isRedirect) {
 					res.sendRedirect(viewPath + contextPath + viewName);
@@ -94,7 +94,7 @@ public class ActionServlet extends HttpServlet {
 				viewName = mav.viewName;
 				boolean isRedirect = mav.isRedirect;
 				if(viewName.equals("Fail.jsp")) {
-					contextPath = "";
+					contextPath = "/";
 				}
 				if(isRedirect) {
 					res.sendRedirect(viewPath + contextPath + viewName);
@@ -109,7 +109,7 @@ public class ActionServlet extends HttpServlet {
 				viewName = mav.viewName;
 				boolean isRedirect = mav.isRedirect;
 				if(viewName.equals("Fail.jsp")) {
-					contextPath = "";
+					contextPath = "/";
 				}
 				if(isRedirect) {
 					res.sendRedirect(viewPath + contextPath + viewName);
@@ -124,7 +124,7 @@ public class ActionServlet extends HttpServlet {
 				viewName = mav.viewName;
 				boolean isRedirect = mav.isRedirect;
 				if(viewName.equals("Fail.jsp")) {
-					contextPath = "";
+					contextPath = "/s";
 				}
 				if(isRedirect) {
 					res.sendRedirect(viewPath + "/visitor/" + viewName);

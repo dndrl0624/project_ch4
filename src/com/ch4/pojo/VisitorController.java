@@ -80,7 +80,7 @@ public class VisitorController implements Controller{
 				mav.setViewName("Visit_Main.jsp");
 			}
 			else if(result == 0) {
-				mav.setViewName("Visit_ApplyFail.jsp");
+				mav.setViewName("Fail.jsp");
 			}
 		}
 		else if(requestName.equals("changeVisitor")) {
