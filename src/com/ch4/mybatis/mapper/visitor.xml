@@ -1,8 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ch4.mybatis.mapper.VisitorMapper">
-   <!-- QR코드 조회(visitor) -->
-   <select id="visitorQRcode" parameterType="map" resultType="map">
+	
+	<resultMap type="hashmap" id="vMap"/>
+	<!-- 신청자 방문이력 조회 -->
+	<update id="preVisitorSearch" parameterType="map" statementType="CALLABLE">
+		{call proc_preVisitApply(
+			#{visit_apply_name, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_apply_hp, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{com_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_apply_date1, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{visit_apply_date2, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{preList, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=vMap},
+			#{result, mode=OUT, jdbcType=INTEGER, javaType=int}
+		)}
+	</update>
+	
+	<!-- 신청자 반입이력 조회 -->
+	<update id="preGoodsSearch" parameterType="map" statementType="CALLABLE">
+		{call proc_preGoodsApply(
+			#{aplg_name, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{aplg_hp, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{com_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{aplg_date1, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{aplg_date2, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+			#{preList, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=vMap},
+			#{result, mode=OUT, jdbcType=INTEGER, javaType=int}
+		)}
+	</update>
+	
+	
+	<!-- QR코드 조회(visitor) -->
+	<select id="visitorQRcode" parameterType="map" resultType="map">
 		select confm_no, confm_date, confm_qrcode, com_name
 		  from cmg_confm cc, visit_confm vc, visit_apply va, company co
 		 where vc.confm_no = cc. confm_no
@@ -10,7 +39,7 @@
 		   and co.con_no = va.con_no 
 		   and confm_name = #{confm_name}
 		   and confm_hp = #{confm_hp}
-   </select>
+	</select>
 	<!-- 신청 내용 작성  (기본정보)-->
 	<update id="visitorApplyAdd" parameterType="map" statementType="CALLABLE">
 		{call proc_vApplyAdd(
@@ -74,6 +103,5 @@
 			#{result, mode=OUT, jdbcType=INTEGER, javaType=int}
 		)}
 	</update>
-	
 	
 </mapper>
