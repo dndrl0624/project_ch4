@@ -5,6 +5,9 @@
 	<update id="companyLogin" parameterType="map" statementType="CALLABLE">
 		{call proc_companyLogin(#{cmng_id,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
 								,#{cmng_pw,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+								,#{cmng_name,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+								,#{com_no,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+								,#{com_name,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
 								,#{grade,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
 								,#{dept_name,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
 								,#{msg,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
