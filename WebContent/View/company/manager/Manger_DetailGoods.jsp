@@ -121,15 +121,23 @@ table.table {
 	var now = new Date();
 	//신청 승인 처리
 	function gpermission(){
-		$("#f_gper").attr("method","post");
-		$("#f_gper").attr("action","company/mngPermit.ch4?aplg_no="+(반출) );
-		$("#f_gper").submit();
+		if(!($("#desti_hidden").val())){
+			alert('실반입장소를 선택하세요.');
+			$("#desti_combo").combobox('textbox').focus();
+			return;
+		}
+		$("#permit_st_hidden").val("승인");
+		$("#f_decide").attr("method","post");
+		$("#f_decide").attr("action","/company/mngPermit.ch4");
+		$("#f_decide").submit();
 	}
 	//신청 반려 처리
 	function greturn(){
-		$("#f_gret").attr("method","post");
-		$("#f_gret").attr("action","company/mngPermit.ch4?aplg_no="+(반출) );
-		$("#f_gret").submit();
+		$("#permit_st_hidden").val("반려");
+		$("#notes_hidden").attr("value",$("#reason").val());
+		$("#f_decide").attr("method","post");
+		$("#f_decide").attr("action","/company/mngPermit.ch4");
+		$("#f_decide").submit();
 	}
 </script>
 </head>
@@ -193,7 +201,7 @@ table.table {
 											<td><%=aplg_trans_date%></td>
 											<td><%=aplg_desti%></td>
 											<td>
-												<select id="desti_combo" name="confm_desti" class="easyui-combobox">
+												<select id="desti_combo" name="confm_desti" class="easyui-combobox" style="width:30%;" data-options="panelHeight:'300px'">
 												<option value=""></option>
 												</select>
 											</td>
@@ -230,37 +238,61 @@ table.table {
 						</div>
 					</div>
 					<div style="float: right; margin-bottom: 20%;">
-						<button type="button" id="btn_permission" class="btn btn-primary"
-							onClick="location.href='javascript:gpermission()'">반입 신청
-							승인</button>
-						<button type="button" id="btn_return" class="btn btn-danger"
-							onClick="location.href='javascript:greturn()'">반입 신청 반려</button>
-						<button type="button" class="btn btn-default"
-							onClick="location.href='javascript:history.back()'">이전
-							페이지</button>
+						<button type="button" id="btn_permission" class="btn btn-primary" onClick="javascript:gpermission()">반입 신청 승인</button>
+						<button type="button" id="btn_return" class="btn btn-danger">반입 신청 반려</button>
+						<button type="button" class="btn btn-default" onClick="javascript:history.back()">이전페이지</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<form id="f_gper">
-		<input type="hidden" id="com_no_hidden" name="com_no" value="<%=com_no %>"> 
+	<!-- 반려 사유 모달 -->
+	<div class="modal fade" id="returnModal" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">×</button>
+					<h4 class="modal-title">반려 사유</h4>
+				</div>
+				<div class="modal-body">
+					<h4>반려사유</h4>
+					<textarea id="reason" rows="5" cols="60%" style="margin-left: 10%;"></textarea>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" onClick="javascript:greturn()">반려 제출</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<form id="f_decide">
+		<input type="hidden" id="aplg_no_hidden" name="aplg_no" value="<%=aplg_no %>"> 
 		<input type="hidden" id="permit_id_hidden" name="aplg_permit_id" value="<%=cmng_id %>">
 		<input type="hidden" id="permit_st_hidden" name="aplg_permit_st" value="">
 		<input type="hidden" id="notes_hidden" name="aplg_notes" value="">
 		<input type="hidden" id="desti_hidden" name="confm_desti" value="">
 	</form>
-</body>
 <script type="text/javascript">
-	$(document).ready({
+	$(document).ready(function(){
+		<% for(int i=0;i<gmList.size();i++){ %>
+		var gRow = "<tr><td>"+<%=gmList.get(i).get("GMNG_NAME") %>
+					+"</td><td>"+<%=gmList.get(i).get("GMNG_TYPE") %>+"</td>"
+					+"</td><td>"+<%=gmList.get(i).get("GMNG_QUAN") %>+"</td></tr>";
+		$("#tb_goods tbody").append(gRow);
+		<% } %>
 		$("#desti_combo").combobox({
 			valueField: 'desti_name',
 			textField: 'desti_name',
 			url: 'company/destiList.ch4?com_no='+'<%=com_no %>',
 			onChange: function(newValue){
-				
+				$("#desti_hidden").attr('value',newValue);
 			}
+		});
+		//반려 사유 등록
+		$("#btn_return").click(function(){
+			$("#returnModal").modal();
 		});
 	});
 </script>
+</body>
 </html>

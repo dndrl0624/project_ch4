@@ -52,10 +52,6 @@
 		gmAddList = (List<Map<String,Object>>)request.getAttribute("gmAddList");
 	}
 	
-	//버릴거
-	String[] gmng_name = {"LG그램","갤럭시 노트10+","시디즈 의자"};
-	String[] gmng_type = {"전자제품","전자제품","의자"};
-	String[] gmng_quan = {"5","10","30"};
  %>
 <!DOCTYPE html>
 <html>
@@ -126,24 +122,11 @@
 <%@ include file="/View/CommonForm/Top.jsp"%>
 <script type="text/javascript">
 	$(document).ready(function(){
-		////////// 버릴거  //////////
-		var gmng_name = new Array();
-		<% for(String name : gmng_name){%>gmng_name.push('<%=name%>');<%}%>
-		var gmng_type = new Array();
-		<% for(String type : gmng_type){%>gmng_type.push('<%=type%>');<%}%>
-		var gmng_quan = new Array();
-		<% for(String quan : gmng_quan){%>gmng_quan.push('<%=quan%>');<%}%>
-		for(var i=0;i<gmng_name.length;i++){
-			var gRow = "<tr><td>"+gmng_name[i]+"</td><td>"+gmng_type[i]+"</td><td>"+gmng_quan[i]+"</td></tr>";
-			$("#tb_goods tbody").append(gRow);
-		}
-		////////// 버릴거  //////////
-		
 		//쓸거
 		<% for(int i=0;i<gmAddList.size();i++){ %>
-		var gRow = "<tr><td>"+<%=gmAddList.get(i).get("gmng_name") %>
-					+"</td><td>"+<%=gmAddList.get(i).get("gmng_type") %>+"</td>"
-					+"</td><td>"+<%=gmAddList.get(i).get("gmng_quan") %>+"</td></tr>";
+		var gRow = "<tr><td>"+<%=gmAddList.get(i).get("GMNG_NAME") %>
+					+"</td><td>"+<%=gmAddList.get(i).get("GMNG_TYPE") %>+"</td>"
+					+"</td><td>"+<%=gmAddList.get(i).get("GMNG_QUAN") %>+"</td></tr>";
 		$("#tb_goods tbody").append(gRow);
 		<% } %>
 	});

@@ -68,9 +68,9 @@
 	}
 	
 	//반입기기
-	List<Map<String,Object>> tnAddList = new ArrayList<>();
-	if(null!=request.getAttribute("tnAddList")){
-		tnAddList = (List<Map<String,Object>>)request.getAttribute("tnAddList");
+	List<Map<String,Object>> tkAddList = new ArrayList<>();
+	if(null!=request.getAttribute("tkAddList")){
+		tkAddList = (List<Map<String,Object>>)request.getAttribute("tkAddList");
 	}
 	
 	//주차	
@@ -164,10 +164,10 @@
 		<% } %>
 		
 		//쓸거
-		<% for(int i=0;i<tnAddList.size();i++){ %>
-		var dRow = "<tr><td>"+<%=tnAddList.get(i).get("TKIN_KIND") %>
-					+"</td><td>"+<%=tnAddList.get(i).get("TKIN_BRAND") %>+"</td>"
-					+"</td><td>"+<%=tnAddList.get(i).get("TKIN_MODEL") %>+"</td></tr>";
+		<% for(int i=0;i<tkAddList.size();i++){ %>
+		var dRow = "<tr><td>"+<%=tkAddList.get(i).get("TKIN_KIND") %>
+					+"</td><td>"+<%=tkAddList.get(i).get("TKIN_BRAND") %>+"</td>"
+					+"</td><td>"+<%=tkAddList.get(i).get("TKIN_MODEL") %>+"</td></tr>";
 		$("#tb_device tbody").append(dRow);
 		<% } %>
 		

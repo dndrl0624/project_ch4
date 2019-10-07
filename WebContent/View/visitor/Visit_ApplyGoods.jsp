@@ -408,9 +408,9 @@
 				    		<table class="table">
 				    			<tr>
 					    			<th>성명</th>
-					    			<td><%=aplg_name %></td>
+					    			<td><input type="hidden" name="aplg_name" value="<%=aplg_name %>"><%=aplg_name %></td>
 					    			<th>전화번호</th>
-					    			<td><%=aplg_hp %></td>
+					    			<td><input type="hidden" name="aplg_hp" value="<%=aplg_hp %>"><%=aplg_hp %></td>
 				    			</tr>
 				    		</table>
 				    	</div>
@@ -438,7 +438,7 @@
 				    			<tbody>
 				    				<tr>
 				    					<td>
-				    						<select id="aplg_desti" class="easyui-combobox" style="width:80%;">
+				    						<select id="aplg_desti" name="aplg_desti" class="easyui-combobox" style="width:80%;">
 				    							<option value="">목적지</option>
 				    						</select>
 				    					</td>
