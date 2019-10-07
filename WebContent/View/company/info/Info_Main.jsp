@@ -1,5 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+// 	String user_id = "";
+// 	String user_name = "";
+// 	String company_no = "";
+// 	String company_name = "";
+// 	user_id = (String)session.getAttribute("CMNG_ID");
+// 	user_name = (String)session.getAttribute("CMNG_NAME");
+// 	company_no = (String)session.getAttribute("COM_NO");
+// 	company_name = (String)session.getAttribute("COM_NAME");
+// 	if(user_id==null||user_id.equals("")){
+// 		//로그인 페이지로 돌아가기
+// 		response.sendRedirect("loginform.jsp");
+// 	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -131,6 +145,9 @@ figure.snip1200.hover p {
 
 <!-- Side Bar -->
 <aside>
+	<div style="margin-top:30px">
+	<h1 style="color: white;">회@사@이@름@</h1>
+	</div>
 	<div class="panel-group" style="margin-top:90px">
 		<div class="panel panel-info">
 			<div class="panel-heading">
@@ -256,7 +273,7 @@ figure.snip1200.hover p {
         </div>
 </div>
 </div>
-  
+</div> 
  
 <!-- 공통 Footer -->
 <%@ include file="/View/CommonForm/Footer.jsp"%>

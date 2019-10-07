@@ -1,5 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	String user_id = "";
+	String user_name = "";
+	String company_no = "";
+	String company_name = "";
+	user_id = (String)session.getAttribute("CMNG_ID");
+	user_name = (String)session.getAttribute("CMNG_NAME");
+	company_no = (String)session.getAttribute("COM_NO");
+	company_name = (String)session.getAttribute("COM_NAME");
+	if(user_id==null||user_id.equals("")){
+		//로그인 페이지로 돌아가기
+		response.sendRedirect("loginform.jsp");
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -167,6 +181,7 @@ function btn_search(){
 	<div class="col-lg-12">
 	<div style="padding-left:200px;margin-top: 120px;">
 	<form id="f_search">
+	<input type="hidden" name="COM_NO" value="<% session.getAttribute("COM_NO"); %>">
 		<div class='col-sm-2'>
 			<select class="easyui-combobox" id="SearchType" name='SearchType' label="검색방법" labelPosition="left" style="width:180px;">
 				<option value="APLG_NO" selected>신청번호</option>

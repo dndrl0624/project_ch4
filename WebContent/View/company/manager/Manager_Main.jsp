@@ -143,6 +143,10 @@ figure.snip1200.hover p {
 
 <!-- Side Bar -->
 <aside>
+	<div style="margin-top:30px">
+	<h1 style="color: white;">회@사@이@름@</h1>
+<%-- 	<% session.getAttribute("COM_NAME"); %> --%>
+	</div>
 	<div class="panel-group" style="margin-top:90px">
 		<div class="panel panel-info">
 			<div class="panel-heading">

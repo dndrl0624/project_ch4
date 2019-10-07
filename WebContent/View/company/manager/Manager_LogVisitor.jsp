@@ -1,5 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	String user_id = "";
+	String user_name = "";
+	String company_no = "";
+	String company_name = "";
+	user_id = (String)session.getAttribute("CMNG_ID");
+	user_name = (String)session.getAttribute("CMNG_NAME");
+	company_no = (String)session.getAttribute("COM_NO");
+	company_name = (String)session.getAttribute("COM_NAME");
+	if(user_id==null||user_id.equals("")){
+		//로그인 페이지로 돌아가기
+		response.sendRedirect("loginform.jsp");
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -170,6 +184,7 @@ function search(){
 <div class="col-lg-12">
 <div style="padding-left:200px">
 <form id="f_search">
+<input type="hidden" name="COM_NO" value="<% session.getAttribute("COM_NO"); %>">
 <!-- 캘린더 -->
 	<div class="col-lg-1"></div>
 	<div class="col-lg-3">
