@@ -48,9 +48,59 @@
 	</update>
 	
 	<!-- 목적지 삭제 -->
-	<delete id="">
+	<delete id="destidel" parameterType="map">
 		delete desti_no, desti_name, desti_lcinfo, desti_notes
 			from destination
 		where desti_no = #{desti_no}
 	</delete>
+	
+	<!-- 키오스크 조회 -->
+	<select id="kiosksearch" parameterType="map" resultType="map">
+		select kiosk_gate, kiosk_st, kiosk_notes, com_no
+				from kiosk
+		where kiosk_no = #{kiosk_no}
+	</select>
+	
+	<!-- 키오스크 상태에 따른 조회 -->
+	<select id="kioskstsearch" parameterType="map" resultType="map">
+		select kiosk_no, kiosk_gate, kiosk_notes, com_no
+				from kiosk
+		where kiosk_st = #{kiosk_st}
+	</select>
+	
+	<!-- 키오스크 정보 변경 -->
+	<update id="kioskupd" parameterType="map">
+		update kiosk
+		   set kiosk_no = #{kiosk_no}
+		   	  ,kiosk_gate = #{kiosk_gate}
+		   	  ,kisok_st = #{kiosk_st}
+		   	  <if test="kiosk_notes != null">
+		   	  	,kiosk_notes = #{kiosk_notes}
+		   	  </if>
+		 where com_no = #{com_no}
+	</update>
+	
+	<!-- 휴무일 조회 -->
+	<select id="comclsearch" parameterType="map" resultType="map">
+		select comcl_date, comcl_dayweek, comcl_notes
+				from company_closeday
+		<where>
+		<!-- 검색 : 회사코드 -->
+	   		<if test="com_no != null">
+	   			and com_no = #{com_no}
+	   		</if>
+		<!-- 검색 : 회사 휴무날짜 (기간)-->
+	   		<if test="comcl_date1 != null and comcl_date2 != null">
+	   			and comcl_date >= #{comcl_date1}
+	   			<![CDATA[and comcl_date <= #{comcl_date2}]]>
+	   		</if>
+	   	</where>	
+	</select>
+	
+	<!-- 휴무일 추가 -->
+	<insert id="comcladd" parameterType="map">
+		insert into company_closeday(comcl_date, comcl_dayweek, comcl_notes, com_no)
+			values(#{comcl_date}, #{comcl_dayweek}, #{comcl_dayweek}, #{comcl_notes}, #{com_no})
+	</insert>
+	
 </mapper>  
