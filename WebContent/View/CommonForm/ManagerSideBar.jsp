@@ -4,17 +4,19 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-	String cmng_id = "";
-	String cmng_name = "";
-	String com_no = "";
-	String com_name = "";
-	Map<String,Object> pMap = new HashMap<>();
+	String cmng_id = "null";
+	String cmng_name = "null";
+	String com_no = "null";
+	String com_name = "null";
+	String dept_name  = "null";
+	Map<String,Object> pMap = null;
 	if(null!=request.getSession().getAttribute("pMap")){
 		pMap = (Map<String,Object>)request.getSession().getAttribute("pMap");
-		cmng_id = (String)pMap.get("CMNG_ID");
+		cmng_id = (String)pMap.get("cmng_id");
 		cmng_name = (String)pMap.get("cmng_name");
 		com_no = (String)pMap.get("com_no");
 		com_name = (String)pMap.get("com_name");
+		dept_name= (String)pMap.get("dept_name");
 	}
 %>
 <style>
@@ -74,9 +76,9 @@
 <!-- Side Bar -->
 <aside>
 	<div id="info">
-		<h4><b>회사명</b></h4>
-		<h5><b>부서명</b></h5>
-		<h4><b>회원명</b>(님)</h4>
+		<h4><b><%=com_name %></b></h4>
+		<h5><b><%=dept_name %></b></h5>
+		<h4><b><%=cmng_name %></b>(님)</h4>
 		<button id="btn_logout" type="button" onClick="logout()">로그아웃</button>
 	</div>
 	<div id="pg_side" class="panel-group">
