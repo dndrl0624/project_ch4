@@ -73,7 +73,6 @@
 		
 	}
 </script>
-<!-- Side Bar -->
 <aside>
 	<div id="info">
 		<h4><b><%=com_name %></b></h4>
@@ -85,7 +84,7 @@
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<a href="/View/company/manager/Manager_Main.jsp">
+					<a href="/project_ch4_pojo/View/company/info/Info_Main.jsp">
 					<i class="fa fa-home" aria-hidden="true"></i>메인페이지</a>
 				</h4>
 			</div>
@@ -93,34 +92,25 @@
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<a data-toggle="collapse" href="#collapse1">
-					<i class="fa fa-users" aria-hidden="true"></i>방문 관리</a>
+					<a href="/project_ch4_pojo/View/company/info/Info_ManageLog.jsp">
+					<i class="fa fa-list-alt" aria-hidden="true"></i>방문자현황관리</a>
 				</h4>
 			</div>
-			<div id="collapse1" class="panel-collapse collapse">
-				<div class="panel-body">
-					<a  href="/View/company/manager/Manager_SearchVisitor.jsp">
-					<i class="fa fa-search-plus" aria-hidden="true"></i>방문 신청 관리</a><br> 
-					<a  href="/View/company/manager/Manager_LogVisitor.jsp">
-					<i class="fa fa-list-alt" aria-hidden="true"></i>방문 현황 조회</a><br> 
-				</div>
-			</div>
 		</div>
-		
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<a data-toggle="collapse" href="#collapse2">
-					<i class="fa fa-truck" aria-hidden="true"></i>물품 반입 관리</a>
+					<a href="/project_ch4_pojo/View/company/info/Info_ManageGLog.jsp">
+					<i class="fa fa-truck" aria-hidden="true"></i>반입현황관리</a>
 				</h4>
 			</div>
-			<div id="collapse2" class="panel-collapse collapse">
-				<div class="panel-body">
-					<a  href="/View/company/manager/Manager_SearchGoods.jsp">
-					<i class="fa fa-search-plus" aria-hidden="true"></i>반입 신청 관리</a><br> 
-					<a  href="/View/company/manager/Manager_LogGoods.jsp">
-					<i class="fa fa-list-alt" aria-hidden="true"></i>반입 현황 조회</a><br> 
-				</div>
+		</div>
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a href="/project_ch4_pojo/View/company/info/Info_ManageCompany.jsp">
+					<i class="fa fa-search-plus" aria-hidden="true"></i>종합 관리</a>
+				</h4>
 			</div>
 		</div>
 	</div>

@@ -24,7 +24,7 @@
 <%@ include file="../CommonForm/TapLogo.jsp"%>
 <!-- Link Import --> 
 <%@ include file="/Style/common/HeadUI.jsp"%> 
-<title>방문/반입 관리 - CH4 방문자 관리 시스템</title>
+<title>로그인 - CH4 방문자 관리 시스템</title>
 <style type="text/css">
 /* 점보트론 이미지 및 크기 */
 #jumbo_companylogin {

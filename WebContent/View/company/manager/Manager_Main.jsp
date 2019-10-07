@@ -1,26 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	// 	String user_id = "";
-	// 	String user_name = "";
-	// 	String company_no = "";
-	// 	String company_name = "";
-	// 	user_id = (String)session.getAttribute("CMNG_ID");
-	// 	user_name = (String)session.getAttribute("CMNG_NAME");
-	// 	company_no = (String)session.getAttribute("COM_NO");
-	// 	company_name = (String)session.getAttribute("COM_NAME");
-	// 	if(user_id==null||user_id.equals("")){
-	// 		//로그인 페이지로 돌아가기
-	// 		response.sendRedirect("loginform.jsp");
-	// 	}
-%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <!-- Web icon 설정 -->
 <%@ include file="../../CommonForm/TapLogo.jsp"%>
-<title>관리자 메인 페이지</title>
+<title>승인자 메인 - CH4 방문자 관리 시스템</title>
 <!-- 공통코드 -->
 <%@ include file="../../../Style/common/HeadUI.jsp"%>
 </head>
@@ -153,16 +139,13 @@ figure.snip1200:hover p, figure.snip1200.hover p {
 
 	<!-- Content -->
 	<div class="mainContent">
-		<!-- 페이지 이름 / 환영+ 로그아웃 버튼 -->
 		<%@ include file="../../CommonForm/ManagerSideBar.jsp"%>
 		<div style="padding-left: 200px">
 			<div class="col-lg-12">
 
 				<div style="font-size: 35px; width: 78%; float: left;">
 					<h1>
-						회사명
-						<%-- 			<% company_name %> --%>
-						<%-- 			<% (String)session.getAttribute("COM_NAME"); %> --%>
+						<%=com_name%>
 					</h1>
 				</div>
 
@@ -170,8 +153,7 @@ figure.snip1200:hover p, figure.snip1200.hover p {
 				<!-- Portfolio Item 1 -->
 				<div class="col-md-6 col-lg-3">
 					<figure class="snip1200">
-						<img src="/Style/images/postIt/yellow.png"
-							alt="sq-sample27" />
+						<img src="/Style/images/postIt/yellow.png" alt="sq-sample27" />
 						<figcaption>
 							<p>귀사에 방문 신청한 자료들을 조회합니다.이 페이지에서 신청에 대한 승인/반려를 처리합니다.</p>
 							<div class="heading">
@@ -180,16 +162,14 @@ figure.snip1200:hover p, figure.snip1200.hover p {
 								</h2>
 							</div>
 						</figcaption>
-						<a
-							href="/View/company/manager/Manager_SearchVisitor.jsp"></a>
+						<a href="/View/company/manager/Manager_SearchVisitor.jsp"></a>
 					</figure>
 				</div>
 
 				<!-- Portfolio Item 2 -->
 				<div class="col-md-6 col-lg-3">
 					<figure class="snip1200">
-						<img src="/Style/images/postIt/red.png"
-							alt="sq-sample27" />
+						<img src="/Style/images/postIt/red.png" alt="sq-sample27" />
 						<figcaption>
 							<p>귀사에 대한 방문 신청을 처리한 건들을 조회합니다. 승인된 신청에 대해서 방문자들의 위치를 파악 할 수
 								있습니다.</p>
@@ -199,35 +179,31 @@ figure.snip1200:hover p, figure.snip1200.hover p {
 								</h2>
 							</div>
 						</figcaption>
-						<a
-							href="/View/company/manager/Manager_LogVisitor.jsp"></a>
+						<a href="/View/company/manager/Manager_LogVisitor.jsp"></a>
 					</figure>
 				</div>
 
 				<!-- Portfolio Item 3 -->
 				<div class="col-md-6 col-lg-3">
 					<figure class="snip1200">
-						<img src="/Style/images/postIt/greenblue.png"
-							alt="sq-sample27" />
+						<img src="/Style/images/postIt/greenblue.png" alt="sq-sample27" />
 						<figcaption>
 							<p>귀사에 반입할 물품에 대해서 반입 신청한 자료를 조회합니다. 이 페이지에서 신청에 대하 승인/반려를
 								처리합니다.</p>
 							<div class="heading">
 								<h2>
-									반입<span>신청 조회</span>
+									반입<span> 신청 조회</span>
 								</h2>
 							</div>
 						</figcaption>
-						<a
-							href="/View/company/manager/Manager_SearchGoods.jsp"></a>
+						<a href="/View/company/manager/Manager_SearchGoods.jsp"></a>
 					</figure>
 				</div>
 
 				<!-- Portfolio Item 4 -->
 				<div class="col-md-6 col-lg-3">
 					<figure class="snip1200">
-						<img src="/Style/images/postIt/blue.png"
-							alt="sq-sample27" />
+						<img src="/Style/images/postIt/blue.png" alt="sq-sample27" />
 						<figcaption>
 							<p>귀사에 대한 반입 신청을 처리한 건들을 조회합니다. 승인된 신청에 대해서 반입 물품들의 처리상태를 파악
 								할 수 있습니다.</p>
@@ -237,8 +213,7 @@ figure.snip1200:hover p, figure.snip1200.hover p {
 								</h2>
 							</div>
 						</figcaption>
-						<a
-							href="/View/company/manager/Manager_LogGoods.jsp"></a>
+						<a href="/View/company/manager/Manager_LogGoods.jsp"></a>
 					</figure>
 				</div>
 			</div>
