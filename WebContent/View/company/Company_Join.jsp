@@ -8,11 +8,8 @@
 <%@ include file="../CommonForm/TapLogo.jsp"%>
 <!-- Link Import --> 
 <%@ include file="/Style/common/HeadUI.jsp"%> 
-<title>회원가입 창!!!~~~!!!</title>
+<title>회원가입 - CH4 방문자 관리 시스템</title>
 <style>
-	div #label{
-		vertical-align: middle;
-	}
 	span#help_block{
 		display: none;
 	}
@@ -27,9 +24,6 @@
 	}
 	.easyui-textbox{
 		height: 40px;
-	}
-	div .row{
-		
 	}
 
 </style>
@@ -88,7 +82,7 @@
 		} 
 		//url 보내기
 		$('#join-submit').attr("method","post");
-		$('#join-submit').attr("action","company/join.ch4?"); //전송을 하는 곳.
+		$('#join-submit').attr("action","company/join.ch4"); //전송을 하는 곳.
 		$('#join-submit').submit(); 
 	}
 	//아이디 중복 체크
@@ -173,19 +167,17 @@
 			<div class="col-lg-offset-1 col-lg-10 col-lg-offset-1" align="center">
 				<div class="well col-lg-offset-1 col-lg-10 col-lg-offset-1" align="center">
 					<form id="f_join">
-						<div class="col-lg-offset-1 col-lg-10 col-lg-offset-1" align="center">
+						<div class="col-lg-offset-1 col-lg-10 col-lg-offset-1" align="left">
 							<div class="row">
-								<div class="row">
-									<input id="cmng_id" name="cmng_id" class="easyui-textbox" label="아이디" 
-										   prompt="아이디를 입력하세요." label-position="left"
-										   style="width:413px;height: 40px;">
-									<button id="id_dbcheck" class="btn btn-danger" style="width: 82px;height: 40px;"onClick="checkid()" >
-										중복검사
-									</button>
-								</div>
-								<div class="row" align="left" style="margin-left: 36px;">
-									<div id="idcheck"></div>
-								</div>
+								<input id="cmng_id" name="cmng_id" class="easyui-textbox" label="아이디" 
+									   prompt="아이디를 입력하세요." 
+									   style="width:413px;height: 40px;">
+								<button id="id_dbcheck" class="btn btn-danger" style="width: 82px;height: 40px;"onClick="checkid()" >
+									중복검사
+								</button>
+							</div>
+							<div class="row" style="margin-left: 36px;">
+								<div id="idcheck"></div>
 							</div>
 							<div class="row">
 								<input id="cmng_pw" name="cmng_pw" class="easyui-passwordbox" label="비밀번호" 
@@ -198,7 +190,7 @@
 								       style="width:500px; height: 40px;">
 							</div>
 							<div class="row">
-								<div id="pwcheck">ddddss</div>
+								<div id="pwcheck"></div>
 							</div>
 							<div class="row">
 								<input id="cmng_name" name="cmng_name" class="easyui-textbox" label="성명" 
@@ -217,13 +209,13 @@
 								<input id="cmng_permit_hp3" class="easyui-textbox"
 									   style="width:128px;height: 40px;">
 							</div>
-							<div class="row" align="left" style="margin-left: 16px;">
-									 <select class="easyui-combobox" name="cmng_grade" id="cmng_grade" 
-									 		 label="등급" style="width:350px;height: 40px;">
+							<div class="row">
+								<select class="easyui-combobox" name="cmng_grade" id="cmng_grade" 
+									 		 label="등급" data-options="panelHeight:'auto'" style="width:350px;height: 40px;">
 						                <option value=""></option>
 						                <option value="CMNG_GRADE_COMMIT">결제자</option>
 						                <option value="CMNG_GRADE_INFO">안내데스크</option>
-						             </select>
+						        </select>
 							</div>
 						</div>
 					</form>
@@ -238,6 +230,5 @@
 		</div>
 	</div>
 </div>
-<%@ include file="/View/CommonForm/Footer.jsp"%>
 </body>
 </html>

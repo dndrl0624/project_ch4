@@ -6,7 +6,7 @@ i {
 /* 화면 전체 내부여백(Top,Bottom 부분 겹침방지) */
 body {
 	padding-top : 70px;
-	padding-bottom : 120px;
+	padding-bottom : 0px;
 	padding-right : 0px;
 	padding-left : 0px;
 }

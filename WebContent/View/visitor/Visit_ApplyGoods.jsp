@@ -9,24 +9,24 @@
 	if(null!=request.getSession().getAttribute("pMap")){
 		pMap = (Map<String,Object>)request.getSession().getAttribute("pMap");
 	}
-	if(null!=pMap.get("COM_NO")){
-		com_no = (String)pMap.get("COM_NO");
+	if(null!=pMap.get("com_no")){
+		com_no = (String)pMap.get("com_no");
 	}
 	String com_name = "null";
-	if(null!=pMap.get("COM_NAME")){
-		com_name = (String)pMap.get("COM_NAME");
+	if(null!=pMap.get("com_name")){
+		com_name = (String)pMap.get("com_name");
 	}
 	String aplg_desti = "null";
-	if(null!=pMap.get("APLG_DESTI")){
-		aplg_desti = (String)pMap.get("APLG_DESTI");
+	if(null!=pMap.get("visit_desti")){
+		aplg_desti = (String)pMap.get("visit_desti");
 	}
 	String aplg_name = "null";
-	if(null!=pMap.get("APLG_NAME")){
-		aplg_name = (String)pMap.get("APLG_NAME");
+	if(null!=pMap.get("visit_apply_name")){
+		aplg_name = (String)pMap.get("visit_apply_name");
 	}
 	String aplg_hp = "null";
-	if(null!=pMap.get("APLG_HP")){
-		aplg_hp = (String)pMap.get("APLG_HP");
+	if(null!=pMap.get("visit_apply_hp")){
+		aplg_hp = (String)pMap.get("visit_apply_hp");
 	}
 %>
 <!DOCTYPE html>
@@ -195,8 +195,7 @@
 				type: 'POST',
 				data: $("#form_search_log").serialize(),
 				dataType: 'json',
-//	 			url: '/goods/preGoodsList.ch4',
-				url: '../../json/testLog2.json',
+	 			url: '/goods/preGoodsList.ch4',
 				success: function(result){
 					//재검색 할 경우 이전 검색기록 제거
 					$("#tb_log #tr_log").remove();
@@ -225,24 +224,18 @@
 			//선택된 row의 값 가져오기
 			var aplg_desti = tr.find("td").eq(2).text();
 			var aplg_reason = tr.find("td").eq(3).text();
-			var aplg_trans_date = tr.find("td").eq(4).text();
 			//가져온 값 입력폼에 반영하기
 			$("#aplg_desti").combobox('select',aplg_desti);
 			$("#aplg_reason").textbox('setValue',aplg_reason);
-			$("#aplg_trans_date").datebox('setValue',aplg_trans_date);
 			$("#input_reflect").attr('value',$("input[name=aplg_no]:checked").val());
 			$.ajax({
 				type: 'POST',
 				data: $("#form_reflect").serialize(),
 				dataType: 'json',
-// 				url: '/goods/preGoodsListDetail.ch4',
-				url: '../../json/testLog6.json',
+				url: '/goods/preGoodsListDetail.ch4',
 				success: function(result){
 					//정보 걸러내기
-					var gmList;
-					$.each(result,function(index,item){
-						gmList = item.gmList;
-					});
+					var gmList = result.gmList;
 					//받은정보 뿌리기
 					for(i=0;i<gmList.length;i++){
 						var goodsname = gmList[i].GMNG_NAME;

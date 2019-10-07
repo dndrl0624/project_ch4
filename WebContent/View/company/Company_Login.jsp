@@ -20,11 +20,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- Web icon 설정 --> 
+<%@ include file="../CommonForm/TapLogo.jsp"%>
+<!-- Link Import --> 
+<%@ include file="/Style/common/HeadUI.jsp"%> 
 <title>방문/반입 관리 - CH4 방문자 관리 시스템</title>
 <style type="text/css">
 /* 점보트론 이미지 및 크기 */
 #jumbo_companylogin {
 	margin-top: 0px;
+	margin-bottom: 0px;
 	padding-top: 10px;
 	height: 600px;
 	background-image: url('../../Style/images/banner/speedGate (2).jpg');
@@ -149,6 +154,5 @@ h2 {
 		</div>
 	</div>
 </div>
-<%@ include file="/View/CommonForm/Footer.jsp"%>
 </body>
 </html>
