@@ -145,7 +145,7 @@ figure.snip1200:hover p, figure.snip1200.hover p {
 
 				<div style="font-size: 35px; width: 78%; float: left;">
 					<h1>
-						<%=com_name%>
+						<%=com_name_s%>
 					</h1>
 				</div>
 

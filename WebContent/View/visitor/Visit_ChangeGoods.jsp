@@ -18,13 +18,13 @@
 	String aplg_name = "null";
 	//신청자 연락처
 	String aplg_hp = "null";
-	//방문날짜
+	//반입날짜
 	String aplg_trans_date = "2019-10-31";
-	//방문지
+	//반입지
 	String com_name = "null";
 	//목적지
 	String aplg_desti = "null";
-	//방문목적
+	//반입사유
 	String aplg_reason = "null";
 	
 	Map<String,Object> rMap = null;

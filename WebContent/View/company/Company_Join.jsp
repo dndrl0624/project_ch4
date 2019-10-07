@@ -10,6 +10,9 @@
 <%@ include file="/Style/common/HeadUI.jsp"%> 
 <title>회원가입 - CH4 방문자 관리 시스템</title>
 <style>
+	div #label{
+		vertical-align: middle;
+	}
 	span#help_block{
 		display: none;
 	}
@@ -22,10 +25,42 @@
 		margin: 10px;
 		padding-right: 5px;
 	}
-	.easyui-textbox{
-		height: 40px;
+	.well {
+		padding-right: 30px;
+		padding-left: 30px;
+		padding-top: 30px;
+		padding-bottom: 20px;
 	}
-
+	#_easyui_textbox_input1,#_easyui_textbox_input2,#_easyui_textbox_input3,
+	#_easyui_textbox_input4,#_easyui_textbox_input5,#_easyui_textbox_input6,
+	#_easyui_textbox_input7,#_easyui_textbox_input8
+	{
+		height:40px;
+	}
+	.btn{
+		height:40px;
+		width: 120px;
+	}
+	.tb {
+		width: 485px;
+	}
+	.tb_id{
+		width:350px;
+	}
+	.tb_combo {
+		width: 320px;
+	}
+	table td{
+		padding-bottom: 10px;
+		align:'left';
+		
+	}
+	table th{
+		width: 120px;
+	}
+	#cmng_permit_hp1,#cmng_permit_hp2, #cmng_permit_hp3{
+		width: 153px;
+	}
 </style>
 <script type="text/javascript">
 	function join(){
@@ -82,7 +117,7 @@
 		} 
 		//url 보내기
 		$('#join-submit').attr("method","post");
-		$('#join-submit').attr("action","company/join.ch4"); //전송을 하는 곳.
+		$('#join-submit').attr("action","company/join.ch4?"); //전송을 하는 곳.
 		$('#join-submit').submit(); 
 	}
 	//아이디 중복 체크
@@ -155,76 +190,93 @@
 	        	$("#pwcheck").html("<span style='color:red;'></span>");
 	        }
 	    });
-
 	});
 </script>
 <div class="container-fluid">
 	<div class="col-lg-offset-1 col-lg-10 col-lg-offset-1">
-		<div class="page-header" style="padding-top: 10px">
+		<div class="row page-header" style="padding-top: 10px">
 			<h1 class="text-center col-12 mb-0" style="padding-bottom: 20px;">JOIN</h1>
 		</div>
-		<div class="row" style="vertical-align: middle;">
-			<div class="col-lg-offset-1 col-lg-10 col-lg-offset-1" align="center">
-				<div class="well col-lg-offset-1 col-lg-10 col-lg-offset-1" align="center">
-					<form id="f_join">
-						<div class="col-lg-offset-1 col-lg-10 col-lg-offset-1" align="left">
-							<div class="row">
-								<input id="cmng_id" name="cmng_id" class="easyui-textbox" label="아이디" 
-									   prompt="아이디를 입력하세요." 
-									   style="width:413px;height: 40px;">
-								<button id="id_dbcheck" class="btn btn-danger" style="width: 82px;height: 40px;"onClick="checkid()" >
-									중복검사
+		<div class="row">
+			<div class="well col-lg-offset-2 col-lg-8 col-lg-offset-2">
+				<div class="" align="center">
+					<table >
+						<tr>
+							<th> 아이디 </th>
+							<td colspan="2">
+								<input id="cmng_id" name="cmng_id" class="tb_id easyui-textbox"
+										prompt="아이디를 입력하세요.">
+							</td>
+							<td align="center">
+								<button id="id_dbcheck" class="btn btn-danger"
+										onClick="checkid()" >
+											중복검사
 								</button>
-							</div>
-							<div class="row" style="margin-left: 36px;">
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td colspan="3">
 								<div id="idcheck"></div>
-							</div>
-							<div class="row">
-								<input id="cmng_pw" name="cmng_pw" class="easyui-passwordbox" label="비밀번호" 
-									   prompt="비밀번호를 입력하세요."
-									   style="width:500px;height: 40px; ">
-							</div>
-							<div class="row">
-								<input id="re_cmng_pw" name="re_cmng_pw" class="easyui-passwordbox" label="비밀번호 확인" 
-									   prompt="비밀번호를 다시  입력 해 주세요"
-								       style="width:500px; height: 40px;">
-							</div>
-							<div class="row">
+							</td>
+						</tr>
+						<tr>
+							<th>비밀번호 </th>
+							<td colspan="3">
+								<input id="cmng_pw" name="cmng_pw" class="tb easyui-passwordbox"
+									   prompt="비밀번호를 입력하세요.">
+							</td>
+						</tr>
+						<tr>
+							<th>비밀번호 확인 </th>
+							<td colspan="3">
+								<input id="re_cmng_pw" name="re_cmng_pw" class="tb easyui-passwordbox" 
+									   prompt="비밀번호를 다시  입력 해 주세요">
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td colspan="3">
 								<div id="pwcheck"></div>
-							</div>
-							<div class="row">
-								<input id="cmng_name" name="cmng_name" class="easyui-textbox" label="성명" 
-									   prompt="이름을 입력해주세요"
-									   style="width:500px;height: 40px;">
-									   
-							</div>
-							<div class="row">
+							</td>
+						</tr>
+						<tr>
+							<th>성명  </th>
+							<td colspan="3">
+								<input id="cmng_name" name="cmng_name" class="tb easyui-textbox"
+									   prompt="이름을 입력해주세요">
+							</td>
+						</tr>
+						<tr align="left">
+							<th>연락처 </th>
+							<td id="hp1" colspan="3" >
 								<input type="hidden" id="cmng_permit_hp" name="cmng_permit_hp" > 
-								<input id="cmng_permit_hp1" name="cmng_permit_hp" class="easyui-textbox" label="연락처" 
-									   style="width:220px;height: 40px;" prompt="010">
+								<input id="cmng_permit_hp1" name="cmng_permit_hp" class="easyui-textbox"
+									   prompt="010">
 								<span>-</span>
-								<input id="cmng_permit_hp2" class="easyui-textbox"
-									   style="width:128px;height: 40px;">
+								<input id="cmng_permit_hp2" class="easyui-textbox">
 								<span>-</span>
-								<input id="cmng_permit_hp3" class="easyui-textbox"
-									   style="width:128px;height: 40px;">
-							</div>
-							<div class="row">
-								<select class="easyui-combobox" name="cmng_grade" id="cmng_grade" 
-									 		 label="등급" data-options="panelHeight:'auto'" style="width:350px;height: 40px;">
+								<input id="cmng_permit_hp3" class="easyui-textbox">
+							</td>
+						</tr>
+						<tr>
+							<th>등급 </th>
+							<td colspan="3">
+								 <select class="tb_combo easyui-combobox" name="cmng_grade" id="cmng_grade" 
+								 		 data-options="panelHeight:'auto'">
 						                <option value=""></option>
 						                <option value="CMNG_GRADE_COMMIT">결제자</option>
 						                <option value="CMNG_GRADE_INFO">안내데스크</option>
-						        </select>
-							</div>
-						</div>
-					</form>
+						             </select>
+							</td>
+						</tr>
+					</table>
 				</div>
 			</div>
 		</div>
-		<div class="row" align="center" style="padding-top: 100px">
+		<div class="row" align="center" style="padding-top: 50px">
 			<button id="join-submit" class="btn btn-primary" 
-				    style="width: 180px;height: 40px;" onClick="join()">
+				    onClick="join()">
 				        회원가입&emsp;<i class="fa fa-check spaceLeft"></i>
 			</button>
 		</div>

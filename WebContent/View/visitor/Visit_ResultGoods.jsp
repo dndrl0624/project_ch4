@@ -62,7 +62,7 @@
 <head>
 <meta charset="UTF-8">
 <!-- Web icon 설정 --> 
-<%@ include file="../CommonForm/TapLogo.jsp"%>
+<%@ include file="/View/CommonForm/TapLogo.jsp"%>
 <!-- Link Import --> 
 <%@ include file="/Style/common/HeadUI.jsp"%> 
 <title>신청결과 - CH4 방문자 관리 시스템</title>
@@ -166,7 +166,7 @@
 	<div class="row">
 	    <div class="col-lg-8 col-lg-offset-2"> 
 	    	<div style="text-align:center;">
-	    		<img src="../../Style/images/crud/transport_logo_default.png" class="img-thumbnail" style="width:30%;border:0px;">
+	    		<img src="/View/Style/images/crud/transport_logo_default.png" class="img-thumbnail" style="width:30%;border:0px;">
 	    		<h3 style="margin-top:10px;">"고객님의 반입신청이 <b style="font-size:40px; color:#b22222;">접수</b><b style="font-size:24px; color:#4169e1;">(<%=aplg_no %>)</b>되었습니다."</h3>
 	    	</div><br>
 	    	<div class="row" style="text-align:center;">

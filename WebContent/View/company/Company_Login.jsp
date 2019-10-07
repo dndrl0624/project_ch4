@@ -29,7 +29,6 @@
 /* 점보트론 이미지 및 크기 */
 #jumbo_companylogin {
 	margin-top: 0px;
-	margin-bottom: 0px;
 	padding-top: 10px;
 	height: 600px;
 	background-image: url('../../Style/images/banner/speedGate (2).jpg');
@@ -40,16 +39,13 @@
 	height: 100%;
 	padding-bottom: 30px;
 }
-
 div.row {
 	padding-top: 20px;
 }
-
 #btn_login {
 	width: 50%;
 	height: 80px;
 }
-
 .checkbox {
 	border: 0px;
 }
