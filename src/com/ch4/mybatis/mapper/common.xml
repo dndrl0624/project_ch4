@@ -256,7 +256,7 @@
 			</if>
 	</select>
 	<!-- 물품관리 테이블 조회 -->
-	<select id="goodsSearch">
+	<select id="goodsSearch" parameterType="map" resultType="map">
 		select aplg_no, gmng_name, gmng_type, gmng_quan, gmng_confm, gmng_notes from goods_mng
 		<where>
 			<!-- 검색 : (승인)반입번호 -->
