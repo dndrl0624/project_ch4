@@ -31,7 +31,17 @@ $(document).ready(function(){
 
 /* 테이블 데이터 */
 	$("#tb_lg").bootstrapTable({
-		pagination:'true'
+		columns:[
+			{field:"CONFM_NO",title:'물품번호'}
+			,{field:"CONFM_DESTI",title:'방문장소'}
+			,{field:"CONFM_STATE",title:'반입현황'}
+			,{field:"CONFM_NAME",title:'물품명'}
+			,{field:"CONFM_TYPE",title:'물품종류'}
+			,{field:"CONFM_QUAN",title:'물품개수'}
+			,{field:"CONFM_TRANS_QUAN",title:'반입개수'}
+			,{field:"CONFM_TRANS_TIME",title:'반입시간'}
+		]
+		,pagination:'true'
 		,paginationPreText:"Previous"
 		,paginationNextText:"Next"
 		,toolbarAlign : 'right'
@@ -103,18 +113,19 @@ function search(){
 	<div class="mainContent">
 		<%@ include file="../../CommonForm/ManagerSideBar.jsp"%>
 		<div style="padding-left: 200px">
-			<div class="col-lg-12">
-				<div style="font-size: 35px; width: 78%; float: left;">
+			<div class="col-lg-offset-1 col-lg-10"
+				style="margin-top: 20px; margin-bottom: 20px;">
+				<div
+					style="margin: 30px 20px 10px 0px; font-size: 35px; width: 50%; float: left;">
 					<h1>반입 현황 조회</h1>
 				</div>
-				<div class="col-lg-12">
+				<div class="col-lg-offset-1 col-lg-10">
 					<!-- 검색 조건 설정 -->
 					<form id="f_search">
 						<!-- 캘린더 -->
-						<div class="col-lg-1"></div>
-						<div class="col-lg-3">
+						<div class="col-lg-offset-1 col-lg-3">
 							<div class="easyui-calendar" id="calender"
-								style="margin-bottom: 10px; width: 150px; height: 150px;"></div>
+								style="margin-bottom: 10px; width: 250px; height: 200px;"></div>
 						</div>
 						<!-- 검색 툴바 -->
 						<div class="col-lg-7">
@@ -182,22 +193,8 @@ function search(){
 							</div>
 						</div>
 					</form>
-
-					<!-- 부트 테이블 : search_ResultVisitor 참조-->
-					<div style="width: 86%;">
+					<div style="width: 84%;">
 						<table class="table table-bordered table-hover" id="tb_lg">
-							<thead>
-								<tr>
-									<th data-field="CONFM_NO">물품번호</th>
-									<th data-field="CONFM_DESTI">방문장소</th>
-									<th data-field="CONFM_STATE">반입현황</th>
-									<th data-field="CONFM_NAME">물품명</th>
-									<th data-field="CONFM_TYPE">물품종류</th>
-									<th data-field="CONFM_QUAN">물품개수</th>
-									<th data-field="CONFM_TRANS_QUAN">반입개수</th>
-									<th data-field="CONFM_TRANS_TIME">반입시간</th>
-								</tr>
-							</thead>
 						</table>
 					</div>
 				</div>

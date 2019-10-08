@@ -14,7 +14,6 @@
  	if(request.getAttribute("msg")!=null){
 		msg = (String)request.getAttribute("msg");
 	} 
- 	//msg = "PW";
 %>
 <!DOCTYPE html>
 <html>
@@ -90,12 +89,11 @@ h2 {
 <body>
 <script type="text/javascript">
 	$(document).ready(function(){
-	
 		var msg = "<%= msg%>" ;
-		if(msg=="ID"){
+		if(msg=="id"){
 			alert("아이디가 틀렸습니다.");
 		}
-		else if(msg=="PW"){
+		else if(msg=="pw"){
 			alert("비밀번호가 틀렸습니다.");
 		}
 	});

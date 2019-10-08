@@ -142,82 +142,80 @@ figure.snip1200:hover p, figure.snip1200.hover p {
 		<%@ include file="../../CommonForm/ManagerSideBar.jsp"%>
 		<div style="padding-left: 200px">
 			<div class="col-lg-12">
-
-				<div style="font-size: 35px; width: 78%; float: left;">
-					<h1>
-						<%=com_name%>
-					</h1>
+				<div class="col-lg-offset-1 col-lg-10"
+					style="margin-top: 20px; margin-bottom: 20px;">
+					<div style="font-size: 35px; width: 78%; float: left;">
+						<h1><%=com_name%></h1>
+					</div>
 				</div>
+				<div class="col-lg-offset-1 col-lg-10">
+					<div class="col-md-6 col-lg-3">
+						<figure class="snip1200">
+							<img src="/Style/images/postIt/yellow.png" alt="sq-sample27" />
+							<figcaption>
+								<p>귀사에 방문 신청한 자료들을 조회합니다.이 페이지에서 신청에 대한 승인/반려를 처리합니다.</p>
+								<div class="heading">
+									<h2>
+										방문<span> 신청 조회</span>
+									</h2>
+								</div>
+							</figcaption>
+							<a href="/View/company/manager/Manager_SearchVisitor.jsp"></a>
+						</figure>
+					</div>
 
-				<!-- 하단 : 분할 : 소개 -->
-				<!-- Portfolio Item 1 -->
-				<div class="col-md-6 col-lg-3">
-					<figure class="snip1200">
-						<img src="/Style/images/postIt/yellow.png" alt="sq-sample27" />
-						<figcaption>
-							<p>귀사에 방문 신청한 자료들을 조회합니다.이 페이지에서 신청에 대한 승인/반려를 처리합니다.</p>
-							<div class="heading">
-								<h2>
-									방문<span> 신청 조회</span>
-								</h2>
-							</div>
-						</figcaption>
-						<a href="/View/company/manager/Manager_SearchVisitor.jsp"></a>
-					</figure>
-				</div>
+					<!-- Portfolio Item 2 -->
+					<div class="col-md-6 col-lg-3">
+						<figure class="snip1200">
+							<img src="/Style/images/postIt/red.png" alt="sq-sample27" />
+							<figcaption>
+								<p>귀사에 대한 방문 신청을 처리한 건들을 조회합니다. 승인된 신청에 대해서 방문자들의 위치를 파악 할 수
+									있습니다.</p>
+								<div class="heading">
+									<h2>
+										방문<span> 현황 조회</span>
+									</h2>
+								</div>
+							</figcaption>
+							<a href="/View/company/manager/Manager_LogVisitor.jsp"></a>
+						</figure>
+					</div>
 
-				<!-- Portfolio Item 2 -->
-				<div class="col-md-6 col-lg-3">
-					<figure class="snip1200">
-						<img src="/Style/images/postIt/red.png" alt="sq-sample27" />
-						<figcaption>
-							<p>귀사에 대한 방문 신청을 처리한 건들을 조회합니다. 승인된 신청에 대해서 방문자들의 위치를 파악 할 수
-								있습니다.</p>
-							<div class="heading">
-								<h2>
-									방문<span> 현황 조회</span>
-								</h2>
-							</div>
-						</figcaption>
-						<a href="/View/company/manager/Manager_LogVisitor.jsp"></a>
-					</figure>
-				</div>
+					<!-- Portfolio Item 3 -->
+					<div class="col-md-6 col-lg-3">
+						<figure class="snip1200">
+							<img src="/Style/images/postIt/greenblue.png" alt="sq-sample27" />
+							<figcaption>
+								<p>귀사에 반입할 물품에 대해서 반입 신청한 자료를 조회합니다. 이 페이지에서 신청에 대하 승인/반려를
+									처리합니다.</p>
+								<div class="heading">
+									<h2>
+										반입<span> 신청 조회</span>
+									</h2>
+								</div>
+							</figcaption>
+							<a href="/View/company/manager/Manager_SearchGoods.jsp"></a>
+						</figure>
+					</div>
 
-				<!-- Portfolio Item 3 -->
-				<div class="col-md-6 col-lg-3">
-					<figure class="snip1200">
-						<img src="/Style/images/postIt/greenblue.png" alt="sq-sample27" />
-						<figcaption>
-							<p>귀사에 반입할 물품에 대해서 반입 신청한 자료를 조회합니다. 이 페이지에서 신청에 대하 승인/반려를
-								처리합니다.</p>
-							<div class="heading">
-								<h2>
-									반입<span> 신청 조회</span>
-								</h2>
-							</div>
-						</figcaption>
-						<a href="/View/company/manager/Manager_SearchGoods.jsp"></a>
-					</figure>
-				</div>
-
-				<!-- Portfolio Item 4 -->
-				<div class="col-md-6 col-lg-3">
-					<figure class="snip1200">
-						<img src="/Style/images/postIt/blue.png" alt="sq-sample27" />
-						<figcaption>
-							<p>귀사에 대한 반입 신청을 처리한 건들을 조회합니다. 승인된 신청에 대해서 반입 물품들의 처리상태를 파악
-								할 수 있습니다.</p>
-							<div class="heading">
-								<h2>
-									반입<span> 현황 조회</span>
-								</h2>
-							</div>
-						</figcaption>
-						<a href="/View/company/manager/Manager_LogGoods.jsp"></a>
-					</figure>
+					<!-- Portfolio Item 4 -->
+					<div class="col-md-6 col-lg-3">
+						<figure class="snip1200">
+							<img src="/Style/images/postIt/blue.png" alt="sq-sample27" />
+							<figcaption>
+								<p>귀사에 대한 반입 신청을 처리한 건들을 조회합니다. 승인된 신청에 대해서 반입 물품들의 처리상태를 파악
+									할 수 있습니다.</p>
+								<div class="heading">
+									<h2>
+										반입<span> 현황 조회</span>
+									</h2>
+								</div>
+							</figcaption>
+							<a href="/View/company/manager/Manager_LogGoods.jsp"></a>
+						</figure>
+					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
 </body>

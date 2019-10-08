@@ -3,15 +3,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8"><!-- Web icon 설정 --> 
+<meta charset="UTF-8">
+<!-- Web icon 설정 -->
 <%@ include file="../../CommonForm/TapLogo.jsp"%>
 <title>종합 정보 관리</title>
 <!-- 공통코드 -->
 <%@ include file="../../../Style/common/HeadUI.jsp"%>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.15.4/extensions/toolbar/bootstrap-table-toolbar.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.15.4/extensions/toolbar/bootstrap-table-toolbar.min.js"></script>
 </head>
 <body>
-<script type="text/javascript">
+	<script type="text/javascript">
 //combobox 직접입력 방지
 $.fn.combobox.defaults.editable = false
 //datebox 직접입력 방지
@@ -216,259 +218,341 @@ $(document).ready(function(){
 		$("#f_redday_del").submit();
 	}
 </script>
-<%@ include file="../../CommonForm/Top.jsp"%>
+	<%@ include file="../../CommonForm/Top.jsp"%>
 
-<!-- Content -->
-<div class="mainContent">
-<!-- 페이지 이름 / 환영+ 로그아웃 버튼 -->
-	<div class="col-lg-12">
-	<div style="padding-left:200px">
-		<div style="margin:30px 20px 10px 0px;font-size:35px;width: 50%;float: left;">종합 관리 페이지</div>
-	</div>
-	</div>
-
-<!-- Nav tabs 구현 -->
-<div class="col-lg-12">
-<div style="padding-left:200px">
-<div role="tabpanel">
-	<ul class="nav nav-tabs" role="tablist">
-    	<li role="presentation" class="active">
-    				<a href="#desti" aria-controls="desti" role="tab" data-toggle="tab">목적지 관리</a></li>
-    	<li role="presentation">
-    				<a href="#kio" aria-controls="kio" role="tab" data-toggle="tab">키오스크 관리</a></li>
-    	<li role="presentation">
-    				<a href="#redday" aria-controls="redday" role="tab" data-toggle="tab">휴무일 관리</a></li>
-  	</ul>
-
-<!-- Tab panes 구현 -->
-  	<div class="tab-content">
-<!-- 부트 테이블 : 목적지 관리 -->
-  		<div role="tabpanel" class="tab-pane fade in active" id="desti">
+	<!-- Content -->
+	<div class="mainContent">
+		<%@ include file="../../CommonForm/InfoSideBar.jsp"%>
+		<div style="padding-left: 200px">
 			<div class="col-lg-12">
-				<div class='col-sm-1'></div>
-				<div class='col-lg-8' style="margin-left: 5%; margin-top: 2%;">
-					<div class='col-lg-12'>
-						<span style="font-size:30px;">목적지 관리</span>
-					</div>
-						<button type="button" class="btn btn-info" 
-								style="float:left; margin-top: 10px;margin-left: 1%;"
-					 			data-toggle="modal" data-target="#addDestiModal">목적지 추가</button>
-						<table class="table table-bordered table-hover" id="tb_desti"></table>
+				<div class="col-lg-offset-1 col-lg-10"
+					style="margin-top: 20px; margin-bottom: 20px;">
+					<div
+						style="margin: 30px 20px 10px 0px; font-size: 35px; width: 50%; float: left;">종합
+						관리 페이지</div>
 				</div>
 			</div>
-   		</div>
-<!-- 부트 테이블 : 키오스크 관리 -->
-   		<div role="tabpanel" class="tab-pane" id="kio">
-			<div class="col-lg-12">
-				<div class='col-sm-1'></div>
-				<div class='col-lg-8' style="margin-left: 5%; margin-top: 2%;">
-					<div class='col-lg-12' style="margin-bottom: 1%;">
-						<span style="font-size:30px;">키오스크 관리</span>
-					</div>
-					
-					<div class='col-lg-12' style="margin-bottom: 1%;padding: 0px;">
-						<form id="f_kio">
-	 						<button class="btn btn-primary" id="search_kio" type="button" style="float: right; margin-left: 1%;">search</button>
-							<select class="form-control" id="combo-kio" name="KIOSK_ST" style="width: 120px; float: right;">
-								<option value="정상">정상</option>
-								<option value="고장">고장</option>
-								<option value="수리요청">수리요청</option>
-								<option value="수리중">수리중</option>
-							</select>
-						</form>
-					</div>
-					<table class="table table-bordered table-hover" id="bt_kio"></table>
-				</div>
-			</div>
-		</div>
-<!-- 부트테이블 : 휴무일 관리 -->
-		<div role="tabpanel" class="tab-pane" id="redday">
-			<div class="col-lg-12">
-				<div class='col-sm-1'></div>
-				<div class='col-lg-8' style="margin-left: 5%; margin-top: 2%;">
-					<div class='col-lg-12' style="margin-bottom: 1%;">
-						<span style="font-size:30px;">휴무일 관리</span>
-					</div>
-					<div style="margin-bottom: 1%;">
-						<div class='col-lg-12' style="margin-bottom: 1%; padding-right: 0px;">
-					 		<form id="f_redday">
-								<button type="button" class="btn btn-info" style="float: left;"
-					 				data-toggle="modal" data-target="#addRedModal">휴무일 추가</button>
-					 			<div align="right" style="padding: 0px;">
-									<span style="font-weight: bold;">시작일</span>
-									<input class="easyui-datebox" id="startdate" name="date1" style="width:120px;" required>
-									<b>&nbsp;~&nbsp;</b>
-									<span style="font-weight: bold;">종료일</span>
-									<input class="easyui-datebox" id="closedate" name="date2" 
-													data-options="validType:'md[\'2015/11/05\']'" style="width:120px;" required>
-									<button id="search_reddate" type="button" class="btn btn-primary">search</button>
+
+			<!-- Nav tabs 구현 -->
+			<div class="col-lg-offset-1 col-lg-10">
+				<div role="tabpanel">
+					<ul class="nav nav-tabs" role="tablist">
+						<li role="presentation" class="active"><a href="#desti"
+							aria-controls="desti" role="tab" data-toggle="tab">목적지 관리</a></li>
+						<li role="presentation"><a href="#kio" aria-controls="kio"
+							role="tab" data-toggle="tab">키오스크 관리</a></li>
+						<li role="presentation"><a href="#redday"
+							aria-controls="redday" role="tab" data-toggle="tab">휴무일 관리</a></li>
+					</ul>
+
+					<!-- Tab panes 구현 -->
+					<div class="tab-content">
+						<!-- 부트 테이블 : 목적지 관리 -->
+						<div role="tabpanel" class="tab-pane fade in active" id="desti">
+							<div class="col-lg-12">
+								<div class='col-sm-1'></div>
+								<div class='col-lg-8' style="margin-left: 5%; margin-top: 2%;">
+									<div class='col-lg-12'>
+										<span style="font-size: 30px;">목적지 관리</span>
+									</div>
+									<button type="button" class="btn btn-info"
+										style="float: left; margin-top: 10px; margin-left: 1%;"
+										data-toggle="modal" data-target="#addDestiModal">목적지
+										추가</button>
+									<table class="table table-bordered table-hover" id="tb_desti"></table>
 								</div>
-							</form>	
+							</div>
 						</div>
+						<!-- 부트 테이블 : 키오스크 관리 -->
+						<div role="tabpanel" class="tab-pane" id="kio">
+							<div class="col-lg-12">
+								<div class='col-sm-1'></div>
+								<div class='col-lg-8' style="margin-left: 5%; margin-top: 2%;">
+									<div class='col-lg-12' style="margin-bottom: 1%;">
+										<span style="font-size: 30px;">키오스크 관리</span>
+									</div>
+
+									<div class='col-lg-12' style="margin-bottom: 1%; padding: 0px;">
+										<form id="f_kio">
+											<button class="btn btn-primary" id="search_kio" type="button"
+												style="float: right; margin-left: 1%;">search</button>
+											<select class="form-control" id="combo-kio" name="KIOSK_ST"
+												style="width: 120px; float: right;">
+												<option value="정상">정상</option>
+												<option value="고장">고장</option>
+												<option value="수리요청">수리요청</option>
+												<option value="수리중">수리중</option>
+											</select>
+										</form>
+									</div>
+									<table class="table table-bordered table-hover" id="bt_kio"></table>
+								</div>
+							</div>
+						</div>
+						<!-- 부트테이블 : 휴무일 관리 -->
+						<div role="tabpanel" class="tab-pane" id="redday">
+							<div class="col-lg-12">
+								<div class='col-sm-1'></div>
+								<div class='col-lg-8' style="margin-left: 5%; margin-top: 2%;">
+									<div class='col-lg-12' style="margin-bottom: 1%;">
+										<span style="font-size: 30px;">휴무일 관리</span>
+									</div>
+									<div style="margin-bottom: 1%;">
+										<div class='col-lg-12'
+											style="margin-bottom: 1%; padding-right: 0px;">
+											<form id="f_redday">
+												<button type="button" class="btn btn-info"
+													style="float: left;" data-toggle="modal"
+													data-target="#addRedModal">휴무일 추가</button>
+												<div align="right" style="padding: 0px;">
+													<span style="font-weight: bold;">시작일</span> <input
+														class="easyui-datebox" id="startdate" name="date1"
+														style="width: 120px;" required> <b>&nbsp;~&nbsp;</b>
+													<span style="font-weight: bold;">종료일</span> <input
+														class="easyui-datebox" id="closedate" name="date2"
+														data-options="validType:'md[\'2015/11/05\']'"
+														style="width: 120px;" required>
+													<button id="search_reddate" type="button"
+														class="btn btn-primary">search</button>
+												</div>
+											</form>
+										</div>
+									</div>
+									<table class="table table-bordered table-hover" id="bt_red"></table>
+								</div>
+							</div>
+						</div>
+
 					</div>
-					<table class="table table-bordered table-hover" id="bt_red"></table>
 				</div>
 			</div>
 		</div>
-		
-	</div>	
-</div>
-</div>
-</div>
-</div>
+	</div>
 
-<!-- 목적지추가 모달창 -->
-<div id="addDestiModal" class="modal fade" role="dialog" style="width: 50%;margin-left: 28%;margin-top: 10%;">
-	<div class="modal-dialog">
-		<div class="modal-content">
-	        <div class="modal-header">
-	          <button type="button" class="close" data-dismiss="modal">&times;</button>
-	          <h4 class="modal-title">목적지 추가</h4>
-	        </div>
-	        
-	        <div class="modal-body" style="align: center;padding-left: 30%">
-	        	<p>일련번호는 자동으로 추가됩니다.</p>
-	        	<form id="f_desti_add">
-		        	<table>
-		        		<tr><td width=70 style="word-break:break-all">목적지명</td>	
-		        							<td><input class="easyui-textbox" id="DESTI_NAME_ADD" name="DESTI_NAME"></td></tr>
-		        		<tr><td>위치</td>		<td><input class="easyui-textbox" id="DESTI_LOC_ADD" name="DESTI_LCINFO"></td></tr>
-		        		<tr><td>비고</td>		<td><input class="easyui-textbox" id="DESTI_NOTES_ADD" name="DESTI_NOTES"></td></tr>
-		        	</table>
-	        	</form>
-	        </div>
-	        
-	        <div class="modal-footer">
-	          <button type="button" class="btn btn-info" id="desti_add" onclick="javascript:addDesti();">저장</button>
-	          <button type="button" class="btn" id="btn_close" data-dismiss="modal">Close</button>
-	        </div>
+	<!-- 목적지추가 모달창 -->
+	<div id="addDestiModal" class="modal fade" role="dialog"
+		style="width: 50%; margin-left: 28%; margin-top: 10%;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">목적지 추가</h4>
+				</div>
+
+				<div class="modal-body" style="align: center; padding-left: 30%">
+					<p>일련번호는 자동으로 추가됩니다.</p>
+					<form id="f_desti_add">
+						<table>
+							<tr>
+								<td width=70 style="word-break: break-all">목적지명</td>
+								<td><input class="easyui-textbox" id="DESTI_NAME_ADD"
+									name="DESTI_NAME"></td>
+							</tr>
+							<tr>
+								<td>위치</td>
+								<td><input class="easyui-textbox" id="DESTI_LOC_ADD"
+									name="DESTI_LCINFO"></td>
+							</tr>
+							<tr>
+								<td>비고</td>
+								<td><input class="easyui-textbox" id="DESTI_NOTES_ADD"
+									name="DESTI_NOTES"></td>
+							</tr>
+						</table>
+					</form>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-info" id="desti_add"
+						onclick="javascript:addDesti();">저장</button>
+					<button type="button" class="btn" id="btn_close"
+						data-dismiss="modal">Close</button>
+				</div>
+			</div>
 		</div>
 	</div>
-</div>
 
-<!-- 상세정보 모달창 : 상세조회/수정/삭제 -->
-<div id="destiModal" class="modal fade" role="dialog" style="width: 50%;margin-left: 28%;margin-top: 10%;">
-	<div class="modal-dialog">
-		<div class="modal-content">
-	        <div class="modal-header">
-	          <button type="button" class="close" data-dismiss="modal">&times;</button>
-	          <h4 class="modal-title">목적지 상세정보</h4>
-	        </div>
-	        
-	        <div class="modal-body" style="align: center;padding-left: 30%">
-	        	<form id="f_desti_chage">
-		        	<table>
-		        		<tr><td width=70 style="word-break:break-all">일련번호</td>		
-		        								<td><input class="easyui-textbox" id="DESTI_NO_INFO" name="DESTI_NO" readonly="readonly"></td></tr>
-		        		<tr><td>목적지명</td>		<td><input class="easyui-textbox" id="DESTI_NAME_INFO" name="DESTI_NAME"></td></tr>
-		        		<tr><td>위치</td>			<td><input class="easyui-textbox" id="DESTI_LOC_INFO" name="DESTI_LCINFO"></td></tr>
-		        		<tr><td>비고</td>			<td><input class="easyui-textbox" id="DESTI_NOTES_INFO" name="DESTI_NOTES"></td></tr>
-		        	</table>
-	        	</form>
-	        </div>
-	        
-	        <div class="modal-footer">
-	          <button type="button" class="btn btn-info" id="desti_change" onclick="javascript:updateDesti();">수정</button>
-	          <button type="button" class="btn btn-danger" id="desti_delete" onclick="javascript:deletDesti();">삭제</button>
-	          <button type="button" class="btn" id="btn_close" data-dismiss="modal">Close</button>
-	        </div>
+	<!-- 상세정보 모달창 : 상세조회/수정/삭제 -->
+	<div id="destiModal" class="modal fade" role="dialog"
+		style="width: 50%; margin-left: 28%; margin-top: 10%;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">목적지 상세정보</h4>
+				</div>
+
+				<div class="modal-body" style="align: center; padding-left: 30%">
+					<form id="f_desti_chage">
+						<table>
+							<tr>
+								<td width=70 style="word-break: break-all">일련번호</td>
+								<td><input class="easyui-textbox" id="DESTI_NO_INFO"
+									name="DESTI_NO" readonly="readonly"></td>
+							</tr>
+							<tr>
+								<td>목적지명</td>
+								<td><input class="easyui-textbox" id="DESTI_NAME_INFO"
+									name="DESTI_NAME"></td>
+							</tr>
+							<tr>
+								<td>위치</td>
+								<td><input class="easyui-textbox" id="DESTI_LOC_INFO"
+									name="DESTI_LCINFO"></td>
+							</tr>
+							<tr>
+								<td>비고</td>
+								<td><input class="easyui-textbox" id="DESTI_NOTES_INFO"
+									name="DESTI_NOTES"></td>
+							</tr>
+						</table>
+					</form>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-info" id="desti_change"
+						onclick="javascript:updateDesti();">수정</button>
+					<button type="button" class="btn btn-danger" id="desti_delete"
+						onclick="javascript:deletDesti();">삭제</button>
+					<button type="button" class="btn" id="btn_close"
+						data-dismiss="modal">Close</button>
+				</div>
+			</div>
 		</div>
 	</div>
-</div>
 
-<!-- 키오스크 모달 상세정보 -->
-<div id="kioskModal" class="modal fade" role="dialog" style="width: 50%;margin-left: 28%;margin-top: 10%;">
-	<div class="modal-dialog">
-		<div class="modal-content">
-	        <div class="modal-header">
-	          <button type="button" class="close" data-dismiss="modal">&times;</button>
-	          <h4 class="modal-title">키오스크 정보 수정창</h4>
-	        </div>
-	        <div class="modal-body" style="align: center;padding-left: 30%">
-		        <form id="f_kio_change">
-		        	<table>
-		        		<tr><td width=120 style="word-break:break-all">일련번호</td>	
-		        							<td><input class="easyui-textbox" id="kiosk_no" name="kiosk_no" readonly="readonly"></td></tr>
-		        		<tr><td>위치</td>		<td><input class="easyui-textbox" id="kiosk_location" name="KIOSK_GATE"></td></tr>
-		        		<tr><td>상태</td>		
-						        		    <td>
-						        				<select class="form-control"  id="KIOSK_ST" name="KIOSK_ST" style="width:100%;">
-													<option value="정상">정상</option>
-													<option value="고장">고장</option>
-													<option value="수리요청">수리요청</option>
-													<option value="수리중">수리중</option>
-												</select>
-						        		    </td>
-		        		</tr>
-		        		<tr><td>비고</td>		<td><input class="easyui-textbox" id="KIOSK_NOTES" name="KIOSK_NOTES"></td></tr>
-		        	</table>
-		        </form>
-	        </div>
-	        <div class="modal-footer">
-	          <button type="button" class="btn btn-info" id="kio_save" onclick='kio_save()'>변경 저장</button>
-	          <button type="button" class="btn" id="btn_close" data-dismiss="modal">Close</button>
-	        </div>
+	<!-- 키오스크 모달 상세정보 -->
+	<div id="kioskModal" class="modal fade" role="dialog"
+		style="width: 50%; margin-left: 28%; margin-top: 10%;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">키오스크 정보 수정창</h4>
+				</div>
+				<div class="modal-body" style="align: center; padding-left: 30%">
+					<form id="f_kio_change">
+						<table>
+							<tr>
+								<td width=120 style="word-break: break-all">일련번호</td>
+								<td><input class="easyui-textbox" id="kiosk_no"
+									name="kiosk_no" readonly="readonly"></td>
+							</tr>
+							<tr>
+								<td>위치</td>
+								<td><input class="easyui-textbox" id="kiosk_location"
+									name="KIOSK_GATE"></td>
+							</tr>
+							<tr>
+								<td>상태</td>
+								<td><select class="form-control" id="KIOSK_ST"
+									name="KIOSK_ST" style="width: 100%;">
+										<option value="정상">정상</option>
+										<option value="고장">고장</option>
+										<option value="수리요청">수리요청</option>
+										<option value="수리중">수리중</option>
+								</select></td>
+							</tr>
+							<tr>
+								<td>비고</td>
+								<td><input class="easyui-textbox" id="KIOSK_NOTES"
+									name="KIOSK_NOTES"></td>
+							</tr>
+						</table>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-info" id="kio_save"
+						onclick='kio_save()'>변경 저장</button>
+					<button type="button" class="btn" id="btn_close"
+						data-dismiss="modal">Close</button>
+				</div>
+			</div>
 		</div>
 	</div>
-</div>
 
-<!-- 휴무일 추가 모달창 -->
-<div id="addRedModal" class="modal fade" role="dialog" style="width: 50%;margin-left: 28%;margin-top: 10%;">
-	<div class="modal-dialog">
-		<div class="modal-content">
-	        <div class="modal-header">
-	          <button type="button" class="close" data-dismiss="modal">&times;</button>
-	          <h4 class="modal-title">휴무일 추가</h4>
-	        </div>
-	        
-	        <div class="modal-body" style="align: center;padding-left: 30%">
-	        	<form id="f_redday_add">
-	        	<table>
-	        		<tr><td width=70 style="word-break:break-all">목적지명</td>	
-	        							<td><input class="easyui-textbox" id="DATE_ADD" name="COMCL_DATE"></td></tr>
-	        		<tr><td>위치</td>		<td><input class="easyui-textbox" id="DAYWEEK_ADD" name="COMCL_DAYWEEK"></td></tr>
-	        		<tr><td>비고</td>		<td><input class="easyui-textbox" id="NOTES_ADD" name="COMCL_NOTES"></td></tr>
-	        	</table>
-	        	</form>
-	        </div>
-	        
-	        <div class="modal-footer">
-	          <button type="button" class="btn btn-info" id="desti_add" onclick="javascript:addRed();">저장</button>
-	          <button type="button" class="btn" id="btn_close" data-dismiss="modal">Close</button>
-	        </div>
+	<!-- 휴무일 추가 모달창 -->
+	<div id="addRedModal" class="modal fade" role="dialog"
+		style="width: 50%; margin-left: 28%; margin-top: 10%;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">휴무일 추가</h4>
+				</div>
+
+				<div class="modal-body" style="align: center; padding-left: 30%">
+					<form id="f_redday_add">
+						<table>
+							<tr>
+								<td width=70 style="word-break: break-all">목적지명</td>
+								<td><input class="easyui-textbox" id="DATE_ADD"
+									name="COMCL_DATE"></td>
+							</tr>
+							<tr>
+								<td>위치</td>
+								<td><input class="easyui-textbox" id="DAYWEEK_ADD"
+									name="COMCL_DAYWEEK"></td>
+							</tr>
+							<tr>
+								<td>비고</td>
+								<td><input class="easyui-textbox" id="NOTES_ADD"
+									name="COMCL_NOTES"></td>
+							</tr>
+						</table>
+					</form>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-info" id="desti_add"
+						onclick="javascript:addRed();">저장</button>
+					<button type="button" class="btn" id="btn_close"
+						data-dismiss="modal">Close</button>
+				</div>
+			</div>
 		</div>
 	</div>
-</div>
 
-<!-- 휴무일 삭제 모달창 -->
-<div id="delRedModal" class="modal fade" role="dialog" style="width: 50%;margin-left: 28%;margin-top: 10%;">
-	<div class="modal-dialog">
-		<div class="modal-content">
-	        <div class="modal-header">
-	          <button type="button" class="close" data-dismiss="modal">&times;</button>
-	          <h4 class="modal-title">휴무일 추가</h4>
-	        </div>
-	        
-	        <div class="modal-body" style="align: center;padding-left: 30%">
-	        	<form id="f_redday_del">
-		        	<table>
-		        		<tr><td width=70 style="word-break:break-all">목적지명</td>	
-		        							<td><input class="easyui-textbox" id="DATE_DEL" name="COMCL_DATE" readonly="readonly"></td></tr>
-		        		<tr><td>위치</td>		<td><input class="easyui-textbox" id="DAYWEEK_DEL" name="COMCL_DAYWEEK" readonly="readonly"></td></tr>
-		        		<tr><td>비고</td>		<td><input class="easyui-textbox" id="NOTES_DEL" name="COMCL_NOTES" readonly="readonly"></td></tr>
-		        	</table>
-	        	</form>
-	        </div>
-	        
-	        <div class="modal-footer">
-	          <button type="button" class="btn btn-danger" id="desti_add" onclick="javascript:addRed();">삭제</button>
-	          <button type="button" class="btn" id="btn_close" data-dismiss="modal">Close</button>
-	        </div>
+	<!-- 휴무일 삭제 모달창 -->
+	<div id="delRedModal" class="modal fade" role="dialog"
+		style="width: 50%; margin-left: 28%; margin-top: 10%;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">휴무일 추가</h4>
+				</div>
+
+				<div class="modal-body" style="align: center; padding-left: 30%">
+					<form id="f_redday_del">
+						<table>
+							<tr>
+								<td width=70 style="word-break: break-all">목적지명</td>
+								<td><input class="easyui-textbox" id="DATE_DEL"
+									name="COMCL_DATE" readonly="readonly"></td>
+							</tr>
+							<tr>
+								<td>위치</td>
+								<td><input class="easyui-textbox" id="DAYWEEK_DEL"
+									name="COMCL_DAYWEEK" readonly="readonly"></td>
+							</tr>
+							<tr>
+								<td>비고</td>
+								<td><input class="easyui-textbox" id="NOTES_DEL"
+									name="COMCL_NOTES" readonly="readonly"></td>
+							</tr>
+						</table>
+					</form>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" id="desti_add"
+						onclick="javascript:addRed();">삭제</button>
+					<button type="button" class="btn" id="btn_close"
+						data-dismiss="modal">Close</button>
+				</div>
+			</div>
 		</div>
 	</div>
-</div>
-
-<!-- 공통 Footer -->
-<%@ include file="/View/CommonForm/Footer.jsp"%>
 </body>
 </html>

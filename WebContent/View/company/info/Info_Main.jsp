@@ -145,76 +145,76 @@ figure.snip1200:hover p, figure.snip1200.hover p {
 		<%@ include file="../../CommonForm/InfoSideBar.jsp"%>
 		<div style="padding-left: 200px">
 			<div class="col-lg-12">
-
-				<div style="font-size: 35px; width: 78%; float: left;">
-					<h1>
-						<%=com_name%>
-					</h1>
+				<div class="col-lg-offset-1 col-lg-10"
+					style="margin-top: 20px; margin-bottom: 20px;">
+					<div style="font-size: 35px; width: 78%; float: left;">
+						<h1><%=com_name%></h1>
+					</div>
 				</div>
+				<div class="col-lg-offset-1 col-lg-10">
+					<!-- Portfolio Item 1 -->
+					<div class="col-md-6 col-lg-3">
+						<figure class="snip1200">
+							<img src="/Style/images/postIt/yellow.png" alt="sq-sample27" />
+							<figcaption>
+								<p>안쪽 내용 설명이 들어간 부분이지롱</p>
+								<div class="heading">
+									<h2>
+										<span>안내 공지</span>
+									</h2>
+								</div>
+							</figcaption>
+							<a href="/View/company/info/Info_Notice.jsp"></a>
+						</figure>
+					</div>
 
-				<!-- 하단 : 3개로 분할 : 신청 / 방문/물류/ 인포 소개 -->
-				<!-- Portfolio Item 1 -->
-				<div class="col-md-6 col-lg-3">
-					<figure class="snip1200">
-						<img src="/Style/images/postIt/yellow.png" alt="sq-sample27" />
-						<figcaption>
-							<p>안쪽 내용 설명이 들어간 부분이지롱</p>
-							<div class="heading">
-								<h2>
-									<span>안내 공지</span>
-								</h2>
-							</div>
-						</figcaption>
-						<a href="/View/company/info/Info_Notice.jsp"></a>
-					</figure>
-				</div>
+					<!-- Portfolio Item 2 -->
+					<div class="col-md-6 col-lg-3">
+						<figure class="snip1200">
+							<img src="/Style/images/postIt/red.png" alt="sq-sample27" />
+							<figcaption>
+								<p>안쪽 내용 설명이 들어간 부분이지롱</p>
+								<div class="heading">
+									<h2>
+										방문자 <span>현황</span>
+									</h2>
+								</div>
+							</figcaption>
+							<a href="/View/company/info/Info_ManageLog.jsp"></a>
+						</figure>
+					</div>
 
-				<!-- Portfolio Item 2 -->
-				<div class="col-md-6 col-lg-3">
-					<figure class="snip1200">
-						<img src="/Style/images/postIt/red.png" alt="sq-sample27" />
-						<figcaption>
-							<p>안쪽 내용 설명이 들어간 부분이지롱</p>
-							<div class="heading">
-								<h2>
-									방문자 <span>현황</span>
-								</h2>
-							</div>
-						</figcaption>
-						<a href="/View/company/info/Info_ManageLog.jsp"></a>
-					</figure>
-				</div>
+					<!-- Portfolio Item 3 -->
+					<div class="col-md-6 col-lg-3">
+						<figure class="snip1200">
+							<img src="/Style/images/postIt/green.png" alt="sq-sample27" />
+							<figcaption>
+								<p>안쪽 내용 설명이 들어간 부분이지롱</p>
+								<div class="heading">
+									<h2>
+										<span>키오스크 관리</span>
+									</h2>
+								</div>
+							</figcaption>
+							<a href="/View/company/info/Info_ManageKiosk.jsp"></a>
+						</figure>
+					</div>
 
-				<!-- Portfolio Item 3 -->
-				<div class="col-md-6 col-lg-3">
-					<figure class="snip1200">
-						<img src="/Style/images/postIt/green.png" alt="sq-sample27" />
-						<figcaption>
-							<p>안쪽 내용 설명이 들어간 부분이지롱</p>
-							<div class="heading">
-								<h2>
-									<span>키오스크 관리</span>
-								</h2>
-							</div>
-						</figcaption>
-						<a href="/View/company/info/Info_ManageKiosk.jsp"></a>
-					</figure>
-				</div>
-
-				<!-- Portfolio Item 4 -->
-				<div class="col-md-6 col-lg-3">
-					<figure class="snip1200">
-						<img src="/Style/images/postIt/puple.png" alt="sq-sample27" />
-						<figcaption>
-							<p>안쪽 내용 설명이 들어간 부분이지롱</p>
-							<div class="heading">
-								<h2>
-									<span>목적지 관리</span>
-								</h2>
-							</div>
-						</figcaption>
-						<a href="/View/company/info/Info_ManageDesti.jsp"></a>
-					</figure>
+					<!-- Portfolio Item 4 -->
+					<div class="col-md-6 col-lg-3">
+						<figure class="snip1200">
+							<img src="/Style/images/postIt/puple.png" alt="sq-sample27" />
+							<figcaption>
+								<p>안쪽 내용 설명이 들어간 부분이지롱</p>
+								<div class="heading">
+									<h2>
+										<span>목적지 관리</span>
+									</h2>
+								</div>
+							</figcaption>
+							<a href="/View/company/info/Info_ManageDesti.jsp"></a>
+						</figure>
+					</div>
 				</div>
 			</div>
 		</div>

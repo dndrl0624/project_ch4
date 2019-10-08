@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -17,13 +18,13 @@
 	//반입사유
 	String aplg_reason = "null";
 	
-	Map<String,Object> rMap = null;
+	Map<String,Object> rMap = new HashMap<>();
 	if(null!=request.getAttribute("rMap")){
 		rMap = (Map<String,Object>)request.getAttribute("rMap");
 	}
 	//기본정보
-	Map<String,Object> infoMap = null;
-	if(null!=rMap){
+	Map<String,Object> infoMap = new HashMap<>();
+	if(null!=rMap.get("infoMap")){
 		infoMap = (Map<String,Object>)rMap.get("infoMap");
 		aplg_no = (String)infoMap.get("APLG_NO");
 		aplg_date = (String)infoMap.get("APLG_DATE");
@@ -34,8 +35,8 @@
 		aplg_reason = (String)infoMap.get("APLG_REASON");
 	}
 	//물품관리 테이블
-	List<Map<String,Object>> gmList = null;
-	if(null!=rMap){
+	List<Map<String,Object>> gmList = new ArrayList<>();
+	if(null!=rMap.get("gmList")){
 		gmList = (List<Map<String,Object>>)rMap.get("gmList");
 	}
 %>
@@ -192,7 +193,7 @@ table.table {
 										<tr>
 											<th>반입날짜</th>
 											<th>목적지</th>
-											<th>실반입장소</th>
+											<th style="width:200px;">실반입장소</th>
 											<th>반입사유</th>
 										</tr>
 									</thead>
@@ -201,7 +202,7 @@ table.table {
 											<td><%=aplg_trans_date%></td>
 											<td><%=aplg_desti%></td>
 											<td>
-												<select id="desti_combo" name="confm_desti" class="easyui-combobox" style="width:30%;" data-options="panelHeight:'300px'">
+												<select id="desti_combo" name="confm_desti" class="easyui-combobox" style="width:150px;" data-options="panelHeight:'300px'">
 												<option value=""></option>
 												</select>
 											</td>

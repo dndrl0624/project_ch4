@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -24,13 +25,13 @@
 	//방문목적
 	String visit_purps = "null";
 	
-	Map<String,Object> rMap = null;
+	Map<String,Object> rMap = new HashMap<>();
 	if(null!=request.getAttribute("rMap")){
 		rMap = (Map<String,Object>)request.getAttribute("rMap");
 	}
 	//기본정보
-	Map<String,Object> infoMap = null;
-	if(null!=rMap){
+	Map<String,Object> infoMap = new HashMap<>();
+	if(null!=rMap.get("infoMap")){
 		infoMap = (Map<String,Object>)rMap.get("infoMap");
 		visit_no = (String)infoMap.get("VISIT_NO");
 		visit_apply_date = (String)infoMap.get("VISIT_APPLY_DATE");
@@ -46,21 +47,21 @@
 		visit_purps = (String)infoMap.get("VISIT_PURPS");
 	}
 	//방문자 이름 & 연락처
-	List<Map<String,Object>> vtList = null;
-	if(null!=request.getAttribute("vtList")){
-		vtList = (List<Map<String,Object>>)request.getAttribute("vtList");
+	List<Map<String,Object>> vtList = new ArrayList<>();
+	if(null!=rMap.get("vtList")){
+		vtList = (List<Map<String,Object>>)rMap.get("vtList");
 	}
 	
 	//반입기기
-	List<Map<String,Object>> tkList = null;
-	if(null!=request.getAttribute("tkList")){
-		tkList = (List<Map<String,Object>>)request.getAttribute("tkList");
+	List<Map<String,Object>> tkList = new ArrayList<>();
+	if(null!=rMap.get("tkList")){
+		tkList = (List<Map<String,Object>>)rMap.get("tkList");
 	}
 	
 	//주차	
-	List<Map<String,Object>> pkList = null;
-	if(null!=request.getAttribute("pkList")){
-		pkList = (List<Map<String,Object>>)request.getAttribute("pkList");
+	List<Map<String,Object>> pkList = new ArrayList<>();
+	if(null!=rMap.get("pkList")){
+		pkList = (List<Map<String,Object>>)rMap.get("pkList");
 	}
 %>
 <!DOCTYPE html>
@@ -176,7 +177,7 @@ table.table {
 				<div class="col-lg-offset-1 col-lg-10"
 					style="margin-top: 20px; margin-bottom: 20px;">
 					<div style="font-size: 35px; width: 78%; float: left;">
-						<h1>반입 신청 상세</h1>
+						<h1>방문 신청 상세</h1>
 					</div>
 				</div>
 				<div class="col-lg-offset-1 col-lg-10">
@@ -241,6 +242,7 @@ table.table {
 										<tr>
 											<th>방문지</th>
 											<th>목적지</th>
+											<th style="width:200px;">실방문장소</th>
 											<th>방문목적</th>
 										</tr>
 									</thead>
@@ -248,6 +250,11 @@ table.table {
 										<tr>
 											<td><%=com_name%></td>
 											<td><%=visit_desti%></td>
+											<td>
+												<select id="desti_combo" name="confm_desti" class="easyui-combobox" style="width:150px;" data-options="panelHeight:'300px'">
+												<option value=""></option>
+												</select>
+											</td>
 											<td><%=visit_purps%></td>
 										</tr>
 									</tbody>

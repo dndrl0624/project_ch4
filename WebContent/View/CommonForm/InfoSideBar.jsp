@@ -9,14 +9,12 @@
 	String com_no = "null";
 	String com_name = "null";
 	String dept_name  = "null";
-	Map<String,Object> rMap = null;
-	if(null!=request.getSession().getAttribute("rMap")){
-		rMap = (Map<String,Object>)request.getSession().getAttribute("rMap");
-		cmng_id = (String)rMap.get("cmng_id");
-		cmng_name = (String)rMap.get("cmng_name");
-		com_no = (String)rMap.get("com_no");
-		com_name = (String)rMap.get("com_name");
-		dept_name= (String)rMap.get("dept_name");
+	if(null!=request.getSession().getAttribute("cmng_id")){
+		cmng_id = (String)request.getSession().getAttribute("cmng_id");
+		cmng_name = (String)request.getSession().getAttribute("cmng_name");
+		com_no = (String)request.getSession().getAttribute("com_no");
+		com_name = (String)request.getSession().getAttribute("com_name");
+		dept_name= (String)request.getSession().getAttribute("dept_name");
 	}
 %>
 <style>
@@ -70,7 +68,7 @@
 </style>
 <script>
 	function logout(){
-		
+		location.href = '/company/logout.ch4';
 	}
 </script>
 <aside>
