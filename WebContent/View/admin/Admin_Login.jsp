@@ -22,19 +22,38 @@
 		padding-bottom: 50px;
 		padding-top: 30px;
 	}
-	#btn_login {
-		width: 30%;
-		height: 40px;
-	}
-	.checkbox{
-		border: 0px;
-	}
-	h2 {
+	#admin {
 		padding-left: 3%;
 		margin-left: 8%;
 		border-left: solid 7px;
 		color: white;
+		margin-top: 100px;
+		font-family: unset;
+    	font-weight: 800;
 	}
+	#login_title{
+		color: white;
+		margin-bottom : 30px;
+		font-family: unset;
+    	font-weight: 700;
+    	font-family: -webkit-pictograph;
+	
+	}
+	#admin_id,#admin_pw,#btn_login {
+		width: 300px; 
+	}
+	#_easyui_textbox_input1,#_easyui_textbox_input2 {
+		height: 40px;
+	}
+	#btn_login{
+		margin-top: 30px;
+	}
+	
+	.checkbox{
+		border: 0px;
+	}
+
+}
 
 </style>
 <script type="text/javascript">
@@ -61,26 +80,26 @@
 </head>
 <body>
 <%@ include file="/View/CommonForm/Top.jsp"%>
-<div class="container" style="text-align: center;">
+<div class="container">
 	<div id="jumbo_adminlogin" class="jumbotron">
 		<div class="col-lg-offset-1 col-lg-10 col-lg-offset-1">
-			<div class="row" align="left" style="margin-top:80px;">
-				<h2>ADMIN</h2>
+			<div class="row" align="left" >
+				<h2 id="admin">ADMIN</h2>
 			</div>
 			<div class="col-lg-offset-1 col-lg-10 col-lg-offset-1">
 				<div id="login_background" class="row" align="center" >
-					<h1 style="font-size: 50px;">Please sign in</h1>
+					<h1 id="login_title">Please sign in</h1>
 					<div class="row">
 						<div class="col-lg-offset-3 col-lg-6 col-lg-offset-3">
 							<form class="f_adminlogin">
 								<div class="row">
-									<input id="admin_id" class="easyui-textbox"  prompt="id" data-options="iconCls:'icon-man'" style="width:300px; height: 40px;">
+									<input id="admin_id" class="easyui-textbox"  prompt="id" data-options="iconCls:'icon-man'" >
 								</div>
 								<div class="row"> 
-									<input id="admin_pw" class="easyui-passwordbox" prompt="Password" iconWidth="28" style="width:300px; height: 40px;margin-top: -10px;">
+									<input id="admin_pw" class="easyui-passwordbox" prompt="Password" iconWidth="28">
 								</div>
 								<div class="row">
-									<button id="btn_login" type="button" class="btn btn-lg btn-primary btn-block" style="margin-top: 50px;" onClick="javascript:login()">Sign in</button>
+									<button id="btn_login" type="button" class="btn btn-lg btn-primary btn-block" onClick="javascript:login()">Sign in</button>
 								</div>
 							</form>
 						</div>

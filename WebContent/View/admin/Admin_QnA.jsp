@@ -4,7 +4,7 @@
     pageEncoding="UTF-8"%>
     
 <%
-/*  	List<Map<String,Object>> qnaList = new ArrayList<>();
+  	List<Map<String,Object>> qnaList = new ArrayList<>();
 	Map<String, Object> pMap = new HashMap<>();
 	pMap.put("Q_NO","1");
 	pMap.put("Q_TITLE","q_title1");
@@ -44,9 +44,9 @@
 	pMap.put("Q_DATE","q_date5");
 	pMap.put("Q_EMAIL","q_email5");
 	pMap.put("Q_WRITER","q_writer5");
-	qnaList.add(pMap);  */
-	List<Map<String,Object>> qnaList = null;
-	qnaList = (List<Map<String,Object>>)request.getAttribute("qnaList");
+	qnaList.add(pMap); 
+	//List<Map<String,Object>> qnaList = null;
+	//qnaList = (List<Map<String,Object>>)request.getAttribute("qnaList");
  %>
 <!DOCTYPE html>
 <html>
@@ -74,7 +74,7 @@
 	function moreView(){
 		//rno = 리스트를 불러올 때 시작 값.
 		rno = $(".panel-heading").length+1;//현재 화면에 있는 패널의 길이 만큼 구한것.
-			$.ajax({
+	/* 	$.ajax({
 			url : 'admin/qnaList.ch4&rno='+rno
 					//이 url에서 연결될 화면이 qnaList.jsp임.
 			,method:'get'
@@ -82,7 +82,7 @@
 				alert(data);
 				$('#moreList').append(data);				
 			}
-		});
+		}); */
 	}
 </script>
 <style type="text/css">
@@ -93,21 +93,36 @@
 	}
 	.panel-success {
 	    background-color: #dff0d8;
+	    margin-top: 30px;
+	}
+	#btn_answer{
+		margin-right: 30px;
+	}
+	#a_content {
+		width: 900px;
+		
 	}
 </style>
 </head>
 
 <body>
 <%@ include file="/View/CommonForm/Top.jsp"%>
-
+<script type="text/javascript">
+	$(document).ready(function(){
+		$.ajax({
+			method:"get"
+			//,url:"admin/qnaList.ch4?rno=1"
+		});
+	});
+</script>
 <div class="container">
 	<div class="col-lg-offset-1 col-lg-10 col-lg-offset-1">
 		<div class="row">
       		<h3>Q&A</h3>
 		</div>
 		<!-- 내용 부분 -->
-	 	<div class="row" style="margin-bottom: 20px;">
-			<div id="panel" class="panel panel-success" >
+	 	<div class="row">
+			<div id="question_panel" class="panel panel-success" >
 				<!-- 본문 내용 -->
 <%
 	if(qnaList.size()>0 && qnaList != null){
@@ -130,8 +145,8 @@
 							<h4><%=qnaList.get(i).get("Q_CONTENT")%></h4>
 						</div>
 					</div>
-					<div class="row" align="right" style="margin-right: 20px;">
-						<button class="btn btn-warning" data-toggle="collapse" data-target="#writeAnswer<%=i%>">답변 쓰기</button>
+					<div class="row" align="right">
+						<button class="btn btn-warning" id="btn_answer" data-toggle="collapse" data-target="#writeAnswer<%=i%>">답변 쓰기</button>
 					</div>
 				</div>
 				<!-- 댓글내용 -->
@@ -141,8 +156,7 @@
 					<div class="panel-body">
 						<h5>댓글 내용</h5>
 						<textarea class="easyui-textbox" placeholder="답변을 입력해주세요." 
-							 		  id="a_content" name="a_content"
-							 		  style="height:100px; width: 900px;"></textarea>
+							 		  id="a_content" name="a_content" style="height: 100px;"></textarea>
 					</div>
 					<div class="panel-footer">
 						<button class="btn btn-danger" type="button" onClick="sendAnswer()">답변 보내기</button>
