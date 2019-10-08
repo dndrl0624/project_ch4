@@ -51,7 +51,7 @@
    
    <!-- 신청 내용 작성 (반입기기) -->
    <insert id="deviceAdd" parameterType="map">
-      <foreach collection="tnAddList" item="it" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+      <foreach collection="tkAddList" item="it" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
          into tkin_mng(tkin_model, tkin_kind, tkin_brand, visit_no)
             values(#{it.tkin_model}, #{it.tkin_kind}, #{it.tkin_brand}, #{visit_no})
       </foreach>
