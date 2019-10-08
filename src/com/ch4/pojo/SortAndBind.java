@@ -12,7 +12,7 @@ public class SortAndBind {
       
       
       List<Map<String,Object>> vtAddList = new ArrayList<Map<String,Object>>();
-      List<Map<String,Object>> tnAddList = new ArrayList<Map<String,Object>>();
+      List<Map<String,Object>> tkAddList = new ArrayList<Map<String,Object>>();
       List<Map<String,Object>> pkAddList = new ArrayList<Map<String,Object>>();
       Map<String,Object> applyAdd = null;
       
@@ -31,16 +31,16 @@ public class SortAndBind {
       }
       
         ///////////////// [반입기기 list에 담기] //////////////////
-      String[] tn_models = (String[])pMap.get("tkin_model");
-      String[] tn_brand = (String[])pMap.get("tkin_brand");
-      String[] tn_kinds = (String[])pMap.get("tkin_kind");
-      if(tn_models.length>0 || tn_models!=null) {
-         for(int i=0;i<tn_models.length;i++) {
+      String[] tk_models = (String[])pMap.get("tkin_model");
+      String[] tk_brand = (String[])pMap.get("tkin_brand");
+      String[] tk_kinds = (String[])pMap.get("tkin_kind");
+      if(tk_models.length>0 || tk_models!=null) {
+         for(int i=0;i<tk_models.length;i++) {
             Map<String,Object> addMap = new HashMap<String, Object>();
-            addMap.put("tkin_model",tn_models[i]);
-            addMap.put("tkin_brand",tn_brand[i]);
-            addMap.put("tkin_kind",tn_kinds[i]);
-            tnAddList.add(addMap);         
+            addMap.put("tkin_model",tk_models[i]);
+            addMap.put("tkin_brand",tk_brand[i]);
+            addMap.put("tkin_kind",tk_kinds[i]);
+            tkAddList.add(addMap);         
          }
          pMap.remove("tkin_model");
          pMap.remove("tkin_brand");
@@ -69,7 +69,7 @@ public class SortAndBind {
       
       /////// 4개의 정보들 하나의 Map에 담기 
       rMap.put("vtAddList", vtAddList);
-      rMap.put("tnAddList", tnAddList);
+      rMap.put("tkAddList", tkAddList);
       rMap.put("pkAddList", pkAddList);
       rMap.put("applyAdd", applyAdd);
       

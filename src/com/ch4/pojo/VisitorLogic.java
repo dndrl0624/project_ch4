@@ -21,7 +21,7 @@ public class VisitorLogic {
       Map<String, Object> addInfo = SortAndBind.visitApplySort(pMap);
       
       List<Map<String,Object>> vtAddList = (List<Map<String,Object>>) addInfo.get("vtAddList");
-      List<Map<String,Object>> tnAddList = (List<Map<String,Object>>) addInfo.get("tnAddList");
+      List<Map<String,Object>> tkAddList = (List<Map<String,Object>>) addInfo.get("tkAddList");
       List<Map<String,Object>> pkAddList = (List<Map<String,Object>>) addInfo.get("pkAddList");
       Map<String,Object> applyAdd = (Map<String,Object>) addInfo.get("applyAdd");
       vDao.visitApplyAdd(applyAdd);
@@ -36,14 +36,14 @@ public class VisitorLogic {
          Map<String, Object> vtMap = new HashMap<String, Object>();
          vtMap.put("vtAddList", vtAddList);
          vtMap.put("visit_no", visit_no);
-         Map<String, Object> tnMap = new HashMap<String, Object>();
-         tnMap.put("tnAddList", tnAddList);
-         tnMap.put("visit_no", visit_no);
+         Map<String, Object> tkMap = new HashMap<String, Object>();
+         tkMap.put("tkAddList", tkAddList);
+         tkMap.put("visit_no", visit_no);
          Map<String, Object> pkMap = new HashMap<String, Object>();
          pkMap.put("pkAddList", pkAddList);
          pkMap.put("visit_no", visit_no);
          
-         result = vDao.visitSubAdd(vtMap,tnMap,pkMap);
+         result = vDao.visitSubAdd(vtMap,tkMap,pkMap);
       }
       
       return result;
