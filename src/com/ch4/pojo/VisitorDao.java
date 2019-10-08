@@ -39,14 +39,14 @@ public class VisitorDao {
    }
    
    public int visitSubAdd(Map<String, Object> vtMap
-                        , Map<String, Object> tnMap
+                        , Map<String, Object> tkMap
                         , Map<String, Object> pkMap
                         ) 
    {
       int result = 0;
       
       int visitorNum = ((List<Map<String,Object>>)vtMap.get("vtAddList")).size();
-      int deviceNum = ((List<Map<String,Object>>)tnMap.get("tnAddList")).size();
+      int deviceNum = ((List<Map<String,Object>>)tkMap.get("tkAddList")).size();
       int parkNum = ((List<Map<String,Object>>)pkMap.get("pkAddList")).size();
       int rowNum = 0;
       logger.info("visitorNum : " + visitorNum);
@@ -56,7 +56,7 @@ public class VisitorDao {
       rowNum = sqlSession.insert("visitorAdd", vtMap);
       if(visitorNum==rowNum) {
          result = 1;
-         rowNum = sqlSession.insert("deviceAdd", tnMap);
+         rowNum = sqlSession.insert("deviceAdd", tkMap);
          if(deviceNum==rowNum) {
             result = 1;
             rowNum = sqlSession.insert("parkingAdd", pkMap);
@@ -137,12 +137,12 @@ public class VisitorDao {
       
       Map<String, Object> infoMap = sqlSession.selectOne("visitorApplySearch", pMap);
       List<Map<String, Object>> vtList = sqlSession.selectList("visitorSearch", pMap);
-      List<Map<String, Object>> tnList = sqlSession.selectList("deviceSeaech", pMap);
+      List<Map<String, Object>> tkList = sqlSession.selectList("deviceSeaech", pMap);
       List<Map<String, Object>> pkList = sqlSession.selectList("parkingSearch", pMap);
       
       rMap.put("infoMap", infoMap);
       rMap.put("vtList", vtList);
-      rMap.put("tnList", tnList);
+      rMap.put("tkList", tkList);
       rMap.put("pkList", pkList);
       
       return rMap;
