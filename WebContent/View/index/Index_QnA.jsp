@@ -41,9 +41,41 @@
 	    border-width: thick;
 	    margin-bottom: -10px;
 	}
+	#index_qna{
+		font-size: 60px;
+		text-shadow: 4px 2px 2px gray;
+		margin-top: 70px;
+		font-family: Spoqa Han Sans, Sans-serif;
+		font-weight: 800;
+	}
 	#qa_title{
 		background-color: #5c5c5c;
 	}
+	#fontO{
+		color:tomato;
+		font-family: fantasy;
+	}
+	#fontW {
+		color: white;
+		font-family: fantasy;
+	}
+	#boardQnA {
+		margin-top: 30px;
+	}
+	.well {
+		padding-left: 50px;
+		padding-right: 50px;
+	}
+	#f_question #q_email {
+		width: 100%;
+	}
+	#f_question #q_title, #q_writer, #q_content, #q_content{
+		width: 90%;
+	}
+	#btn_write {
+		margin-top: 20px;
+	}
+	
 </style>
 <script type="text/javascript">
 	function q_write(){
@@ -84,22 +116,22 @@
 		<div class="container_Banner_Content col-lg-offset-2 col-lg-2 col-lg-8" 
 			 style="color: white;">
 			<div class="row Content_title">
-				<h1 style="font-size:60px; text-shadow: 4px 2px 2px gray;  margin-top: 70px;">Q&A</h1>
+				<h1 id="index_qna">Q&A</h1>
 			</div>
-			<div class="row page_link"  style="padding-left: 5px;">
+			<div class="row page_link">
 				<a href="Index_Main.jsp">Home</a> → <a href="Index_QnA.jsp">Q&A</a>
 			</div>
 		</div>
 	</div> 
 </section>
 	<div class="well col-lg-offset-2 col-lg-8 col-lg-offset-2" id="qa_title" >
-		<h1><font color="tomato" style="font-family: fantasy;" >1:1문의</font><font color="white">게시판</font></h1>
-		<p><font color="white">서비스를 이용하시는 중 궁금한 사항 및 불편한 사항을 문의해주세요.<br>
+		<h1><font id="fontO">1:1문의</font><font id="fontW">게시판</font></h1>
+		<p><font id="fontW">서비스를 이용하시는 중 궁금한 사항 및 불편한 사항을 문의해주세요.<br>
 		      문의하신 내용의 처리 및 답변은 평일기준 24시간 이내 처리됩니다.</font></p>
 	</div>
 <!-- 카드 시작 -->
 <div class="container" >
-    <div class="col-lg-offset-1 col-lg-10 col-lg-offset-1" style="margin-top: 30px;">
+    <div class="col-lg-offset-1 col-lg-10 col-lg-offset-1" id="boardQnA">
     <!-- 메세지 입력 부분 -->
 	    <div class="row">
 		    <div class="well" align="center" style="text-align: center; ">
@@ -113,23 +145,23 @@
 						</div>
 						<div class="col-lg-10" align="left">
 							<input class="easyui-textbox" type="text" prompt="Enter your Title" 
-								 	id="q_title" name="q_title" style="width: 81%" ></input>
+								 	id="q_title" name="q_title"></input>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-lg-2" >
 							<label for="q_writer" >작성자</label>
 						</div>
-						<div class="col-lg-3" align="left">
+						<div class="col-lg-4" align="left">
 							<input class="easyui-textbox" placeholder="Enter your name"  
-								  id="q_writer" name="q_writer" style="width: 100%" ></input>	
+								  id="q_writer" name="q_writer" ></input>	
 						</div>
-						<div class="col-lg-2">
+						<div class="col-lg-1">
 							<label for="q_email" >이메일</label>
 						</div>
 						<div class="col-lg-4" align="left">
 							<input class="easyui-textbox" placeholder="Enter your email" 
-									  id="q_email" name="q_email" style="width: 77%"></input>							
+									  id="q_email" name="q_email"></input>							
 						</div>
 					</div>
 					<div class="row">
@@ -138,11 +170,10 @@
 						</div>
 						<div class="col-lg-10" align="left">
 							<textarea class="easyui-textbox" placeholder="문의사항을 입력해주세요." 
-							 		  id="q_content" name="q_content"
-							 		  style="height: 200px; width: 81%"></textarea>
+							 		  id="q_content" name="q_content" style="height: 200px;"></textarea>
 						</div>
 					</div> 
-			 		<div class="row" style="margin-top: 10px;">
+			 		<div class="row">
 			 			<button class="btn btn-success btn-m text-light" id="btn_write" name="btn_write"
 			 					onClick="q_write()" type="button">글쓰기
 			 			</button>

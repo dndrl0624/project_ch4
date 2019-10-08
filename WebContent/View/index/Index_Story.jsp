@@ -64,17 +64,24 @@
 	color: #222;
 	font-size: 45px;
 	font-family: Spoqa Han Sans, Sans-serif;
-	font-weight: 700;
+	font-weight: 900;
 	line-height: 1.2;
+	margin-bottom: 30px;
 }
 
+#about_title{
+	color: #008329;
+	
+}
 .title_p {
-	font-size: 15px;
-	margin-top: 20px;
-	line-height: 2.6;
+	font-size: 16px;
+	line-height: 2.0;
 	text-align: center;
 	font-family: Spoqa Han Sans, Sans-serif;
 	font-weight: 500;
+}
+#bg_gray{
+	background-color: #f9f9f9;
 }
 
 .phase {
@@ -164,10 +171,10 @@
 </nav>
 <div class="container-fluid" align="center" >
 
-	<div class="row"  style="background-color: #f9f9f9;">
+	<div class="row" id="bg_gray">
 		<div  class="aos-item aos-init aos-animate" data-aos="fade-up"
 		 data-aos-id="about_title" data-aos-id-string="CH4">
-			<h1 id="about_title" class="about" style="color: #008329">CH4</h1>
+			<h1 id="about_title" class="about">CH4</h1>
 			<div class="col-lg-offset-3 col-lg-6 col-lg-offset-3">
 				<p class="title_p">
 					클라우드 웹서비스 기반
@@ -195,15 +202,15 @@
 			<div class="row title">
 				<h2 class="about" id="about_date">개발 일정표</h2>
 			</div>
-			<div class="col-lg-offset-3 col-lg-6 col-lg-offset-3 Schedule">
-				<img src="../../Style/images/banner/developdate.png" style="margin-top: 20px;">
+			<div class="col-lg-offset-2 col-lg-8 col-lg-offset-2 Schedule">
+				<img src="../../Style/images/banner/developdate.png">
 			</div>
 		</div>
 	</div>
 	<div class="row" align="center">
 		<div class="aos-item aos-init aos-animate" data-aos="fade-in"
 			 data-aos-id="about_stage" data-aos-id-string="개발 단계">
-			 <div style="background-color: #f9f9f9;">
+			 <div id="bg_gray">
 			 	<div class="row title">
 					<h2 class="about" id="about_stage">개발 단계</h2>
 				</div>

@@ -30,48 +30,100 @@
 
 #main1 {
 	border-bottom: ridge;
-	border-top: ridge;
 }
-	#fontB{
-		color: #0b4f96;
-		font-weight:bold;
-		font-size: 16px;
-	
-	}
-	#fontG{
-		 color: #5a5a5a;
-		 font-weight:bold;
-	}
-	h3 {
-		padding-left: 3%;
-		border-left: solid 7px;
-		color: black;
-	}
-	.panel.panel-default{
-		margin-bottom: 0px;
-	}
+
+#title {
+	font-family: Spoqa Han Sans, Sans-serif;
+	font-size: 45px;
+	font-weight: 700;
+}
+
+#title_a {
+	font-family: Spoqa Han Sans, Sans-serif;
+	font-weight: 400;
+	font-size: 15px;
+	color: #b4b4b4;
+}
+
+#fontB {
+	color: #0b4f96;
+	font-weight: 700;
+	font-size: 17px;
+	font-family: Spoqa Han Sans, Sans-serif;
+}
+
+#fontG {
+	font-family: Spoqa Han Sans, Sans-serif;
+	color: #5a5a5a;
+	font-weight: bold;
+}
+
+.col-lg-4 {
+	padding-bottom: 10px;
+	margin-bottom: 30px;
+}
+
+p {
+	margin-top: 10px;
+}
+
+h3 {
+	padding-left: 3%;
+	border-left: solid 7px;
+	color: black;
+}
+
+.panel.panel-default {
+	margin-bottom: 0px;
+}
+
+#noticeTop {
+	border-top: ridge;
+	border-top-color: #0054a6;
+}
+
+#enquirycall {
+	border: 1px;
+	border-color: white;
+	background-color: #fafafa;
+}
+
+#service {
+	height: 180px;
+	padding-top: 10px;
+	border-right-color: white-space;
+}
+
+#fontT {
+	font-family: Spoqa Han Sans, Sans-serif;
+	font-weight: 900;
+}
+#requiryimg {
+	height: 150px;
+	padding-top: 10px;
+}
 </style> 
 </head>
 <body>
-
+<%@ include file="/View/CommonForm/Top.jsp"%>
 <!-- 고객지원 내용 -->
 <div class="col-lg-offset-1 col-lg-10 col-lg-offset-1">
 	<div class="row" align="center">
 		<div class="col-lg-offset-1 col-lg-10 col-lg-offset-1">
 			<div id="main1">
 				<div class="row">
-					<h1 style="font-weight:bold;">고객센터</h1>
+					<h1 id="title">고객센터</h1>
 				</div>
 				<div class="row">
-					<h5 style="color: gray;">CH4 서비스를 이용하시면서 궁금한 점이 있으신가요? 원하시는 상담방법을 이용해 문의해주세요.</h5>
+					<h5 id="title_a">CH4 서비스를 이용하시면서 궁금한 점이 있으신가요? 원하시는 상담방법을 이용해 문의해주세요.</h5>
 				</div>
 				<div class="row">
 					<img alt="" src="../../Style/images/logo/line.png">
 				</div>
 				<div class="row">
-					<div class="col-lg-4" style="padding-bottom: 10px; margin-bottom: 30px;">
+					<div class="col-lg-4">
 						<div class="col-lg-7">
-							<p align="center" style="margin-top: 10px;">
+							<p align="center">
 								<font id="fontB">자주하는 질문</font>
 								<font id="fontG">에서 먼저 확인해주세요.<font>
 							</p>
@@ -80,9 +132,9 @@
 							<img alt="" src="../../Style/images/logo/question.png">
 						</div>
 					</div>
-					<div class="col-lg-4" style="padding-bottom: 10px; margin-bottom: 30px;">
+					<div class="col-lg-4">
 						<div class="col-lg-7">
-							<p align="center" style="margin-top: 10px;">
+							<p align="center">
 								<font id="fontB">서비스 문의하기</font>
 								<font id="fontG">를 이용해주세요.<font>
 							</p>
@@ -91,9 +143,9 @@
 							<img alt="" src="../../Style/images/logo/Inquiry.png">
 						</div>
 					</div>
-					<div class="col-lg-4" style="padding-bottom: 10px; margin-bottom: 30px;">
+					<div class="col-lg-4">
 						<div class="col-lg-7">
-							<p align="center" style="margin-top: 10px;">
+							<p align="center">
 								<font id="fontB">고객센터 상담원</font>
 								<font id="fontG">에게 전화문의를 해주세요.<font>
 							</p>
@@ -107,7 +159,7 @@
 			<div class="row" align="left" id="main2">
 				<h3>자주하는 질문 TOP5</h3>
 			</div>
-			<div class="row" id="top5"  style=" border-top: ridge; border-top-color: #0054a6;">
+			<div class="row" id="noticeTop">
 			<!-- top1 -->
 			<div class="panel panel-default">
 				<div class="panel-heading" role="tab" id="topOne">
@@ -244,25 +296,24 @@
 			</div>
 			<!-- 문의 전화 -->
 			<div class="row" style="margin-top: 10px;">
-				<div class="col-lg-6" style=" border:1px;border-color:white; background-color:#fafafa;">
-					<div class="col-lg-7" align="left" 
-						style="height: 160px; padding-top: 10px; border-right-color: white-space: ;">
-						<h4><font style="font-weight: bold;">서비스 문의하기</font></h4>
+				<div class="col-lg-6" id="enquirycall">
+					<div class="col-lg-7" align="left" id="service">
+						<h4 id="fontT">서비스 문의하기</h4>
 						<p><font id="fontG">서비스 이용과 관련한 문의사항을 등록해주세요. 최대한 빨리 답변해드릴 수 있도록 노력하겠습니다.</font></p>
 					</div>
-					<div class="col-lg-5" style="height: 150px; padding-top: 10px;">
+					<div class="col-lg-5" id="requiryimg">
 						<img alt="" src="../../Style/images/logo/sendMail.png">
 					</div>
 				</div>
-				<div class="col-lg-6" style=" border:1px;border-color:white; background-color:#fafafa;">
+				<div class="col-lg-6" id="enquirycall">
 					<div class="col-lg-7" align="left" 
 						style="height: 160px; padding-top: 10px;">
-						<h4><font style="font-weight: bold;">고객센터 상담 안내</font></h4>
-						<h2 style="margin-top: 0px; margin-bottom: 3px;"><font style="font-weight: bold;">1588-1688</font></h2>
+						<h4><font id="fontT">고객센터 상담 안내</font></h4>
+						<h2 style="margin-top: 0px; margin-bottom: 3px;"><font id="fontT">1588-1688</font></h2>
 						<p><font id="fontG">평일 > 09:00~12:00,13:00~18:00</font></p>
 						<p><font id="fontG">업무외 시간에는 서비스 문의하기를 이용해주세요.</font></p>
 					</div>
-					<div class="col-lg-5" style="height: 150px; padding-top: 10px;">
+					<div class="col-lg-5" id="requiryimg">
 						<img alt="" src="../../Style/images/logo/calling.png">
 					</div>
 				</div>
