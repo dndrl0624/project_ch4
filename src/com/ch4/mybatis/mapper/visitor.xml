@@ -4,11 +4,14 @@
    <resultMap type="hashmap" id="vMap"/>
    <!-- QR코드 조회(visitor) -->
    <select id="visitorQRcode" parameterType="map" resultType="map">
-      select confm_qrcode
-         from cmg_confm
+      select cc.confm_no, confm_desti, confm_visit_date
+      		,confm_date, confm_qrcode, com_name
+         from cmg_confm cc, visit_confm vc, visit_apply va, company co
          where confm_name = #{confm_name}
          and confm_hp = #{confm_hp}
-         and confm_no = #{confm_no}
+         and cc.confm_no = vc.confm_no
+         and vc.visit_no = va.visit_no
+         and va.com_no = co.com_no
    </select>
    <!-- 신청자 방문이력 조회 -->
    <update id="preVisitorSearch" parameterType="map" statementType="CALLABLE">

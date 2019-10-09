@@ -2,19 +2,26 @@
 <!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ch4.mybatis.mapper.CompanyMapper">
 	<!-- 로그인 프로시저-->
-	<select id="companyLogin" parameterType="map" statementType="CALLABLE">
+	<update id="companyLogin" parameterType="map" statementType="CALLABLE">
 		{call proc_companyLogin(#{cmng_id,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
 								,#{cmng_pw,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+								,#{cmng_name,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+								,#{com_no,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+								,#{com_name,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+								,#{cmng_grade,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+								,#{dept_name,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
 								,#{msg,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+								,#{result,mode=OUT, jdbcType=INTEGER, javaType=int}
 								)}
-	</select>
+	</update>
 	
 	<!-- 회원가입 아이디 중복검사 프로시저  -->
-	<insert id="isExistID" parameterType="map" statementType="CALLABLE">
+	<select id="isExistID" parameterType="map" statementType="CALLABLE">
 		{call proc_isExistID(#{cmng_id,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
 							,#{msg,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+							,#{result,mode=OUT, jdbcType=INTEGER, javaType=int}
 							)}	
-	</insert>
+	</select>
 	
 	<!-- 회원가입  -->
 	<insert id="companyJoin" parameterType="map">

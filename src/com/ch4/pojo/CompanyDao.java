@@ -71,7 +71,9 @@ public class CompanyDao {
 
 	public int companyLogin(Map<String, Object> pMap) {
 		int result = 0;
-		result = sqlSession.selectOne("companyLogin", pMap);
+		logger.info(pMap);
+		sqlSession.update("companyLogin", pMap);
+		result = (int)pMap.get("result");
 		return result;
 	}
 

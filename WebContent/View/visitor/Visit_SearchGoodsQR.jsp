@@ -80,26 +80,19 @@
 <body>
 <%@ include file="/View/CommonForm/Top.jsp"%>
 <script type="text/javascript">
-	//부트스트랩 테이블 default 세팅
-	$.fn.bootstrapTable.defaults.locales = ["ko-KR"];
-	$.fn.bootstrapTable.defaults.singleSelect = true;
-	$.fn.bootstrapTable.defaults.pagination = true;
-	$.fn.bootstrapTable.defaults.pageList = [10,20,30,50];
-	$.fn.bootstrapTable.columnDefaults.halign = 'center';
-	$.fn.bootstrapTable.columnDefaults.valign = 'middle';
-	$.fn.bootstrapTable.columnDefaults.align = 'center';
 	$(document).ready(function(){
 		$("#tb_search").bootstrapTable({
 			columns:[
-			    {field:'confm_no',title:'물품번호',formatter: operateFormatterNo},
-			    {field:'com_name',title:'반입지'},
-			    {field:'aplg_trans_date',title:'반입일자'},
-			    {field:'confm_name',title:'물품명'},
-			    {field:'confm_type',title:'물품종류'},
-			    {field:'confm_quan',title:'EA'},
+			    {field:'CONFM_NO',title:'물품번호',formatter: operateFormatterNo},
+			    {field:'COM_NAME',title:'반입지'},
+			    {field:'CONFM_DESTI',title:'반입장소'},
+			    {field:'CONFM_TRANS_DATE',title:'반입일자'},
+			    {field:'CONFM_NAME',title:'물품명'},
+			    {field:'CONFM_TYPE',title:'물품종류'},
+			    {field:'CONFM_QUAN',title:'EA'},
 			    {field:'show_qr',title:'QR코드',events: window.operateEvents,
 			          formatter: operateFormatterQR,width:150},
-			    {field:'confm_qrcode',title:'QRcode',visible:false},
+			    {field:'CONFM_QRCODE',title:'QRcode',visible:false},
 			    {field:'qrPath',title:'QRpath',visible:false}
 			]
 		});
@@ -139,35 +132,27 @@
 		}
 	}
 	function searchQR(){
-		//테스트용
+		if(!($("#input_search_num").textbox('getValue'))){
+			alert("신청번호를 입력해 주세요.");
+			$("#input_search_num").textbox('textbox').focus();
+			return;
+		}
 		$.ajax({
-			url: "../../json/testLog9.json",
+			type: "POST",
+			url: "/goods/qrCodeList.ch4",
+			data: $("#form_search").serialize(),
 			dataType: "json",
 			success: function(result){
+				if(!result){
+					alert("조회결과가 없습니다.");
+					return;
+				}
 				$("#tb_search").bootstrapTable('load',result);
+			},
+			error: function(){
+				alert("error");
 			}
 		});
-// 		if(!($("#input_search_num").textbox('getValue'))){
-// 			alert("신청번호를 입력해 주세요.");
-// 			$("#input_search_num").textbox('textbox').focus();
-// 			return;
-// 		}
-// 		$.ajax({
-// 			type: "POST",
-// 			url: "/goods/qrCodeList.ch4",
-// 			data: $("#form_search").serialize(),
-// 			dataType: "json",
-// 			success: function(result){
-// 				if(!result){
-// 					alert("조회결과가 없습니다.");
-// 					return;
-// 				}
-// 				$("#tb_search").bootstrapTable('load',result);
-// 			},
-// 			error: function(){
-// 				alert("error");
-// 			}
-// 		});
 	}
 </script>
 <div class="container">

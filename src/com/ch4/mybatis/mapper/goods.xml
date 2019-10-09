@@ -5,11 +5,12 @@
    </resultMap>
    <!-- QR코드 조회(goods) -->
    <select id="visitorQRcode" parameterType="map" resultType="map">
-      select confm_qrcode
-        from goods_confm
+      select gc.confm_no, confm_desti, confm_trans_date, confm_name
+      		,confm_type, confm_quan, confm_qrcode, com_name
+        from goods_confm gc, goods_apply ga, company co
        where confm_no = #{confm_no}
-         and confm_name = #{confm_name}
-         and aplg_no = {aplg_no}
+       	 and gc.aplg_no = ga.aplg_no
+       	 and ga.com_no = co.com_no
    </select>
    <!-- 신청자 반입이력 조회 -->
    <update id="preGoodsSearch" parameterType="map" statementType="CALLABLE">

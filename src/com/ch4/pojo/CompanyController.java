@@ -29,7 +29,7 @@ public class CompanyController implements Controller{
 		ModelAndView mav = new ModelAndView(req, res);
 		Map<String,Object> pMap = new HashMap<>();
 		HashMapBinder hmb = new HashMapBinder(req);
-		hmb.multiBind(pMap);
+		hmb.bind(pMap);
 		if(requestName.equals("mngPermit")) {
 			int result = 0;
 			logger.info("pMap : " + pMap);

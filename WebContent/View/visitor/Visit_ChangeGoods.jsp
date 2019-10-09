@@ -62,6 +62,7 @@
 <style>
 	body {
 		position: relative;
+		padding-bottom:100px;
 	}
 	ul.nav-pills {
 		padding-top: 70px;

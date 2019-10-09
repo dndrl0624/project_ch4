@@ -86,13 +86,14 @@
 	$(document).ready(function(){
 		$("#tb_search").bootstrapTable({
 			columns:[
-			    {field:'confm_no',title:'방문번호',formatter: operateFormatterNo},
-			    {field:'com_name',title:'방문지'},
-			    {field:'visit_date',title:'방문일자'},
-			    {field:'confm_date',title:'승인일자'},
+			    {field:'CONFM_NO',title:'방문번호',formatter: operateFormatterNo},
+			    {field:'COM_NAME',title:'방문지'},
+			    {field:'CONFM_DESTI',title:'방문장소'},
+			    {field:'CONFM_VISIT_DATE',title:'방문일자'},
+			    {field:'CONFM_DATE',title:'승인일자'},
 			    {field:'show_qr',title:'QR코드',events: window.operateEvents,
 			          formatter: operateFormatterQR,width:150},
-			    {field:'confm_qrcode',title:'QRcode',visible:false},
+			    {field:'CONFM_QRCODE',title:'QRcode',visible:false},
 			    {field:'qrPath',title:'QRpath',visible:false}
 			]
 		});
@@ -100,7 +101,7 @@
 	function searchApply(confm_no){
 		$("#confm_no").attr('value',confm_no);
 		$("#form_search_info").attr('action','/visitor/searchVisitor.ch4');
-//		$("#form_search_info").submit();
+		$("#form_search_info").submit();
 //		alert('방문번호로 신청 상세조회');
 	}
 	function operateFormatterNo(value, row, index) {
@@ -132,54 +133,46 @@
 		}
 	}
 	function searchQR(){
-		//테스트용
+		if(!($("#input_search_name").textbox('getValue'))){
+			alert("방문자 성명을 입력해 주세요.");
+			$("#input_search_name").textbox('textbox').focus();
+			return;
+		}
+		if(!($("#input_search_hp1").textbox('getValue'))){
+			alert("방문자 연락처를 입력해 주세요.");
+			$("#input_search_hp1").textbox('textbox').focus();
+			return;
+		}
+		if(!($("#input_search_hp2").textbox('getValue'))){
+			alert("방문자 연락처를 입력해 주세요.");
+			$("#input_search_hp2").textbox('textbox').focus();
+			return;
+		}
+		if(!($("#input_search_hp3").textbox('getValue'))){
+			alert("방문자 연락처를 입력해 주세요.");
+			$("#input_search_hp3").textbox('textbox').focus();
+			return;
+		}
+		var search_hp = $("#input_search_hp1").textbox('getValue') + "-"
+						+ $("#input_search_hp2").textbox('getValue') + "-"
+						+ $("#input_search_hp3").textbox('getValue');
+		$("#input_search_hp").attr("value",search_hp);
 		$.ajax({
-			url: "../../json/testLog3.json",
+			type: "POST",
+			url: "/visitor/qrCodeList.ch4",
+			data: $("#form_search").serialize(),
 			dataType: "json",
 			success: function(result){
+				if(!result){
+					alert("조회결과가 없습니다.");
+					return;
+				}
 				$("#tb_search").bootstrapTable('load',result);
+			},
+			error: function(){
+				alert("error");
 			}
 		});
-// 		if(!($("#input_search_name").textbox('getValue'))){
-// 			alert("방문자 성명을 입력해 주세요.");
-// 			$("#input_search_name").textbox('textbox').focus();
-// 			return;
-// 		}
-// 		if(!($("#input_search_hp1").textbox('getValue'))){
-// 			alert("방문자 연락처를 입력해 주세요.");
-// 			$("#input_search_hp1").textbox('textbox').focus();
-// 			return;
-// 		}
-// 		if(!($("#input_search_hp2").textbox('getValue'))){
-// 			alert("방문자 연락처를 입력해 주세요.");
-// 			$("#input_search_hp2").textbox('textbox').focus();
-// 			return;
-// 		}
-// 		if(!($("#input_search_hp3").textbox('getValue'))){
-// 			alert("방문자 연락처를 입력해 주세요.");
-// 			$("#input_search_hp3").textbox('textbox').focus();
-// 			return;
-// 		}
-// 		var search_hp = $("#input_search_hp1").textbox('getValue') + "-"
-// 						+ $("#input_search_hp2").textbox('getValue') + "-"
-// 						+ $("#input_search_hp3").textbox('getValue');
-// 		$("#input_search_hp").attr("value",search_hp);
-// 		$.ajax({
-// 			type: "POST",
-// 			url: "/visitor/qrCodeList.ch4",
-// 			data: $("#form_search").serialize(),
-// 			dataType: "json",
-// 			success: function(result){
-// 				if(!result){
-// 					alert("조회결과가 없습니다.");
-// 					return;
-// 				}
-// 				$("#tb_search").bootstrapTable('load',result);
-// 			},
-// 			error: function(){
-// 				alert("error");
-// 			}
-// 		});
 	}
 </script>
 <div class="container">
