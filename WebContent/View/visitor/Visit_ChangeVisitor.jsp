@@ -708,6 +708,7 @@
 	    <!------------------------------------- 신청 폼 시작 -------------------------------------->
 	    <form id="form_update" action="/visitor/update.ch4" method="POST">
 	    	<input id="com_no" type="hidden" name="com_no" value="<%=com_no %>">
+	    	<input id="visit_no" type="hidden" name="visit_no" value="<%=visit_no %>">
 	    	<input id="visit_tkin_encc" type="hidden" name="visit_tkin_encc" value="<%=visit_tkin_encc %>">
 	    	<input id="visit_vhcle_encc" type="hidden" name="visit_vhcle_encc" value="<%=visit_vhcle_encc %>">
 		    <div id="section1" class="panel panel-info">    

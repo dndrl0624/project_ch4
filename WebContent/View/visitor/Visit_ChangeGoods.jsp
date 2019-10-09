@@ -336,6 +336,7 @@
 			<!------------------------------------- 신청 폼 시작 -------------------------------------->
 	    	<form id="form_update" action="/goods/update.ch4" method="POST">
 		    	<input id="com_no" type="hidden" name="com_no" value="<%=com_no %>">
+	    		<input id="aplg_no" type="hidden" name="aplg_no" value="<%=aplg_no %>">
 				<!-- 반입정보  -->
 				<div id="section1" class="panel panel-info">    
 				    <div class="panel-heading">기본 반입정보</div>
