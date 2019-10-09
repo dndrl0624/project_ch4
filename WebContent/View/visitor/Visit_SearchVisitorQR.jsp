@@ -8,7 +8,6 @@
 <%@ include file="../CommonForm/TapLogo.jsp"%>
 <!-- Link Import --> 
 <%@ include file="/Style/common/HeadUI.jsp"%> 
-<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <title>QR조회 - CH4 방문자 관리 시스템</title>
 <style>
 	h2#title {
@@ -84,15 +83,6 @@
 <body>
 <%@ include file="/View/CommonForm/Top.jsp"%>
 <script type="text/javascript">
-	//부트스트랩 테이블 default 세팅
-	$.fn.bootstrapTable.defaults.locales = ["ko-KR"];
-	$.fn.bootstrapTable.defaults.singleSelect = true;
-	$.fn.bootstrapTable.defaults.pagination = true;
-	$.fn.bootstrapTable.defaults.pageList = [10,20,30,50];
-	$.fn.bootstrapTable.columnDefaults.halign = 'center';
-	$.fn.bootstrapTable.columnDefaults.valign = 'middle';
-	$.fn.bootstrapTable.columnDefaults.align = 'center';
-	Kakao.init('f4f3ab8a29c343aa2fd1474eb91c9bbf');
 	$(document).ready(function(){
 		$("#tb_search").bootstrapTable({
 			columns:[
@@ -139,20 +129,6 @@
 			$("#md_qr_body").empty();
 			$("#md_qr_body").append(QR);
 			$("#md_QR").modal('show');
-		},
-		'click .btn.message': function(e, value, row, index) {
-		    window.open('http://api.coolsms.co.kr/sendmsg?user=dndrl0624&password=gofl5047!@&to=01056447244&from=01056447244&text=HELLO');
-// 			Kakao.Link.sendDefault({
-// 		        objectType: 'feed',
-// 		        content: {
-// 			        title: 'CH4 방문 QR',
-// 			        imageUrl: 'http://localhost:8080/project_ch4_pojo/Style/images/crud/QR.png',
-// 			        link: {
-// 				        mobileWebUrl: 'http://localhost:8080/project_ch4_pojo/View/visitor/Visit_SearchVisitorQR.jsp',
-// 				        webUrl: 'http://localhost:8080/project_ch4_pojo/View/visitor/Visit_SearchVisitorQR.jsp'
-// 			        }
-// 		        }
-// 		    });
 		}
 	}
 	function searchQR(){

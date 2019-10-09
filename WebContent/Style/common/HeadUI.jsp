@@ -7,12 +7,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script src="/Style/js/jquery.easyui.min.js"></script>
-<!-- Custom styles for this template -->
-<!-- Project Common Javascript -->
-<script src="/Style/js/ch4commons.js"></script>
-<!-- Project Common CSS -->
-<link rel="stylesheet" type="text/css" href="/Style/css/ch4commons.css">
-<!-- ------------------------- -->
 
 <!-- i Tag Font Image -->
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -21,3 +15,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.15.4/bootstrap-table.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.15.4/extensions/toolbar/bootstrap-table-toolbar.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.15.4/locale/bootstrap-table-ko-KR.min.js"></script>
+<!-- Custom styles for this template -->
+<!-- Project Common Javascript -->
+<script src="/Style/js/ch4commons.js"></script>
+<!-- Project Common CSS -->
+<link rel="stylesheet" type="text/css" href="/Style/css/ch4commons.css">
+<!-- ------------------------- -->

@@ -234,6 +234,9 @@
 				dataType: 'json',
 				url: '/goods/preGoodsListDetail.ch4',
 				success: function(result){
+					//기존 추가 정보 제거
+					$("#tb_goods tbody").empty();
+					gIndex=1;
 					//정보 걸러내기
 					var gmList = result.gmList;
 					//받은정보 뿌리기

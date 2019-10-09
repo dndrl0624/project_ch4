@@ -254,16 +254,16 @@
 $(document).ready(function(){
 	//방문지 초기화
 	$("#combo_company").combobox({
-		valueField: 'com_no',
-		textField: 'com_name',
+		valueField: 'COM_NO',
+		textField: 'COM_NAME',
 		url: "/visitor/companyList.ch4",
 		onChange:function(newValue){
 			//alert("방문지: "+$("#combo_company").combobox('getValue'));
 			var com_name = $(this).textbox('getText');
 			$("#com_name").attr("value",com_name);
 			$("#combo_desti").combobox({
-				valueField: 'dept_name',
-				textField: 'dept_name',
+				valueField: 'DEPT_NAME',
+				textField: 'DEPT_NAME',
 				url: "/visitor/deptList.ch4?com_no="+newValue
 			});
 		}

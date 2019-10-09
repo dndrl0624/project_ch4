@@ -270,6 +270,13 @@
             dataType: 'json',
             url: '/visitor/preVisitListDetail.ch4',           
             success: function(result){
+               //기존 추가 정보 제거
+               $("#tb_visitor tbody").empty();
+               $("#tb_device tbody").empty();
+               $("#tb_parking tbody").empty();
+               vIndex=1;
+               dIndex=1;
+               pIndex=1;
                //정보 걸러내기
                var vtList = result.vtList;
                var tkList = result.tkList;

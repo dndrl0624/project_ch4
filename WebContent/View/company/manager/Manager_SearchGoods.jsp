@@ -31,19 +31,18 @@ $(document).ready(function(){
 
 /* 테이블 데이터 */
 	$("#tb_searchGood").bootstrapTable({
-		toolbar:'#toolbar'
-		,toolbarAlign : 'right'
-		,pagination:'true'
-		,paginationPreText:"Previous"
-		,paginationNextText:"Next"
+		columns:[
+			{field:"APLG_NO",title:'신청번호'}
+			,{field:"APLG_DATE",title:'신청일'}
+			,{field:"APLG_NAME",title:'신청자명'}
+			,{field:"APLG_HP",title:'연락처'}
+			,{field:"APLG_DESTI",title:'목적지'}
+			,{field:"APLG_PERMIT_ST",title:'결재상태'}
+		]
 		,url: "/project_ch4_pojo/json/searchGoodsJson.json"
-	    ,onLoadError: function(status,jqXHR){
-	    	alert("error");
-	    }
-	    ,paginationPreText:"Previous"
-	    ,paginationNextText:"Next"
-	    ,pageSize:10//기본 페이지 사이즈
-	    ,pageList:[10, 15, 20, 30] //칸수
+		,onDbClickRow : function(row, $element, field) {
+			//디테일 페이지 이동
+		}
 	});
 
 //방문현황 콤보
@@ -105,81 +104,63 @@ function btn_search(){
 }
 </script>
 	<%@ include file="../../CommonForm/Top.jsp"%>
-
 	<!-- Content -->
 	<div class="mainContent">
 		<%@ include file="../../CommonForm/ManagerSideBar.jsp"%>
 		<div style="padding-left: 200px">
-			<div class="col-lg-12">
-
-				<div style="font-size: 35px; width: 78%; float: left;">
+			<div class="col-lg-offset-1 col-lg-10"
+				style="margin-top: 20px; margin-bottom: 20px;">
+				<div
+					style="margin: 30px 20px 10px 0px; font-size: 35px; width: 50%; float: left;">
 					<h1>반입 신청 관리</h1>
 				</div>
-				<!-- 검색 조건 설정 -->
-				<div class="col-lg-12">
+			</div>
+			<!-- 검색 조건 설정 -->
+			<div class="col-lg-offset-1 col-lg-10">
+				<div class="row">
 					<form id="f_search">
-						<div class='col-sm-2'>
+						<div class='col-lg-2' style="padding: 5px;">
 							<select class="easyui-combobox" id="SearchType" name='SearchType'
-								label="검색방법" labelPosition="left" style="width: 180px;">
+								 style="width: 90%;">
 								<option value="APLG_NO" selected>신청번호</option>
 								<option value="APLG_NAME">신청자</option>
 								<option value="APLG_DESTI">목적지
 								<option>
 							</select>
 						</div>
-						<div class='col-sm-2'>
+						<div class='col-lg-2' style="padding: 5px;">
 							<!-- 검색창 : 콤보박스에 의한 분기 -->
 							<!-- 텍스트 박스에 대해 name값 변경 : 처음 값은 방문자명 // onChange 이벤트로 Name속성을 바꾸어 주기 -->
 							<input class="easyui-textbox" id="searchText" name="VISITOR_NAME"
-								style="width: 150px;"> <a class="easyui-linkbutton"
+								style="width: 80%;"> <a class="easyui-linkbutton"
 								type="button" data-options="iconCls:'icon-search'"
 								onclick="btn_search()"></a>
 						</div>
-						<div class='col-sm-2'>
+						<div class='col-lg-2' style="padding: 5px;">
 							<select class="easyui-combobox" id="state" name="APLG_PERMIT_ST"
-								label="결재상태" labelPosition="left" style="width: 180px;">
+								style="width: 100%;">
 								<option value="" selected>전체</option>
-								<option value="결제중" selected>결제중</option>
+								<option value="결재중">결재중</option>
 								<option value="승인">승인</option>
 								<option value="반려">반려</option>
 								<option value="취소">취소</option>
 							</select>
 						</div>
 						<!-- 날짜 검색 -->
-						<div class='col-sm-4' style="padding: 0px;">
-							<div class='col-sm-6'>
-								<span style="font-weight: bold;">신청일</span> <input
-									class="easyui-datebox" id="startdate" name="aplg_date1"
-									style="width: 120px;">
-							</div>
-							<div class='col-sm-1'>
-								<h4 align="center">
-									<b>~</b>
-								</h4>
-							</div>
-							<div class='col-sm-4' style="padding: 0px;">
-								<input class="easyui-datebox" id=closedate name="aplg_date2"
-									style="width: 120px;">
+						<div class='col-lg-4' style="padding: 5px; padding-left:15px;">
+							<div class="row">
+								<span style="font-weight: bold;">신청일</span>
+								<input class="easyui-datebox" id="startdate" name="aplg_date1" style="width: 40%;">
+								<b>~</b>
+								<input class="easyui-datebox" id=closedate name="aplg_date2" style="width: 40%;">
 							</div>
 						</div>
 					</form>
-
-					<!-- 부트 테이블 : search_ResultVisitor 참조-->
-					<div style="width: 86%;">
-						<table class="table table-bordered table-hover" id="tb_searchGood">
-							<thead>
-								<tr>
-									<th data-field="APLG_NO">신청번호</th>
-									<th data-field="GMNG_CONFM">승인여부</th>
-									<th data-field="APLG_NAME">신청자명</th>
-									<th data-field="APLG_HP">연락처</th>
-									<th data-field="APLG_DATE">신청일</th>
-									<th data-field="APLG_DESTI">목적지</th>
-								</tr>
-							</thead>
-						</table>
-					</div>
-
+				</div>
+				<!-- 부트 테이블 : search_ResultVisitor 참조-->
+				<div class="row" style="width: 86%; margin-top:20px;">
+					<table class="table table-bordered table-hover" id="tb_searchGood">
+					</table>
 				</div>
 			</div>
 		</div>

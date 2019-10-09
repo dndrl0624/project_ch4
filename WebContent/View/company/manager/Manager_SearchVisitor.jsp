@@ -35,32 +35,19 @@ $(document).ready(function(){
 	$("#tb_sv").bootstrapTable({
 		 	columns:[
 		         {field:'VISIT_NO',title:'신청번호'}
-		         ,{field:'VISIT_PERMIT_ST',title:'승인상태'}
+		         ,{field:'VISIT_DAYE',title:'신청일'}
 		         ,{field:'VISIT_APPLY_NAME',title:'신청자명'}
-		         ,{field:'VISIT_APPLY_HP',title:'신청자연락처'}
-		         ,{field:'VISIT_DAYE',title:'신청일자'}
+		         ,{field:'VISIT_APPLY_HP',title:'연락처'}
 		         ,{field:'VISIT_DESTI',title:'목적지'}/* 현재위치 : 내부 외부 사내 .. */
+		         ,{field:'VISIT_PERMIT_ST',title:'결재상태'}
 		   	 ]
 			,url:'/project_ch4_pojo/json/searchVisitorJson.json'// 실제 사용할 URL 변경하기  : company/applyVisitList.ch4
-			,dataType: "json"
-			,success: function(result){
-				$("#tb_sv").bootstrapTable('load',result);
-			}
-			,onLoadError: function(status,jqXHR){
-				alert("error");
-			}
-			,pagination:'true'//페이지 네이션
-			,paginationPreText:"Previous"
-		    ,paginationNextText:"Next"
-		    ,pageSize:10//기본 페이지 사이즈
-		    ,pageList:[10, 15, 20, 30] //칸수
 			,onDblClickRow : function(row, $element, field) {
 				//테이블에서 일련번호 칸에 들어간 정보 가져오기
 				var choo = $element.find('td').eq(0).text();
 				//alert(choo);
 				//디테일 페이지로 이동
-				 location.href="/project_ch4_pojo/View/company/manager/Manger_DetailVisitor.jsp?VISIT_NO="+choo
-				 // 실제 사용할 URL 변경하기  :
+				// 실제 사용할 URL 변경하기  :
 		}
 	});
 //승인상태 변경 검색 이벤트
@@ -111,19 +98,6 @@ $(document).ready(function(){
 
 /* 검색버튼 기능 */
 function btn_search(){
-/* 전화번호 형식 맞춰주기 */
-//alert($("#SearchType").combobox('getValue'));
-// 	if($("#SearchType").combobox('getValue')=="VISITOR_HP"||$("#SearchType").combobox('getValue')=="VISIT_APPLY_HP"){
-// 		var hp = $("#searchText").textbox('getValue');
-// 		if(-1==hp.indexOf("-")){
-// 			var telA = hp.substring(0,3);
-// 			var telB = hp.substring(4,8);
-// 			var telC = hp.substring(8);
-// 			//alert(telA);
-// 			hp =telA+"-"+telB+"-"+telC;
-// 			$("#searchText").textbox('setValue',hp);
-// 		}
-// 	}
 	/* 검색 조건을 통해 재출력 */
 	$.ajax({
 		type:'post'
@@ -138,46 +112,42 @@ function btn_search(){
 
 </script>
 	<%@ include file="../../CommonForm/Top.jsp"%>
-
 	<!-- Content -->
 	<div class="mainContent">
 		<%@ include file="../../CommonForm/ManagerSideBar.jsp"%>
 		<div style="padding-left: 200px">
-			<div class="col-lg-12">
-
-				<div style="font-size: 35px; width: 78%; float: left;">
-					<h1>
-						방문 신청 관리
-					</h1>
+			<div class="col-lg-offset-1 col-lg-10"
+				style="margin-top: 20px; margin-bottom: 20px;">
+				<div
+					style="margin: 30px 20px 10px 0px; font-size: 35px; width: 50%; float: left;">
+					<h1>방문 신청 관리</h1>
 				</div>
-				<!-- 검색 툴바 -->
-				<div class="col-lg-12">
+			</div>
+			<!-- 검색 툴바 -->
+			<div class="col-lg-offset-1 col-lg-10">
+				<div class="row">
 					<form id="f_search">
-
 						<!-- 검색 타입 설정 -->
-						<div class='col-sm-2' style="margin-left: 20px;">
+						<div class='col-lg-2' style="padding: 5px;">
 							<select class="easyui-combobox" id="SearchType" name='SearchType'
-								label="검색방법" labelPosition="left" style="width: 100%;">
+								style="width: 90%;">
 								<option value="VISI_APPLY_NAME" selected>신청자명</option>
 								<option value="VISITOR_NAME">방문자명</option>
 								<option value="VISIT_DESTI">목적지</option>
 								<option value="VISIT_NO">신청번호</option>
 							</select>
 						</div>
-
-						<!-- 검색창 : 콤보박스에 의한 분기 -->
-						<!-- 텍스트 박스에 대해 name값 변경 : 처음 값은 방문자명 // onChange 이벤트로 Name속성을 바꾸어 주기 -->
-						<div class='col-sm-2'>
+						<div class='col-lg-2' style="padding: 5px;">
+							<!-- 검색창 : 콤보박스에 의한 분기 -->
+							<!-- 텍스트 박스에 대해 name값 변경 : 처음 값은 방문자명 // onChange 이벤트로 Name속성을 바꾸어 주기 -->
 							<input class="easyui-textbox" id="searchText" name="VISITOR_NAME"
-								style="width: 150px;"> <a class="easyui-linkbutton"
+								style="width: 80%;"> <a class="easyui-linkbutton"
 								type="button" data-options="iconCls:'icon-search'"
 								onclick="btn_search()"></a>
 						</div>
-
-						<div class='col-sm-2'
-							style="margin-left: 30px; margin-right: 30px; padding: 0;">
+						<div class='col-lg-2' style="padding: 5px;">
 							<select class="easyui-combobox" id="state" name="GMNG_CONFM"
-								label="승인상태" labelPosition="left" style="width: 100%;">
+								style="width: 100%;">
 								<option value="" selected>전체</option>
 								<option value="결재중">결재중</option>
 								<option value="승인">승인</option>
@@ -185,31 +155,21 @@ function btn_search(){
 								<option value="취소">취소</option>
 							</select>
 						</div>
-
 						<!-- 날짜 검색 -->
-						<div class='col-sm-4' style="padding: 0px;">
-							<div class='col-sm-6'>
-								<span style="font-weight: bold;">신청일</span> <input
-									class="easyui-datebox" id="startdate" name="visit_apply_date1"
-									style="width: 120px;">
-							</div>
-							<div class='col-sm-1'>
-								<h4 align="center">
-									<b>~</b>
-								</h4>
-							</div>
-							<div class='col-sm-4' style="padding: 0px;">
-								<input class="easyui-datebox" id=closedate
-									name="visit_apply_date2" style="width: 120px;">
+						<div class='col-lg-4' style="padding: 5px; padding-left: 15px;">
+							<div class="row">
+								<span style="font-weight: bold;">신청일</span>
+								<input class="easyui-datebox" id="startdate" name="visit_apply_date1" style="width: 40%;">
+								<b>~</b>
+								<input class="easyui-datebox" id=closedate name="visit_apply_date2" style="width: 40%;">
 							</div>
 						</div>
 					</form>
-
-					<!-- 부트 테이블 : search_ResultVisitor 참조 -->
-					<div style="width: 86%;">
-						<table class="table table-bordered table-hover" id="tb_sv">
-						</table>
-					</div>
+				</div>
+				<!-- 부트 테이블 : search_ResultVisitor 참조 -->
+				<div class="row" style="width: 86%; margin-top:20px;">
+					<table class="table table-bordered table-hover" id="tb_sv">
+					</table>
 				</div>
 			</div>
 		</div>
