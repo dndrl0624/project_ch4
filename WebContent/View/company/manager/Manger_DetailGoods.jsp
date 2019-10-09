@@ -276,15 +276,15 @@ table.table {
 <script type="text/javascript">
 	$(document).ready(function(){
 		<% for(int i=0;i<gmList.size();i++){ %>
-		var gRow = "<tr><td>"+<%=gmList.get(i).get("GMNG_NAME") %>
-					+"</td><td>"+<%=gmList.get(i).get("GMNG_TYPE") %>+"</td>"
-					+"</td><td>"+<%=gmList.get(i).get("GMNG_QUAN") %>+"</td></tr>";
+		var gRow = "<tr><td>"+"<%=gmList.get(i).get("GMNG_NAME") %>"
+					+"</td><td>"+"<%=gmList.get(i).get("GMNG_TYPE") %>"+"</td>"
+					+"</td><td>"+"<%=gmList.get(i).get("GMNG_QUAN") %>"+"</td></tr>";
 		$("#tb_goods tbody").append(gRow);
 		<% } %>
 		$("#desti_combo").combobox({
-			valueField: 'desti_name',
-			textField: 'desti_name',
-			url: 'company/destiList.ch4?com_no='+'<%=com_no %>',
+			valueField: 'DESTI_NAME',
+			textField: 'DESTI_NAME',
+			url: '/company/destiList.ch4?com_no='+'<%=com_no %>',
 			onChange: function(newValue){
 				$("#desti_hidden").attr('value',newValue);
 			}

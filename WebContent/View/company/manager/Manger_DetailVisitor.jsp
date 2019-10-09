@@ -378,30 +378,30 @@ table.table {
 	$(document).ready(function(){
 		//쓸거
 		<% for(int i=0;i<vtList.size();i++){ %>
-		var vRow = "<tr><td>"+<%=vtList.get(i).get("VISITOR_NAME") %>
-					+"</td><td>"+<%=vtList.get(i).get("VISITOR_HP") %>+"</td></tr>";
+		var vRow = "<tr><td>"+"<%=vtList.get(i).get("VISITOR_NAME") %>"
+					+"</td><td>"+"<%=vtList.get(i).get("VISITOR_HP") %>"+"</td></tr>";
 		$("#tb_visitor tbody").append(vRow);
 		<% } %>
 		
 		//쓸거
 		<% for(int i=0;i<tkList.size();i++){ %>
-		var dRow = "<tr><td>"+<%=tkList.get(i).get("TKIN_KIND") %>
-					+"</td><td>"+<%=tkList.get(i).get("TKIN_BRAND") %>+"</td>"
-					+"</td><td>"+<%=tkList.get(i).get("TKIN_MODEL") %>+"</td></tr>";
+		var dRow = "<tr><td>"+"<%=tkList.get(i).get("TKIN_KIND") %>"
+					+"</td><td>"+"<%=tkList.get(i).get("TKIN_BRAND") %>"+"</td>"
+					+"</td><td>"+"<%=tkList.get(i).get("TKIN_MODEL") %>"+"</td></tr>";
 		$("#tb_device tbody").append(dRow);
 		<% } %>
 		
 		//쓸거
 		<% for(int i=0;i<pkList.size();i++){ %>
-		var pRow = "<tr><td>"+<%=pkList.get(i).get("PARKING_NUM") %>
-					+"</td><td>"+<%=pkList.get(i).get("PARKING_KIND") %>+"</td>"
-					+"</td><td>"+<%=pkList.get(i).get("PARKING_MODEL") %>+"</td></tr>";
+		var pRow = "<tr><td>"+"<%=pkList.get(i).get("PARKING_NUM") %>"
+					+"</td><td>"+"<%=pkList.get(i).get("PARKING_KIND") %>"+"</td>"
+					+"</td><td>"+"<%=pkList.get(i).get("PARKING_MODEL") %>"+"</td></tr>";
 		$("#tb_parking tbody").append(pRow);
 		<% } %>
 		$("#desti_combo").combobox({
-			valueField: 'desti_name',
-			textField: 'desti_name',
-			url: 'company/destiList.ch4?com_no='+'<%=com_no %>',
+			valueField: 'DESTI_NAME',
+			textField: 'DESTI_NAME',
+			url: '/company/destiList.ch4?com_no='+'<%=com_no %>',
 			onChange: function(newValue){
 				$("#desti_hidden").attr('value',newValue);
 			}

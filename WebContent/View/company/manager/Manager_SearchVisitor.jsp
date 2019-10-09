@@ -41,11 +41,11 @@ $(document).ready(function(){
 		         ,{field:'VISIT_DESTI',title:'목적지'}/* 현재위치 : 내부 외부 사내 .. */
 		         ,{field:'VISIT_PERMIT_ST',title:'결재상태'}
 		   	 ]
-			,url:'company/applyVisitList.ch4'
+			,url:'/company/applyVisitList.ch4'
 			,onDblClickRow : function(row, $element, field) {
 				//테이블에서 신청번호 칸에 들어간 정보 가져오기
 				var visit_no = $element.find('td').eq(0).text();
-				location.href = 'company/applyVisitDetail.ch4?visit_no='+visit_no;
+				location.href = '/company/applyVisitDetail.ch4?visit_no='+visit_no;
 		}
 	});
 //승인상태 변경 검색 이벤트
@@ -54,7 +54,7 @@ $(document).ready(function(){
 			//alert("work");
 			$.ajax({
 				type:'post'
-				,url:'company/applyVisitList.ch4'
+				,url:'/company/applyVisitList.ch4'
 				,dataType: "json"
 				,data :$("#f_search").serialize()
 				,success: function(data){
@@ -69,7 +69,7 @@ $(document).ready(function(){
 		onSelect: function(date){
 				$.ajax({
 					type:'post'
-					,url:'company/applyVisitList.ch4'
+					,url:'/company/applyVisitList.ch4'
 					,dataType: "json"
 					,data :$("#f_search").serialize()
 					,success: function(data){
@@ -82,7 +82,7 @@ $(document).ready(function(){
 		onSelect: function(date){
 				$.ajax({
 					type:'post'
-					,url:'company/applyVisitList.ch4'
+					,url:'/company/applyVisitList.ch4'
 					,dataType: "json"
 					,data :$("#f_search").serialize()
 					,success: function(data){
@@ -99,7 +99,7 @@ function btn_search(){
 	/* 검색 조건을 통해 재출력 */
 	$.ajax({
 		type:'post'
-		,url:'company/applyVisitList.ch4'
+		,url:'/company/applyVisitList.ch4'
 		,dataType: "json"
 		,data :$("#f_search").serialize()
 		,success: function(data){

@@ -39,11 +39,11 @@ $(document).ready(function(){
 			,{field:"APLG_DESTI",title:'목적지'}
 			,{field:"APLG_PERMIT_ST",title:'결재상태'}
 		]
-		,url:'company/applyGoodsList.ch4'
+		,url:'/company/applyGoodsList.ch4'
 		,onDbClickRow : function(row, $element, field) {
 			//테이블에서 신청번호 칸에 들어간 정보 가져오기
 			var aplg_no = $element.find('td').eq(0).text();
-			location.href = 'company/applyGoodsDetail.ch4?aplg_no='+aplg_no;
+			location.href = '/company/applyGoodsDetail.ch4?aplg_no='+aplg_no;
 		}
 	});
 
@@ -53,7 +53,7 @@ $(document).ready(function(){
 			//alert("work");
 			$.ajax({
 				type:'post'
-				,url:'company/applyGoodsList.ch4'
+				,url:'/company/applyGoodsList.ch4'
 				,dataType: "json"
 				,data :$("#f_search").serialize()
 				,success: function(data){
@@ -67,7 +67,7 @@ $(document).ready(function(){
 		onSelect: function(date){
 				$.ajax({
 					type:'post'
-					,url:'company/applyGoodsList.ch4'
+					,url:'/company/applyGoodsList.ch4'
 					,dataType: "json"
 					,data :$("#f_search").serialize()
 					,success: function(data){
@@ -80,7 +80,7 @@ $(document).ready(function(){
 		onSelect: function(date){
 				$.ajax({
 					type:'post'
-					,url:'company/applyGoodsList.ch4'
+					,url:'/company/applyGoodsList.ch4'
 					,dataType: "json"
 					,data :$("#f_search").serialize()
 					,success: function(data){
@@ -92,7 +92,7 @@ $(document).ready(function(){
 	$("#btn_search").click(function(){
 		$.ajax({
 			type:'post'
-			,url:'company/applyGoodsList.ch4'
+			,url:'/company/applyGoodsList.ch4'
 			,dataType: "json"
 			,data :$("#f_search").serialize()
 			,success: function(data){
