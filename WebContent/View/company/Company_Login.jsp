@@ -73,7 +73,7 @@ h2 {
         else{
         	//전송
         	$('#fsignin').attr("method","post");
-    		$('#fsignin').attr("action","company/login.ch4"); //전송을 하는 곳.
+    		$('#fsignin').attr("action","/company/login.ch4"); //전송을 하는 곳.
     		$('#fsignin').submit(); 
         }
 	}
