@@ -22,11 +22,11 @@ public class MyBatisCommonFactory {
 	private static SqlSessionFactory sqlSessionFactory = null;
 	public static void init() {
 		try {
-			String resource = "com/mybatis/MapperConfig.xml";
+			String resource = "com/ch4/mybatis/MapperConfig.xml";
 			Reader reader = Resources.getResourceAsReader(resource);
 			if(sqlSessionFactory==null) {
 				sqlSessionFactory = 
-						new SqlSessionFactoryBuilder().build(reader,"development");
+						new SqlSessionFactoryBuilder().build(reader,"development2");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

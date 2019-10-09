@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ch4.mybatis.mapper.GoodsMapper">
+<resultMap type="java.util.HashMap" id="gMap">
+   </resultMap>
+   <!-- QR코드 조회(goods) -->
+   <select id="visitorQRcode" parameterType="map" resultType="map">
+      select confm_qrcode
+        from goods_confm
+       where confm_no = #{confm_no}
+         and confm_name = #{confm_name}
+         and aplg_no = {aplg_no}
+   </select>
+   <!-- 신청자 반입이력 조회 -->
+   <update id="preGoodsSearch" parameterType="map" statementType="CALLABLE">
+      {call proc_preGoodsApply(
+         #{aplg_name, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{aplg_hp, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{com_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{aplg_date1, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{aplg_date2, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{preList, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=gMap},
+         #{result, mode=OUT, jdbcType=INTEGER, javaType=int}
+      )}
+   </update>
+   <!-- 반입 신청 등록 -->
+    <update id="goodsApplyAdd" parameterType="map" statementType="CALLABLE">
+    {call proc_gApplyAdd(
+         #{aplg_name, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{aplg_hp, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{aplg_reason, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{aplg_desti, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{aplg_trans_date, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{com_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{aplg_no, mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{result, mode=OUT, jdbcType=INTEGER, javaType=int}
+      )}
+    </update>
+    <!-- 반입 물품정보 등록 -->
+    <insert id="goodsAdd" parameterType="map">
+     <foreach collection="gmAddList" item="it" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+       into goods_mng(aplg_no, gmng_name, gmng_type, gmng_quan)
+      values(#{aplg_no}, #{it.gmng_name}, #{it.gmng_type}, #{it.gmng_quan})
+     </foreach>
+    </insert>    
+   <!-- 반입 신청 변경 -->
+   <update id="goodsApplyUpdate" parameterType="map">
+      update goods_apply
+           set aplg_reason = #{aplg_reason}
+              ,aplg_desti = #{aplg_desti}
+              ,aplg_trans_date = #{aplg_trans_date}
+         where aplg_no = #{aplg_no}
+   </update>
+   <!-- 반입 신청 변경(물품관리 삭제) -->
+   <update id="goodsSubDelete" parameterType="map">
+      delete from goods_mng
+       where aplg_no = #{aplg_no}
+   </update>
+   <!-- 반입 신청 취소 (결제상태 변경)-->
+   <update id="goodsApplyCancle" parameterType="map" statementType="CALLABLE">
+      {call proc_goodsCancle(#{aplg_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String})}
+   </update>
+</mapper>
