@@ -62,6 +62,7 @@
 <style>
 	body {
 		position: relative;
+		padding-bottom:100px;
 	}
 	ul.nav-pills {
 		padding-top: 70px;
@@ -163,7 +164,7 @@
 		//////////////////////////////  방문자 정보 세팅  //////////////////////////////
 		//실제로 쓸 for문
 		<% for(int i=0;i<gmList.size();i++){ %>
-		var gRow = "<tr id='gRow'><td><input id='chkGoods' type='checkbox'></td>"
+		var gRow = "<tr id='gRow"+gIndex+"'><td><input id='chkGoods' type='checkbox'></td>"
 					+"<td><input id='gmng_name' type='hidden' name='gmng_name' value='"
 					+"<%=gmList.get(i).get("GMNG_NAME") %>"+"'>"+"<%=gmList.get(i).get("GMNG_NAME") %>"+"</td>"
 					+"<td><input id='gmng_type' type='hidden' name='gmng_type' value='"
@@ -273,6 +274,7 @@
 					}
 				}
 				gIndex = reset;
+				alert(gIndex);
 				$("#tb_goods input:checkbox").prop("checked", false);
 			}
 			//없으면 == checked가 없음
@@ -316,7 +318,7 @@
 			+"EA: "+$("#gmng_quan").val()+"\n"
 			+"물품종류: "+$("#gmng_type").val()+"\n"
 		);
-		$("#form_update").submit();
+// 		$("#form_update").submit();
 	}
 </script>
 <div class="container-fluid">

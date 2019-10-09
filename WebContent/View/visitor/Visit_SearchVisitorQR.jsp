@@ -86,21 +86,22 @@
 	$(document).ready(function(){
 		$("#tb_search").bootstrapTable({
 			columns:[
-			    {field:'confm_no',title:'방문번호',formatter: operateFormatterNo},
-			    {field:'com_name',title:'방문지'},
-			    {field:'visit_date',title:'방문일자'},
-			    {field:'confm_date',title:'승인일자'},
+			    {field:'CONFM_NO',title:'방문번호',formatter: operateFormatterNo},
+			    {field:'COM_NAME',title:'방문지'},
+			    {field:'CONFM_DESTI',title:'방문장소'},
+			    {field:'CONFM_VISIT_DATE',title:'방문일자'},
+			    {field:'CONFM_DATE',title:'승인일자'},
 			    {field:'show_qr',title:'QR코드',events: window.operateEvents,
 			          formatter: operateFormatterQR,width:150},
-			    {field:'confm_qrcode',title:'QRcode',visible:false},
+			    {field:'CONFM_QRCODE',title:'QRcode',visible:false},
 			    {field:'qrPath',title:'QRpath',visible:false}
 			]
 		});
 	});
 	function searchApply(confm_no){
 		$("#confm_no").attr('value',confm_no);
-		$("#form_search_info").attr('action','/visitor/searchVisitor.ch4');
-//		$("#form_search_info").submit();
+		$("#form_search").attr('action','/visitor/qrCodeList.ch4');
+		$("#form_search").submit();
 //		alert('방문번호로 신청 상세조회');
 	}
 	function operateFormatterNo(value, row, index) {
@@ -228,9 +229,5 @@
 		</div>
 	</div>
 </div>
-<!-- 방문번호로 정보조회 FORM전송 -->
-<form id="form_search_info" action="" method="post">
-	<input id="confm_no" type="hidden" name="confm_no" value="">
-</form>
 </body>
 </html>
