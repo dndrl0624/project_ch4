@@ -8,7 +8,7 @@
 								,#{cmng_name,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
 								,#{com_no,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
 								,#{com_name,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
-								,#{grade,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+								,#{cmng_grade,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
 								,#{dept_name,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
 								,#{msg,mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
 								,#{result,mode=OUT, jdbcType=INTEGER, javaType=int}

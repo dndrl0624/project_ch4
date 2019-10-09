@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ch4.mybatis.mapper.VisitorMapper">
-	
 	<resultMap type="hashmap" id="vMap"/>
 	<!-- 신청자 방문이력 조회 -->
 	<update id="preVisitorSearch" parameterType="map" statementType="CALLABLE">
@@ -28,7 +27,6 @@
 			#{result, mode=OUT, jdbcType=INTEGER, javaType=int}
 		)}
 	</update>
-	
 	
 	<!-- QR코드 조회(visitor) -->
 	<select id="visitorQRcode" parameterType="map" resultType="map">
