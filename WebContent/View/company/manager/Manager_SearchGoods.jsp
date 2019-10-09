@@ -39,9 +39,11 @@ $(document).ready(function(){
 			,{field:"APLG_DESTI",title:'목적지'}
 			,{field:"APLG_PERMIT_ST",title:'결재상태'}
 		]
-		,url: "/project_ch4_pojo/json/searchGoodsJson.json"
+		,url:'company/applyGoodsList.ch4'
 		,onDbClickRow : function(row, $element, field) {
-			//디테일 페이지 이동
+			//테이블에서 신청번호 칸에 들어간 정보 가져오기
+			var aplg_no = $element.find('td').eq(0).text();
+			location.href = 'company/applyGoodsDetail.ch4?aplg_no='+aplg_no;
 		}
 	});
 
@@ -51,7 +53,7 @@ $(document).ready(function(){
 			//alert("work");
 			$.ajax({
 				type:'post'
-				,url:'/project_ch4_pojo/json/searchVisitorJson.json'/* 실제 사용할 URL 변경하기  : company/???.ch4 */
+				,url:'company/applyGoodsList.ch4'
 				,dataType: "json"
 				,data :$("#f_search").serialize()
 				,success: function(data){
@@ -65,7 +67,7 @@ $(document).ready(function(){
 		onSelect: function(date){
 				$.ajax({
 					type:'post'
-					,url:'/project_ch4_pojo/json/searchVisitorJson.json'/* 실제 사용할 URL 변경하기  : company/???.ch4 */
+					,url:'company/applyGoodsList.ch4'
 					,dataType: "json"
 					,data :$("#f_search").serialize()
 					,success: function(data){
@@ -78,7 +80,7 @@ $(document).ready(function(){
 		onSelect: function(date){
 				$.ajax({
 					type:'post'
-					,url:'/project_ch4_pojo/json/searchVisitorJson.json'/* 실제 사용할 URL 변경하기  : company/???.ch4 */
+					,url:'company/applyGoodsList.ch4'
 					,dataType: "json"
 					,data :$("#f_search").serialize()
 					,success: function(data){
@@ -87,21 +89,18 @@ $(document).ready(function(){
 				});
 			}
 	});
-	
-});
-
-/* 검색버튼 기능 */
-function btn_search(){
-	$.ajax({
+	$("#btn_search").click(function(){
+		$.ajax({
 			type:'post'
-			,url:'project_ch4_pojo/json/searchGoodsJson.json'/* 실제 사용할 URL 변경하기  : company/applyVisitList.ch4 */
+			,url:'company/applyGoodsList.ch4'
 			,dataType: "json"
 			,data :$("#f_search").serialize()
 			,success: function(data){
 				$("#tb_searchGood").bootstrapTable('data',data);
 			}
+		});
 	});
-}
+});
 </script>
 	<%@ include file="../../CommonForm/Top.jsp"%>
 	<!-- Content -->
@@ -132,9 +131,8 @@ function btn_search(){
 							<!-- 검색창 : 콤보박스에 의한 분기 -->
 							<!-- 텍스트 박스에 대해 name값 변경 : 처음 값은 방문자명 // onChange 이벤트로 Name속성을 바꾸어 주기 -->
 							<input class="easyui-textbox" id="searchText" name="VISITOR_NAME"
-								style="width: 80%;"> <a class="easyui-linkbutton"
-								type="button" data-options="iconCls:'icon-search'"
-								onclick="btn_search()"></a>
+								style="width: 80%;"> <a id="btn_search" class="easyui-linkbutton"
+								type="button" data-options="iconCls:'icon-search'"></a>
 						</div>
 						<div class='col-lg-2' style="padding: 5px;">
 							<select class="easyui-combobox" id="state" name="APLG_PERMIT_ST"

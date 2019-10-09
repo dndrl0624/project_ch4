@@ -19,7 +19,7 @@
 	//신청자 연락처
 	String aplg_hp = "null";
 	//반입날짜
-	String aplg_trans_date = "2019-10-31";
+	String aplg_trans_date = "null";
 	//반입지
 	String com_name = "null";
 	//목적지
@@ -165,11 +165,11 @@
 		<% for(int i=0;i<gmList.size();i++){ %>
 		var gRow = "<tr id='gRow'><td><input id='chkGoods' type='checkbox'></td>"
 					+"<td><input id='gmng_name' type='hidden' name='gmng_name' value='"
-					+<%=gmList.get(i).get("GMNG_NAME") %>+"'>"+<%=gmList.get(i).get("GMNG_NAME") %>+"</td>"
+					+"<%=gmList.get(i).get("GMNG_NAME") %>"+"'>"+"<%=gmList.get(i).get("GMNG_NAME") %>"+"</td>"
 					+"<td><input id='gmng_type' type='hidden' name='gmng_type' value='"
-					+<%=gmList.get(i).get("GMNG_TYPE") %>+"'>"+<%=gmList.get(i).get("GMNG_TYPE") %>+"</td>"
+					+"<%=gmList.get(i).get("GMNG_TYPE") %>"+"'>"+"<%=gmList.get(i).get("GMNG_TYPE") %>"+"</td>"
 					+"<td><input id='gmng_quan' type='hidden' name='gmng_quan' value='"
-					+<%=gmList.get(i).get("GMNG_QUAN") %>+"'>"+<%=gmList.get(i).get("GMNG_QUAN") %>+"</td></tr>";
+					+"<%=gmList.get(i).get("GMNG_QUAN") %>"+"'>"+"<%=gmList.get(i).get("GMNG_QUAN") %>"+"</td></tr>";
 		$("#tb_goods tbody").append(gRow);
 		gIndex++;
 		<% } %>
@@ -177,9 +177,9 @@
 		
 		//목적지 combobox 초기화 + 이전페이지 정보 반영
 		$("#aplg_desti").combobox({
-			valueField: 'dept_name',
-			textField: 'dept_name',
-			url: "/visitor/deptList.ch4?cmpCode="+<%=com_no %>
+			valueField: 'DEPT_NAME',
+			textField: 'DEPT_NAME',
+			url: "/visitor/deptList.ch4?com_no="+"<%=com_no %>"
 		});
 		$("#aplg_desti").combobox('select','<%=aplg_desti %>');
 		///////////////////////// 방문날짜 이벤트  //////////////////////////
@@ -334,7 +334,7 @@
 		    	</div>
 			</div>
 			<!------------------------------------- 신청 폼 시작 -------------------------------------->
-	    	<form id="form_update" action="/goods/add.ch4" method="POST">
+	    	<form id="form_update" action="/goods/update.ch4" method="POST">
 		    	<input id="com_no" type="hidden" name="com_no" value="<%=com_no %>">
 				<!-- 반입정보  -->
 				<div id="section1" class="panel panel-info">    

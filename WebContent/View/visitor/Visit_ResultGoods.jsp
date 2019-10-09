@@ -124,9 +124,9 @@
 	$(document).ready(function(){
 		//쓸거
 		<% for(int i=0;i<gmAddList.size();i++){ %>
-		var gRow = "<tr><td>"+<%=gmAddList.get(i).get("GMNG_NAME") %>
-					+"</td><td>"+<%=gmAddList.get(i).get("GMNG_TYPE") %>+"</td>"
-					+"</td><td>"+<%=gmAddList.get(i).get("GMNG_QUAN") %>+"</td></tr>";
+		var gRow = "<tr><td>"+"<%=gmAddList.get(i).get("gmng_name") %>"
+					+"</td><td>"+"<%=gmAddList.get(i).get("gmng_type") %>"+"</td>"
+					+"</td><td>"+"<%=gmAddList.get(i).get("gmng_quan") %>"+"</td></tr>";
 		$("#tb_goods tbody").append(gRow);
 		<% } %>
 	});

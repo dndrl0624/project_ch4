@@ -158,24 +158,24 @@
 	$(document).ready(function(){
 		//쓸거
 		<% for(int i=0;i<vtAddList.size();i++){ %>
-		var vRow = "<tr><td>"+<%=vtAddList.get(i).get("VISITOR_NAME") %>
-					+"</td><td>"+<%=vtAddList.get(i).get("VISITOR_HP") %>+"</td></tr>";
+		var vRow = "<tr><td>"+"<%=vtAddList.get(i).get("visitor_name") %>"
+					+"</td><td>"+"<%=vtAddList.get(i).get("visitor_hp") %>"+"</td></tr>";
 		$("#tb_visitor tbody").append(vRow);
 		<% } %>
 		
 		//쓸거
 		<% for(int i=0;i<tkAddList.size();i++){ %>
-		var dRow = "<tr><td>"+<%=tkAddList.get(i).get("TKIN_KIND") %>
-					+"</td><td>"+<%=tkAddList.get(i).get("TKIN_BRAND") %>+"</td>"
-					+"</td><td>"+<%=tkAddList.get(i).get("TKIN_MODEL") %>+"</td></tr>";
+		var dRow = "<tr><td>"+"<%=tkAddList.get(i).get("tkin_kind") %>"
+					+"</td><td>"+"<%=tkAddList.get(i).get("tkin_brand") %>"+"</td>"
+					+"</td><td>"+"<%=tkAddList.get(i).get("tkin_model") %>"+"</td></tr>";
 		$("#tb_device tbody").append(dRow);
 		<% } %>
 		
 		//쓸거
 		<% for(int i=0;i<pkAddList.size();i++){ %>
-		var pRow = "<tr><td>"+<%=pkAddList.get(i).get("PARKING_NUM") %>
-					+"</td><td>"+<%=pkAddList.get(i).get("PARKING_KIND") %>+"</td>"
-					+"</td><td>"+<%=pkAddList.get(i).get("PARKING_MODEL") %>+"</td></tr>";
+		var pRow = "<tr><td>"+"<%=pkAddList.get(i).get("parking_num") %>"
+					+"</td><td>"+"<%=pkAddList.get(i).get("parking_kind") %>"+"</td>"
+					+"</td><td>"+"<%=pkAddList.get(i).get("parking_model") %>"+"</td></tr>";
 		$("#tb_parking tbody").append(pRow);
 		<% } %>
 	});

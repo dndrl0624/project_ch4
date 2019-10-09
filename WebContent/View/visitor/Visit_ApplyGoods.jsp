@@ -134,8 +134,8 @@
 	$(document).ready(function(){
 		//목적지 combobox 초기화 + 이전페이지 정보 반영
 		$("#aplg_desti").combobox({
-			valueField: 'dept_name',
-			textField: 'dept_name',
+			valueField: 'DEPT_NAME',
+			textField: 'DEPT_NAME',
 			url: "/visitor/deptList.ch4?com_no="+'<%=com_no %>'
 		});
 		$("#aplg_desti").combobox('select','<%=aplg_desti%>');
@@ -402,6 +402,7 @@
 			<!------------------------------------- 신청 폼 시작 -------------------------------------->
 	    	<form id="form_apply" action="/goods/add.ch4" method="POST">
 		    	<input id="com_no" type="hidden" name="com_no" value="<%=com_no %>">
+		    	<input id="com_name" type="hidden" name="com_name" value="<%=com_name %>">
 				<!-- 반입정보  -->
 				<div id="section1" class="panel panel-info">    
 				    <div class="panel-heading">기본 반입정보</div>

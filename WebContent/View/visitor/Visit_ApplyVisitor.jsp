@@ -163,8 +163,8 @@
    $(document).ready(function(){
       //목적지 combobox 초기화 + 이전페이지 정보 반영
       $("#visit_desti").combobox({
-         valueField: 'dept_name',
-         textField: 'dept_name',
+         valueField: 'DEPT_NAME',
+         textField: 'DEPT_NAME',
          url: "/visitor/deptList.ch4?com_no="+'<%=com_no %>'
       });
       $("#visit_desti").combobox('select','<%=visit_desti%>');
@@ -751,6 +751,7 @@
        <!------------------------------------- 신청 폼 시작 -------------------------------------->
        <form id="form_apply" action="/visitor/add.ch4" method="POST">
           <input id="com_no" type="hidden" name="com_no" value="<%=com_no %>">
+          <input id="com_name" type="hidden" name="com_name" value="<%=com_name %>">
           <input id="visit_tkin_encc" type="hidden" name="visit_tkin_encc" value="">
           <input id="visit_vhcle_encc" type="hidden" name="visit_vhcle_encc" value="">
           <div id="section1" class="panel panel-info">    

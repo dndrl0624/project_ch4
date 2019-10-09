@@ -77,9 +77,9 @@
 		vtList = (List<Map<String,Object>>)rMap.get("vtList");
 	}
 	//반입기기 리스트
-	List<Map<String,Object>> tnList = new ArrayList<>();
+	List<Map<String,Object>> tkList = new ArrayList<>();
 	if(null!=rMap){
-		tnList = (List<Map<String,Object>>)rMap.get("tnList");
+		tkList = (List<Map<String,Object>>)rMap.get("tkList");
 	}
 	//주차 리스트
 	List<Map<String,Object>> pkList = new ArrayList<>();
@@ -224,23 +224,23 @@
 		<% for(int i=0;i<vtList.size();i++){ %>
 		var vRow = "<tr id='vRow'><td><input id='chkVisitor' type='checkbox'></td>"
 					+"<td><input id='visitor_name' type='hidden' name='visitor_name' value='"
-					+<%=vtList.get(i).get("VISITOR_NAME") %>+"'>"+<%=vtList.get(i).get("VISITOR_NAME") %>+"</td>"
+					+"<%=vtList.get(i).get("VISITOR_NAME") %>"+"'>"+"<%=vtList.get(i).get("VISITOR_NAME") %>"+"</td>"
 					+"<td><input id='visitor_hp' type='hidden' name='visitor_hp' value='"
-					+<%=vtList.get(i).get("VISITOR_HP") %>+"'>"+<%=vtList.get(i).get("VISITOR_HP") %>+"</td></tr>";
+					+"<%=vtList.get(i).get("VISITOR_HP") %>"+"'>"+"<%=vtList.get(i).get("VISITOR_HP") %>"+"</td></tr>";
 		$("#tb_visitor tbody").append(vRow);
 		vIndex++;
 		<% } %>
 		//////////////////////////////  방문자 정보 세팅  끝 //////////////////////////////
 		//////////////////////////////  반입기기정보 세팅  //////////////////////////////
 		//실제로 쓸 for문
-		<% for(int i=0;i<tnList.size();i++){ %>
+		<% for(int i=0;i<tkList.size();i++){ %>
 		var dRow = "<tr id='dRow'><td><input id='chkDevice' type='checkbox'></td>"
 					+"<td><input id='tkin_kind' type='hidden' name='tkin_kind' value='"
-					+<%=tnList.get(i).get("TKIN_KIND") %>+"'>"+<%=tnList.get(i).get("TKIN_KIND") %>+"</td>"
+					+"<%=tkList.get(i).get("TKIN_KIND") %>"+"'>"+"<%=tkList.get(i).get("TKIN_KIND") %>"+"</td>"
 					+"<td><input id='tkin_brand' type='hidden' name='tkin_brand' value='"
-					+<%=tnList.get(i).get("TKIN_BRAND") %>+"'>"+<%=tnList.get(i).get("TKIN_BRAND") %>+"</td>"
+					+"<%=tkList.get(i).get("TKIN_BRAND") %>"+"'>"+"<%=tkList.get(i).get("TKIN_BRAND") %>"+"</td>"
 					+"<td><input id='tkin_model' type='hidden' name='tkin_model' value='"
-					+<%=tnList.get(i).get("TKIN_MODEL") %>+"'>"+<%=tnList.get(i).get("TKIN_MODEL") %>+"</td></tr>";
+					+"<%=tkList.get(i).get("TKIN_MODEL") %>"+"'>"+"<%=tkList.get(i).get("TKIN_MODEL") %>"+"</td></tr>";
 		$("#tb_device tbody").append(dRow);
 		dIndex++;
 		<% } %>
@@ -250,11 +250,11 @@
 		<% for(int i=0;i<pkList.size();i++){ %>
 		var pRow = "<tr id='pRow'><td><input id='chkParking' type='checkbox'></td>"
 					+"<td><input id='parking_num' type='hidden' name='parking_num' value='"
-					+<%=pkList.get(i).get("PARKING_NUM") %>+"'>"+<%=pkList.get(i).get("PARKING_NUM") %>+"</td>"
+					+"<%=pkList.get(i).get("PARKING_NUM") %>"+"'>"+"<%=pkList.get(i).get("PARKING_NUM") %>"+"</td>"
 					+"<td><input id='parking_kind' type='hidden' name='parking_kind' value='"
-					+<%=pkList.get(i).get("PARKING_KIND") %>+"'>"+<%=pkList.get(i).get("PARKING_KIND") %>+"</td>"
+					+"<%=pkList.get(i).get("PARKING_KIND") %>"+"'>"+"<%=pkList.get(i).get("PARKING_KIND") %>"+"</td>"
 					+"<td><input id='parking_model' type='hidden' name='parking_model' value='"
-					+<%=pkList.get(i).get("PARKING_MODEL") %>+"'>"+<%=pkList.get(i).get("PARKING_MODEL") %>+"</td>"+"</tr>";
+					+"<%=pkList.get(i).get("PARKING_MODEL") %>"+"'>"+"<%=pkList.get(i).get("PARKING_MODEL") %>"+"</td>"+"</tr>";
 		$("#tb_parking tbody").append(pRow);
 		pIndex++;
 		<% } %>
@@ -262,9 +262,9 @@
 		
 		//목적지 combobox 초기화 + 이전페이지 정보 반영
 		$("#visit_desti").combobox({
-			valueField: 'dept_name',
-			textField: 'dept_name',
-			url: "/visitor/deptList.ch4?cmpCode="+<%=com_no %>
+			valueField: 'DEPT_NAME',
+			textField: 'DEPT_NAME',
+			url: "/visitor/deptList.ch4?com_no="+"<%=com_no %>"
 		});
 		$("#visit_desti").combobox('select','<%=visit_desti%>');
 		///////////////////////// 방문날짜 이벤트  //////////////////////////
@@ -706,7 +706,7 @@
 		    	</div>
 			</div>
 	    <!------------------------------------- 신청 폼 시작 -------------------------------------->
-	    <form id="form_update" action="/visitor/add.ch4" method="POST">
+	    <form id="form_update" action="/visitor/update.ch4" method="POST">
 	    	<input id="com_no" type="hidden" name="com_no" value="<%=com_no %>">
 	    	<input id="visit_tkin_encc" type="hidden" name="visit_tkin_encc" value="<%=visit_tkin_encc %>">
 	    	<input id="visit_vhcle_encc" type="hidden" name="visit_vhcle_encc" value="<%=visit_vhcle_encc %>">
