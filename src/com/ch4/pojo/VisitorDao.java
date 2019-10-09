@@ -93,12 +93,12 @@ public class VisitorDao {
 
 
    public List<Map<String, Object>> companyList() {
-      List<Map<String, Object>> companyList = sqlSession.selectList("com.ch4.mybatis.mapper.CompanyMapper.companyCombo");
+      List<Map<String, Object>> companyList = sqlSession.selectList("companyCombo");
       return companyList;
    }
    public List<Map<String, Object>> deptList(Map<String, Object> pMap) {
       logger.info(pMap);
-      List<Map<String, Object>> deptList = sqlSession.selectList("com.ch4.mybatis.mapper.CompanyMapper.deptCombo", pMap);
+      List<Map<String, Object>> deptList = sqlSession.selectList("deptCombo", pMap);
       return deptList;
    }
 
@@ -137,7 +137,7 @@ public class VisitorDao {
       
       Map<String, Object> infoMap = sqlSession.selectOne("visitorApplySearch", pMap);
       List<Map<String, Object>> vtList = sqlSession.selectList("visitorSearch", pMap);
-      List<Map<String, Object>> tkList = sqlSession.selectList("deviceSeaech", pMap);
+      List<Map<String, Object>> tkList = sqlSession.selectList("deviceSearch", pMap);
       List<Map<String, Object>> pkList = sqlSession.selectList("parkingSearch", pMap);
       
       rMap.put("infoMap", infoMap);

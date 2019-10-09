@@ -126,6 +126,10 @@
    <select id="parkingSearch" parameterType="map" resultType="map">
       select parking_kind, parking_model, parking_num from parking_mng
       <where>
+         <!-- 검색 : 신청번호 -->
+         <if test="visit_no != null">
+            and visit_no = #{visit_no}
+         </if>
          <!-- 검색 : 차량번호 -->
          <if test="parking_num != null">
             and parking_num = #{parking_num}

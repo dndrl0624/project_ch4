@@ -58,6 +58,8 @@
    </update>
    <!-- 반입 신청 취소 (결제상태 변경)-->
    <update id="goodsApplyCancle" parameterType="map" statementType="CALLABLE">
-      {call proc_goodsCancle(#{aplg_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String})}
+      {call proc_goodsCancle(#{aplg_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+                             #{result, mode=OUT, jdbcType=INTEGER, javaType=int}
+      )}
    </update>
 </mapper>

@@ -72,8 +72,11 @@ public class GoodsDao {
 
    public int goodsCancle(Map<String, Object> pMap) {
       int result = 0;
-      result = sqlSession.update("goodsApplyCancle", pMap);
-      sqlSession.commit();
+      sqlSession.update("goodsApplyCancle", pMap);
+      result = (int)pMap.get("result");
+      if(result==1) {
+         sqlSession.commit();
+      }
       return result;
    }
 
