@@ -50,23 +50,14 @@ public class GoodsDao {
       
       return result;
    }
-
-   /*
-    * id="goodsApplyUpdate" id="goodsSubDelete" id="goodsAdd" ??
-    */
+   
    public int goodsUpdate(Map<String, Object> pMap) {
       int result = 0;
-      result = sqlSession.update("goodsApplyUpdate", pMap);
-      if(result==0) {
-         return result;
+      sqlSession.update("goodsApplyUpdate", pMap);
+      result = (int)pMap.get("result");
+      if(result==1) {
+         sqlSession.commit();
       }
-      else if(result==1) {
-         result = goodsSubAdd(pMap);
-      }
-      if(result==0) {
-         return result;
-      }
-      sqlSession.commit();
       return result;
    }
 
@@ -86,9 +77,16 @@ public class GoodsDao {
       return preGoodsList;
    }
 
-   public List<Map<String, Object>> goodsDetail(Map<String, Object> pMap) {
-      List<Map<String, Object>> preGoodsDetail = sqlSession.selectList("goodsSearch", pMap);
-      return preGoodsDetail;
+   public Map<String, Object> goodsDetail(Map<String, Object> pMap) {
+      Map<String,Object> rMap = new HashMap<String, Object>();
+      
+      Map<String, Object> infoMap = sqlSession.selectOne("goodsApplySearch", pMap);
+      List<Map<String, Object>> gmList = sqlSession.selectList("goodsSearch", pMap);
+      
+      rMap.put("infoMap", infoMap);
+      rMap.put("gmList", gmList);
+      
+      return rMap;
    }
 
    public Map<String, Object> goodsSearch(Map<String, Object> pMap) {

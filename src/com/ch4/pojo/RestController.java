@@ -108,7 +108,7 @@ public class RestController implements Rcontroller {
          
          }
          else if (requestName.equals("detail")) {
-            List<Map<String, Object>> rMap = gLogic.goodsDetail(pMap);
+            Map<String, Object> rMap = gLogic.goodsDetail(pMap);
             jsonStr = g.toJson(rMap);
          }
          else if (requestName.equals("qrCodeList")) {

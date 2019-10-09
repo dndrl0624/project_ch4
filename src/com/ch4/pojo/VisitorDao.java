@@ -78,7 +78,11 @@ public class VisitorDao {
 
    public int visitorUpdate(Map<String, Object> pMap) {
       int result = 0;
-      result = sqlSession.update("visitorUpdate", pMap);
+      sqlSession.update("visitorApplyUpdate", pMap);
+      result = (int)pMap.get("result");
+      if(result==1) {
+         sqlSession.commit();
+      }
       return result;
    }
 

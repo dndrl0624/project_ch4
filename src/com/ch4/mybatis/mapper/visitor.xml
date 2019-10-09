@@ -64,6 +64,21 @@
             values(#{it.parking_kind}, #{it.parking_num}, #{it.parking_model}, #{visit_no})
       </foreach>
    </insert>
+   <!-- 방문 신청 변경(기본내용 수정) -->
+   <update id="visitorApplyUpdate" parameterType="map" statementType="CALLABLE">
+      {call proc_vApplyUpd(
+         #{visit_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{visit_purps, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{visit_desti, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{visit_type, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{visit_term, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{visit_day, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{visit_date, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{visit_tkin_encc, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{visit_vhcle_encc, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{result, mode=OUT, jdbcType=INTEGER, javaType=int}
+      )}
+   </update>
    <!-- 방문 신청 취소 (결제상태 변경)-->
    <update id="visitorApplyCancle" parameterType="map" statementType="CALLABLE">
       {call proc_visitorCancle(#{visit_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},

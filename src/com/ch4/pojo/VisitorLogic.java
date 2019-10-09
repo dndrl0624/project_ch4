@@ -44,6 +44,11 @@ public class VisitorLogic {
          pkMap.put("visit_no", visit_no);
          
          result = vDao.visitSubAdd(vtMap,tkMap,pkMap);
+         if(result==1) {
+            pMap.put("vtAddList",vtAddList);
+            pMap.put("tkAddList",tkAddList);
+            pMap.put("pkAddList",pkAddList);
+         }
       }
       
       return result;
@@ -51,10 +56,40 @@ public class VisitorLogic {
 
    public int visitorUpdate(Map<String, Object> pMap) {
       int result = 0;
-      result = vDao.visitorUpdate(pMap);
-      /*
-       * 여기에 방문자,차량,기기 add 코드
-       */
+      String visit_no = null;
+
+      Map<String, Object> updInfo = SortAndBind.visitApplySort(pMap);
+      
+      List<Map<String,Object>> vtAddList = (List<Map<String,Object>>) updInfo.get("vtAddList");
+      List<Map<String,Object>> tkAddList = (List<Map<String,Object>>) updInfo.get("tkAddList");
+      List<Map<String,Object>> pkAddList = (List<Map<String,Object>>) updInfo.get("pkAddList");
+      Map<String,Object> applyupd = (Map<String,Object>) updInfo.get("applyAdd");
+      
+      result = vDao.visitorUpdate(applyupd);
+      if(result==1) {
+         visit_no = pMap.get("visit_no").toString();
+         
+         Map<String, Object> vtMap = new HashMap<String, Object>();
+          vtMap.put("vtAddList", vtAddList);
+          vtMap.put("visit_no", visit_no);
+          Map<String, Object> tkMap = new HashMap<String, Object>();
+          tkMap.put("tkAddList", tkAddList);
+          tkMap.put("visit_no", visit_no);
+          Map<String, Object> pkMap = new HashMap<String, Object>();
+          pkMap.put("pkAddList", pkAddList);
+          pkMap.put("visit_no", visit_no);
+          
+          result = vDao.visitSubAdd(vtMap,tkMap,pkMap);
+          
+          if(result==1) {
+             pMap.put("vtAddList",vtAddList);
+             pMap.put("tkAddList",tkAddList);
+             pMap.put("pkAddList",pkAddList);
+          }
+      }
+      else if(result==0) {
+         return result;
+      }
       return result;
    }
 

@@ -32,13 +32,39 @@ public class GoodsLogic {
          gmMap.put("gmAddList", gmAddList);
          
          result = gDao.goodsSubAdd(gmMap);
+         if(result==1) {
+            pMap.put("gmAddList", gmAddList);
+         }
       }
       return result;
    }
 
    public int goodsUpdate(Map<String, Object> pMap) {
       int result = 0;
+      String aplg_no = null;
+      Map<String, Object> updInfo = SortAndBind.goodsApplySort(pMap);
+      
+      List<Map<String,Object>> gmAddList = (List<Map<String,Object>>)updInfo.get("gmAddList");
+      Map<String,Object> applyupd = (Map<String,Object>) updInfo.get("applyAdd");
+      
       result = gDao.goodsUpdate(pMap);
+      
+      if(result==0) {
+         return result;
+      }
+      else if(result==1) {
+         aplg_no = pMap.get("aplg_no").toString();
+         
+         Map<String, Object> gmMap = new HashMap<String, Object>();
+          gmMap.put("aplg_no", aplg_no);
+          gmMap.put("gmAddList", gmAddList);
+          
+          result = gDao.goodsSubAdd(gmMap);
+          
+          if(result==1) {
+             pMap.put("gmAddList", gmAddList);
+          }
+      }
       return result;
    }
 
@@ -68,8 +94,8 @@ public class GoodsLogic {
       return goodsList;
    }
 
-   public List<Map<String, Object>> goodsDetail(Map<String, Object> pMap) {
-      List<Map<String, Object>> goodsDetail = gDao.goodsDetail(pMap);
+   public Map<String, Object> goodsDetail(Map<String, Object> pMap) {
+      Map<String, Object> goodsDetail = gDao.goodsDetail(pMap);
       return goodsDetail;
    }
 
