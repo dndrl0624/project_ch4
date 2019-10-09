@@ -223,7 +223,7 @@
 		//////////////////////////////  방문자 정보 세팅  //////////////////////////////
 		//실제로 쓸 for문
 		<% for(int i=0;i<vtList.size();i++){ %>
-		var vRow = "<tr id='vRow'><td><input id='chkVisitor' type='checkbox'></td>"
+		var vRow = "<tr id='vRow"+vIndex+"'><td><input id='chkVisitor' type='checkbox'></td>"
 					+"<td><input id='visitor_name' type='hidden' name='visitor_name' value='"
 					+"<%=vtList.get(i).get("VISITOR_NAME") %>"+"'>"+"<%=vtList.get(i).get("VISITOR_NAME") %>"+"</td>"
 					+"<td><input id='visitor_hp' type='hidden' name='visitor_hp' value='"

@@ -274,7 +274,6 @@
 					}
 				}
 				gIndex = reset;
-				alert(gIndex);
 				$("#tb_goods input:checkbox").prop("checked", false);
 			}
 			//없으면 == checked가 없음
@@ -318,7 +317,7 @@
 			+"EA: "+$("#gmng_quan").val()+"\n"
 			+"물품종류: "+$("#gmng_type").val()+"\n"
 		);
-// 		$("#form_update").submit();
+		$("#form_update").submit();
 	}
 </script>
 <div class="container-fluid">

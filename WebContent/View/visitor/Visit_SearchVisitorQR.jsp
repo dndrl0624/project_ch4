@@ -100,8 +100,8 @@
 	});
 	function searchApply(confm_no){
 		$("#confm_no").attr('value',confm_no);
-		$("#form_search").attr('action','/visitor/qrCodeList.ch4');
-		$("#form_search").submit();
+		$("#form_search_info").attr('action','/visitor/searchVisitor.ch4');
+		$("#form_search_info").submit();
 //		alert('방문번호로 신청 상세조회');
 	}
 	function operateFormatterNo(value, row, index) {
@@ -133,54 +133,46 @@
 		}
 	}
 	function searchQR(){
-		//테스트용
+		if(!($("#input_search_name").textbox('getValue'))){
+			alert("방문자 성명을 입력해 주세요.");
+			$("#input_search_name").textbox('textbox').focus();
+			return;
+		}
+		if(!($("#input_search_hp1").textbox('getValue'))){
+			alert("방문자 연락처를 입력해 주세요.");
+			$("#input_search_hp1").textbox('textbox').focus();
+			return;
+		}
+		if(!($("#input_search_hp2").textbox('getValue'))){
+			alert("방문자 연락처를 입력해 주세요.");
+			$("#input_search_hp2").textbox('textbox').focus();
+			return;
+		}
+		if(!($("#input_search_hp3").textbox('getValue'))){
+			alert("방문자 연락처를 입력해 주세요.");
+			$("#input_search_hp3").textbox('textbox').focus();
+			return;
+		}
+		var search_hp = $("#input_search_hp1").textbox('getValue') + "-"
+						+ $("#input_search_hp2").textbox('getValue') + "-"
+						+ $("#input_search_hp3").textbox('getValue');
+		$("#input_search_hp").attr("value",search_hp);
 		$.ajax({
-			url: "../../json/testLog3.json",
+			type: "POST",
+			url: "/visitor/qrCodeList.ch4",
+			data: $("#form_search").serialize(),
 			dataType: "json",
 			success: function(result){
+				if(!result){
+					alert("조회결과가 없습니다.");
+					return;
+				}
 				$("#tb_search").bootstrapTable('load',result);
+			},
+			error: function(){
+				alert("error");
 			}
 		});
-// 		if(!($("#input_search_name").textbox('getValue'))){
-// 			alert("방문자 성명을 입력해 주세요.");
-// 			$("#input_search_name").textbox('textbox').focus();
-// 			return;
-// 		}
-// 		if(!($("#input_search_hp1").textbox('getValue'))){
-// 			alert("방문자 연락처를 입력해 주세요.");
-// 			$("#input_search_hp1").textbox('textbox').focus();
-// 			return;
-// 		}
-// 		if(!($("#input_search_hp2").textbox('getValue'))){
-// 			alert("방문자 연락처를 입력해 주세요.");
-// 			$("#input_search_hp2").textbox('textbox').focus();
-// 			return;
-// 		}
-// 		if(!($("#input_search_hp3").textbox('getValue'))){
-// 			alert("방문자 연락처를 입력해 주세요.");
-// 			$("#input_search_hp3").textbox('textbox').focus();
-// 			return;
-// 		}
-// 		var search_hp = $("#input_search_hp1").textbox('getValue') + "-"
-// 						+ $("#input_search_hp2").textbox('getValue') + "-"
-// 						+ $("#input_search_hp3").textbox('getValue');
-// 		$("#input_search_hp").attr("value",search_hp);
-// 		$.ajax({
-// 			type: "POST",
-// 			url: "/visitor/qrCodeList.ch4",
-// 			data: $("#form_search").serialize(),
-// 			dataType: "json",
-// 			success: function(result){
-// 				if(!result){
-// 					alert("조회결과가 없습니다.");
-// 					return;
-// 				}
-// 				$("#tb_search").bootstrapTable('load',result);
-// 			},
-// 			error: function(){
-// 				alert("error");
-// 			}
-// 		});
 	}
 </script>
 <div class="container">
@@ -229,5 +221,9 @@
 		</div>
 	</div>
 </div>
+<!-- 방문번호로 정보조회 FORM전송 -->
+<form id="form_search_info" action="" method="post">
+	<input id="confm_no" type="hidden" name="confm_no" value="">
+</form>
 </body>
 </html>
