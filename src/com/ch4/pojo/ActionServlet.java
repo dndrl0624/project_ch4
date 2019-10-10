@@ -37,7 +37,7 @@ public class ActionServlet extends HttpServlet {
          controller = RequestMapping.getController(command);
          rController = RequestMappingR.getController(command);
       } catch (Exception e) {
-         logger.info("Mapping Exception : " + e.getMessage());
+         logger.info("Mapping Exception : " +  e.getMessage());
       }
       ///////////////////////////////////////////////
       
