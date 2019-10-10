@@ -224,9 +224,9 @@
 		//실제로 쓸 for문
 		<% for(int i=0;i<vtList.size();i++){ %>
 		var vRow = "<tr id='vRow"+vIndex+"'><td><input id='chkVisitor' type='checkbox'></td>"
-					+"<td><input id='visitor_name' type='hidden' name='visitor_name' value='"
+					+"<td><input id='visitor_name' type='hidden' name='visitor_names' value='"
 					+"<%=vtList.get(i).get("VISITOR_NAME") %>"+"'>"+"<%=vtList.get(i).get("VISITOR_NAME") %>"+"</td>"
-					+"<td><input id='visitor_hp' type='hidden' name='visitor_hp' value='"
+					+"<td><input id='visitor_hp' type='hidden' name='visitor_hps' value='"
 					+"<%=vtList.get(i).get("VISITOR_HP") %>"+"'>"+"<%=vtList.get(i).get("VISITOR_HP") %>"+"</td></tr>";
 		$("#tb_visitor tbody").append(vRow);
 		vIndex++;
@@ -236,11 +236,11 @@
 		//실제로 쓸 for문
 		<% for(int i=0;i<tkList.size();i++){ %>
 		var dRow = "<tr id='dRow'><td><input id='chkDevice' type='checkbox'></td>"
-					+"<td><input id='tkin_kind' type='hidden' name='tkin_kind' value='"
+					+"<td><input id='tkin_kind' type='hidden' name='tkin_kinds' value='"
 					+"<%=tkList.get(i).get("TKIN_KIND") %>"+"'>"+"<%=tkList.get(i).get("TKIN_KIND") %>"+"</td>"
-					+"<td><input id='tkin_brand' type='hidden' name='tkin_brand' value='"
+					+"<td><input id='tkin_brand' type='hidden' name='tkin_brands' value='"
 					+"<%=tkList.get(i).get("TKIN_BRAND") %>"+"'>"+"<%=tkList.get(i).get("TKIN_BRAND") %>"+"</td>"
-					+"<td><input id='tkin_model' type='hidden' name='tkin_model' value='"
+					+"<td><input id='tkin_model' type='hidden' name='tkin_models' value='"
 					+"<%=tkList.get(i).get("TKIN_MODEL") %>"+"'>"+"<%=tkList.get(i).get("TKIN_MODEL") %>"+"</td></tr>";
 		$("#tb_device tbody").append(dRow);
 		dIndex++;
@@ -250,11 +250,11 @@
 		//실제로 쓸 for문
 		<% for(int i=0;i<pkList.size();i++){ %>
 		var pRow = "<tr id='pRow'><td><input id='chkParking' type='checkbox'></td>"
-					+"<td><input id='parking_num' type='hidden' name='parking_num' value='"
+					+"<td><input id='parking_num' type='hidden' name='parking_nums' value='"
 					+"<%=pkList.get(i).get("PARKING_NUM") %>"+"'>"+"<%=pkList.get(i).get("PARKING_NUM") %>"+"</td>"
-					+"<td><input id='parking_kind' type='hidden' name='parking_kind' value='"
+					+"<td><input id='parking_kind' type='hidden' name='parking_kinds' value='"
 					+"<%=pkList.get(i).get("PARKING_KIND") %>"+"'>"+"<%=pkList.get(i).get("PARKING_KIND") %>"+"</td>"
-					+"<td><input id='parking_model' type='hidden' name='parking_model' value='"
+					+"<td><input id='parking_model' type='hidden' name='parking_models' value='"
 					+"<%=pkList.get(i).get("PARKING_MODEL") %>"+"'>"+"<%=pkList.get(i).get("PARKING_MODEL") %>"+"</td>"+"</tr>";
 		$("#tb_parking tbody").append(pRow);
 		pIndex++;
@@ -376,8 +376,8 @@
 			var name = $("#v_name").val();
 			var hp = $("#v_hp1").val()+'-'+$("#v_hp2").val()+'-'+$("#v_hp3").val();
 			var row = "<tr id='vRow"+vIndex+"'><td><input id='chkVisitor' type='checkbox'></td>"
-					+"<td><input id='visitor_name' type='hidden' name='visitor_name' value='"+name+"'>"+name+"</td>"
-					+"<td><input id='visitor_hp' type='hidden' name='visitor_hp' value='"+hp+"'>"+hp+"</td></tr>";
+					+"<td><input id='visitor_name' type='hidden' name='visitor_names' value='"+name+"'>"+name+"</td>"
+					+"<td><input id='visitor_hp' type='hidden' name='visitor_hps' value='"+hp+"'>"+hp+"</td></tr>";
 			$("#tb_visitor tbody").append(row);
 			$("#v_name").textbox('setValue',null);
 			$("#v_hp1").textbox('setValue',null);
@@ -478,9 +478,9 @@
 			var brand = $("#d_brand").combobox('getText');
 			var model = $("#d_model").val();
 			var row = "<tr id='dRow"+dIndex+"'><td><input id='chkDevice' type='checkbox'></td>"
-					+"<td><input id='tkin_kind' type='hidden' name='tkin_kind' value='"+kind+"'>"+kind+"</td>"
-					+"<td><input id='tkin_brand' type='hidden' name='tkin_brand' value='"+brand+"'>"+brand+"</td>"
-					+"<td><input id='tkin_model' type='hidden' name='tkin_model' value='"+model+"'>"+model+"</td></tr>";
+					+"<td><input id='tkin_kind' type='hidden' name='tkin_kinds' value='"+kind+"'>"+kind+"</td>"
+					+"<td><input id='tkin_brand' type='hidden' name='tkin_brands' value='"+brand+"'>"+brand+"</td>"
+					+"<td><input id='tkin_model' type='hidden' name='tkin_models' value='"+model+"'>"+model+"</td></tr>";
 			$("#tb_device tbody").append(row);
 			$("#d_name").textbox('setValue',null);
 			$("#d_model").textbox('setValue',null);
@@ -558,9 +558,9 @@
 			var kind = $("#p_kind").combobox('getText');
 			var model = $("#p_model").combobox('getText');
 			var row = "<tr id='pRow"+pIndex+"'><td><input id='chkParking' type='checkbox'></td>"
-					+"<td><input id='parking_num' type='hidden' name='parking_num' value='"+num+"'>"+num+"</td>"
-					+"<td><input id='parking_kind' type='hidden' name='parking_kind' value='"+kind+"'>"+kind+"</td>"
-					+"<td><input id='parking_model' type='hidden' name='parking_model' value='"+model+"'>"+model+"</td></tr>";
+					+"<td><input id='parking_num' type='hidden' name='parking_nums' value='"+num+"'>"+num+"</td>"
+					+"<td><input id='parking_kind' type='hidden' name='parking_kinds' value='"+kind+"'>"+kind+"</td>"
+					+"<td><input id='parking_model' type='hidden' name='parking_models' value='"+model+"'>"+model+"</td></tr>";
 			$("#tb_parking tbody").append(row);
 			$("#p_num").textbox('setValue',null);
 			$("#p_kind").combobox('select','차종');

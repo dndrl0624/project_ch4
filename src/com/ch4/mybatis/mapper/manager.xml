@@ -23,7 +23,7 @@
 		update visit_apply
 		   set visit_permit_st = #{visit_permit_st}
 		   	  ,visit_permit_id = #{cmng_id}
-		   	  <if test="visit_notes != null">
+		   	  <if test='visit_notes not in {null,""}'>
 		   	  	,visit_notes = #{visit_notes}
 		   	  </if>
 		 where visit_no = #{visit_no}

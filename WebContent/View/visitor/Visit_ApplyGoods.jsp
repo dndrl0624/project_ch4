@@ -245,9 +245,9 @@
 						var goodsinfo = gmList[i].GMNG_TYPE;
 						var EA = gmList[i].GMNG_QUAN;
 						var row = "<tr id='gRow"+gIndex+"'><td><input id='chkGoods' type='checkbox' value='"+gIndex+"'></td>"
-								+"<td><input id='gmng_name' type='hidden' name='gmng_name' value='"+goodsname+"'>"+goodsname+"</td>"
-								+"<td><input id='gmng_type' type='hidden' name='gmng_type' value='"+goodsinfo+"'>"+goodsinfo+"</td>"
-								+"<td><input id='gmng_quan' type='hidden' name='gmng_quan' value='"+EA+"'>"+EA+"</td></tr>";
+								+"<td><input id='gmng_name' type='hidden' name='gmng_names' value='"+goodsname+"'>"+goodsname+"</td>"
+								+"<td><input id='gmng_type' type='hidden' name='gmng_types' value='"+goodsinfo+"'>"+goodsinfo+"</td>"
+								+"<td><input id='gmng_quan' type='hidden' name='gmng_quans' value='"+EA+"'>"+EA+"</td></tr>";
 						$("#tb_goods tbody").append(row);
 						gIndex++;
 					}
@@ -283,9 +283,9 @@
 			var EA = $("#v_ea").val();
 			var goodsinfo = $("#v_goodsinfo").val();
 			var row = "<tr id='gRow"+gIndex+"'><td><input id='chkGoods' type='checkbox' value='"+gIndex+"'></td>"
-					+"<td><input id='gmng_name' type='hidden' name='gmng_name' value='"+goodsname+"'>"+goodsname+"</td>"
-					+"<td><input id='gmng_type' type='hidden' name='gmng_type' value='"+goodsinfo+"'>"+goodsinfo+"</td>"
-					+"<td><input id='gmng_quan' type='hidden' name='gmng_quan' value='"+EA+"'>"+EA+"</td></tr>";
+					+"<td><input id='gmng_name' type='hidden' name='gmng_names' value='"+goodsname+"'>"+goodsname+"</td>"
+					+"<td><input id='gmng_type' type='hidden' name='gmng_types' value='"+goodsinfo+"'>"+goodsinfo+"</td>"
+					+"<td><input id='gmng_quan' type='hidden' name='gmng_quans' value='"+EA+"'>"+EA+"</td></tr>";
 			$("#tb_goods tbody").append(row);
 			$("#v_goodsname").textbox('setValue',null);
 			$("#v_goodsinfo").textbox('setValue',null);

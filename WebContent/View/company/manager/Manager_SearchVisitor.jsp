@@ -49,7 +49,7 @@ $(document).ready(function(){
 		}
 	});
 //승인상태 변경 검색 이벤트
-	$("#GMNG_CONFM").combobox({
+	$("#state").combobox({
 		onChange: function(newVal){
 			//alert("work");
 			$.ajax({
@@ -67,29 +67,31 @@ $(document).ready(function(){
 //신청일 변경 검색 이벤트
 	$("#startdate").datebox({
 		onSelect: function(date){
-				$.ajax({
-					type:'post'
-					,url:'/company/applyVisitList.ch4'
-					,dataType: "json"
-					,data :$("#f_search").serialize()
-					,success: function(data){
-						$("#tb_sv").bootstrapTable('load',data);
-					}
-				});
-			}
+			$(this).datebox('setValue',date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate());
+			$.ajax({
+				type:'post'
+				,url:'/company/applyVisitList.ch4'
+				,dataType: "json"
+				,data :$("#f_search").serialize()
+				,success: function(data){
+					$("#tb_sv").bootstrapTable('load',data);
+				}
+			});
+		}
 	});
 	$("#closedate").datebox({
 		onSelect: function(date){
-				$.ajax({
-					type:'post'
-					,url:'/company/applyVisitList.ch4'
-					,dataType: "json"
-					,data :$("#f_search").serialize()
-					,success: function(data){
-						$("#tb_sv").bootstrapTable('load',data);
-					}
-				});
-			}
+			$(this).datebox('setValue',date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate());
+			$.ajax({
+				type:'post'
+				,url:'/company/applyVisitList.ch4'
+				,dataType: "json"
+				,data :$("#f_search").serialize()
+				,success: function(data){
+					$("#tb_sv").bootstrapTable('load',data);
+				}
+			});
+		}
 	});
 	
 });
@@ -129,22 +131,22 @@ function btn_search(){
 						<div class='col-lg-2' style="padding: 5px;">
 							<select class="easyui-combobox" id="SearchType" name='SearchType'
 								style="width: 90%;">
-								<option value="VISIT_APPLY_NAME" selected>신청자명</option>
-								<option value="VISITOR_NAME">방문자명</option>
-								<option value="VISIT_DESTI">목적지</option>
-								<option value="VISIT_NO">신청번호</option>
+								<option value="visit_apply_name" selected>신청자명</option>
+								<option value="visitor_name">방문자명</option>
+								<option value="visit_desti">목적지</option>
+								<option value="visit_no">신청번호</option>
 							</select>
 						</div>
 						<div class='col-lg-2' style="padding: 5px;">
 							<!-- 검색창 : 콤보박스에 의한 분기 -->
 							<!-- 텍스트 박스에 대해 name값 변경 : 처음 값은 방문자명 // onChange 이벤트로 Name속성을 바꾸어 주기 -->
-							<input class="easyui-textbox" id="searchText" name="VISITOR_NAME"
+							<input class="easyui-textbox" id="searchText" name="visit_apply_name"
 								style="width: 80%;"> <a class="easyui-linkbutton"
 								type="button" data-options="iconCls:'icon-search'"
 								onclick="btn_search()"></a>
 						</div>
 						<div class='col-lg-2' style="padding: 5px;">
-							<select class="easyui-combobox" id="state" name="GMNG_CONFM"
+							<select class="easyui-combobox" id="state" name="visit_permit_st"
 								style="width: 100%;">
 								<option value="" selected>전체</option>
 								<option value="결재중">결재중</option>
