@@ -421,7 +421,9 @@
                +"<td><input id='visitor_hp' type='hidden' name='visitor_hp' value='"+hp+"'>"+hp+"</td></tr>";
          $("#tb_visitor tbody").append(row);
          $("#v_name").textbox('setValue',null);
-         $("#v_hp").textbox('setValue',null);
+         $("#v_hp1").textbox('setValue',null);
+         $("#v_hp2").textbox('setValue',null);
+         $("#v_hp3").textbox('setValue',null);
          $("#md_visitor").modal("hide");
          vIndex++;
       });

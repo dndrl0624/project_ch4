@@ -9,7 +9,7 @@
 		<nav class="navbar navbar-default navbar-fixed-top" style="padding-top:10px;padding-bottom:10px;">
 			<div class="container">
 				<!-- 대표 회사 아이콘 및 링크 -->	
-				<a id="Main_log" href="../index/Index_Choose.jsp">
+				<a id="Main_log" href="/View/index/Index_Choose.jsp">
 					<img src="/Style/images/logo/logo_navi3.png" alt="">
 				</a>
 			</div>
