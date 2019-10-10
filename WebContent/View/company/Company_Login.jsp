@@ -36,21 +36,8 @@
 /* 배경 투명도 및 크기  */
 #login_background {
 	background-color: rgba(223, 223, 223, 0.7);
-	height: 100%;
+	height: 400px;
 	padding-bottom: 30px;
-}
-
-div.row {
-	padding-top: 20px;
-}
-
-#btn_login {
-	width: 50%;
-	height: 80px;
-}
-
-.checkbox {
-	border: 0px;
 }
 /* 구분에 대한 css */
 h2 {
@@ -58,6 +45,35 @@ h2 {
 	margin-left: 8%;
 	border-left: solid 7px;
 	color: white;
+	font-weight: 700;
+	font-family: sans-serif;
+}
+#com_join,#kiosk {
+	width: 80px;
+}
+#signtitle {
+	font-size: 50px;
+	margin-bottom: 30px;
+}
+
+#cmng_id {
+	width: 350px;
+	height: 50px;
+	margin-bottom: 10px;
+}
+#cmng_pw {
+	width: 350px;
+	height: 50px;
+	margin-bottom: 10px;
+}
+#btn_login {
+	width: 350px;
+	height: 50px;
+}
+.checkbox {
+	border: 0px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 </style>
 <script type="text/javascript">
@@ -110,10 +126,10 @@ h2 {
 			<div class="row">
 			<!-- 로그인//kiosk 버튼 -->
 				<div class="col-lg-offset-8 col-lg-4">
-					<button class="btn btn-light" id="com_join" style="width: 80px;" type="button"
+					<button class="btn btn-light" id="com_join"type="button"
 							onClick="moveJoin()">JOIN</button>
 					<button class="btn btn-danger" id="kiosk" type="button"
-							onClick="moveKiosk()" style="width: 80px;">KIOSK</button>
+							onClick="moveKiosk()">KIOSK</button>
 				</div>
 			</div>
 			<div class="row" align="left">
@@ -122,30 +138,37 @@ h2 {
 			<div class="col-lg-offset-1 col-lg-10 col-lg-offset-1">
 				<div id="login_background" class="row" align="center">
 					&nbsp;
-					<h1 style="font-size: 50px;">Please sign in</h1>
+					<h1 id="signtitle">Please sign in</h1>
 					&nbsp;
 					<!-- 로그인화면 -->
 					<form class="fsignin" id="fsignin">
-						<div class="row">
-							<div class="col-lg-7" align="right">
-								<div class="col-lg-offset-4 col-lg-8 ">
-									<input id="cmng_id" name="cmng_id" value="<%=id %>" class="easyui-textbox"  prompt="id" data-options="iconCls:'icon-man'" style="width:80%; height: 40px; margin-bottom: 10px">
-									<input id="cmng_pw" name="cmng_pw" class="easyui-passwordbox" prompt="Password" iconWidth="28" style="width:80%; height: 40px">
+						<div align="center"> 
+							<div class="row">
+								<div class="col-lg-offset-2 col-lg-8 col-lg-offset-2">
+									<div class="row" style="margin-bottom: 10px;">
+										<input id="cmng_id" name="cmng_id" value="<%=id %>" class="easyui-textbox" 
+												style="height: 40px;"
+												prompt="id" data-options="iconCls:'icon-man'">
+									</div>
+									<div class="row">
+										<input id="cmng_pw" name="cmng_pw" class="easyui-passwordbox" 
+												style="height: 40px;"
+												prompt="Password" iconWidth="28">
+									</div>
 								</div>
-							</div> 
-							<div class="col-lg-3" align="left">
-								<button id="btn_login"  class="btn btn-lg btn-primary btn-block" onClick="login()" type="submit">Sign in</button>
 							</div>
-							<div class="col-lg-2">
-							<!-- 크기 맞추려고 넣은 빈 공간입니당. -->
+							<div class="row" >
+								<div class="checkbox">
+	   								<label>
+										<input type="checkbox" id="logincheck" name="logincheck" <% if(id.length() > 1) out.print("checked"); %>value="remember-me"> Remember me
+							    	</label>
+							    </div>
 							</div>
-						</div>
-						<div class="row">
-							<div class="checkbox">
-   								<label>
-									<input type="checkbox" id="logincheck" name="logincheck" <% if(id.length() > 1) out.print("checked"); %>value="remember-me"> Remember me
-						    	</label>
-						    </div>
+							<div class="row">
+								<div class="col-lg-offset-2 col-lg-8 col-lg-offset-2">
+									<button id="btn_login"  class="btn btn-lg btn-primary btn-block" onClick="login()" type="submit">Sign in</button>
+								</div>
+							</div>
 						</div>
 					</form>
 				</div>
