@@ -89,8 +89,8 @@ public class GoodsDao {
       return rMap;
    }
 
-   public Map<String, Object> goodsSearch(Map<String, Object> pMap) {
-      Map<String,Object> goodsSearch = sqlSession.selectOne("goodsApplySearch", pMap);
+   public List<Map<String,Object>> goodsSearch(Map<String, Object> pMap) {
+      List<Map<String,Object>> goodsSearch = sqlSession.selectList("goodsApplySearch", pMap);
       return goodsSearch;
    }
 

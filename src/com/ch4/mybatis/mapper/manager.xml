@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ch4.mybatis.mapper.ManagerMapper">
-	<resultMap type="hashmap" id="vMap"/>
-	<resultMap type="hashmap" id="dMap"/>
-	
 	<!-- visitorQR코드 DB에 저장 -->
 	<insert id="vApplyConfirm" parameterType="map">
 		<foreach collection="confirmList" item="item" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
@@ -39,7 +36,7 @@
 			#{visit_permit_id, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
 			#{visit_permit_st, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
 			#{visit_permit_notes, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
-			#{confirmList, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=vMap},
+			#{confirmList, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=rMap},
 			#{result, mode=OUT, jdbcType=INTEGER, javaType=int}
 		)}	
 	</update>
@@ -51,7 +48,7 @@
 			#{aplg_permit_id, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
 			#{aplg_permit_st, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
 			#{aplg_permit_notes, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
-			#{confirmList, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=vMap},
+			#{confirmList, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=rMap},
 			#{result, mode=OUT, jdbcType=INTEGER, javaType=int}
 		)}
 	</update>

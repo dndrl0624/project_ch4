@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ch4.mybatis.mapper.CommonMapper">
+	<resultMap type="hashmap" id="rMap"/>
 	<!-- 회사명단 콤보박스 -->
 	<select id="companyCombo" parameterType="map" resultType="map">
 		select com_no, com_name
@@ -104,7 +105,7 @@
 	</select>
 	<!-- 방문자 조회 -->
 	<select id="visitorSearch" parameterType="map" resultType="map">
-		select visitot_name, visitor_hp from visitor_mng
+		select visitor_name, visitor_hp from visitor_mng
 		<where>
 			<!-- 검색 : (승인)방문번호 -->
 			<if test="confm_no != null">

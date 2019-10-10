@@ -117,15 +117,83 @@
 <body>
 <%@ include file="/View/CommonForm/Top.jsp"%>
 <script>
-	//부트스트랩 테이블 default 세팅
-	$.fn.bootstrapTable.defaults.locales = ["ko-KR"];
-	$.fn.bootstrapTable.defaults.singleSelect = true;
-	$.fn.bootstrapTable.defaults.pagination = true;
-	$.fn.bootstrapTable.defaults.pageList = [10,20,30,50];
-	$.fn.bootstrapTable.columnDefaults.halign = 'center';
-	$.fn.bootstrapTable.columnDefaults.valign = 'middle';
-	$.fn.bootstrapTable.columnDefaults.align = 'center';
 	$(document).ready(function(){
+		$("#tb_search").bootstrapTable({
+			columns:[
+			    {field:'VISIT_NO',title:'신청번호'},
+			    {field:'VISIT_APPLY_DATE',title:'신청일자'},
+			    {field:'COM_NAME',title:'방문지'},
+			    {field:'VISIT_PURPS',title:'방문목적'},
+			    {field:'VISIT_DATE',title:'방문일자'},
+			    {field:'VISIT_PERMIT_ST',title:'결재상태'}
+			],
+			onClickRow:function(row,$element,field){
+				var visit_no = $element.find("td:first").html();
+				$("#input_update").attr('value',visit_no);
+				$.ajax({
+					type: 'get',
+					dataType: 'json',
+					url: '/visitor/detail.ch4?visit_no='+visit_no,
+					success: function(result){
+						//값 뿌리기 전에 테이블 자식노드 제거
+						$("#tb_detail1 tbody").empty();
+						$("#tb_detail2 tbody").empty();
+						$("#tb_detail3 tbody").empty();
+						$("#tb_visitor tbody").empty();
+						$("#tb_device tbody").empty();
+						$("#tb_parking tbody").empty();
+						//////////////////////  값 뿌려주기  /////////////////////////
+						var infoMap = result.infoMap;
+						var vtList = result.vtList;
+						var tkList = result.tkList;
+						var pkList = result.pkList;
+	    				var row = "<tr><td>"+infoMap.VISIT_NO+"</td>"
+	    							+"<td>"+infoMap.VISIT_APPLY_DATE+"</td>"
+	    							+"<td>"+infoMap.VISIT_PERMIT_ST+"</td>"
+	    							+"<td>"+infoMap.VISIT_APPLY_NAME+"</td>"
+	    							+"<td>"+infoMap.VISIT_APPLY_HP+"</td></tr>";
+	    				$("#tb_detail1 tbody").append(row);
+	    				if(infoMap.VISIT_TYPE=="정기방문"){
+		    				row = "<tr><td>"+infoMap.VISIT_TYPE+"</td>"
+		    						+"<td>"+infoMap.VISIT_TERM+"</td>"
+		    						+"<td>"+infoMap.VISIT_DAY+"</td>"
+		    						+"<td>"+infoMap.VISIT_DATE+"</td></tr>";
+	    				}
+	    				else{
+		    				row = "<tr><td>"+infoMap.VISIT_TYPE+"</td>"
+		    						+"<td>해당없음</td>"
+		    						+"<td>해당없음</td>"
+		    						+"<td>"+infoMap.VISIT_DATE+"</td></tr>";
+	    				}
+	    				$("#tb_detail2 tbody").append(row);
+	    				row = "<tr><td>"+infoMap.COM_NAME+"</td>"
+	    						+"<td>"+infoMap.VISIT_DESTI+"</td>"
+	    						+"<td>"+infoMap.VISIT_PURPS+"</td></tr>";
+	    				$("#tb_detail3 tbody").append(row);
+	    				for(i=0;i<vtList.length;i++){
+		    				row = "<tr><td>"+vtList[i].VISITOR_NAME+"</td>"
+		    						+"<td>"+vtList[i].VISITOR_HP+"</td></tr>";
+	    					$("#tb_visitor tbody").append(row);
+	    				}
+	    				for(i=0;i<tkList.length;i++){
+		    				row = "<tr><td>"+tkList[i].TKIN_KIND+"</td>"
+	    							+"<td>"+tkList[i].TKIN_BRAND+"</td>"
+		    						+"<td>"+tkList[i].TKIN_MODEL+"</td></tr>";
+	    					$("#tb_device tbody").append(row);
+	    				}
+	    				for(i=0;i<pkList.length;i++){
+		    				row = "<tr><td>"+pkList[i].PARKING_NUM+"</td>"
+	    							+"<td>"+pkList[i].PARKING_KIND+"</td>"
+		    						+"<td>"+pkList[i].PARKING_MODEL+"</td></tr>";
+	    					$("#tb_parking tbody").append(row);
+	    				}
+						//////////////////////  값 뿌려주기  /////////////////////////
+					}
+				});
+				//방문이력 조회 Modal 띄우기
+				$("#md_detail").modal('show');
+			},
+		});
 		<%if(null!=confm_no){%>
 			$("#input_num").textbox('setValue','<%=confm_no %>');
 			$.ajax({
@@ -154,160 +222,76 @@
 		$('.nav-tabs a[href="#nav_search2"]').on('shown.bs.tab', function(){
 			searchKeyword = "name&hp";
 		});
-		$("#tb_search").bootstrapTable({
-			columns:[
-			    {field:'visit_no',title:'신청번호'},
-			    {field:'visit_apply_date',title:'신청일자'},
-			    {field:'com_name',title:'방문지'},
-			    {field:'visit_purps',title:'방문목적'},
-			    {field:'visit_date',title:'방문일자'},
-			    {field:'visit_permit_st',title:'결제상태'}
-			],
-			onClickRow:function(row,$element,field){
-				var visit_no = $element.find("td:first").html();
-				$("#input_update").attr('value',visit_no);
+		$("#btn_search").click(function(){
+			//신청번호로 조회니?
+			if("number"==searchKeyword){
+				if(!($("#input_num").textbox('getValue'))){
+					alert("신청번호를 입력해 주세요.");
+					$("#input_num").textbox('textbox').focus();
+					return;
+				}
 				$.ajax({
-					type: 'get',
-					dataType: 'json',
-// 					url: '/visitor/detail.ch4?visit_no='+visit_no,
-					url: '../../json/testLog7.json',
+					type: "POST",
+					url: "/visitor/search.ch4",
+					data: $("#form_search_num").serialize(),
+					dataType: "json",
 					success: function(result){
-						//값 뿌리기 전에 테이블 자식노드 제거
-						$("#tb_detail1 tbody").empty();
-						$("#tb_detail2 tbody").empty();
-						$("#tb_detail3 tbody").empty();
-						$("#tb_visitor tbody").empty();
-						$("#tb_device tbody").empty();
-						$("#tb_parking tbody").empty();
-						//////////////////////  값 뿌려주기  /////////////////////////
-						var infoMap;
-						var vtList;
-						var tnList;
-						var pkList;
-						$.each(result,function(index,item){
-							infoMap = item.infoMap;
-							vtList = item.vtList;
-							tnList = item.tnList;
-							pkList = item.pkList;
-						});
-	    				var row = "<tr><td>"+infoMap[0].visit_no+"</td>"
-	    							+"<td>"+infoMap[0].visit_apply_date+"</td>"
-	    							+"<td>"+infoMap[0].visit_permit_st+"</td>"
-	    							+"<td>"+infoMap[0].visit_apply_name+"</td>"
-	    							+"<td>"+infoMap[0].visit_apply_hp+"</td></tr>";
-	    				$("#tb_detail1 tbody").append(row);
-	    				row = "<tr><td>"+infoMap[0].visit_type+"</td>"
-	    						+"<td>"+infoMap[0].visit_term+"</td>"
-	    						+"<td>"+infoMap[0].visit_day+"</td>"
-	    						+"<td>"+infoMap[0].visit_date+"</td></tr>";
-	    				$("#tb_detail2 tbody").append(row);
-	    				row = "<tr><td>"+infoMap[0].com_name+"</td>"
-	    						+"<td>"+infoMap[0].visit_desti+"</td>"
-	    						+"<td>"+infoMap[0].visit_purps+"</td></tr>";
-	    				$("#tb_detail3 tbody").append(row);
-	    				for(i=0;i<vtList.length;i++){
-		    				row = "<tr><td>"+vtList[i].visitor_name+"</td>"
-		    						+"<td>"+vtList[i].visitor_hp+"</td></tr>";
-	    					$("#tb_visitor tbody").append(row);
-	    				}
-	    				for(i=0;i<tnList.length;i++){
-		    				row = "<tr><td>"+tnList[i].tkin_kind+"</td>"
-	    							+"<td>"+tnList[i].tkin_brand+"</td>"
-		    						+"<td>"+tnList[i].tkin_model+"</td></tr>";
-	    					$("#tb_device tbody").append(row);
-	    				}
-	    				for(i=0;i<pkList.length;i++){
-		    				row = "<tr><td>"+pkList[i].parking_num+"</td>"
-	    							+"<td>"+pkList[i].parking_kind+"</td>"
-		    						+"<td>"+pkList[i].parking_model+"</td></tr>";
-	    					$("#tb_parking tbody").append(row);
-	    				}
-						//////////////////////  값 뿌려주기  /////////////////////////
+						if(!result){
+							alert("조회결과가 없습니다.");
+							return;
+						}
+						$("#tb_search").bootstrapTable('load',result);
+					},
+					error: function(){
+						alert("error");
 					}
 				});
-				//방문이력 조회 Modal 띄우기
-				$("#md_detail").modal('show');
-			},
-		});
-	});
-	//조회페이지 넘어가는 함수
-	function searchApply(){
-		//테스트용
-		$.ajax({
-			url: "../../json/testLog3.json",
-			dataType: "json",
-			success: function(result){
-				$("#tb_search").bootstrapTable('load',result);
+			}
+			//이름 & 연락처로 조회니?
+			else if("name&hp"==searchKeyword){
+				if(!($("#input_search_name").textbox('getValue'))){
+					alert("신청자 성명을 입력해 주세요.");
+					$("#input_search_name").textbox('textbox').focus();
+					return;
+				}
+				if(!($("#input_search_hp1").textbox('getValue'))){
+					alert("신청자 연락처를 입력해 주세요.");
+					$("#input_search_hp1").textbox('textbox').focus();
+					return;
+				}
+				if(!($("#input_search_hp2").textbox('getValue'))){
+					alert("신청자 연락처를 입력해 주세요.");
+					$("#input_search_hp2").textbox('textbox').focus();
+					return;
+				}
+				if(!($("#input_search_hp3").textbox('getValue'))){
+					alert("신청자 연락처를 입력해 주세요.");
+					$("#input_search_hp3").textbox('textbox').focus();
+					return;
+				}
+				var search_hp = $("#input_search_hp1").textbox('getValue') + "-"
+								+ $("#input_search_hp2").textbox('getValue') + "-"
+								+ $("#input_search_hp3").textbox('getValue');
+				$("#input_search_hp").attr("value",search_hp);
+				$.ajax({
+					type: "POST",
+					url: "/visitor/search.ch4",
+					data: $("#form_search_name").serialize(),
+					dataType: "json",
+					success: function(result){
+						if(!result){
+							alert("조회결과가 없습니다.");
+							return;
+						}
+						$("#tb_search").bootstrapTable('load',result);
+					},
+					error: function(){
+						alert("error");
+					}
+				});
 			}
 		});
-// 		//신청번호로 조회니?
-// 		if("number"==searchKeyword){
-// 			if(!($("#input_num").textbox('getValue'))){
-// 				alert("신청번호를 입력해 주세요.");
-// 				$("#input_num").textbox('textbox').focus();
-// 				return;
-// 			}
-// 			$.ajax({
-// 				type: "POST",
-// 				url: "/visitor/search.ch4",
-// 				data: $("#form_search_num").serialize(),
-// 				dataType: "json",
-// 				success: function(result){
-// 					if(!result){
-// 						alert("조회결과가 없습니다.");
-// 						return;
-// 					}
-// 					$("#tb_search").bootstrapTable('load',result);
-// 				},
-// 				error: function(){
-// 					alert("error");
-// 				}
-// 			});
-// 		}
-// 		//이름 & 연락처로 조회니?
-// 		else if("name&hp"==searchKeyword){
-// 			if(!($("#input_search_name").textbox('getValue'))){
-// 				alert("신청자 성명을 입력해 주세요.");
-// 				$("#input_search_name").textbox('textbox').focus();
-// 				return;
-// 			}
-// 			if(!($("#input_search_hp1").textbox('getValue'))){
-// 				alert("신청자 연락처를 입력해 주세요.");
-// 				$("#input_search_hp1").textbox('textbox').focus();
-// 				return;
-// 			}
-// 			if(!($("#input_search_hp2").textbox('getValue'))){
-// 				alert("신청자 연락처를 입력해 주세요.");
-// 				$("#input_search_hp2").textbox('textbox').focus();
-// 				return;
-// 			}
-// 			if(!($("#input_search_hp3").textbox('getValue'))){
-// 				alert("신청자 연락처를 입력해 주세요.");
-// 				$("#input_search_hp3").textbox('textbox').focus();
-// 				return;
-// 			}
-// 			var search_hp = $("#input_search_hp1").textbox('getValue') + "-"
-// 							+ $("#input_search_hp2").textbox('getValue') + "-"
-// 							+ $("#input_search_hp3").textbox('getValue');
-// 			$("#input_search_hp").attr("value",search_hp);
-// 			$.ajax({
-// 				type: "POST",
-// 				url: "/visitor/search.ch4",
-// 				data: $("#form_search_name").serialize(),
-// 				dataType: "json",
-// 				success: function(result){
-// 					if(!result){
-// 						alert("조회결과가 없습니다.");
-// 						return;
-// 					}
-// 					$("#tb_search").bootstrapTable('load',result);
-// 				},
-// 				error: function(){
-// 					alert("error");
-// 				}
-// 			});
-// 		}
-	}
+	});
 	//방문신청 변경 페이지 이동
 	function applyUpdate(){
 		$("#form_next").attr('action','/visitor/changeVisitor.ch4');
@@ -373,7 +357,7 @@
 							</div>
 						</div>
 						<div class="col-lg-2" style="padding-left:0px;padding-right:40px;margin : 10px 0px 10px 0px;">
-							<button id="btn_search" class="btn btn-info" type="button" onClick="searchApply()">조회</button>
+							<button id="btn_search" class="btn btn-info" type="button">조회</button>
 						</div>
 					</div>
 				</div>

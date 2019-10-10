@@ -115,8 +115,8 @@ public class VisitorDao {
       return deptList;
    }
 
-   public Map<String, Object> applySearch(Map<String, Object> pMap) {
-      Map<String, Object> applySearch = sqlSession.selectOne("visitorApplySearch", pMap);
+   public List<Map<String, Object>> applySearch(Map<String, Object> pMap) {
+      List<Map<String, Object>> applySearch = sqlSession.selectList("visitorApplySearch", pMap);
       return applySearch;
    }
    public List<Map<String, Object>> applyList(Map<String, Object> pMap) {

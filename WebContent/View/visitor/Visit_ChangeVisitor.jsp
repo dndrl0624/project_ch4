@@ -360,17 +360,17 @@
 			}
 			if(!($("#v_hp1").val())){
 				alert("연락처를 입력해 주세요.");
-				$("#v_hp1").numberbox('textbox').focus();
+				$("#v_hp1").textbox('textbox').focus();
 				return;
 			}
 			if(!($("#v_hp2").val())){
 				alert("연락처를 입력해 주세요.");
-				$("#v_hp2").numberbox('textbox').focus();
+				$("#v_hp2").textbox('textbox').focus();
 				return;
 			}
 			if(!($("#v_hp3").val())){
 				alert("연락처를 입력해 주세요.");
-				$("#v_hp3").numberbox('textbox').focus();
+				$("#v_hp3").textbox('textbox').focus();
 				return;
 			}
 			var name = $("#v_name").val();
@@ -380,9 +380,9 @@
 					+"<td><input id='visitor_hp' type='hidden' name='visitor_hp' value='"+hp+"'>"+hp+"</td></tr>";
 			$("#tb_visitor tbody").append(row);
 			$("#v_name").textbox('setValue',null);
-			$("#v_hp1").numberbox('setValue',null);
-			$("#v_hp2").numberbox('setValue',null);
-			$("#v_hp3").numberbox('setValue',null);
+			$("#v_hp1").textbox('setValue',null);
+			$("#v_hp2").textbox('setValue',null);
+			$("#v_hp3").textbox('setValue',null);
 			$("#md_visitor").modal("hide");
 			vIndex++;
 		});
@@ -920,9 +920,9 @@
 					<tr>
 						<th><p>전화번호</p></th>
 						<td>
-							<input id="v_hp1" class="easyui-numberbox" style="width:60px;"> -
-							<input id="v_hp2" class="easyui-numberbox" style="width:60px;"> -
-							<input id="v_hp3" class="easyui-numberbox" style="width:60px;">
+							<input id="v_hp1" class="easyui-textbox" type='number' style="width:60px;"> -
+							<input id="v_hp2" class="easyui-textbox" type='number' style="width:60px;"> -
+							<input id="v_hp3" class="easyui-textbox" type='number' style="width:60px;">
 						</td>
 					</tr>
 				</table>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ch4.mybatis.mapper.VisitorMapper">
-	<resultMap type="hashmap" id="vMap"/>
 	<!-- 신청자 방문이력 조회 -->
 	<update id="preVisitorSearch" parameterType="map" statementType="CALLABLE">
 		{call proc_preVisitApply(
@@ -10,7 +9,7 @@
 			#{com_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
 			#{visit_apply_date1, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
 			#{visit_apply_date2, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
-			#{preList, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=vMap},
+			#{preList, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=rMap},
 			#{result, mode=OUT, jdbcType=INTEGER, javaType=int}
 		)}
 	</update>
@@ -23,7 +22,7 @@
 			#{com_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
 			#{aplg_date1, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
 			#{aplg_date2, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
-			#{preList, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=vMap},
+			#{preList, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=rMap},
 			#{result, mode=OUT, jdbcType=INTEGER, javaType=int}
 		)}
 	</update>
@@ -67,15 +66,15 @@
 	<!-- 신청 내용 작성 (반입기기) -->
 	<insert id="deviceAdd" parameterType="map">
 		<foreach collection="tkAddList" item="it" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
-			into tkin_mng(tkin_model, tkin_kind, tkin_posbl_encc, tkin_brand, visit_no)
-				values(#{it.tkin_model}, #{it.tkin_kind}, #{it.tkin_posbl_encc}, #{it.tkin_brand}, #{visit_no})
+			into tkin_mng(tkin_model, tkin_kind, tkin_brand, visit_no)
+				values(#{it.tkin_model}, #{it.tkin_kind}, #{it.tkin_brand}, #{visit_no})
 		</foreach>
 	</insert>
 	
 	<!-- 신청 내용 작성 (주차) -->
 	<insert id="parkingAdd" parameterType="map">
 		<foreach collection="pkAddList" item="it" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
-			insert into parking_mng(parking_kind, parking_num, parking_model, visit_no)
+			into parking_mng(parking_kind, parking_num, parking_model, visit_no)
 				values(#{it.parking_kind}, #{it.parking_num}, #{it.parking_model}, #{visit_no})
 		</foreach>
 	</insert>
