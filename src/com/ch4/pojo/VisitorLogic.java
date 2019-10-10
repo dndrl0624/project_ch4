@@ -105,8 +105,8 @@ public class VisitorLogic {
       return companyList;
    }
 
-   public Map<String, Object> applySearch(Map<String, Object> pMap) {
-      Map<String, Object> applySearch = vDao.applySearch(pMap);
+   public List<Map<String,Object>> applySearch(Map<String, Object> pMap) {
+	   List<Map<String,Object>> applySearch = vDao.applySearch(pMap);
       return applySearch;
    }
    public List<Map<String, Object>> applyList(Map<String, Object> pMap) {

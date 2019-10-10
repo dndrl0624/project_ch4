@@ -1,6 +1,5 @@
 package com.ch4.pojo;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,16 +20,28 @@ public class CompanyDao {
    }
 
    //////////////////////////////////////////////////////////////////////////
-   public int mngUpdate(Map<String, Object> pMap) {
+   public int mngUpdateV(Map<String, Object> pMap) {
       int result = 0;
-      if(pMap.get("visit_no")!=null) {
-         result = sqlSession.update("vApplyPermit",pMap); // 프로시저로 수정
+  
+      sqlSession.update("vApplyPermit",pMap); 
+      result = (int)pMap.get("result");
+      logger.info("pMap : : " + pMap);
+      
+      if(result==1) {
+         sqlSession.commit();
       }
-      else if(pMap.get("aplg_no")!=null) {
-         result = sqlSession.update("gApplyPermit",pMap); //  프로시저로 수정
-      }
-      sqlSession.commit();
       return result;
+   }
+   
+   public int mngUpdateG(Map<String, Object> pMap) {
+      int result = 0;
+      sqlSession.update("gApplyPermit",pMap); 
+       result = (int)pMap.get("result");
+       if(result==1) {
+          sqlSession.commit();
+       }
+      return result;
+      
    }
 
    public int mngPermitV(Map<String,Object> pMap) {
@@ -97,8 +108,10 @@ public class CompanyDao {
       return applyGoodsList;
    }
 
-
-
+public List<Map<String, Object>> destiList(Map<String, Object> pMap) {
+   List<Map<String, Object>> destiList = sqlSession.selectList("destiCombo",pMap);
+   return destiList;
+}
 
 
 

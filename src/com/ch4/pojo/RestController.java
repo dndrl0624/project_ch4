@@ -46,6 +46,10 @@ public class RestController implements Rcontroller {
             List<Map<String, Object>> applyGoodsList = cLogic.applyGoodsList(pMap);
             jsonStr = g.toJson(applyGoodsList);
          }
+         else if (requestName.equals("destiList")) {
+            List<Map<String, Object>> destiList = cLogic.destiList(pMap);
+            jsonStr = g.toJson(destiList);
+         }
       } ////////////////////////////////////end of company
       else if ("visitor".equals(work)) {/////////start of visitor
          VisitorLogic vLogic = new VisitorLogic();
@@ -67,11 +71,11 @@ public class RestController implements Rcontroller {
             jsonStr = g.toJson(preVisitDetail);
          }
          else if (requestName.equals("search")) {
-            if(pMap.get("searchType").equals("applyNo")) {
-               Map<String, Object> applySearch = vLogic.applySearch(pMap);
+            if(pMap.get("searchType").equals("num")) {
+               List<Map<String, Object>> applySearch = vLogic.applySearch(pMap);
                jsonStr = g.toJson(applySearch);
             }
-            else if(pMap.get("searchType").equals("applicantInfo")){
+            else if(pMap.get("searchType").equals("info")){
                List<Map<String, Object>> applyList = vLogic.applyList(pMap);
                jsonStr = g.toJson(applyList);
             }
@@ -97,11 +101,11 @@ public class RestController implements Rcontroller {
             jsonStr = g.toJson(preGoodsDetail);
          }
          else if (requestName.equals("search")) {
-            if(pMap.get("searchType").equals("applyNo")) {
-               Map<String, Object> goodsSearch = gLogic.goodsSearch(pMap);
+            if(pMap.get("searchType").equals("num")) {
+               List<Map<String,Object>> goodsSearch = gLogic.goodsSearch(pMap);
                jsonStr = g.toJson(goodsSearch);
             }
-            else if(pMap.get("searchType").equals("applicantInfo")){
+            else if(pMap.get("searchType").equals("info")){
                List<Map<String, Object>> goodsList = gLogic.goodsList(pMap);
                jsonStr = g.toJson(goodsList);
             }
