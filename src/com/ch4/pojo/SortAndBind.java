@@ -19,7 +19,7 @@ public class SortAndBind {
       ////////////////// [방문자 list에 담기] //////////////////
       String[] vt_names = (String[])pMap.get("visitor_name");
       String[] vt_hps = (String[])pMap.get("visitor_hp");
-      if(vt_names.length>0 || vt_names!=null) {
+      if(vt_names!=null && vt_names.length>0) {
          for(int i=0;i<vt_names.length;i++) {
             Map<String,Object> addMap = new HashMap<String, Object>();
             addMap.put("visitor_name",vt_names[i]);
@@ -34,7 +34,7 @@ public class SortAndBind {
       String[] tk_models = (String[])pMap.get("tkin_model");
       String[] tk_brand = (String[])pMap.get("tkin_brand");
       String[] tk_kinds = (String[])pMap.get("tkin_kind");
-      if(tk_models.length>0 || tk_models!=null) {
+      if(tk_models!=null&&tk_models.length>0) {
          for(int i=0;i<tk_models.length;i++) {
             Map<String,Object> addMap = new HashMap<String, Object>();
             addMap.put("tkin_model",tk_models[i]);
@@ -50,7 +50,7 @@ public class SortAndBind {
       String[] pk_kinds = (String[])pMap.get("parking_kind");
       String[] pk_models = (String[])pMap.get("parking_model");
       String[] pk_nums = (String[])pMap.get("parking_num");
-      if(pk_kinds.length>0||pk_kinds!=null) {
+      if(pk_kinds!=null&&pk_kinds.length>0) {
          for(int i=0;i<pk_kinds.length;i++) {
             Map<String,Object> addMap = new HashMap<String, Object>();
             addMap.put("parking_kind",pk_kinds[i]);
@@ -86,7 +86,7 @@ public class SortAndBind {
       String[] gm_names = (String[])pMap.get("gmng_name");
       String[] gm_types = (String[])pMap.get("gmng_type");
       String[] gm_quans = (String[])pMap.get("gmng_quan");
-      if(gm_names.length>0||gm_names!=null) {
+      if(gm_names!=null&&gm_names.length>0) {
          for(int i=0;i<gm_names.length;i++) {
             Map<String,Object> addMap = new HashMap<String, Object>();
             addMap.put("gmng_name",gm_names[i]);

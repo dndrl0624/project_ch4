@@ -53,32 +53,33 @@
 			#{visit_vhcle_encc, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
 			#{com_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
 			#{visit_no, mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String},
-			#{result, mode=OUT, jdbcType=INTEGER, javaType=int},
+			#{result, mode=OUT, jdbcType=INTEGER, javaType=int}
 		)}
 	</update>
 	 <!-- 신청 내용 작성 (방문자) -->
-	<insert id="visitorAdd" parameterType="map">
-		<foreach collection="vtAddList" item="it" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
-			into visitor_mng(visitor_name, visitor_hp, visitor_no)
-				values(#{it.visitor_name}, #{it.visitor_hp}, #{it.visitor_no})
-		</foreach>
-	</insert>
-	
-	<!-- 신청 내용 작성 (반입기기) -->
-	<insert id="deviceAdd" parameterType="map">
-		<foreach collection="tnAddList" item="it" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
-			into tkin_mng(tkin_model, tkin_kind, tkin_posbl_encc, tkin_brand, visit_no)
-				values(#{it.tkin_model}, #{it.tkin_kind}, #{it.tkin_posbl_encc}, #{it.tkin_brand}, #{it.visit_no})
-		</foreach>
-	</insert>
-	
-	<!-- 신청 내용 작성 (주차) -->
-	<insert id="parkingAdd" parameterType="map">
-		<foreach collection="pkAddList" item="it" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
-			insert into parking_mng(parking_kind, parking_num, parking_model, visit_no)
-				values(#{it.parking_kind}, #{it.parking_num}, #{it.parking_model}, #{it.visit_no})
-		</foreach>
-	</insert>
+   <insert id="visitorAdd" parameterType="map">
+      <foreach collection="vtAddList" item="it" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+         into visitor_mng(visitor_name, visitor_hp, visit_no)
+            values(#{it.visitor_name}, #{it.visitor_hp}, #{visit_no})
+      </foreach>
+   </insert>
+   
+   <!-- 신청 내용 작성 (반입기기) -->
+   <insert id="deviceAdd" parameterType="map">
+      <foreach collection="tkAddList" item="it" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+         into tkin_mng(tkin_model, tkin_kind, tkin_brand, visit_no)
+            values(#{it.tkin_model}, #{it.tkin_kind}, #{it.tkin_brand}, #{visit_no})
+      </foreach>
+   </insert>
+   
+   
+   <!-- 신청 내용 작성 (주차) -->
+   <insert id="parkingAdd" parameterType="map">
+      <foreach collection="pkAddList" item="it" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+         insert into parking_mng(parking_kind, parking_num, parking_model, visit_no)
+            values(#{it.parking_kind}, #{it.parking_num}, #{it.parking_model}, #{visit_no})
+      </foreach>
+   </insert>
 	<!-- 방문 신청 취소 (결제상태 변경)-->
 	<update id="visitorApplyCancle" parameterType="map" statementType="CALLABLE">
 		{call proc_visitorCancle(

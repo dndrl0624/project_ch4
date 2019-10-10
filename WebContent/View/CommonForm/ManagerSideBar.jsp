@@ -84,7 +84,7 @@
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h4 class="panel-title">
-					<a href="/View/company/manager/Manager_Main.jsp">
+					<a href="/company/mng_main.ch4">
 					<i class="fa fa-home" aria-hidden="true"></i>메인페이지</a>
 				</h4>
 			</div>
@@ -98,9 +98,9 @@
 			</div>
 			<div id="collapse1" class="panel-collapse collapse">
 				<div class="panel-body">
-					<a  href="/View/company/manager/Manager_SearchVisitor.jsp">
+					<a  href="/company/searchVisitor.ch4">
 					<i class="fa fa-search-plus" aria-hidden="true"></i>방문 신청 관리</a><br> 
-					<a  href="/View/company/manager/Manager_LogVisitor.jsp">
+					<a  href="/company/logVisitor.jsp">
 					<i class="fa fa-list-alt" aria-hidden="true"></i>방문 현황 조회</a><br> 
 				</div>
 			</div>
