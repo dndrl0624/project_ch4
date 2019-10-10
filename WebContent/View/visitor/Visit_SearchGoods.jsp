@@ -110,15 +110,56 @@
 <body>
 <%@ include file="/View/CommonForm/Top.jsp"%>
 <script>
-	//부트스트랩 테이블 default 세팅
-	$.fn.bootstrapTable.defaults.locales = ["ko-KR"];
-	$.fn.bootstrapTable.defaults.singleSelect = true;
-	$.fn.bootstrapTable.defaults.pagination = true;
-	$.fn.bootstrapTable.defaults.pageList = [10,20,30,50];
-	$.fn.bootstrapTable.columnDefaults.halign = 'center';
-	$.fn.bootstrapTable.columnDefaults.valign = 'middle';
-	$.fn.bootstrapTable.columnDefaults.align = 'center';
 	$(document).ready(function(){
+		$("#tb_search").bootstrapTable({
+			columns:[
+			    {field:'APLG_NO',title:'신청번호'},
+			    {field:'APLG_DATE',title:'신청일자'},
+			    {field:'COM_NAME',title:'반입지'},
+			    {field:'APLG_REASON',title:'반입사유'},
+			    {field:'APLG_TRANS_DATE',title:'반입일자'},
+			    {field:'APLG_PERMIT_ST',title:'결제상태'}
+			],
+			onClickRow:function(row,$element,field){
+				var aplg_no = $element.find("td:first").html();
+				$("#input_update").attr('value',aplg_no)
+				$.ajax({
+					type: 'get',
+					dataType: 'json',
+					url: '/goods/detail.ch4?aplg_no='+aplg_no,
+					success: function(result){
+						//값 뿌리기 전에 테이블 자식노드 제거
+						$("#tb_detail1 tbody").empty();
+						$("#tb_detail2 tbody").empty();
+						$("#tb_goods tbody").empty();
+						//////////////////////  값 뿌려주기  /////////////////////////
+						var infoMap = result.infoMap;
+						var gmList = result.gmList;
+	    				var row = "<tr><td>"+infoMap.APLG_NO+"</td>"
+	    							+"<td>"+infoMap.APLG_DATE+"</td>"
+	    							+"<td>"+infoMap.APLG_PERMIT_ST+"</td>"
+	    							+"<td>"+infoMap.APLG_NAME+"</td>"
+	    							+"<td>"+infoMap.APLG_HP+"</td></tr>";
+	    				$("#tb_detail1 tbody").append(row);
+	    				row = "<tr><td>"+infoMap.COM_NAME+"</td>"
+	    						+"<td>"+infoMap.APLG_DESTI+"</td>"
+	    						+"<td>"+infoMap.APLG_TRANS_DATE+"</td>"
+	    						+"<td>"+infoMap.APLG_REASON+"</td></tr>";
+	    				$("#tb_detail2 tbody").append(row);
+	    				for(i=0;i<gmList.length;i++){
+		    				row = "<tr><td>"+gmList[i].GMNG_NAME+"</td>"
+	    							+"<td>"+gmList[i].GMNG_TYPE+"</td>"
+	    							+"<td>"+gmList[i].GMNG_QUAN+"</td>"
+		    						+"<td>"+gmList[i].GMNG_CONFM+"</td></tr>";
+	    					$("#tb_goods tbody").append(row);
+	    				}
+						//////////////////////  값 뿌려주기  /////////////////////////
+					}
+				});
+				//반입이력 조회 Modal 띄우기
+				$("#md_detail").modal('show');
+			},
+		});
 		<%if(null!=confm_no){%>
 			$("#input_num").textbox('setValue','<%=confm_no %>');
 			$.ajax({
@@ -147,139 +188,76 @@
 		$('.nav-tabs a[href="#nav_search2"]').on('shown.bs.tab', function(){
 			searchKeyword = "name&hp";
 		});
-		$("#tb_search").bootstrapTable({
-			columns:[
-			    {field:'aplg_no',title:'신청번호'},
-			    {field:'aplg_date',title:'신청일자'},
-			    {field:'com_name',title:'반입지'},
-			    {field:'aplg_reason',title:'반입사유'},
-			    {field:'aplg_trans_date',title:'반입일자'},
-			    {field:'aplg_permit_st',title:'결제상태'}
-			],
-			onClickRow:function(row,$element,field){
-				var aplg_no = $element.find("td:first").html();
-				$("#input_update").attr('value',aplg_no)
+		$("#btn_search").click(function(){
+			//신청번호로 조회니?
+			if("number"==searchKeyword){
+				if(!($("#input_num").textbox('getValue'))){
+					alert("신청번호를 입력해 주세요.");
+					$("#input_num").textbox('textbox').focus();
+					return;
+				}
 				$.ajax({
-					type: 'get',
-					dataType: 'json',
-					url: '../../json/testLog8.json',
-// 					url: '/goods/detail.ch4?aplg_no='+aplg_no,
+					type: "POST",
+					url: "/goods/search.ch4",
+					data: $("#form_search_num").serialize(),
+					dataType: "json",
 					success: function(result){
-						//값 뿌리기 전에 테이블 자식노드 제거
-						$("#tb_detail1 tbody").empty();
-						$("#tb_detail2 tbody").empty();
-						$("#tb_goods tbody").empty();
-						//////////////////////  값 뿌려주기  /////////////////////////
-						var infoMap;
-						var gmList;
-						$.each(result,function(index,item){
-							infoMap = item.infoMap;
-							gmList = item.gmList;
-						});
-	    				var row = "<tr><td>"+infoMap[0].aplg_no+"</td>"
-	    							+"<td>"+infoMap[0].aplg_date+"</td>"
-	    							+"<td>"+infoMap[0].aplg_permit_st+"</td>"
-	    							+"<td>"+infoMap[0].aplg_name+"</td>"
-	    							+"<td>"+infoMap[0].aplg_hp+"</td></tr>";
-	    				$("#tb_detail1 tbody").append(row);
-	    				row = "<tr><td>"+infoMap[0].com_name+"</td>"
-	    						+"<td>"+infoMap[0].aplg_desti+"</td>"
-	    						+"<td>"+infoMap[0].aplg_trans_date+"</td>"
-	    						+"<td>"+infoMap[0].aplg_reason+"</td></tr>";
-	    				$("#tb_detail2 tbody").append(row);
-	    				for(i=0;i<gmList.length;i++){
-		    				row = "<tr><td>"+gmList[i].gmng_name+"</td>"
-	    							+"<td>"+gmList[i].gmng_type+"</td>"
-	    							+"<td>"+gmList[i].gmng_quan+"</td>"
-		    						+"<td>"+gmList[i].gmng_confm+"</td></tr>";
-	    					$("#tb_goods tbody").append(row);
-	    				}
-						//////////////////////  값 뿌려주기  /////////////////////////
+						if(!result){
+							alert("조회결과가 없습니다.");
+							return;
+						}
+						$("#tb_search").bootstrapTable('load',result);
+					},
+					error: function(){
+						alert("error");
 					}
 				});
-				//반입이력 조회 Modal 띄우기
-				$("#md_detail").modal('show');
-			},
-		});
-	});
-	//조회페이지 넘어가는 함수
-	function searchApply(){
-		//테스트용
-		$.ajax({
-			url: "../../json/testLog4.json",
-			dataType: "json",
-			success: function(result){
-				$("#tb_search").bootstrapTable('load',result);
+			}
+			//이름 & 연락처로 조회니?
+			else if("name&hp"==searchKeyword){
+				if(!($("#input_search_name").textbox('getValue'))){
+					alert("신청자 성명을 입력해 주세요.");
+					$("#input_search_name").textbox('textbox').focus();
+					return;
+				}
+				if(!($("#input_search_hp1").textbox('getValue'))){
+					alert("신청자 연락처를 입력해 주세요.");
+					$("#input_search_hp1").textbox('textbox').focus();
+					return;
+				}
+				if(!($("#input_search_hp2").textbox('getValue'))){
+					alert("신청자 연락처를 입력해 주세요.");
+					$("#input_search_hp2").textbox('textbox').focus();
+					return;
+				}
+				if(!($("#input_search_hp3").textbox('getValue'))){
+					alert("신청자 연락처를 입력해 주세요.");
+					$("#input_search_hp3").textbox('textbox').focus();
+					return;
+				}
+				var search_hp = $("#input_search_hp1").textbox('getValue') + "-"
+								+ $("#input_search_hp2").textbox('getValue') + "-"
+								+ $("#input_search_hp3").textbox('getValue');
+				$("#input_search_hp").attr("value",search_hp);
+				$.ajax({
+					type: "POST",
+					url: "/goods/search.ch4",
+					data: $("#form_search_name").serialize(),
+					dataType: "json",
+					success: function(result){
+						if(!result){
+							alert("조회결과가 없습니다.");
+							return;
+						}
+						$("#tb_search").bootstrapTable('load',result);
+					},
+					error: function(){
+						alert("error");
+					}
+				});
 			}
 		});
-// 		//신청번호로 조회니?
-// 		if("number"==searchKeyword){
-// 			if(!($("#input_num").textbox('getValue'))){
-// 				alert("신청번호를 입력해 주세요.");
-// 				$("#input_num").textbox('textbox').focus();
-// 				return;
-// 			}
-// 			$.ajax({
-// 				type: "POST",
-// 				url: "/goods/search.ch4",
-// 				data: $("#form_search_num").serialize(),
-// 				dataType: "json",
-// 				success: function(result){
-// 					if(!result){
-// 						alert("조회결과가 없습니다.");
-// 						return;
-// 					}
-// 					$("#tb_search").bootstrapTable('load',result);
-// 				},
-// 				error: function(){
-// 					alert("error");
-// 				}
-// 			});
-// 		}
-// 		//이름 & 연락처로 조회니?
-// 		else if("name&hp"==searchKeyword){
-// 			if(!($("#input_search_name").textbox('getValue'))){
-// 				alert("신청자 성명을 입력해 주세요.");
-// 				$("#input_search_name").textbox('textbox').focus();
-// 				return;
-// 			}
-// 			if(!($("#input_search_hp1").textbox('getValue'))){
-// 				alert("신청자 연락처를 입력해 주세요.");
-// 				$("#input_search_hp1").textbox('textbox').focus();
-// 				return;
-// 			}
-// 			if(!($("#input_search_hp2").textbox('getValue'))){
-// 				alert("신청자 연락처를 입력해 주세요.");
-// 				$("#input_search_hp2").textbox('textbox').focus();
-// 				return;
-// 			}
-// 			if(!($("#input_search_hp3").textbox('getValue'))){
-// 				alert("신청자 연락처를 입력해 주세요.");
-// 				$("#input_search_hp3").textbox('textbox').focus();
-// 				return;
-// 			}
-// 			var search_hp = $("#input_search_hp1").textbox('getValue') + "-"
-// 							+ $("#input_search_hp2").textbox('getValue') + "-"
-// 							+ $("#input_search_hp3").textbox('getValue');
-// 			$("#input_search_hp").attr("value",search_hp);
-// 			$.ajax({
-// 				type: "POST",
-// 				url: "/goods/search.ch4",
-// 				data: $("#form_search_name").serialize(),
-// 				dataType: "json",
-// 				success: function(result){
-// 					if(!result){
-// 						alert("조회결과가 없습니다.");
-// 						return;
-// 					}
-// 					$("#tb_search").bootstrapTable('load',result);
-// 				},
-// 				error: function(){
-// 					alert("error");
-// 				}
-// 			});
-// 		}
-	}
+	});
 	//반입신청 변경 페이지 이동
 	function applyUpdate(){
 		$("#form_next").attr('action','/goods/changeGoods.ch4');
@@ -345,7 +323,7 @@
 							</div>
 						</div>
 						<div class="col-lg-2" style="padding-left:0px;padding-right:40px;margin : 10px 0px 10px 0px;">
-							<button id="btn_search" class="btn btn-info" type="button" onClick="searchApply()">조회</button>
+							<button id="btn_search" class="btn btn-info" type="button">조회</button>
 						</div>
 					</div>
 				</div>

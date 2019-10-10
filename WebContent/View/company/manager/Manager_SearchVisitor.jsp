@@ -129,7 +129,7 @@ function btn_search(){
 						<div class='col-lg-2' style="padding: 5px;">
 							<select class="easyui-combobox" id="SearchType" name='SearchType'
 								style="width: 90%;">
-								<option value="VISI_APPLY_NAME" selected>신청자명</option>
+								<option value="VISIT_APPLY_NAME" selected>신청자명</option>
 								<option value="VISITOR_NAME">방문자명</option>
 								<option value="VISIT_DESTI">목적지</option>
 								<option value="VISIT_NO">신청번호</option>

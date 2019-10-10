@@ -165,11 +165,11 @@
 		//실제로 쓸 for문
 		<% for(int i=0;i<gmList.size();i++){ %>
 		var gRow = "<tr id='gRow"+gIndex+"'><td><input id='chkGoods' type='checkbox'></td>"
-					+"<td><input id='gmng_name' type='hidden' name='gmng_name' value='"
+					+"<td><input id='gmng_name' type='hidden' name='gmng_names' value='"
 					+"<%=gmList.get(i).get("GMNG_NAME") %>"+"'>"+"<%=gmList.get(i).get("GMNG_NAME") %>"+"</td>"
-					+"<td><input id='gmng_type' type='hidden' name='gmng_type' value='"
+					+"<td><input id='gmng_type' type='hidden' name='gmng_types' value='"
 					+"<%=gmList.get(i).get("GMNG_TYPE") %>"+"'>"+"<%=gmList.get(i).get("GMNG_TYPE") %>"+"</td>"
-					+"<td><input id='gmng_quan' type='hidden' name='gmng_quan' value='"
+					+"<td><input id='gmng_quan' type='hidden' name='gmng_quans' value='"
 					+"<%=gmList.get(i).get("GMNG_QUAN") %>"+"'>"+"<%=gmList.get(i).get("GMNG_QUAN") %>"+"</td></tr>";
 		$("#tb_goods tbody").append(gRow);
 		gIndex++;
@@ -221,9 +221,9 @@
 			var EA = $("#v_ea").val();
 			var goodsinfo = $("#v_goodsinfo").val();
 			var row = "<tr id='gRow"+gIndex+"'><td><input id='chkGoods' type='checkbox' value='"+gIndex+"'></td>"
-					+"<td><input id='gmng_name' type='hidden' name='gmng_name' value='"+goodsname+"'>"+goodsname+"</td>"
-					+"<td><input id='gmng_type' type='hidden' name='gmng_type' value='"+goodsinfo+"'>"+goodsinfo+"</td>"
-					+"<td><input id='gmng_quan' type='hidden' name='gmng_quan' value='"+EA+"'>"+EA+"</td></tr>";
+					+"<td><input id='gmng_name' type='hidden' name='gmng_names' value='"+goodsname+"'>"+goodsname+"</td>"
+					+"<td><input id='gmng_type' type='hidden' name='gmng_types' value='"+goodsinfo+"'>"+goodsinfo+"</td>"
+					+"<td><input id='gmng_quan' type='hidden' name='gmng_quans' value='"+EA+"'>"+EA+"</td></tr>";
 			$("#tb_goods tbody").append(row);
 			$("#v_goodsname").textbox('setValue',null);
 			$("#v_goodsinfo").textbox('setValue',null);

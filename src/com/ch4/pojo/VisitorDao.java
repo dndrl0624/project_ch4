@@ -57,18 +57,18 @@ public class VisitorDao {
       if(visitorNum==rowNum) {
          result = 1;
          if(deviceNum!=0) {
-            rowNum = sqlSession.insert("deviceAdd", tkMap);
+        	 rowNum = sqlSession.insert("deviceAdd", tkMap);
          }
          else {
-            rowNum = 0;
+        	 rowNum = 0;
          }
          if(deviceNum==rowNum) {
             result = 1;
             if(parkNum!=0) {
-               rowNum = sqlSession.insert("parkingAdd", pkMap);
+            	rowNum = sqlSession.insert("parkingAdd", pkMap);
             }
             else {
-               rowNum = 0;
+            	rowNum = 0;
             }
          }
          else {
@@ -115,8 +115,8 @@ public class VisitorDao {
       return deptList;
    }
 
-   public Map<String, Object> applySearch(Map<String, Object> pMap) {
-      Map<String, Object> applySearch = sqlSession.selectOne("visitorApplySearch", pMap);
+   public List<Map<String, Object>> applySearch(Map<String, Object> pMap) {
+      List<Map<String, Object>> applySearch = sqlSession.selectList("visitorApplySearch", pMap);
       return applySearch;
    }
    public List<Map<String, Object>> applyList(Map<String, Object> pMap) {
