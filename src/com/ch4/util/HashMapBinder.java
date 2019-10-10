@@ -80,18 +80,18 @@ public class HashMapBinder {
 			String name = (String)er.nextElement();//name,address,pet
 			if(
 					////// visit ////////
-					("visitor_name".equals(name))
-					||("visitor_hp".equals(name))
-					||("tkin_model".equals(name))
-					||("tkin_brand".equals(name))
-					||("tkin_kind".equals(name))
-					||("parking_kind".equals(name))
-					||("parking_model".equals(name))
-					||("parking_num".equals(name))
+					("visitor_names".equals(name))
+					||("visitor_hps".equals(name))
+					||("tkin_models".equals(name))
+					||("tkin_brands".equals(name))
+					||("tkin_kinds".equals(name))
+					||("parking_kinds".equals(name))
+					||("parking_models".equals(name))
+					||("parking_nums".equals(name))
 				    ////// goods ////////
-					||("gmng_name".equals(name))
-					||("gmng_type".equals(name))
-					||("gmng_quan".equals(name))
+					||("gmng_names".equals(name))
+					||("gmng_types".equals(name))
+					||("gmng_quans".equals(name))
 				) 
 			{
 				String values[] = req.getParameterValues(name);

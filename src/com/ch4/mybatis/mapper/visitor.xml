@@ -44,24 +44,24 @@
     <!-- 신청 내용 작성 (방문자) -->
    <insert id="visitorAdd" parameterType="map">
       <foreach collection="vtAddList" item="it" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
-         into visitor_mng(visitor_name, visitor_hp, visit_no)
-            values(#{it.visitor_name}, #{it.visitor_hp}, #{visit_no})
+         into visitor_mng(visitor_names, visitor_hps, visit_no)
+            values(#{it.visitor_names}, #{it.visitor_hps}, #{visit_no})
       </foreach>
    </insert>
    
    <!-- 신청 내용 작성 (반입기기) -->
    <insert id="deviceAdd" parameterType="map">
       <foreach collection="tkAddList" item="it" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
-         into tkin_mng(tkin_model, tkin_kind, tkin_brand, visit_no)
-            values(#{it.tkin_model}, #{it.tkin_kind}, #{it.tkin_brand}, #{visit_no})
+         into tkin_mng(tkin_models, tkin_kinds, tkin_brands, visit_no)
+            values(#{it.tkin_models}, #{it.tkin_kinds}, #{it.tkin_brands}, #{visit_no})
       </foreach>
    </insert>
    
    <!-- 신청 내용 작성 (주차) -->
    <insert id="parkingAdd" parameterType="map">
       <foreach collection="pkAddList" item="it" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
-          into parking_mng(parking_kind, parking_num, parking_model, visit_no)
-            values(#{it.parking_kind}, #{it.parking_num}, #{it.parking_model}, #{visit_no})
+          into parking_mng(parking_kinds, parking_nums, parking_models, visit_no)
+            values(#{it.parking_kinds}, #{it.parking_nums}, #{it.parking_models}, #{visit_no})
       </foreach>
    </insert>
    <!-- 방문 신청 변경(기본내용 수정) -->
