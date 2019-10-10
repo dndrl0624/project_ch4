@@ -101,5 +101,4 @@
 			#{result, mode=OUT, jdbcType=INTEGER, javaType=int}
 		)}
 	</update>
-	
 </mapper>

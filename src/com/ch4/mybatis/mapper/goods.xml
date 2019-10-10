@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ch4.mybatis.mapper.GoodsMapper">
-	<!-- QR코드 조회(goods) -->
+<resultMap type="java.util.HashMap" id="gMap">
+   </resultMap>
+   <!-- QR코드 조회(goods) -->
 	<select id="goodsQRcode" parameterType="map" resultType="map">
 		select confm_no, confm_name, confm_type, confm_quan
 				,confm_qrcode, aplg_trans_date, com_name
@@ -10,13 +12,31 @@
 		   and co.com_no = ga.com_no
 		   and gc.aplg_no = #{aplg_no}
 	</select>
-	<!-- 반입 신청 등록 -->
-    <insert id="goodsApplyAdd" parameterType="map">
-		insert into goods_apply(aplg_no, aplg_name, aplg_reason
-				,aplg_desti, aplg_trans_date, aplg_hp, com_no)
-		values(#{aplg_no}, #{aplg_name}, #{aplg_reason}
-				,#{aplg_desti}, #{aplg_trans_date}, #{aplg_hp}, #{com_no})
-    </insert>
+   <!-- 신청자 반입이력 조회 -->
+   <update id="preGoodsSearch" parameterType="map" statementType="CALLABLE">
+      {call proc_preGoodsApply(
+         #{aplg_name, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{aplg_hp, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{com_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{aplg_date1, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{aplg_date2, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{preList, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=gMap},
+         #{result, mode=OUT, jdbcType=INTEGER, javaType=int}
+      )}
+   </update>
+   <!-- 반입 신청 등록 -->
+    <update id="goodsApplyAdd" parameterType="map" statementType="CALLABLE">
+    {call proc_gApplyAdd(
+         #{aplg_name, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{aplg_hp, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{aplg_reason, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{aplg_desti, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{aplg_trans_date, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{com_no, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{aplg_no, mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String},
+         #{result, mode=OUT, jdbcType=INTEGER, javaType=int}
+      )}
+    </update>
     <!-- 반입 물품정보 등록 -->
     <insert id="goodsAdd" parameterType="map">
     	<foreach collection="gmAddList" item="it" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">

@@ -27,15 +27,51 @@ public class InfoController implements Controller{
 		Map<String,Object> pMap = new HashMap<>();
 		HashMapBinder hmb = new HashMapBinder(req);
 		hmb.bind(pMap);
-		if(requestName.equals("QRconfirm")) {
+		if(requestName.equals("kioskLogin")) {
 			int result = 0;
-			result = iLogic.confirmQR(pMap);
+			result = iLogic.kioskLogin(pMap);
+			mav.isRedirect=false;
 			if(result==1) {
-				mav.addObject("pMap", pMap);
+				mav.setViewName("Kiosk_Run.jsp");
 			}
 			else if(result==0) {
-				
+				mav.setViewName("Kiosk_Login.jsp");
 			}
+		}			
+		else if(requestName.equals("QRconfirm")) {
+			if(((String)pMap.get("type")).equals("visitor")) {
+				Map<String, Object> resultMap = null;
+				resultMap = iLogic.confirmQR(pMap);
+				mav.isRedirect(false);
+				if("in".equals(resultMap.get("inout"))
+						||"denied".equals(resultMap.get("inout"))
+						||"none".equals(resultMap.get("inout"))
+				  ) 
+				{
+					mav.addObject("pMap", pMap);
+					mav.setViewName("Kiosk_Result.jsp");
+				}
+				else if("out".equals(resultMap.get("inout"))) {
+					mav.addObject("pMap", pMap);
+					mav.setViewName("Kiosk_SelectExit.jsp");
+				}
+			}
+			else if(((String)pMap.get("type")).equals("goods")) {
+				//여기다가 이 qr을 입력하면 안된다는 소리 출력하는법?
+			}
+
+			
+		}
+		else if(requestName.equals("selectExit")) {
+			Map<String, Object> resultMap = null;
+			resultMap = iLogic.selectExit(pMap);
+			if((int)resultMap.get("result")==1) {
+				mav.setViewName("Kiosk_Result.jsp");
+			}
+			else if((int)resultMap.get("result")==0) {
+				mav.setViewName("Fail.jsp");
+			}
+			
 		}
 		return mav;
 	}

@@ -10,69 +10,92 @@ import org.apache.log4j.Logger;
 import com.ch4.util.MyBatisCommonFactory;
 
 public class CompanyDao {
-	Logger logger = Logger.getLogger(CompanyDao.class);
-	SqlSessionFactory sqlSessionFactory = null;
-	SqlSession sqlSession = null;
-	public CompanyDao() {
-		sqlSessionFactory = MyBatisCommonFactory.getSqlSessionFactory();
-	}
-	public int mngUpdate(Map<String, Object> pMap) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	public Map<String,Object> mngVPermit(Map<String, Object> pMap) {
-		logger.info("dao permit 호출");
-		logger.info(pMap);
-		sqlSession = sqlSessionFactory.openSession();
-		sqlSession.update("vApplyPermit",pMap);
-		return pMap;
-	}
-	public Map<String,Object> mngGPermit(Map<String, Object> pMap) {
-		logger.info("dao permit 호출");
-		logger.info(pMap);
-		sqlSession = sqlSessionFactory.openSession();
-		sqlSession.update("gApplyPermit",pMap);
-		return pMap;
-	}
-	public int goodsQRAdd(Map<String, Object> pMap) {
-		int result = 0;
-		logger.info("dao goodsQRAdd 호출");
-		logger.info(pMap);
-		sqlSession = sqlSessionFactory.openSession();
-		result = sqlSession.insert("goodsQRAdd",pMap);
-		return result;
-	}
-	public String getQRcode(Map<String, Object> pMap) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	public int companyLogin(Map<String, Object> pMap) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	public int companyJoin(Map<String, Object> pMap) {
-		int result = 0;
-		logger.info("dao companyJoin 호출");
-		logger.info(pMap);
-		sqlSession = sqlSessionFactory.openSession();
-		result = sqlSession.insert("companyJoin",pMap);
-		return 0;
-	}
-	public int isExistID(Map<String, Object> pMap) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	public List<Map<String, Object>> applyGoodsList(Map<String, Object> pMap) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	public List<Map<String, Object>> applyVisitList(Map<String, Object> pMap) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	public List<Map<String, Object>> inOutList(Map<String, Object> pMap) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
+   Logger logger = Logger.getLogger(CompanyDao.class);
+   SqlSessionFactory sqlSessionFactory = null;
+   SqlSession sqlSession = null;
+   
+   public CompanyDao() {
+      sqlSessionFactory = MyBatisCommonFactory.getSqlSessionFactory();
+      sqlSession = sqlSessionFactory.openSession();
+   }
+
+   //////////////////////////////////////////////////////////////////////////
+   public int mngUpdate(Map<String, Object> pMap) {
+      int result = 0;
+      if(pMap.get("visit_no")!=null) {
+         result = sqlSession.update("vApplyPermit",pMap); // 프로시저로 수정
+      }
+      else if(pMap.get("aplg_no")!=null) {
+         result = sqlSession.update("gApplyPermit",pMap); //  프로시저로 수정
+      }
+      sqlSession.commit();
+      return result;
+   }
+
+   public int mngPermitV(Map<String,Object> pMap) {
+      int result = 0;
+      result = sqlSession.insert("vApplyConfirm",pMap);// VISIT_CONFM테이블에 insert
+      if(result==0) {
+         return result;
+      }
+      else if(result==1) {
+         
+      }
+      sqlSession.commit();
+      return result;
+   }
+   
+   public int mngPermitG(Map<String,Object> pMap) {
+      int result = 0;
+      result = sqlSession.insert("gApplyConfirm",pMap);// GOODS_COMFM테이블에 insert
+      if(result==0) {
+         return result;
+      }
+      sqlSession.commit();
+      return result;
+   }
+   
+/////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+   public List<Map<String, Object>> applyVisitList(Map<String, Object> pMap) {
+      List<Map<String, Object>> applyVisitList = sqlSession.selectList("visitorApplySearch", pMap);
+      return applyVisitList;
+   }
+
+   public List<Map<String, Object>> inOutList(Map<String, Object> pMap) {
+      List<Map<String, Object>> inOutList = sqlSession.selectList("inOutList", pMap);
+      return inOutList;
+   }
+
+
+   public int companyLogin(Map<String, Object> pMap) {
+         int result = 0;
+         logger.info(pMap);
+         sqlSession.update("companyLogin", pMap);
+         result = (int)pMap.get("result");
+         return result;
+      }
+
+   public int companyJoin(Map<String, Object> pMap) {
+      int result = 0;
+      result = sqlSession.insert("companyJoin",pMap);
+      sqlSession.commit();
+      return result;
+   }
+
+
+   public int isExistID(Map<String, Object> pMap) {
+      int result = 0;
+      result = sqlSession.selectOne("isExistID", pMap);
+      return result;
+   }
+
+
+   public List<Map<String, Object>> applyGoodsList(Map<String, Object> pMap) {
+      List<Map<String, Object>> applyGoodsList = sqlSession.selectList("goodsApplySearch", pMap);
+      return applyGoodsList;
+   }
+
+
+
 }

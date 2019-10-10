@@ -107,7 +107,7 @@
 		   and gc.aplg_no = ga.aplg_no
 		<!-- 검색조건 : 반입일자 -->
 		<if test="aplg_date != null">
-			and aplg_date = #{aplg_date}
+			and gc.aplg_date = #{aplg_date}
 		</if>
 		<!-- 검색조건 : 실반입일자 -->
 		<if test="confm_trans_date != null">

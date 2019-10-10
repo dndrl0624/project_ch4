@@ -75,7 +75,7 @@
 			and visit_date = #{visit_date}
 		</if>
 		<!-- 검색 : 방문일자(기간으로) -->
-		<if test="viist_date1 != null">
+		<if test="visit_date1 != null">
 			and visit_date >= #{visit_date1}
 		</if>
 		<if test="visit_date2 != null">
@@ -283,5 +283,4 @@
 			</if>
 		</where>
 	</select>
-	
 </mapper>
