@@ -18,7 +18,6 @@
 $.fn.combobox.defaults.editable = false
 //datebox 직접입력 방지
 $.fn.datebox.defaults.editable = false
-
 // 검색방법 콤보박스로 textbox name값 변경
 $(document).ready(function(){
 	$('#SearchType').combobox({
@@ -95,7 +94,6 @@ $(document).ready(function(){
 	});
 	
 });
-
 /* 검색버튼 기능 */
 function btn_search(){
 	/* 검색 조건을 통해 재출력 */
@@ -109,7 +107,6 @@ function btn_search(){
 		}
 	});	
 }
-
 </script>
 	<%@ include file="../../CommonForm/Top.jsp"%>
 	<!-- Content -->
