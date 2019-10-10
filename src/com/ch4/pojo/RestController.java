@@ -46,6 +46,10 @@ public class RestController implements Rcontroller {
             List<Map<String, Object>> applyGoodsList = cLogic.applyGoodsList(pMap);
             jsonStr = g.toJson(applyGoodsList);
          }
+         else if (requestName.equals("destiList")) {
+        	 List<Map<String, Object>> destiList = cLogic.destiList(pMap);
+        	 jsonStr = g.toJson(destiList);
+         }
       } ////////////////////////////////////end of company
       else if ("visitor".equals(work)) {/////////start of visitor
          VisitorLogic vLogic = new VisitorLogic();

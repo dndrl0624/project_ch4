@@ -14,7 +14,7 @@
 		 where com_no = #{com_no}
 	</select>	
 	<!-- 목적지명단 콤보박스 -->
-	<select id="destiCombo">
+	<select id="destiCombo" parameterType="map" resultType="map">
 		select desti_no, desti_name
 		  from destination
 		 where com_no = #{com_no}

@@ -145,7 +145,7 @@ table.table {
 <script type="text/javascript">
 	var now = new Date();
 	//신청 승인 처리
-	function gpermission(){
+	function vpermission(){
 		if(!($("#desti_hidden").val())){
 			alert('실방문장소를 선택하세요.');
 			$("#desti_combo").combobox('textbox').focus();
@@ -371,7 +371,7 @@ table.table {
 		<input type="hidden" id="visit_no_hidden" name="visit_no" value="<%=visit_no %>"> 
 		<input type="hidden" id="permit_id_hidden" name="visit_permit_id" value="<%=cmng_id %>">
 		<input type="hidden" id="permit_st_hidden" name="visit_permit_st" value="">
-		<input type="hidden" id="notes_hidden" name="visit_notes" value="">
+		<input type="hidden" id="notes_hidden" name="visit_permit_notes" value="">
 		<input type="hidden" id="desti_hidden" name="confm_desti" value="">
 	</form>
 <script type="text/javascript">

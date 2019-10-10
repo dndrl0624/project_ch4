@@ -26,8 +26,18 @@ public class CompanyLogic {
 
 	public int mngPermit(Map<String, Object> pMap) {
 		int result = 0;
-		result = cDao.mngUpdate(pMap); // update
+		 if(pMap.get("visit_no")!=null) {
+			 result = cDao.mngUpdateV(pMap); // update
+		 }
+		 else if(pMap.get("aplg_no")!=null) {
+			 result = cDao.mngUpdateG(pMap);    
+		 }
 		
+		List<Map<String,Object>> confirmList = (List<Map<String,Object>>)pMap.get("confirmList");
+		logger.info("와와아 : " + confirmList);
+		for(int i=0;i<confirmList.size();i++) {
+			logger.info(confirmList.get(i));
+		}
 		if(result==0) {
 			return result;
 		}
@@ -48,7 +58,6 @@ public class CompanyLogic {
 			}
 		}
 	
-		List<Map<String,Object>> confirmList = (List<Map<String,Object>>)pMap.get("confirmList");
 		///////////////////////////////////qr이미지 생성//////////////////////////////////
 		for(int i=0; i<confirmList.size();i++) {
 			Map<String,Object> cMap = confirmList.get(i);
@@ -58,7 +67,7 @@ public class CompanyLogic {
 			String url = null;
 			
 			if(pMap.get("visit_no")!=null) {
-				path = savedFilePath + "visit/";
+				path = savedFilePath + "visitor/";
 				url = "http://localhost:8080/Info/QRconfirm.ch4?confm_qrcode=" + qrCode + "&type=visitor";
 			}
 			else if(pMap.get("aplg_no")!=null) {
@@ -113,6 +122,11 @@ public class CompanyLogic {
 	public List<Map<String, Object>> applyGoodsList(Map<String, Object> pMap) {
 		List<Map<String, Object>> applyGoodsList = cDao.applyGoodsList(pMap);
 		return applyGoodsList;
+	}
+
+	public List<Map<String, Object>> destiList(Map<String, Object> pMap) {
+		List<Map<String, Object>> destiList = cDao.destiList(pMap);
+		return destiList;
 	}
 
 

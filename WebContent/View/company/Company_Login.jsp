@@ -5,7 +5,7 @@
    String id= "";//쿠키에서 찾은 아이디 값을 저장할 변수
    if(cookie!=null){
       for(int i =0;i<cookie.length;i++){
-         if(cookie[i].getName().trim().equals("cmng_id")){//id라는 이름의 키가 있을 경우.
+         if(cookie[i].getName().trim().equals("id")){//id라는 이름의 키가 있을 경우.
             id=cookie[i].getValue();//쿠키에 담기
          }
       }
@@ -164,13 +164,15 @@ h2 {
                             </label>
                          </div>
                      </div>
-                     <div class="row">
-                        <div class="col-lg-offset-2 col-lg-8 col-lg-offset-2">
-                           <button id="btn_login"  class="btn btn-lg btn-primary btn-block" onClick="login()" type="submit">Sign in</button>
-                        </div>
-                     </div>
                   </div>
                </form>
+               <div  align="center">
+                  <div class="row">
+                     <div class="col-lg-offset-2 col-lg-8 col-lg-offset-2">
+                        <button id="btn_login"  class="btn btn-lg btn-primary btn-block" onClick="login()" type="submit">Sign in</button>
+                     </div>
+                  </div>
+               </div>
             </div>
          </div>
       </div>
