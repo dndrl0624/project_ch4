@@ -56,10 +56,20 @@ public class VisitorDao {
       rowNum = sqlSession.insert("visitorAdd", vtMap);
       if(visitorNum==rowNum) {
          result = 1;
-         rowNum = sqlSession.insert("deviceAdd", tkMap);
+         if(deviceNum!=0) {
+            rowNum = sqlSession.insert("deviceAdd", tkMap);
+         }
+         else {
+            rowNum = 0;
+         }
          if(deviceNum==rowNum) {
             result = 1;
-            rowNum = sqlSession.insert("parkingAdd", pkMap);
+            if(parkNum!=0) {
+               rowNum = sqlSession.insert("parkingAdd", pkMap);
+            }
+            else {
+               rowNum = 0;
+            }
          }
          else {
             result = 0;

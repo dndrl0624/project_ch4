@@ -26,7 +26,7 @@ public class MyBatisCommonFactory {
 			Reader reader = Resources.getResourceAsReader(resource);
 			if(sqlSessionFactory==null) {
 				sqlSessionFactory = 
-						new SqlSessionFactoryBuilder().build(reader,"development");
+						new SqlSessionFactoryBuilder().build(reader,"development2");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
