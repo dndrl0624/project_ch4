@@ -38,34 +38,34 @@
 		   and vc.confm_no = cc.confm_no
 		   and cc.visit_no = va.visit_no
 		<!-- 검색조건 : 방문일자 -->
-		<if test="confm_visit_date != null">
+		<if test='confm_visit_date not in {null,""}'>
 			and confm_visit_date = #{confm_visit_date}
 		</if>
 		<!-- 검색조건 : 방문일자(기간) -->
-		<if test="confm_visit_date1 != null">
+		<if test='confm_visit_date1 not in {null,""}'>
 			and confm_visit_date >= #{confm_visit_date1}
-			<if test="confm_visit_date2 != null">
-			<![CDATA[and confm_visit_date <= #{confm_visit_date2}]]>
-			</if>
+		</if>
+		<if test='confm_visit_date2 not in {null,""}'>
+		<![CDATA[and confm_visit_date <= #{confm_visit_date2}]]>
 		</if>
 		<!-- 검색조건 : 신청자명 -->
-		<if test="visit_apply_name != null">
+		<if test='visit_apply_name not in {null,""}'>
 			and visit_apply_name = #{visit_apply_name}
 		</if>
 		<!-- 검색조건 : 신청자연락처 -->
-		<if test="visit_apply_hp != null">
+		<if test='visit_apply_hp not in {null,""}'>
 			and visit_apply_hp = #{visit_apply_hp}
 		</if>
 		<!-- 검색조건 : 방문자명 -->
-		<if test="confm_name != null">
+		<if test='confm_name not in {null,""}'>
 			and confm_name like '%'||#{confm_name}||'%'
 		</if>
 		<!-- 검색조건 : 방문자연락처 -->
-		<if test="confm_hp != null">
+		<if test='confm_hp not in {null,""}'>
 			and confm_hp = #{confm_hp}
 		</if>
 		<!-- 검색조건 : 처리상태-->
-		<if test="cmg_notes != null">
+		<if test='cmg_notes not in {null,""}'>
 			and cmg_notes = #{cmg_notes}
 		</if>
 	</select>
@@ -75,27 +75,27 @@
 		  from cmg_log cl, cmg_confm cc
 		 where cl.confm_qrcode = cc.confm_qrcode
 		<!-- 검색조건  : 방문일자-->
-		<if test="confm_visit_date != null">
+		<if test='confm_visit_date not in {null,""}'>
 			and confm_visit_date = #{confm_visit_date}
 		</if>
 		<!-- 검색조건 : 방문번호 -->
-		<if test="confm_no != null">
+		<if test='confm_no not in {null,""}'>
 			and confm_no = #{confm_no}
 		</if>
 		<!-- 검색조건 : 방문자명 -->
-		<if test="confm_name != null">
+		<if test='confm_name not in {null,""}'>
 			and confm_name like '%'||#{confm_name}||'%'
 		</if>
 		<!-- 검색조건 : 방문장소 -->
-		<if test="confm_desti != null">
+		<if test='confm_desti not in {null,""}'>
 			and confm_desti like '%'||#{confm_desti}||'%'
 		</if>
 		<!-- 검색조건 : 방문상태 -->
-		<if test="cmg_notes != null">
+		<if test='cmg_notes not in {null,""}'>
 			and cmg_notes = #{cmg_notes}
 		</if>
 		<!-- 검색조건 : 출입시간 -->
-		<if test="cmg_inout != null">
+		<if test='cmg_inout not in {null,""}'>
 			and substr(cmg_inout,4,2) = #{cmg_inout}
 		</if>
 	</select>
@@ -106,35 +106,35 @@
 		  from goods_confm gc, goods_apply ga
 		   and gc.aplg_no = ga.aplg_no
 		<!-- 검색조건 : 반입일자 -->
-		<if test="aplg_date != null">
+		<if test='aplg_date not in {null,""}'>
 			and gc.aplg_date = #{aplg_date}
 		</if>
 		<!-- 검색조건 : 실반입일자 -->
-		<if test="confm_trans_date != null">
+		<if test='confm_trans_date not in {null,""}'>
 			and aplg_date = #{aplg_date}
 		</if>
 		<!-- 검색조건 : 물품번호 -->
-		<if test="confm_no != null">
+		<if test='confm_no not in {null,""}'>
 			and confm_no = #{confm_no}
 		</if>
 		<!-- 검색조건 : 신청번호 -->
-		<if test="aplg_no != null">
+		<if test='aplg_no not in {null,""}'>
 			and gc.aplg_no = #{aplg_no}
 		</if>
 		<!-- 검색조건 : 물품명 -->
-		<if test="confm_name != null">
+		<if test='confm_name not in {null,""}'>
 			and confm_name = #{confm_name}
 		</if>
 		<!-- 검색조건 : 반입장소 -->
-		<if test="confm_desti != null">
+		<if test='confm_desti not in {null,""}'>
 			and confm_desti = #{confm_desti}
 		</if>
 		<!-- 검색조건 : 반입상태 -->
-		<if test="confm_state != null">
+		<if test='confm_state not in {null,""}'>
 			confm_state = #{confm_state}
 		</if>
 		<!-- 검색조건 : 반입시간 -->
-		<if test="confm_trans_time != null">
+		<if test='confm_trans_time not in {null,""}'>
 			and substr(confm_trans_time,4,2) = #{confm_trans_time}
 		</if>
 	</select>

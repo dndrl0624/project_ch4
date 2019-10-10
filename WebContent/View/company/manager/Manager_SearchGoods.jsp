@@ -25,7 +25,6 @@ $(document).ready(function(){
 			$("#searchText").attr('textboxname',newVal);
 			var inputHidden = $("#searchText").textbox('textbox').parent().find('input:last');
 			inputHidden.attr('name',newVal);
-// 			$("span.textbox > .textbox-value").attr('name',newVal);
 		}
 	});
 
@@ -65,29 +64,31 @@ $(document).ready(function(){
 //날짜 콤보
 	$("#startdate").datebox({
 		onSelect: function(date){
-				$.ajax({
-					type:'post'
-					,url:'/company/applyGoodsList.ch4'
-					,dataType: "json"
-					,data :$("#f_search").serialize()
-					,success: function(data){
-						$("#tb_sv").bootstrapTable('load',data);
-					}
-				});
-			}
+			$(this).datebox('setValue',date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate());
+			$.ajax({
+				type:'post'
+				,url:'/company/applyGoodsList.ch4'
+				,dataType: "json"
+				,data :$("#f_search").serialize()
+				,success: function(data){
+					$("#tb_sv").bootstrapTable('load',data);
+				}
+			});
+		}
 	});
 	$("#closedate").datebox({
 		onSelect: function(date){
-				$.ajax({
-					type:'post'
-					,url:'/company/applyGoodsList.ch4'
-					,dataType: "json"
-					,data :$("#f_search").serialize()
-					,success: function(data){
-						$("#tb_sv").bootstrapTable('load',data);
-					}
-				});
-			}
+			$(this).datebox('setValue',date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate());
+			$.ajax({
+				type:'post'
+				,url:'/company/applyGoodsList.ch4'
+				,dataType: "json"
+				,data :$("#f_search").serialize()
+				,success: function(data){
+					$("#tb_sv").bootstrapTable('load',data);
+				}
+			});
+		}
 	});
 	$("#btn_search").click(function(){
 		$.ajax({
@@ -96,7 +97,7 @@ $(document).ready(function(){
 			,dataType: "json"
 			,data :$("#f_search").serialize()
 			,success: function(data){
-				$("#tb_searchGood").bootstrapTable('data',data);
+				$("#tb_searchGood").bootstrapTable('load',data);
 			}
 		});
 	});
@@ -121,21 +122,20 @@ $(document).ready(function(){
 						<div class='col-lg-2' style="padding: 5px;">
 							<select class="easyui-combobox" id="SearchType" name='SearchType'
 								 style="width: 90%;">
-								<option value="APLG_NO" selected>신청번호</option>
-								<option value="APLG_NAME">신청자</option>
-								<option value="APLG_DESTI">목적지
+								<option value="aplg_no" selected>신청번호</option>
+								<option value="aplg_name">신청자</option>
+								<option value="aplg_desti">목적지
 								<option>
 							</select>
 						</div>
 						<div class='col-lg-2' style="padding: 5px;">
 							<!-- 검색창 : 콤보박스에 의한 분기 -->
-							<!-- 텍스트 박스에 대해 name값 변경 : 처음 값은 방문자명 // onChange 이벤트로 Name속성을 바꾸어 주기 -->
-							<input class="easyui-textbox" id="searchText" name="VISITOR_NAME"
+							<input class="easyui-textbox" id="searchText" name="aplg_no"
 								style="width: 80%;"> <a id="btn_search" class="easyui-linkbutton"
 								type="button" data-options="iconCls:'icon-search'"></a>
 						</div>
 						<div class='col-lg-2' style="padding: 5px;">
-							<select class="easyui-combobox" id="state" name="APLG_PERMIT_ST"
+							<select class="easyui-combobox" id="state" name="aplg_permit_st"
 								style="width: 100%;">
 								<option value="" selected>전체</option>
 								<option value="결재중">결재중</option>
